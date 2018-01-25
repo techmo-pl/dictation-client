@@ -50,7 +50,7 @@ po::options_description CreateHelpOptions(void) {
              "Path to wave file with audio content to be sent to service via RPC.")
             ("session-id", po::value<std::string>()->default_value(""),
              "Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.")
-            ("streaming", "If present, will perform asynchronous RPC.")
+            ("streaming", "If present, will perform asynchronous RPC. This is obligatory for audio content larger than 3.5 MB.")
             ("time-offsets", po::value<bool>()->default_value(false),
              "If true, returns also recognized word time offsets.")
             ("single-utterance", po::value<bool>()->default_value(true),

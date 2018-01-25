@@ -19,3 +19,4 @@ To regenerate sources from `.proto`, run:
 ```
 ./proto/make_proto.sh
 ```
+This might be required when using other gRPC or Protocol Buffers version.
