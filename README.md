@@ -6,6 +6,14 @@ Contents:
 - `cpp`     Dictation ASR gRPC client C++ implementation.  
 
 Required steps:
+- Install Boost:
+```
+./tools/install_boost.sh
+```
+- Install gRPC:
+```
+./tools/install_grpc.sh
+```
 - Update submodule:
 ```
 git submodule update --init --recursive

@@ -7,6 +7,8 @@ Contents:
 Required steps before build:
 - From main directory run:
 ```
+./tools/install_boost.sh
+./tools/install_grpc.sh
 git submodule update --init --recursive
 ./tools/build_googleapis.sh
 ```
