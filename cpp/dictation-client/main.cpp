@@ -83,7 +83,7 @@ int main(int argc, const char *const argv[]) {
 
     std::cout << "Dictation ASR gRPC client " << LIBDICTATION_CLIENT_VERSION << std::endl;
 
-    if (!userOptions.count("wav-path") || !userOptions.count("service-address")) {//bad usage
+    if (not userOptions.count("wav-path") || not userOptions.count("service-address")) {//bad usage
         std::cerr << "Usage: " << argv[0] << " --wav-path /path/to/audio.wav --service-address host:address" << std::endl;
         return 1;
     }

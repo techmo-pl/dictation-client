@@ -57,7 +57,7 @@ void build_recognition_config(const DictationClientConfig& config, unsigned int 
     recognition_config.set_sample_rate_hertz(sample_rate_hertz);
     recognition_config.set_language_code("pl-PL");
     recognition_config.set_enable_word_time_offsets(config.time_offsets);
-    if (!config.service_settings.empty()) {
+    if (not config.service_settings.empty()) {
         read_service_settings_option(config, recognition_config);
     }
 }
@@ -126,7 +126,7 @@ std::string protobuf_message_to_string(const google::protobuf::Message & message
 
 void DictationClient::Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
     grpc::ClientContext context;
-    if (!config.session_id.empty()) {
+    if (not config.session_id.empty()) {
         context.AddMetadata("session_id", config.session_id);
     }
 
@@ -149,7 +149,7 @@ void DictationClient::Recognize(const DictationClientConfig& config, unsigned in
 
 void DictationClient::StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
     grpc::ClientContext context;
-    if (!config.session_id.empty()) {
+    if (not config.session_id.empty()) {
         context.AddMetadata("session_id", config.session_id);
     }
 
@@ -198,9 +198,9 @@ void DictationClient::StreamingRecognize(const DictationClientConfig& config, un
         return streaming_received_responses;
     }();
 
-    grpc::Status status = stream->Finish();
+    const grpc::Status status = stream->Finish();
 
-    if (!status.ok()) {
+    if (not status.ok()) {
         std::cerr << "StreamingRecognize RPC failed with status " << status.error_code() << " " << status.error_message() << std::endl;
     }
 }

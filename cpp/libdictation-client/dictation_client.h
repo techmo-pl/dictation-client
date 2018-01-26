@@ -1,8 +1,6 @@
 #ifndef __DICTATION_CLIENT_H__
 #define __DICTATION_CLIENT_H__
 
-//TODO: includes
-
 
 namespace techmo { namespace dictation {
 
