@@ -10,11 +10,21 @@
 
 namespace po = boost::program_options;
 
-std::string protobuf_message_to_string(const google::protobuf::Message & message)
-{
+std::string ProtobufMessageToString(const google::protobuf::Message & message) {
     grpc::string out_str;
     google::protobuf::TextFormat::PrintToString(message, &out_str);
     return out_str;
+}
+
+techmo::dictation::DictationClientConfig CreateDictationClientConfig(const po::variables_map& userOptions) {
+    techmo::dictation::DictationClientConfig config;
+    config.session_id = userOptions["session-id"].as<std::string>();
+    config.time_offsets = userOptions["time-offsets"].as<bool>();
+    config.single_utterance = userOptions["single-utterance"].as<bool>();
+    config.interim_results = userOptions["interim-results"].as<bool>();
+    config.service_settings = userOptions["service-settings"].as<std::string>();
+    config.max_alternatives = userOptions["max-alternatives"].as<int>();
+    return config;
 }
 
 po::options_description CreateOptionsDescription(void) {
@@ -67,13 +77,7 @@ int main(int argc, const char *const argv[]) {
     }
 
     try {
-        techmo::dictation::DictationClientConfig config;
-        config.session_id = userOptions["session-id"].as<std::string>();
-        config.time_offsets = userOptions["time-offsets"].as<bool>();
-        config.single_utterance = userOptions["single-utterance"].as<bool>();
-        config.interim_results = userOptions["interim-results"].as<bool>();
-        config.service_settings = userOptions["service-settings"].as<std::string>();
-        config.max_alternatives = userOptions["max-alternatives"].as<int>();
+        const techmo::dictation::DictationClientConfig config = CreateDictationClientConfig(userOptions);
 
         const auto wave = ReadWaveFile(userOptions["wav-path"].as<std::string>());
 
@@ -83,13 +87,13 @@ int main(int argc, const char *const argv[]) {
             const auto responses = dictation_client.StreamingRecognize(config, wave.header.samplesPerSec, wave.audioBytes);
 
             for (const auto& response : responses) {
-                std::cout << protobuf_message_to_string(response) << std::endl;
+                std::cout << ProtobufMessageToString(response) << std::endl;
             }
         }
         else {
             const gsapi::RecognizeResponse response = dictation_client.Recognize(config, wave.header.samplesPerSec, wave.audioBytes);
 
-            std::cout << protobuf_message_to_string(response) << std::endl;
+            std::cout << ProtobufMessageToString(response) << std::endl;
         }
     }
     catch (const std::exception &e) {
