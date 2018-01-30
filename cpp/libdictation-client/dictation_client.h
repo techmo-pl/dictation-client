@@ -1,6 +1,10 @@
 #ifndef __DICTATION_CLIENT_H__
 #define __DICTATION_CLIENT_H__
 
+#include "dictation_asr.grpc.pb.h"
+
+
+namespace gsapi = google::cloud::speech::v1;
 
 namespace techmo { namespace dictation {
 
@@ -17,9 +21,9 @@ class DictationClient {
 public:
     DictationClient(const std::string& service_address) : service_address_{ service_address } {}
 
-    void Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content);
+    gsapi::RecognizeResponse Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content);
 
-    void StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content);
+    std::vector<gsapi::StreamingRecognizeResponse> StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content);
 
 private:
     DictationClient(); // Disable default constructor.

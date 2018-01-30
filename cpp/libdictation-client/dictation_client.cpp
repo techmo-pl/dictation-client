@@ -3,13 +3,10 @@
 #include <thread>
 
 #include <grpc++/grpc++.h>
-#include <google/protobuf/text_format.h>
 
-#include "cloud_speech_extended.grpc.pb.h"
+#include "dictation_asr.grpc.pb.h"
 #include "dictation_client.h"
 
-
-namespace gsapi = ::google::cloud::speech::v1;
 
 namespace techmo { namespace dictation {
 
@@ -116,15 +113,8 @@ bool end_of_utterance(const gsapi::StreamingRecognizeResponse& response) {
     return is_eou;
 }
 
-std::string protobuf_message_to_string(const google::protobuf::Message & message)
-{
-    grpc::string out_str;
-    google::protobuf::TextFormat::PrintToString(message, &out_str);
-    return out_str;
-}
 
-
-void DictationClient::Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
+gsapi::RecognizeResponse DictationClient::Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
     grpc::ClientContext context;
     if (not config.session_id.empty()) {
         context.AddMetadata("session_id", config.session_id);
@@ -138,16 +128,15 @@ void DictationClient::Recognize(const DictationClientConfig& config, unsigned in
 
     const grpc::Status status = stub->Recognize(&context, request, &response);
 
-    if (status.ok()) {
-        std::cout << protobuf_message_to_string(response) << std::endl;
-    }
-    else {
+    if (not status.ok()) {
         std::cerr << "Recognize RPC failed with status " << status.error_code() << " " << status.error_message() << std::endl;
     }
+
+    return response;
 }
 
 
-void DictationClient::StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
+std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
     grpc::ClientContext context;
     if (not config.session_id.empty()) {
         context.AddMetadata("session_id", config.session_id);
@@ -188,7 +177,7 @@ void DictationClient::StreamingRecognize(const DictationClientConfig& config, un
                 writer.detach();
             }
             else {
-                std::cout << protobuf_message_to_string(streaming_received_response) << std::endl;
+                std::cout << "Received response." << std::endl;
             }
             streaming_received_responses.push_back(streaming_received_response);
         }
@@ -203,6 +192,8 @@ void DictationClient::StreamingRecognize(const DictationClientConfig& config, un
     if (not status.ok()) {
         std::cerr << "StreamingRecognize RPC failed with status " << status.error_code() << " " << status.error_message() << std::endl;
     }
+
+    return responses;
 }
 
 }}

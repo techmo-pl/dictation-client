@@ -9,8 +9,8 @@ file(GLOB GOOGLEAPIS_SOURCE_FILES
 
 add_library(${PROJECT_NAME}
         ${GOOGLEAPIS_SOURCE_FILES}
-        cloud_speech_extended.grpc.pb.cc cloud_speech_extended.grpc.pb.h
-        cloud_speech_extended.pb.cc cloud_speech_extended.pb.h
+        dictation_asr.grpc.pb.cc dictation_asr.grpc.pb.h
+        dictation_asr.pb.cc dictation_asr.pb.h
         dictation_client.cpp dictation_client.h
         VERSION.h
         )

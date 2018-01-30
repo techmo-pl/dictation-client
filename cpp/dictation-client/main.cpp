@@ -1,48 +1,26 @@
-#include <fstream>
 #include <iostream>
 
 #include <boost/program_options.hpp>
+#include <google/protobuf/text_format.h>
 
+#include "wave-utils.h"
 #include "dictation_client.h"
 #include "VERSION.h"
 
 
 namespace po = boost::program_options;
 
-/// WAVE file header structure
-struct WAV_HEADER//from sarmata/utils/WaveFile.h
+std::string protobuf_message_to_string(const google::protobuf::Message & message)
 {
-    char               RIFF[4];        // RIFF Header      Magic header
-    unsigned int       ChunkSize;      // RIFF Chunk Size
-    char               WAVE[4];        // WAVE Header
-    char               fmt[4];         // FMT header
-    unsigned int       Subchunk1Size;  // Size of the fmt chunk
-    unsigned short     AudioFormat;    // Audio format 1=PCM,6=mulaw,7=alaw, 257=IBM Mu-Law, 258=IBM A-Law, 259=ADPCM
-    unsigned short     NumOfChan;      // Number of channels 1=Mono 2=Sterio
-    unsigned int       SamplesPerSec;  // Sampling Frequency in Hz
-    unsigned int       bytesPerSec;    // bytes per second
-    unsigned short     blockAlign;     // 2=16-bit mono, 4=16-bit stereo
-    unsigned short     bitsPerSample;  // Number of bits per sample
-    char               Subchunk2ID[4]; // "data"  string
-    unsigned int       Subchunk2Size;  // Sampled data length
-};
-
-void read_wave_file(const std::string & wave_path, WAV_HEADER & wave_header, std::string & wave_content)
-{
-    static_assert(sizeof(WAV_HEADER) == 44, "sizeof(WAV_HEADER) is not equal to 44, disable alignment");
-    std::fstream wav_file(wave_path, std::ios::binary | std::ios::in);
-    wav_file.read((char*)(&wave_header), sizeof(wave_header));
-    if (wave_header.Subchunk2ID[0] != 'd' || wave_header.Subchunk2ID[1] != 'a' || wave_header.Subchunk2ID[2] != 't' || wave_header.Subchunk2ID[3] != 'a') {
-        throw std::runtime_error{"Waves with metadata are not supported."};
-    }
-    wave_content = std::string(wave_header.Subchunk2Size,' ');
-    wav_file.read((char*)(&wave_content[0]), wave_content.size());
+    grpc::string out_str;
+    google::protobuf::TextFormat::PrintToString(message, &out_str);
+    return out_str;
 }
 
-po::options_description CreateHelpOptions(void) {
+po::options_description CreateOptionsDescription(void) {
     // command line options
-    po::options_description helpOptions("Dictation ASR gRPC client options:");
-    helpOptions.add_options()
+    po::options_description optionsDescription("Dictation ASR gRPC client options:");
+    optionsDescription.add_options()
             ("help", "Print help message.")
             ("service-address", po::value<std::string>(),
              "IP address and port (address:port) of a service the client will connect to.")
@@ -61,14 +39,14 @@ po::options_description CreateHelpOptions(void) {
              "Semicolon-separated list of key=value pairs defining settings to be sent to service via gRPC request")
             ("max-alternatives", po::value<int>()->default_value(1),
              "Maximum number of recognition hypotheses to be returned.");
-    return helpOptions;
+    return optionsDescription;
 }
 
 int main(int argc, const char *const argv[]) {
-    po::options_description helpOptions(CreateHelpOptions());
+    po::options_description optionsDescription(CreateOptionsDescription());
     po::variables_map userOptions;
     try {
-        po::store(po::command_line_parser(argc, argv).options(helpOptions).run(), userOptions);
+        po::store(po::command_line_parser(argc, argv).options(optionsDescription).run(), userOptions);
         po::notify(userOptions);
     }
     catch (const std::exception &e) {
@@ -77,7 +55,7 @@ int main(int argc, const char *const argv[]) {
     }
 
     if (userOptions.count("help")) {
-        std::cout << helpOptions;
+        std::cout << optionsDescription;
         return 0;
     }
 
@@ -97,17 +75,21 @@ int main(int argc, const char *const argv[]) {
         config.service_settings = userOptions["service-settings"].as<std::string>();
         config.max_alternatives = userOptions["max-alternatives"].as<int>();
 
-        WAV_HEADER wav_header;
-        std::string audio_byte_content;
-        read_wave_file(userOptions["wav-path"].as<std::string>(), wav_header, audio_byte_content);
+        const auto wave = ReadWaveFile(userOptions["wav-path"].as<std::string>());
 
         techmo::dictation::DictationClient dictation_client{ userOptions["service-address"].as<std::string>() };
 
         if (userOptions.count("streaming")) {
-            dictation_client.StreamingRecognize(config, wav_header.SamplesPerSec, audio_byte_content);
+            const auto responses = dictation_client.StreamingRecognize(config, wave.header.samplesPerSec, wave.audioBytes);
+
+            for (const auto& response : responses) {
+                std::cout << protobuf_message_to_string(response) << std::endl;
+            }
         }
         else {
-            dictation_client.Recognize(config, wav_header.SamplesPerSec, audio_byte_content);
+            const gsapi::RecognizeResponse response = dictation_client.Recognize(config, wave.header.samplesPerSec, wave.audioBytes);
+
+            std::cout << protobuf_message_to_string(response) << std::endl;
         }
     }
     catch (const std::exception &e) {

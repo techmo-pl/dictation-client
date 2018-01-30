@@ -19,4 +19,4 @@ ${PROTOC}   -I${path_i} \
             ${PLUGIN} \
             --cpp_out=${path_o} \
             --grpc_out=${path_o} \
-            ${path_i}/cloud_speech_extended.proto
+            ${path_i}/dictation_asr.proto
