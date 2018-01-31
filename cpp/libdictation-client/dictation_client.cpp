@@ -113,6 +113,39 @@ bool end_of_utterance(const gsapi::StreamingRecognizeResponse& response) {
     return is_eou;
 }
 
+std::string grpc_status_to_string(const grpc::Status& status) {
+    // Status codes and their use in gRPC explanation can be found here:
+    // https://github.com/grpc/grpc/blob/master/doc/statuscodes.md
+    // https://grpc.io/grpc/cpp/namespacegrpc.html#aff1730578c90160528f6a8d67ef5c43b
+    const std::string status_string = [&status]() {
+        using code = grpc::StatusCode;
+        switch (status.error_code()) {
+        // Based on https://grpc.io/grpc/cpp/impl_2codegen_2status__code__enum_8h_source.html
+            case code::OK: return "OK";
+            case code::CANCELLED: return "CANCELLED";
+            case code::UNKNOWN: return "UNKNOWN";
+            case code::INVALID_ARGUMENT: return "INVALID_ARGUMENT";
+            case code::DEADLINE_EXCEEDED: return "DEADLINE_EXCEEDED";
+            case code::NOT_FOUND: return "NOT_FOUND";
+            case code::ALREADY_EXISTS: return "ALREADY_EXISTS";
+            case code::PERMISSION_DENIED: return "PERMISSION_DENIED";
+            case code::UNAUTHENTICATED: return "UNAUTHENTICATED";
+            case code::RESOURCE_EXHAUSTED: return "RESOURCE_EXHAUSTED";
+            case code::FAILED_PRECONDITION: return "FAILED_PRECONDITION";
+            case code::ABORTED: return "ABORTED";
+            case code::OUT_OF_RANGE: return "OUT_OF_RANGE";
+            case code::UNIMPLEMENTED: return "UNIMPLEMENTED";
+            case code::INTERNAL: return "INTERNAL";
+            case code::UNAVAILABLE: return "UNAVAILABLE";
+            case code::DATA_LOSS: return "DATA_LOSS";
+            case code::DO_NOT_USE: return "DO_NOT_USE";
+            default: return "Status code not recognized";
+        }
+    }();
+
+    return status_string + " (" + std::to_string(status.error_code()) + ") " + status.error_message();
+}
+
 
 gsapi::RecognizeResponse DictationClient::Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
     grpc::ClientContext context;
@@ -129,7 +162,7 @@ gsapi::RecognizeResponse DictationClient::Recognize(const DictationClientConfig&
     const grpc::Status status = stub->Recognize(&context, request, &response);
 
     if (not status.ok()) {
-        std::cerr << "Recognize RPC failed with status " << status.error_code() << " " << status.error_message() << std::endl;
+        std::cerr << "Recognize RPC failed with status " << grpc_status_to_string(status) << std::endl;
     }
 
     return response;
@@ -190,7 +223,7 @@ std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecogni
     const grpc::Status status = stream->Finish();
 
     if (not status.ok()) {
-        std::cerr << "StreamingRecognize RPC failed with status " << status.error_code() << " " << status.error_message() << std::endl;
+        std::cerr << "StreamingRecognize RPC failed with status " << grpc_status_to_string(status) << std::endl;
     }
 
     return responses;

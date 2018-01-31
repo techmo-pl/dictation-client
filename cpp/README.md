@@ -4,25 +4,38 @@ Contents:
 - `libdictation-client`     Library implementing communication with Techmo Dictation ASR gRPC service.
 - `dictation-client`        Example of program using the library.
 
+This project uses cmake build.
+
+Dependencies are:  
+- Boost     provided as `boost_pkg`  
+    Default location: `/opt/boost_1.60.0`  
+    If not installed, from parent directory run `sudo ./tools/install_boost.sh`  
+- gRPC      provided as `grpc_pkg`  
+    Default location: `/opt/grpc_v1.7.2`  
+    If not installed, from parent directory run `sudo ./tools/install_grpc.sh`  
+- OpenSSL   provided as `ssl_pkg`  
+- DL        provided as `dl_pkg`  
+
 Required steps before build:
-- From main directory run:
+- Build googleapis. From parent directory run:
 ```
-./tools/install_boost.sh
-./tools/install_grpc.sh
 git submodule update --init --recursive
 ./tools/build_googleapis.sh
 ```
+Note: This build is allowed to fail in general but some of the files are required.  
+The script checks if all required files have been built  
+Message "All required googleapis files found." means success in that case.  
+
+To regenerate sources from `.proto`, run:
+```
+./make_proto.sh
+```
+This might be required when using other gRPC or Protocol Buffers version.
 
 Build:
 ```
 mkdir build && cd build && cmake .. && make -j 4
 ```
-
-Required dependencies are:  
-- Boost     provided as `boost_pkg`  
-- gRPC      provided as `grpc_pkg`  
-- OpenSSL   provided as `ssl_pkg`
-- DL        provided as `dl_pkg`
 
 Run:
 ```

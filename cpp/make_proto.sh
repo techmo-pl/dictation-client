@@ -12,10 +12,10 @@ if [ ! -x ${PROTOC} ]; then
 fi
 
 echo "Generating dictation C++ protobuf/grpc sources..."
-path_i="proto"
-path_o="cpp/libdictation-client"
+path_i="../proto"
+path_o="libdictation-client"
 ${PROTOC}   -I${path_i} \
-            -Isubmodules/googleapis \
+            -I../submodules/googleapis \
             ${PLUGIN} \
             --cpp_out=${path_o} \
             --grpc_out=${path_o} \

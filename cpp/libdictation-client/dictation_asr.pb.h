@@ -32,7 +32,6 @@
 #include <google/protobuf/unknown_field_set.h>
 #include "google/api/annotations.pb.h"
 #include "google/longrunning/operations.pb.h"
-#include <google/protobuf/any.pb.h>
 #include <google/protobuf/duration.pb.h>
 #include <google/protobuf/timestamp.pb.h>
 #include "google/rpc/status.pb.h"
