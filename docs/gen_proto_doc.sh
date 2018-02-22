@@ -29,7 +29,7 @@ docker run --rm \
 
 # Manually truncate index.md to contain only API documentation (no included .proto's).
 echo "# API Documentation"      > ${out}    # erase
-echo "<a name="top"/>"          >> ${out}   # then append
+echo "<a name=\"top\"/>"          >> ${out}   # then append
 echo ""                         >> ${out}
 echo "### Table of Contents"    >> ${out}
 echo ""                         >> ${out}

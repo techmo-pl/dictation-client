@@ -416,11 +416,12 @@ message StreamingRecognitionResult {
   float stability = 3;
 
   // [Extension by Techmo]
-  // *Optional* Detailed result (lattice).
-  // Returned *only when requested* (ConfigField: build_lattice=true in RecognitionConfig Message),
-  // *only for final* (is_final = true) results,
+  // Detailed recognition result (lattice).
+  // Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message),
+  // *only for final* (`is_final = true`) results,
   // and *only when it's allowed by licence* .
-  // When requested and not allowed by licence GRPC status: FAILED_PRECONDITION will be returned
+  // When requested and not allowed by licence,
+  // [google.rpc.Code.FAILED_PRECONDITION] will be returned.
   repeated RecognitionLattice lattice = 5;
 }
 
@@ -433,11 +434,12 @@ message SpeechRecognitionResult {
   repeated SpeechRecognitionAlternative alternatives = 1;
 
   // [Extension by Techmo]
-  // *Optional* Detailed result (lattice).
-  // Returned *only when requested* (ConfigField: build_lattice=true in RecognitionConfig Message),
-  // *only for final* (is_final = true) results,
+  // Detailed recognition result (lattice).
+  // Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message),
+  // *only for final* (`is_final = true`) results,
   // and *only when it's allowed by licence* .
-  // When requested and not allowed by licence GRPC status: FAILED_PRECONDITION will be returned
+  // When requested and not allowed by licence,
+  // [google.rpc.Code.FAILED_PRECONDITION] will be returned.
   repeated RecognitionLattice lattice = 5;
 }
 
@@ -482,32 +484,41 @@ message WordInfo {
   string word = 3;
 }
 
+// [Extension by Techmo]
+// Detailed recognition result (lattice).
+// Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message),
+// *only for final* (`is_final = true`) results,
+// and *only when it's allowed by licence* .
+// When requested and not allowed by licence,
+// [google.rpc.Code.FAILED_PRECONDITION] will be returned.
 message RecognitionLattice {
 
-  //List of final nodes
+  // List of final nodes.
   repeated int32 final_nodes = 1;
 
-  //List of lattice edges
+  // List of lattice edges.
   repeated LatticeEdge edges = 2;
 }
 
+// [Extension by Techmo]
+// Edge-specific information for recognition lattice.
 message LatticeEdge {
-  // input node id, node '0' is starting node for lattice
+  // Input node ID, node '0' is starting node for the lattice.
   int32 start_node = 1;
 
-  // end node id
+  // End node ID.
   int32 end_node = 2;
 
-  // word
+  // Word.
   string symbol = 3;
 
-  // language model cost
+  // Language model cost.
   float language_cost = 4;
 
-  // raw acoustic score (unscaled)
+  // Raw acoustic score (unscaled).
   float acoustic_cost = 5;
 
-  // word duration in miliseconds //
+  // Word duration in milliseconds.
   int32 duration = 6;
 }
 
