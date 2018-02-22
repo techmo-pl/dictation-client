@@ -1,5 +1,5 @@
 # API Documentation
-<a name=top/>
+<a name="top"/>
 
 ### Table of Contents
 
@@ -81,17 +81,18 @@ Provides a pair of configuration field name and value.
 <a name="google.cloud.speech.v1.LatticeEdge"/>
 
 ### LatticeEdge
-
+[Extension by Techmo]
+Edge-specific information for recognition lattice.
 
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| start_node | [int32](#int32) | input node id, node '0' is starting node for lattice |
-| end_node | [int32](#int32) | end node id |
-| symbol | [string](#string) | word |
-| language_cost | [float](#float) | language model cost |
-| acoustic_cost | [float](#float) | raw acoustic score (unscaled) |
-| duration | [int32](#int32) | word duration in miliseconds |
+| start_node | [int32](#int32) | Input node ID, node '0' is starting node for the lattice. |
+| end_node | [int32](#int32) | End node ID. |
+| symbol | [string](#string) | Word. |
+| language_cost | [float](#float) | Language model cost. |
+| acoustic_cost | [float](#float) | Raw acoustic score (unscaled). |
+| duration | [int32](#int32) | Word duration in milliseconds. |
 
 
 
@@ -143,13 +144,19 @@ request.
 <a name="google.cloud.speech.v1.RecognitionLattice"/>
 
 ### RecognitionLattice
-
+[Extension by Techmo]
+Detailed recognition result (lattice).
+Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message),
+only for final* (`is_final = true`) results,
+and *only when it's allowed by licence* .
+When requested and not allowed by licence,
+[google.rpc.Code.FAILED_PRECONDITION] will be returned.
 
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| final_nodes | [int32](#int32) | List of final nodes |
-| edges | [LatticeEdge](#google.cloud.speech.v1.LatticeEdge) | List of lattice edges |
+| final_nodes | [int32](#int32) | List of final nodes. |
+| edges | [LatticeEdge](#google.cloud.speech.v1.LatticeEdge) | List of lattice edges. |
 
 
 
@@ -231,7 +238,7 @@ A speech recognition result corresponding to a portion of the audio.
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | Output-only* May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). These alternatives are ordered in terms of accuracy, with the top (first) alternative being the most probable, as ranked by the recognizer. |
-| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [Extension by Techmo] Optional* Detailed result (lattice). Returned *only when requested* (ConfigField: build_lattice=true in RecognitionConfig Message), only for final* (is_final = true) results, and *only when it's allowed by licence* . When requested and not allowed by licence GRPC status: FAILED_PRECONDITION will be returned |
+| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [Extension by Techmo] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), only for final* (`is_final = true`) results, and *only when it's allowed by licence* . When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
 
@@ -268,7 +275,7 @@ that is currently being processed.
 | alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | Output-only* May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). |
 | is_final | [bool](#bool) | Output-only* If `false`, this `StreamingRecognitionResult` represents an interim result that may change. If `true`, this is the final time the speech service will return this particular `StreamingRecognitionResult`, the recognizer will not return any further hypotheses for this portion of the transcript and corresponding audio. |
 | stability | [float](#float) | Output-only* An estimate of the likelihood that the recognizer will not change its guess about this interim result. Values range from 0.0 (completely unstable) to 1.0 (completely stable). This field is only provided for interim results (`is_final=false`). The default of 0.0 is a sentinel value indicating `stability` was not set. |
-| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [Extension by Techmo] Optional* Detailed result (lattice). Returned *only when requested* (ConfigField: build_lattice=true in RecognitionConfig Message), only for final* (is_final = true) results, and *only when it's allowed by licence* . When requested and not allowed by licence GRPC status: FAILED_PRECONDITION will be returned |
+| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [Extension by Techmo] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), only for final* (`is_final = true`) results, and *only when it's allowed by licence* . When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
 
