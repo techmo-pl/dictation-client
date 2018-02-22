@@ -13,16 +13,15 @@
 // limitations under the License.
 //
 // Extensions by Techmo are marked with [Extension by Techmo] tag.
-
 syntax = "proto3";
 
 package google.cloud.speech.v1;
 
 import "google/api/annotations.proto";
-import "google/longrunning/operations.proto";
+//import "google/longrunning/operations.proto";
 //import "google/protobuf/any.proto";
 import "google/protobuf/duration.proto";
-import "google/protobuf/timestamp.proto";
+//import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
 option cc_enable_arenas = true;
@@ -44,9 +43,9 @@ service Speech {
   // google.longrunning.Operations interface. Returns either an
   // `Operation.error` or an `Operation.response` which contains
   // a `LongRunningRecognizeResponse` message.
-  rpc LongRunningRecognize(LongRunningRecognizeRequest) returns (google.longrunning.Operation) {
-    option (google.api.http) = { post: "/v1/speech:longrunningrecognize" body: "*" };
-  }
+//  rpc LongRunningRecognize(LongRunningRecognizeRequest) returns (google.longrunning.Operation) {
+//    option (google.api.http) = { post: "/v1/speech:longrunningrecognize" body: "*" };
+//  }
 
   // Performs bidirectional streaming speech recognition: receive results while
   // sending audio. This method is only available via the gRPC API (not REST).
@@ -65,14 +64,14 @@ message RecognizeRequest {
 
 // The top-level message sent by the client for the `LongRunningRecognize`
 // method.
-message LongRunningRecognizeRequest {
+//message LongRunningRecognizeRequest {
   // *Required* Provides information to the recognizer that specifies how to
   // process the request.
-  RecognitionConfig config = 1;
+//  RecognitionConfig config = 1;
 
   // *Required* The audio data to be recognized.
-  RecognitionAudio audio = 2;
-}
+//  RecognitionAudio audio = 2;
+//}
 
 // The top-level message sent by the client for the `StreamingRecognize` method.
 // Multiple `StreamingRecognizeRequest` messages are sent. The first message
@@ -288,26 +287,26 @@ message RecognizeResponse {
 // messages. It is included in the `result.response` field of the `Operation`
 // returned by the `GetOperation` call of the `google::longrunning::Operations`
 // service.
-message LongRunningRecognizeResponse {
+//message LongRunningRecognizeResponse {
   // *Output-only* Sequential list of transcription results corresponding to
   // sequential portions of audio.
-  repeated SpeechRecognitionResult results = 2;
-}
+//  repeated SpeechRecognitionResult results = 2;
+//}
 
 // Describes the progress of a long-running `LongRunningRecognize` call. It is
 // included in the `metadata` field of the `Operation` returned by the
 // `GetOperation` call of the `google::longrunning::Operations` service.
-message LongRunningRecognizeMetadata {
+//message LongRunningRecognizeMetadata {
   // Approximate percentage of audio processed thus far. Guaranteed to be 100
   // when the audio is fully processed and the results are available.
-  int32 progress_percent = 1;
+//  int32 progress_percent = 1;
 
   // Time when the request was received.
-  google.protobuf.Timestamp start_time = 2;
+//  google.protobuf.Timestamp start_time = 2;
 
   // Time of the most recent processing update.
-  google.protobuf.Timestamp last_update_time = 3;
-}
+//  google.protobuf.Timestamp last_update_time = 3;
+//}
 
 // `StreamingRecognizeResponse` is the only message returned to the client by
 // `StreamingRecognize`. A series of one or more `StreamingRecognizeResponse`
