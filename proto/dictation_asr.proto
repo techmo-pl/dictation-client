@@ -11,8 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
-// Extensions by Techmo are marked with [Extension by Techmo] tag.
+
+// Modified by Techmo, copyright by Google.
+// Extensions by Techmo are marked with [**Extension by Techmo**] tag.
 syntax = "proto3";
 
 package google.cloud.speech.v1;
@@ -31,7 +32,7 @@ option java_outer_classname = "SpeechProto";
 option java_package = "com.google.cloud.speech.v1";
 
 
-// Service that implements Google Cloud Speech API.
+// Service that implements Google Cloud Speech API extended by Techmo.
 service Speech {
   // Performs synchronous speech recognition: receive results after all audio
   // has been sent and processed.
@@ -223,7 +224,7 @@ message RecognitionConfig {
   // `false`.
   bool enable_word_time_offsets = 8;
   
-  // [Extension by Techmo]
+  // [**Extension by Techmo**]
   // *Optional* A means to provide additional configuration fields via request.
   repeated ConfigField config_fields = 12;
 }
@@ -240,7 +241,7 @@ message SpeechContext {
   repeated string phrases = 1;
 }
 
-// [Extension by Techmo]
+// [**Extension by Techmo**]
 // Provides a pair of configuration field name and value.
 message ConfigField {
   // Name of configuration field.
@@ -370,7 +371,7 @@ message StreamingRecognizeResponse {
     // `single_utterance` was set to `true`, and is not used otherwise.
     END_OF_SINGLE_UTTERANCE = 1;
     
-    // [Extension by Techmo]
+    // [**Extension by Techmo**]
     // This event indicates that the server has detected no speech input timeout
     // and expects no additional speech. Therefore, the server will not process
     // additional audio (although it may subsequently return additional results).
@@ -415,11 +416,9 @@ message StreamingRecognitionResult {
   // The default of 0.0 is a sentinel value indicating `stability` was not set.
   float stability = 3;
 
-  // [Extension by Techmo]
+  // [**Extension by Techmo**]
   // Detailed recognition result (lattice).
-  // Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message),
-  // *only for final* (`is_final = true`) results,
-  // and *only when it's allowed by licence* .
+  // Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
   // When requested and not allowed by licence,
   // [google.rpc.Code.FAILED_PRECONDITION] will be returned.
   repeated RecognitionLattice lattice = 5;
@@ -433,11 +432,9 @@ message SpeechRecognitionResult {
   // alternative being the most probable, as ranked by the recognizer.
   repeated SpeechRecognitionAlternative alternatives = 1;
 
-  // [Extension by Techmo]
+  // [**Extension by Techmo**]
   // Detailed recognition result (lattice).
-  // Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message),
-  // *only for final* (`is_final = true`) results,
-  // and *only when it's allowed by licence* .
+  // Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
   // When requested and not allowed by licence,
   // [google.rpc.Code.FAILED_PRECONDITION] will be returned.
   repeated RecognitionLattice lattice = 5;
@@ -484,11 +481,9 @@ message WordInfo {
   string word = 3;
 }
 
-// [Extension by Techmo]
+// [**Extension by Techmo**]
 // Detailed recognition result (lattice).
-// Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message),
-// *only for final* (`is_final = true`) results,
-// and *only when it's allowed by licence* .
+// Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
 // When requested and not allowed by licence,
 // [google.rpc.Code.FAILED_PRECONDITION] will be returned.
 message RecognitionLattice {
@@ -500,7 +495,7 @@ message RecognitionLattice {
   repeated LatticeEdge edges = 2;
 }
 
-// [Extension by Techmo]
+// [**Extension by Techmo**]
 // Edge-specific information for recognition lattice.
 message LatticeEdge {
   // Input node ID, node '0' is starting node for the lattice.
