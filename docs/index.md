@@ -31,27 +31,14 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## dictation_asr.proto
-Copyright 2017 Google Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-Extensions by Techmo are marked with [Extension by Techmo] tag.
+Modified by Techmo, copyright by Google.
+Extensions by Techmo are marked with [**Extension by Techmo**] tag.
 
 
 <a name="google.cloud.speech.v1.Speech"/>
 
 ### Speech
-Service that implements Google Cloud Speech API.
+Service that implements Google Cloud Speech API extended by Techmo.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
@@ -64,7 +51,7 @@ Service that implements Google Cloud Speech API.
 <a name="google.cloud.speech.v1.ConfigField"/>
 
 ### ConfigField
-[Extension by Techmo]
+[**Extension by Techmo**]
 Provides a pair of configuration field name and value.
 
 
@@ -81,7 +68,7 @@ Provides a pair of configuration field name and value.
 <a name="google.cloud.speech.v1.LatticeEdge"/>
 
 ### LatticeEdge
-[Extension by Techmo]
+[**Extension by Techmo**]
 Edge-specific information for recognition lattice.
 
 
@@ -134,7 +121,7 @@ request.
 | profanity_filter | [bool](#bool) | Optional* If set to `true`, the server will attempt to filter out profanities, replacing all but the initial character in each filtered word with asterisks, e.g. "f***". If set to `false` or omitted, profanities won't be filtered out. |
 | speech_contexts | [SpeechContext](#google.cloud.speech.v1.SpeechContext) | Optional* A means to provide context to assist the speech recognition. |
 | enable_word_time_offsets | [bool](#bool) | Optional* If `true`, the top result includes a list of words and the start and end time offsets (timestamps) for those words. If `false`, no word-level time offset information is returned. The default is `false`. |
-| config_fields | [ConfigField](#google.cloud.speech.v1.ConfigField) | [Extension by Techmo] Optional* A means to provide additional configuration fields via request. |
+| config_fields | [ConfigField](#google.cloud.speech.v1.ConfigField) | [**Extension by Techmo**] Optional* A means to provide additional configuration fields via request. |
 
 
 
@@ -144,11 +131,9 @@ request.
 <a name="google.cloud.speech.v1.RecognitionLattice"/>
 
 ### RecognitionLattice
-[Extension by Techmo]
+[**Extension by Techmo**]
 Detailed recognition result (lattice).
-Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message),
-only for final* (`is_final = true`) results,
-and *only when it's allowed by licence* .
+Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
 When requested and not allowed by licence,
 [google.rpc.Code.FAILED_PRECONDITION] will be returned.
 
@@ -238,7 +223,7 @@ A speech recognition result corresponding to a portion of the audio.
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | Output-only* May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). These alternatives are ordered in terms of accuracy, with the top (first) alternative being the most probable, as ranked by the recognizer. |
-| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [Extension by Techmo] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), only for final* (`is_final = true`) results, and *only when it's allowed by licence* . When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
+| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
 
@@ -275,7 +260,7 @@ that is currently being processed.
 | alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | Output-only* May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). |
 | is_final | [bool](#bool) | Output-only* If `false`, this `StreamingRecognitionResult` represents an interim result that may change. If `true`, this is the final time the speech service will return this particular `StreamingRecognitionResult`, the recognizer will not return any further hypotheses for this portion of the transcript and corresponding audio. |
 | stability | [float](#float) | Output-only* An estimate of the likelihood that the recognizer will not change its guess about this interim result. Values range from 0.0 (completely unstable) to 1.0 (completely stable). This field is only provided for interim results (`is_final=false`). The default of 0.0 is a sentinel value indicating `stability` was not set. |
-| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [Extension by Techmo] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), only for final* (`is_final = true`) results, and *only when it's allowed by licence* . When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
+| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
 
@@ -422,7 +407,7 @@ Indicates the type of speech event.
 | ---- | ------ | ----------- |
 | SPEECH_EVENT_UNSPECIFIED | 0 | No speech event specified. |
 | END_OF_SINGLE_UTTERANCE | 1 | This event indicates that the server has detected the end of the user's speech utterance and expects no additional speech. Therefore, the server will not process additional audio (although it may subsequently return additional results). The client should stop sending additional audio data, half-close the gRPC connection, and wait for any additional results until the server closes the gRPC connection. This event is only sent if `single_utterance` was set to `true`, and is not used otherwise. |
-| NO_INPUT_TIMEOUT | 4 | [Extension by Techmo] This event indicates that the server has detected no speech input timeout and expects no additional speech. Therefore, the server will not process additional audio (although it may subsequently return additional results). The client should stop sending additional audio data, half-close the gRPC connection, and wait for any additional results until the server closes the gRPC connection. |
+| NO_INPUT_TIMEOUT | 4 | [**Extension by Techmo**] This event indicates that the server has detected no speech input timeout and expects no additional speech. Therefore, the server will not process additional audio (although it may subsequently return additional results). The client should stop sending additional audio data, half-close the gRPC connection, and wait for any additional results until the server closes the gRPC connection. |
 
 
  <!-- end enums -->
