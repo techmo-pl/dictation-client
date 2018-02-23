@@ -114,14 +114,14 @@ request.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| encoding | [RecognitionConfig.AudioEncoding](#google.cloud.speech.v1.RecognitionConfig.AudioEncoding) | Required* Encoding of audio data sent in all `RecognitionAudio` messages. |
-| sample_rate_hertz | [int32](#int32) | Required* Sample rate in Hertz of the audio data sent in all `RecognitionAudio` messages. Valid values are: 8000-48000. 16000 is optimal. For best results, set the sampling rate of the audio source to 16000 Hz. If that's not possible, use the native sample rate of the audio source (instead of re-sampling). |
-| language_code | [string](#string) | Required* The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". See [Language Support](https://cloud.google.com/speech/docs/languages) for a list of the currently supported language codes. |
-| max_alternatives | [int32](#int32) | Optional* Maximum number of recognition hypotheses to be returned. Specifically, the maximum number of `SpeechRecognitionAlternative` messages within each `SpeechRecognitionResult`. The server may return fewer than `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of one. If omitted, will return a maximum of one. |
-| profanity_filter | [bool](#bool) | Optional* If set to `true`, the server will attempt to filter out profanities, replacing all but the initial character in each filtered word with asterisks, e.g. "f***". If set to `false` or omitted, profanities won't be filtered out. |
-| speech_contexts | [SpeechContext](#google.cloud.speech.v1.SpeechContext) | Optional* A means to provide context to assist the speech recognition. |
-| enable_word_time_offsets | [bool](#bool) | Optional* If `true`, the top result includes a list of words and the start and end time offsets (timestamps) for those words. If `false`, no word-level time offset information is returned. The default is `false`. |
-| config_fields | [ConfigField](#google.cloud.speech.v1.ConfigField) | [**Extension by Techmo**] Optional* A means to provide additional configuration fields via request. |
+| encoding | [RecognitionConfig.AudioEncoding](#google.cloud.speech.v1.RecognitionConfig.AudioEncoding) | [*Required*] Encoding of audio data sent in all `RecognitionAudio` messages. |
+| sample_rate_hertz | [int32](#int32) | [*Required*] Sample rate in Hertz of the audio data sent in all `RecognitionAudio` messages. Valid values are: 8000-48000. 16000 is optimal. For best results, set the sampling rate of the audio source to 16000 Hz. If that's not possible, use the native sample rate of the audio source (instead of re-sampling). |
+| language_code | [string](#string) | [*Required*] The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". See [Language Support](https://cloud.google.com/speech/docs/languages) for a list of the currently supported language codes. |
+| max_alternatives | [int32](#int32) | [*Optional*] Maximum number of recognition hypotheses to be returned. Specifically, the maximum number of `SpeechRecognitionAlternative` messages within each `SpeechRecognitionResult`. The server may return fewer than `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of one. If omitted, will return a maximum of one. |
+| profanity_filter | [bool](#bool) | [*Optional*] If set to `true`, the server will attempt to filter out profanities, replacing all but the initial character in each filtered word with asterisks, e.g. "f***". If set to `false` or omitted, profanities won't be filtered out. |
+| speech_contexts | [SpeechContext](#google.cloud.speech.v1.SpeechContext) | [*Optional*] A means to provide context to assist the speech recognition. |
+| enable_word_time_offsets | [bool](#bool) | [*Optional*] If `true`, the top result includes a list of words and the start and end time offsets (timestamps) for those words. If `false`, no word-level time offset information is returned. The default is `false`. |
+| config_fields | [ConfigField](#google.cloud.speech.v1.ConfigField) | [**Extension by Techmo**] [*Optional*] A means to provide additional configuration fields via request. |
 
 
 
@@ -156,8 +156,8 @@ The top-level message sent by the client for the `Recognize` method.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| config | [RecognitionConfig](#google.cloud.speech.v1.RecognitionConfig) | Required* Provides information to the recognizer that specifies how to process the request. |
-| audio | [RecognitionAudio](#google.cloud.speech.v1.RecognitionAudio) | Required* The audio data to be recognized. |
+| config | [RecognitionConfig](#google.cloud.speech.v1.RecognitionConfig) | [*Required*] Provides information to the recognizer that specifies how to process the request. |
+| audio | [RecognitionAudio](#google.cloud.speech.v1.RecognitionAudio) | [*Required*] The audio data to be recognized. |
 
 
 
@@ -174,7 +174,7 @@ messages.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| results | [SpeechRecognitionResult](#google.cloud.speech.v1.SpeechRecognitionResult) | Output-only* Sequential list of transcription results corresponding to sequential portions of audio. |
+| results | [SpeechRecognitionResult](#google.cloud.speech.v1.SpeechRecognitionResult) | [*Output-only*] Sequential list of transcription results corresponding to sequential portions of audio. |
 
 
 
@@ -190,7 +190,7 @@ in the results.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| phrases | [string](#string) | Optional* A list of strings containing words and phrases "hints" so that the speech recognition is more likely to recognize them. This can be used to improve the accuracy for specific words and phrases, for example, if specific commands are typically spoken by the user. This can also be used to add additional words to the vocabulary of the recognizer. See [usage limits](https://cloud.google.com/speech/limits#content). |
+| phrases | [string](#string) | [*Optional*] A list of strings containing words and phrases "hints" so that the speech recognition is more likely to recognize them. This can be used to improve the accuracy for specific words and phrases, for example, if specific commands are typically spoken by the user. This can also be used to add additional words to the vocabulary of the recognizer. See [usage limits](https://cloud.google.com/speech/limits#content). |
 
 
 
@@ -205,9 +205,9 @@ Alternative hypotheses (a.k.a. n-best list).
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| transcript | [string](#string) | Output-only* Transcript text representing the words that the user spoke. |
-| confidence | [float](#float) | Output-only* The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. This field is typically provided only for the top hypothesis, and only for `is_final=true` results. Clients should not rely on the `confidence` field as it is not guaranteed to be accurate or consistent. The default of 0.0 is a sentinel value indicating `confidence` was not set. |
-| words | [WordInfo](#google.cloud.speech.v1.WordInfo) | Output-only* A list of word-specific information for each recognized word. |
+| transcript | [string](#string) | [*Output-only*] Transcript text representing the words that the user spoke. |
+| confidence | [float](#float) | [*Output-only*] The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. This field is typically provided only for the top hypothesis, and only for `is_final=true` results. Clients should not rely on the `confidence` field as it is not guaranteed to be accurate or consistent. The default of 0.0 is a sentinel value indicating `confidence` was not set. |
+| words | [WordInfo](#google.cloud.speech.v1.WordInfo) | [*Output-only*] A list of word-specific information for each recognized word. |
 
 
 
@@ -222,7 +222,7 @@ A speech recognition result corresponding to a portion of the audio.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | Output-only* May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). These alternatives are ordered in terms of accuracy, with the top (first) alternative being the most probable, as ranked by the recognizer. |
+| alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | [*Output-only*] May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). These alternatives are ordered in terms of accuracy, with the top (first) alternative being the most probable, as ranked by the recognizer. |
 | lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
@@ -239,9 +239,9 @@ request.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| config | [RecognitionConfig](#google.cloud.speech.v1.RecognitionConfig) | Required* Provides information to the recognizer that specifies how to process the request. |
-| single_utterance | [bool](#bool) | Optional* If `false` or omitted, the recognizer will perform continuous recognition (continuing to wait for and process audio even if the user pauses speaking) until the client closes the input stream (gRPC API) or until the maximum time limit has been reached. May return multiple `StreamingRecognitionResult`s with the `is_final` flag set to `true`. If `true`, the recognizer will detect a single spoken utterance. When it detects that the user has paused or stopped speaking, it will return an `END_OF_SINGLE_UTTERANCE` event and cease recognition. It will return no more than one `StreamingRecognitionResult` with the `is_final` flag set to `true`. |
-| interim_results | [bool](#bool) | Optional* If `true`, interim results (tentative hypotheses) may be returned as they become available (these interim results are indicated with the `is_final=false` flag). If `false` or omitted, only `is_final=true` result(s) are returned. |
+| config | [RecognitionConfig](#google.cloud.speech.v1.RecognitionConfig) | [*Required*] Provides information to the recognizer that specifies how to process the request. |
+| single_utterance | [bool](#bool) | [*Optional*] If `false` or omitted, the recognizer will perform continuous recognition (continuing to wait for and process audio even if the user pauses speaking) until the client closes the input stream (gRPC API) or until the maximum time limit has been reached. May return multiple `StreamingRecognitionResult`s with the `is_final` flag set to `true`. If `true`, the recognizer will detect a single spoken utterance. When it detects that the user has paused or stopped speaking, it will return an `END_OF_SINGLE_UTTERANCE` event and cease recognition. It will return no more than one `StreamingRecognitionResult` with the `is_final` flag set to `true`. |
+| interim_results | [bool](#bool) | [*Optional*] If `true`, interim results (tentative hypotheses) may be returned as they become available (these interim results are indicated with the `is_final=false` flag). If `false` or omitted, only `is_final=true` result(s) are returned. |
 
 
 
@@ -257,9 +257,9 @@ that is currently being processed.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | Output-only* May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). |
-| is_final | [bool](#bool) | Output-only* If `false`, this `StreamingRecognitionResult` represents an interim result that may change. If `true`, this is the final time the speech service will return this particular `StreamingRecognitionResult`, the recognizer will not return any further hypotheses for this portion of the transcript and corresponding audio. |
-| stability | [float](#float) | Output-only* An estimate of the likelihood that the recognizer will not change its guess about this interim result. Values range from 0.0 (completely unstable) to 1.0 (completely stable). This field is only provided for interim results (`is_final=false`). The default of 0.0 is a sentinel value indicating `stability` was not set. |
+| alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | [*Output-only*] May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). |
+| is_final | [bool](#bool) | [*Output-only*] If `false`, this `StreamingRecognitionResult` represents an interim result that may change. If `true`, this is the final time the speech service will return this particular `StreamingRecognitionResult`, the recognizer will not return any further hypotheses for this portion of the transcript and corresponding audio. |
+| stability | [float](#float) | [*Output-only*] An estimate of the likelihood that the recognizer will not change its guess about this interim result. Values range from 0.0 (completely unstable) to 1.0 (completely stable). This field is only provided for interim results (`is_final=false`). The default of 0.0 is a sentinel value indicating `stability` was not set. |
 | lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
@@ -341,9 +341,9 @@ one or more (repeated) `results`.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| error | [.google.rpc.Status](#google.cloud.speech.v1..google.rpc.Status) | Output-only* If set, returns a [google.rpc.Status][google.rpc.Status] message that specifies the error for the operation. |
-| results | [StreamingRecognitionResult](#google.cloud.speech.v1.StreamingRecognitionResult) | Output-only* This repeated list contains zero or more results that correspond to consecutive portions of the audio currently being processed. It contains zero or one `is_final=true` result (the newly settled portion), followed by zero or more `is_final=false` results. |
-| speech_event_type | [StreamingRecognizeResponse.SpeechEventType](#google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType) | Output-only* Indicates the type of speech event. |
+| error | [.google.rpc.Status](#google.cloud.speech.v1..google.rpc.Status) | [*Output-only*] If set, returns a [google.rpc.Status][google.rpc.Status] message that specifies the error for the operation. |
+| results | [StreamingRecognitionResult](#google.cloud.speech.v1.StreamingRecognitionResult) | [*Output-only*] This repeated list contains zero or more results that correspond to consecutive portions of the audio currently being processed. It contains zero or one `is_final=true` result (the newly settled portion), followed by zero or more `is_final=false` results. |
+| speech_event_type | [StreamingRecognizeResponse.SpeechEventType](#google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType) | [*Output-only*] Indicates the type of speech event. |
 
 
 
@@ -360,9 +360,9 @@ as `enable_word_time_offsets`.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| start_time | [.google.protobuf.Duration](#google.cloud.speech.v1..google.protobuf.Duration) | Output-only* Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if `enable_word_time_offsets=true` and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary. |
-| end_time | [.google.protobuf.Duration](#google.cloud.speech.v1..google.protobuf.Duration) | Output-only* Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if `enable_word_time_offsets=true` and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary. |
-| word | [string](#string) | Output-only* The word corresponding to this set of information. |
+| start_time | [.google.protobuf.Duration](#google.cloud.speech.v1..google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if `enable_word_time_offsets=true` and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary. |
+| end_time | [.google.protobuf.Duration](#google.cloud.speech.v1..google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if `enable_word_time_offsets=true` and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary. |
+| word | [string](#string) | [*Output-only*] The word corresponding to this set of information. |
 
 
 
