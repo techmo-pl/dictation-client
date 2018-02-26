@@ -11,9 +11,6 @@ class DictationSettings:
     def time_offsets(self):
         return self.args.time_offsets
 
-    def max_alternatives(self):
-        return self.args.max_alternatives
-
     def single_utterance(self):
         return self.args.single_utterance
 

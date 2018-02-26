@@ -22,7 +22,6 @@ if __name__ == '__main__':
     parser.add_argument("--time-offsets", help="If set - the recognizer will return also word time offsets.", action="store_true", default=False)
     parser.add_argument("--single-utterance", help="If set - the recognizer will detect a single spoken utterance.", action="store_true", default=False)
     parser.add_argument("--interim-results", help="If set - messages with temporal results will be shown.", action="store_true", default=False)
-    parser.add_argument("--max-alternatives", help="Maximum number of returned hypotheses.", default=1, type=int)
     # timeouts
     parser.add_argument("--no-input-timeout", help="MRCP v2 no input timeout [ms].", default=5000, type=int)
     parser.add_argument("--speech-complete-timeout", help="MRCP v2 speech complete timeout [ms].", default=2000, type=int)

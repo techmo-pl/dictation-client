@@ -112,7 +112,7 @@ class StreamingRecognizer:
                     # See https://g.co/cloud/speech/docs/languages for a list of supported languages.
                     language_code='pl-PL',  # a BCP-47 language tag
                     enable_word_time_offsets=settings.time_offsets(),  # if true, return recognized word time offsets
-                    max_alternatives=settings.max_alternatives(),  # maximum number of returned hypotheses
+                    max_alternatives=1,  # maximum number of returned hypotheses
                 ),
                 single_utterance=settings.single_utterance(),
                 interim_results=settings.interim_results()

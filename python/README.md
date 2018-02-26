@@ -24,7 +24,6 @@ Usage:
 usage: dictation_client.py [-h] --service-address ADDRESS --wave-path WAVE
                            [--session-id SESSION_ID] [--time-offsets]
                            [--single-utterance] [--interim-results]
-                           [--max-alternatives MAX_ALTERNATIVES]
                            [--no-input-timeout NO_INPUT_TIMEOUT]
                            [--speech-complete-timeout SPEECH_COMPLETE_TIMEOUT]
                            [--recognition-timeout RECOGNITION_TIMEOUT]
@@ -45,8 +44,6 @@ optional arguments:
   --single-utterance    If set - the recognizer will detect a single spoken
                         utterance.
   --interim-results     If set - messages with temporal results will be shown.
-  --max-alternatives MAX_ALTERNATIVES
-                        Maximum number of returned hypotheses.
   --no-input-timeout NO_INPUT_TIMEOUT
                         MRCP v2 no input timeout [ms].
   --speech-complete-timeout SPEECH_COMPLETE_TIMEOUT
