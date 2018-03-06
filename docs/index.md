@@ -31,8 +31,11 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## dictation_asr.proto
-Modified by Techmo, copyright by Google.
-Extensions by Techmo are marked with [**Extension by Techmo**] tag.
+Modified by Techmo, copyright by Google. Changes include:
+- removal of `LongRunningRecognize` support (commented out),
+- modifications of comments, according to how recognition is performed by Techmo,
+- additions that introduce new features to the original API.
+Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
 
 
 <a name="google.cloud.speech.v1.Speech"/>
@@ -90,15 +93,13 @@ Edge-specific information for recognition lattice.
 
 ### RecognitionAudio
 Contains audio data in the encoding specified in the `RecognitionConfig`.
-Either `content` or `uri` must be supplied. Supplying both or neither
-returns [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. See
-[audio limits](https://cloud.google.com/speech/limits#content).
+Only `content` is allowed to be supplied.
 
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | content | [bytes](#bytes) | The audio data bytes encoded as specified in `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a pure binary representation, whereas JSON representations use base64. |
-| uri | [string](#string) | URI that points to a file that contains audio data bytes as specified in `RecognitionConfig`. Currently, only Google Cloud Storage URIs are supported, which must be specified in the following format: `gs://bucket_name/object_name` (other URI formats return [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris). |
+| uri | [string](#string) | [*Unused*] |
 
 
 
@@ -116,10 +117,10 @@ request.
 | ----- | ---- | ----------- |
 | encoding | [RecognitionConfig.AudioEncoding](#google.cloud.speech.v1.RecognitionConfig.AudioEncoding) | [*Required*] Encoding of audio data sent in all `RecognitionAudio` messages. |
 | sample_rate_hertz | [int32](#int32) | [*Required*] Sample rate in Hertz of the audio data sent in all `RecognitionAudio` messages. Valid values are: 8000-48000. 16000 is optimal. For best results, set the sampling rate of the audio source to 16000 Hz. If that's not possible, use the native sample rate of the audio source (instead of re-sampling). |
-| language_code | [string](#string) | [*Required*] The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". See [Language Support](https://cloud.google.com/speech/docs/languages) for a list of the currently supported language codes. |
+| language_code | [string](#string) | [*Required*] The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". The only language supported at he moment is Polish (`pl-PL`). |
 | max_alternatives | [int32](#int32) | [*Optional*] Maximum number of recognition hypotheses to be returned. Specifically, the maximum number of `SpeechRecognitionAlternative` messages within each `SpeechRecognitionResult`. The server may return fewer than `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of one. If omitted, will return a maximum of one. |
-| profanity_filter | [bool](#bool) | [*Optional*] If set to `true`, the server will attempt to filter out profanities, replacing all but the initial character in each filtered word with asterisks, e.g. "f***". If set to `false` or omitted, profanities won't be filtered out. |
-| speech_contexts | [SpeechContext](#google.cloud.speech.v1.SpeechContext) | [*Optional*] A means to provide context to assist the speech recognition. |
+| profanity_filter | [bool](#bool) | [*Optional*][*Unused*] |
+| speech_contexts | [SpeechContext](#google.cloud.speech.v1.SpeechContext) | [*Optional*][*Unused*] |
 | enable_word_time_offsets | [bool](#bool) | [*Optional*] If `true`, the top result includes a list of words and the start and end time offsets (timestamps) for those words. If `false`, no word-level time offset information is returned. The default is `false`. |
 | config_fields | [ConfigField](#google.cloud.speech.v1.ConfigField) | [**Extension by Techmo**] [*Optional*] A means to provide additional configuration fields via request. |
 
@@ -184,13 +185,12 @@ messages.
 <a name="google.cloud.speech.v1.SpeechContext"/>
 
 ### SpeechContext
-Provides "hints" to the speech recognizer to favor specific words and phrases
-in the results.
+[*Unused*]
 
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| phrases | [string](#string) | [*Optional*] A list of strings containing words and phrases "hints" so that the speech recognition is more likely to recognize them. This can be used to improve the accuracy for specific words and phrases, for example, if specific commands are typically spoken by the user. This can also be used to add additional words to the vocabulary of the recognizer. See [usage limits](https://cloud.google.com/speech/limits#content). |
+| phrases | [string](#string) | [*Unused*] |
 
 
 
@@ -206,7 +206,7 @@ Alternative hypotheses (a.k.a. n-best list).
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | transcript | [string](#string) | [*Output-only*] Transcript text representing the words that the user spoke. |
-| confidence | [float](#float) | [*Output-only*] The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. This field is typically provided only for the top hypothesis, and only for `is_final=true` results. Clients should not rely on the `confidence` field as it is not guaranteed to be accurate or consistent. The default of 0.0 is a sentinel value indicating `confidence` was not set. |
+| confidence | [float](#float) | [*Output-only*] The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. |
 | words | [WordInfo](#google.cloud.speech.v1.WordInfo) | [*Output-only*] A list of word-specific information for each recognized word. |
 
 
@@ -259,7 +259,7 @@ that is currently being processed.
 | ----- | ---- | ----------- |
 | alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | [*Output-only*] May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). |
 | is_final | [bool](#bool) | [*Output-only*] If `false`, this `StreamingRecognitionResult` represents an interim result that may change. If `true`, this is the final time the speech service will return this particular `StreamingRecognitionResult`, the recognizer will not return any further hypotheses for this portion of the transcript and corresponding audio. |
-| stability | [float](#float) | [*Output-only*] An estimate of the likelihood that the recognizer will not change its guess about this interim result. Values range from 0.0 (completely unstable) to 1.0 (completely stable). This field is only provided for interim results (`is_final=false`). The default of 0.0 is a sentinel value indicating `stability` was not set. |
+| stability | [float](#float) | [*Unused*] |
 | lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
@@ -280,7 +280,7 @@ All subsequent messages must contain `audio` data and must not contain a
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | streaming_config | [StreamingRecognitionConfig](#google.cloud.speech.v1.StreamingRecognitionConfig) | Provides information to the recognizer that specifies how to process the request. The first `StreamingRecognizeRequest` message must contain a `streaming_config` message. |
-| audio_content | [bytes](#bytes) | The audio data to be recognized. Sequential chunks of audio data are sent in sequential `StreamingRecognizeRequest` messages. The first `StreamingRecognizeRequest` message must not contain `audio_content` data and all subsequent `StreamingRecognizeRequest` messages must contain `audio_content` data. The audio bytes must be encoded as specified in `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a pure binary representation (not base64). See [audio limits](https://cloud.google.com/speech/limits#content). |
+| audio_content | [bytes](#bytes) | The audio data to be recognized. Sequential chunks of audio data are sent in sequential `StreamingRecognizeRequest` messages. The first `StreamingRecognizeRequest` message must not contain `audio_content` data and all subsequent `StreamingRecognizeRequest` messages must contain `audio_content` data. The audio bytes must be encoded as specified in `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a pure binary representation (not base64). |
 
 
 
@@ -360,8 +360,8 @@ as `enable_word_time_offsets`.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| start_time | [.google.protobuf.Duration](#google.cloud.speech.v1..google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if `enable_word_time_offsets=true` and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary. |
-| end_time | [.google.protobuf.Duration](#google.cloud.speech.v1..google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if `enable_word_time_offsets=true` and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary. |
+| start_time | [.google.protobuf.Duration](#google.cloud.speech.v1..google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if `enable_word_time_offsets=true`. |
+| end_time | [.google.protobuf.Duration](#google.cloud.speech.v1..google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if `enable_word_time_offsets=true`. |
 | word | [string](#string) | [*Output-only*] The word corresponding to this set of information. |
 
 
@@ -375,26 +375,20 @@ as `enable_word_time_offsets`.
 
 ### RecognitionConfig.AudioEncoding
 Audio encoding of the data sent in the audio message. All encodings support
-only 1 channel (mono) audio. Only `FLAC` and `WAV` include a header that
-describes the bytes of audio that follow the header. The other encodings
-are raw audio bytes with no header.
-
-For best results, the audio source should be captured and transmitted using
-a lossless encoding (`FLAC` or `LINEAR16`). Recognition accuracy may be
-reduced if lossy codecs, which include the other codecs listed in
-this section, are used to capture or transmit the audio, particularly if
-background noise is present.
+only 1 channel (mono) audio.
+The only encoding supported at he moment is `LINEAR16`. Specifying another
+encoding will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | ENCODING_UNSPECIFIED | 0 | Not specified. Will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. |
 | LINEAR16 | 1 | Uncompressed 16-bit signed little-endian samples (Linear PCM). |
-| FLAC | 2 | [`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio Codec) is the recommended encoding because it is lossless--therefore recognition is not compromised--and requires only about half the bandwidth of `LINEAR16`. `FLAC` stream encoding supports 16-bit and 24-bit samples, however, not all fields in `STREAMINFO` are supported. |
-| MULAW | 3 | 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law. |
-| AMR | 4 | Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000. |
-| AMR_WB | 5 | Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000. |
-| OGG_OPUS | 6 | Opus encoded audio frames in Ogg container ([OggOpus](https://wiki.xiph.org/OggOpus)). `sample_rate_hertz` must be 16000. |
-| SPEEX_WITH_HEADER_BYTE | 7 | Although the use of lossy encodings is not recommended, if a very low bitrate encoding is required, `OGG_OPUS` is highly preferred over Speex encoding. The [Speex](https://speex.org/) encoding supported by Cloud Speech API has a header byte in each block, as in MIME type `audio/x-speex-with-header-byte`. It is a variant of the RTP Speex encoding defined in [RFC 5574](https://tools.ietf.org/html/rfc5574). The stream is a sequence of blocks, one block per RTP packet. Each block starts with a byte containing the length of the block, in bytes, followed by one or more frames of Speex data, padded to an integral number of bytes (octets) as specified in RFC 5574. In other words, each RTP header is replaced with a single byte containing the block length. Only Speex wideband is supported. `sample_rate_hertz` must be 16000. |
+| FLAC | 2 | [*Unused*] |
+| MULAW | 3 | [*Unused*] |
+| AMR | 4 | [*Unused*] |
+| AMR_WB | 5 | [*Unused*] |
+| OGG_OPUS | 6 | [*Unused*] |
+| SPEEX_WITH_HEADER_BYTE | 7 | [*Unused*] |
 
 
 
