@@ -31,9 +31,7 @@
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "google/api/annotations.pb.h"
-#include "google/longrunning/operations.pb.h"
 #include <google/protobuf/duration.pb.h>
-#include <google/protobuf/timestamp.pb.h>
 #include "google/rpc/status.pb.h"
 // @@protoc_insertion_point(includes)
 namespace google {
@@ -46,15 +44,6 @@ extern ConfigFieldDefaultTypeInternal _ConfigField_default_instance_;
 class LatticeEdge;
 class LatticeEdgeDefaultTypeInternal;
 extern LatticeEdgeDefaultTypeInternal _LatticeEdge_default_instance_;
-class LongRunningRecognizeMetadata;
-class LongRunningRecognizeMetadataDefaultTypeInternal;
-extern LongRunningRecognizeMetadataDefaultTypeInternal _LongRunningRecognizeMetadata_default_instance_;
-class LongRunningRecognizeRequest;
-class LongRunningRecognizeRequestDefaultTypeInternal;
-extern LongRunningRecognizeRequestDefaultTypeInternal _LongRunningRecognizeRequest_default_instance_;
-class LongRunningRecognizeResponse;
-class LongRunningRecognizeResponseDefaultTypeInternal;
-extern LongRunningRecognizeResponseDefaultTypeInternal _LongRunningRecognizeResponse_default_instance_;
 class RecognitionAudio;
 class RecognitionAudioDefaultTypeInternal;
 extern RecognitionAudioDefaultTypeInternal _RecognitionAudio_default_instance_;
@@ -313,149 +302,6 @@ class RecognizeRequest : public ::google::protobuf::Message /* @@protoc_insertio
 };
 // -------------------------------------------------------------------
 
-class LongRunningRecognizeRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.cloud.speech.v1.LongRunningRecognizeRequest) */ {
- public:
-  LongRunningRecognizeRequest();
-  virtual ~LongRunningRecognizeRequest();
-
-  LongRunningRecognizeRequest(const LongRunningRecognizeRequest& from);
-
-  inline LongRunningRecognizeRequest& operator=(const LongRunningRecognizeRequest& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  LongRunningRecognizeRequest(LongRunningRecognizeRequest&& from) noexcept
-    : LongRunningRecognizeRequest() {
-    *this = ::std::move(from);
-  }
-
-  inline LongRunningRecognizeRequest& operator=(LongRunningRecognizeRequest&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
-    return GetArenaNoVirtual();
-  }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
-    return MaybeArenaPtr();
-  }
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const LongRunningRecognizeRequest& default_instance();
-
-  static inline const LongRunningRecognizeRequest* internal_default_instance() {
-    return reinterpret_cast<const LongRunningRecognizeRequest*>(
-               &_LongRunningRecognizeRequest_default_instance_);
-  }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
-
-  void UnsafeArenaSwap(LongRunningRecognizeRequest* other);
-  void Swap(LongRunningRecognizeRequest* other);
-  friend void swap(LongRunningRecognizeRequest& a, LongRunningRecognizeRequest& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline LongRunningRecognizeRequest* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  LongRunningRecognizeRequest* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const LongRunningRecognizeRequest& from);
-  void MergeFrom(const LongRunningRecognizeRequest& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(LongRunningRecognizeRequest* other);
-  protected:
-  explicit LongRunningRecognizeRequest(::google::protobuf::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // .google.cloud.speech.v1.RecognitionConfig config = 1;
-  bool has_config() const;
-  void clear_config();
-  static const int kConfigFieldNumber = 1;
-  private:
-  void _slow_mutable_config();
-  void _slow_set_allocated_config(
-      ::google::protobuf::Arena* message_arena, ::google::cloud::speech::v1::RecognitionConfig** config);
-  ::google::cloud::speech::v1::RecognitionConfig* _slow_release_config();
-  public:
-  const ::google::cloud::speech::v1::RecognitionConfig& config() const;
-  ::google::cloud::speech::v1::RecognitionConfig* mutable_config();
-  ::google::cloud::speech::v1::RecognitionConfig* release_config();
-  void set_allocated_config(::google::cloud::speech::v1::RecognitionConfig* config);
-  ::google::cloud::speech::v1::RecognitionConfig* unsafe_arena_release_config();
-  void unsafe_arena_set_allocated_config(
-      ::google::cloud::speech::v1::RecognitionConfig* config);
-
-  // .google.cloud.speech.v1.RecognitionAudio audio = 2;
-  bool has_audio() const;
-  void clear_audio();
-  static const int kAudioFieldNumber = 2;
-  private:
-  void _slow_mutable_audio();
-  void _slow_set_allocated_audio(
-      ::google::protobuf::Arena* message_arena, ::google::cloud::speech::v1::RecognitionAudio** audio);
-  ::google::cloud::speech::v1::RecognitionAudio* _slow_release_audio();
-  public:
-  const ::google::cloud::speech::v1::RecognitionAudio& audio() const;
-  ::google::cloud::speech::v1::RecognitionAudio* mutable_audio();
-  ::google::cloud::speech::v1::RecognitionAudio* release_audio();
-  void set_allocated_audio(::google::cloud::speech::v1::RecognitionAudio* audio);
-  ::google::cloud::speech::v1::RecognitionAudio* unsafe_arena_release_audio();
-  void unsafe_arena_set_allocated_audio(
-      ::google::cloud::speech::v1::RecognitionAudio* audio);
-
-  // @@protoc_insertion_point(class_scope:google.cloud.speech.v1.LongRunningRecognizeRequest)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::google::cloud::speech::v1::RecognitionConfig* config_;
-  ::google::cloud::speech::v1::RecognitionAudio* audio_;
-  mutable int _cached_size_;
-  friend struct protobuf_dictation_5fasr_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
 class StreamingRecognizeRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.cloud.speech.v1.StreamingRecognizeRequest) */ {
  public:
   StreamingRecognizeRequest();
@@ -502,7 +348,7 @@ class StreamingRecognizeRequest : public ::google::protobuf::Message /* @@protoc
                &_StreamingRecognizeRequest_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    2;
+    1;
 
   void UnsafeArenaSwap(StreamingRecognizeRequest* other);
   void Swap(StreamingRecognizeRequest* other);
@@ -659,7 +505,7 @@ class StreamingRecognitionConfig : public ::google::protobuf::Message /* @@proto
                &_StreamingRecognitionConfig_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+    2;
 
   void UnsafeArenaSwap(StreamingRecognitionConfig* other);
   void Swap(StreamingRecognitionConfig* other);
@@ -797,7 +643,7 @@ class RecognitionConfig : public ::google::protobuf::Message /* @@protoc_inserti
                &_RecognitionConfig_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+    3;
 
   void UnsafeArenaSwap(RecognitionConfig* other);
   void Swap(RecognitionConfig* other);
@@ -1019,7 +865,7 @@ class SpeechContext : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_SpeechContext_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+    4;
 
   void UnsafeArenaSwap(SpeechContext* other);
   void Swap(SpeechContext* other);
@@ -1147,7 +993,7 @@ class ConfigField : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_ConfigField_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+    5;
 
   void UnsafeArenaSwap(ConfigField* other);
   void Swap(ConfigField* other);
@@ -1294,7 +1140,7 @@ class RecognitionAudio : public ::google::protobuf::Message /* @@protoc_insertio
                &_RecognitionAudio_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    7;
+    6;
 
   void UnsafeArenaSwap(RecognitionAudio* other);
   void Swap(RecognitionAudio* other);
@@ -1453,7 +1299,7 @@ class RecognizeResponse : public ::google::protobuf::Message /* @@protoc_inserti
                &_RecognizeResponse_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    8;
+    7;
 
   void UnsafeArenaSwap(RecognizeResponse* other);
   void Swap(RecognizeResponse* other);
@@ -1531,274 +1377,6 @@ class RecognizeResponse : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
-class LongRunningRecognizeResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.cloud.speech.v1.LongRunningRecognizeResponse) */ {
- public:
-  LongRunningRecognizeResponse();
-  virtual ~LongRunningRecognizeResponse();
-
-  LongRunningRecognizeResponse(const LongRunningRecognizeResponse& from);
-
-  inline LongRunningRecognizeResponse& operator=(const LongRunningRecognizeResponse& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  LongRunningRecognizeResponse(LongRunningRecognizeResponse&& from) noexcept
-    : LongRunningRecognizeResponse() {
-    *this = ::std::move(from);
-  }
-
-  inline LongRunningRecognizeResponse& operator=(LongRunningRecognizeResponse&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
-    return GetArenaNoVirtual();
-  }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
-    return MaybeArenaPtr();
-  }
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const LongRunningRecognizeResponse& default_instance();
-
-  static inline const LongRunningRecognizeResponse* internal_default_instance() {
-    return reinterpret_cast<const LongRunningRecognizeResponse*>(
-               &_LongRunningRecognizeResponse_default_instance_);
-  }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    9;
-
-  void UnsafeArenaSwap(LongRunningRecognizeResponse* other);
-  void Swap(LongRunningRecognizeResponse* other);
-  friend void swap(LongRunningRecognizeResponse& a, LongRunningRecognizeResponse& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline LongRunningRecognizeResponse* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  LongRunningRecognizeResponse* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const LongRunningRecognizeResponse& from);
-  void MergeFrom(const LongRunningRecognizeResponse& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(LongRunningRecognizeResponse* other);
-  protected:
-  explicit LongRunningRecognizeResponse(::google::protobuf::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated .google.cloud.speech.v1.SpeechRecognitionResult results = 2;
-  int results_size() const;
-  void clear_results();
-  static const int kResultsFieldNumber = 2;
-  const ::google::cloud::speech::v1::SpeechRecognitionResult& results(int index) const;
-  ::google::cloud::speech::v1::SpeechRecognitionResult* mutable_results(int index);
-  ::google::cloud::speech::v1::SpeechRecognitionResult* add_results();
-  ::google::protobuf::RepeatedPtrField< ::google::cloud::speech::v1::SpeechRecognitionResult >*
-      mutable_results();
-  const ::google::protobuf::RepeatedPtrField< ::google::cloud::speech::v1::SpeechRecognitionResult >&
-      results() const;
-
-  // @@protoc_insertion_point(class_scope:google.cloud.speech.v1.LongRunningRecognizeResponse)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::google::protobuf::RepeatedPtrField< ::google::cloud::speech::v1::SpeechRecognitionResult > results_;
-  mutable int _cached_size_;
-  friend struct protobuf_dictation_5fasr_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class LongRunningRecognizeMetadata : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.cloud.speech.v1.LongRunningRecognizeMetadata) */ {
- public:
-  LongRunningRecognizeMetadata();
-  virtual ~LongRunningRecognizeMetadata();
-
-  LongRunningRecognizeMetadata(const LongRunningRecognizeMetadata& from);
-
-  inline LongRunningRecognizeMetadata& operator=(const LongRunningRecognizeMetadata& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  LongRunningRecognizeMetadata(LongRunningRecognizeMetadata&& from) noexcept
-    : LongRunningRecognizeMetadata() {
-    *this = ::std::move(from);
-  }
-
-  inline LongRunningRecognizeMetadata& operator=(LongRunningRecognizeMetadata&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
-    return GetArenaNoVirtual();
-  }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
-    return MaybeArenaPtr();
-  }
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const LongRunningRecognizeMetadata& default_instance();
-
-  static inline const LongRunningRecognizeMetadata* internal_default_instance() {
-    return reinterpret_cast<const LongRunningRecognizeMetadata*>(
-               &_LongRunningRecognizeMetadata_default_instance_);
-  }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    10;
-
-  void UnsafeArenaSwap(LongRunningRecognizeMetadata* other);
-  void Swap(LongRunningRecognizeMetadata* other);
-  friend void swap(LongRunningRecognizeMetadata& a, LongRunningRecognizeMetadata& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline LongRunningRecognizeMetadata* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  LongRunningRecognizeMetadata* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const LongRunningRecognizeMetadata& from);
-  void MergeFrom(const LongRunningRecognizeMetadata& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(LongRunningRecognizeMetadata* other);
-  protected:
-  explicit LongRunningRecognizeMetadata(::google::protobuf::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // .google.protobuf.Timestamp start_time = 2;
-  bool has_start_time() const;
-  void clear_start_time();
-  static const int kStartTimeFieldNumber = 2;
-  private:
-  void _slow_mutable_start_time();
-  void _slow_set_allocated_start_time(
-      ::google::protobuf::Arena* message_arena, ::google::protobuf::Timestamp** start_time);
-  ::google::protobuf::Timestamp* _slow_release_start_time();
-  public:
-  const ::google::protobuf::Timestamp& start_time() const;
-  ::google::protobuf::Timestamp* mutable_start_time();
-  ::google::protobuf::Timestamp* release_start_time();
-  void set_allocated_start_time(::google::protobuf::Timestamp* start_time);
-  ::google::protobuf::Timestamp* unsafe_arena_release_start_time();
-  void unsafe_arena_set_allocated_start_time(
-      ::google::protobuf::Timestamp* start_time);
-
-  // .google.protobuf.Timestamp last_update_time = 3;
-  bool has_last_update_time() const;
-  void clear_last_update_time();
-  static const int kLastUpdateTimeFieldNumber = 3;
-  private:
-  void _slow_mutable_last_update_time();
-  void _slow_set_allocated_last_update_time(
-      ::google::protobuf::Arena* message_arena, ::google::protobuf::Timestamp** last_update_time);
-  ::google::protobuf::Timestamp* _slow_release_last_update_time();
-  public:
-  const ::google::protobuf::Timestamp& last_update_time() const;
-  ::google::protobuf::Timestamp* mutable_last_update_time();
-  ::google::protobuf::Timestamp* release_last_update_time();
-  void set_allocated_last_update_time(::google::protobuf::Timestamp* last_update_time);
-  ::google::protobuf::Timestamp* unsafe_arena_release_last_update_time();
-  void unsafe_arena_set_allocated_last_update_time(
-      ::google::protobuf::Timestamp* last_update_time);
-
-  // int32 progress_percent = 1;
-  void clear_progress_percent();
-  static const int kProgressPercentFieldNumber = 1;
-  ::google::protobuf::int32 progress_percent() const;
-  void set_progress_percent(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:google.cloud.speech.v1.LongRunningRecognizeMetadata)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::google::protobuf::Timestamp* start_time_;
-  ::google::protobuf::Timestamp* last_update_time_;
-  ::google::protobuf::int32 progress_percent_;
-  mutable int _cached_size_;
-  friend struct protobuf_dictation_5fasr_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
 class StreamingRecognizeResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.cloud.speech.v1.StreamingRecognizeResponse) */ {
  public:
   StreamingRecognizeResponse();
@@ -1839,7 +1417,7 @@ class StreamingRecognizeResponse : public ::google::protobuf::Message /* @@proto
                &_StreamingRecognizeResponse_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    11;
+    8;
 
   void UnsafeArenaSwap(StreamingRecognizeResponse* other);
   void Swap(StreamingRecognizeResponse* other);
@@ -2009,7 +1587,7 @@ class StreamingRecognitionResult : public ::google::protobuf::Message /* @@proto
                &_StreamingRecognitionResult_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    12;
+    9;
 
   void UnsafeArenaSwap(StreamingRecognitionResult* other);
   void Swap(StreamingRecognitionResult* other);
@@ -2154,7 +1732,7 @@ class SpeechRecognitionResult : public ::google::protobuf::Message /* @@protoc_i
                &_SpeechRecognitionResult_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    13;
+    10;
 
   void UnsafeArenaSwap(SpeechRecognitionResult* other);
   void Swap(SpeechRecognitionResult* other);
@@ -2285,7 +1863,7 @@ class SpeechRecognitionAlternative : public ::google::protobuf::Message /* @@pro
                &_SpeechRecognitionAlternative_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    14;
+    11;
 
   void UnsafeArenaSwap(SpeechRecognitionAlternative* other);
   void Swap(SpeechRecognitionAlternative* other);
@@ -2428,7 +2006,7 @@ class WordInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_WordInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    15;
+    12;
 
   void UnsafeArenaSwap(WordInfo* other);
   void Swap(WordInfo* other);
@@ -2589,7 +2167,7 @@ class RecognitionLattice : public ::google::protobuf::Message /* @@protoc_insert
                &_RecognitionLattice_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    16;
+    13;
 
   void UnsafeArenaSwap(RecognitionLattice* other);
   void Swap(RecognitionLattice* other);
@@ -2721,7 +2299,7 @@ class LatticeEdge : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_LatticeEdge_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    17;
+    14;
 
   void UnsafeArenaSwap(LatticeEdge* other);
   void Swap(LatticeEdge* other);
@@ -2947,110 +2525,6 @@ inline  void RecognizeRequest::set_allocated_audio(::google::cloud::speech::v1::
     
   }
   // @@protoc_insertion_point(field_set_allocated:google.cloud.speech.v1.RecognizeRequest.audio)
-}
-
-// -------------------------------------------------------------------
-
-// LongRunningRecognizeRequest
-
-// .google.cloud.speech.v1.RecognitionConfig config = 1;
-inline bool LongRunningRecognizeRequest::has_config() const {
-  return this != internal_default_instance() && config_ != NULL;
-}
-inline void LongRunningRecognizeRequest::clear_config() {
-  if (GetArenaNoVirtual() == NULL && config_ != NULL) delete config_;
-  config_ = NULL;
-}
-inline const ::google::cloud::speech::v1::RecognitionConfig& LongRunningRecognizeRequest::config() const {
-  const ::google::cloud::speech::v1::RecognitionConfig* p = config_;
-  // @@protoc_insertion_point(field_get:google.cloud.speech.v1.LongRunningRecognizeRequest.config)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::cloud::speech::v1::RecognitionConfig*>(
-      &::google::cloud::speech::v1::_RecognitionConfig_default_instance_);
-}
-inline ::google::cloud::speech::v1::RecognitionConfig* LongRunningRecognizeRequest::mutable_config() {
-  
-  if (config_ == NULL) {
-    _slow_mutable_config();
-  }
-  // @@protoc_insertion_point(field_mutable:google.cloud.speech.v1.LongRunningRecognizeRequest.config)
-  return config_;
-}
-inline ::google::cloud::speech::v1::RecognitionConfig* LongRunningRecognizeRequest::release_config() {
-  // @@protoc_insertion_point(field_release:google.cloud.speech.v1.LongRunningRecognizeRequest.config)
-  
-  if (GetArenaNoVirtual() != NULL) {
-    return _slow_release_config();
-  } else {
-    ::google::cloud::speech::v1::RecognitionConfig* temp = config_;
-    config_ = NULL;
-    return temp;
-  }
-}
-inline  void LongRunningRecognizeRequest::set_allocated_config(::google::cloud::speech::v1::RecognitionConfig* config) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete config_;
-  }
-  if (config != NULL) {
-    _slow_set_allocated_config(message_arena, &config);
-  }
-  config_ = config;
-  if (config) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:google.cloud.speech.v1.LongRunningRecognizeRequest.config)
-}
-
-// .google.cloud.speech.v1.RecognitionAudio audio = 2;
-inline bool LongRunningRecognizeRequest::has_audio() const {
-  return this != internal_default_instance() && audio_ != NULL;
-}
-inline void LongRunningRecognizeRequest::clear_audio() {
-  if (GetArenaNoVirtual() == NULL && audio_ != NULL) delete audio_;
-  audio_ = NULL;
-}
-inline const ::google::cloud::speech::v1::RecognitionAudio& LongRunningRecognizeRequest::audio() const {
-  const ::google::cloud::speech::v1::RecognitionAudio* p = audio_;
-  // @@protoc_insertion_point(field_get:google.cloud.speech.v1.LongRunningRecognizeRequest.audio)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::cloud::speech::v1::RecognitionAudio*>(
-      &::google::cloud::speech::v1::_RecognitionAudio_default_instance_);
-}
-inline ::google::cloud::speech::v1::RecognitionAudio* LongRunningRecognizeRequest::mutable_audio() {
-  
-  if (audio_ == NULL) {
-    _slow_mutable_audio();
-  }
-  // @@protoc_insertion_point(field_mutable:google.cloud.speech.v1.LongRunningRecognizeRequest.audio)
-  return audio_;
-}
-inline ::google::cloud::speech::v1::RecognitionAudio* LongRunningRecognizeRequest::release_audio() {
-  // @@protoc_insertion_point(field_release:google.cloud.speech.v1.LongRunningRecognizeRequest.audio)
-  
-  if (GetArenaNoVirtual() != NULL) {
-    return _slow_release_audio();
-  } else {
-    ::google::cloud::speech::v1::RecognitionAudio* temp = audio_;
-    audio_ = NULL;
-    return temp;
-  }
-}
-inline  void LongRunningRecognizeRequest::set_allocated_audio(::google::cloud::speech::v1::RecognitionAudio* audio) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete audio_;
-  }
-  if (audio != NULL) {
-    _slow_set_allocated_audio(message_arena, &audio);
-  }
-  audio_ = audio;
-  if (audio) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:google.cloud.speech.v1.LongRunningRecognizeRequest.audio)
 }
 
 // -------------------------------------------------------------------
@@ -4090,158 +3564,6 @@ RecognizeResponse::results() const {
 
 // -------------------------------------------------------------------
 
-// LongRunningRecognizeResponse
-
-// repeated .google.cloud.speech.v1.SpeechRecognitionResult results = 2;
-inline int LongRunningRecognizeResponse::results_size() const {
-  return results_.size();
-}
-inline void LongRunningRecognizeResponse::clear_results() {
-  results_.Clear();
-}
-inline const ::google::cloud::speech::v1::SpeechRecognitionResult& LongRunningRecognizeResponse::results(int index) const {
-  // @@protoc_insertion_point(field_get:google.cloud.speech.v1.LongRunningRecognizeResponse.results)
-  return results_.Get(index);
-}
-inline ::google::cloud::speech::v1::SpeechRecognitionResult* LongRunningRecognizeResponse::mutable_results(int index) {
-  // @@protoc_insertion_point(field_mutable:google.cloud.speech.v1.LongRunningRecognizeResponse.results)
-  return results_.Mutable(index);
-}
-inline ::google::cloud::speech::v1::SpeechRecognitionResult* LongRunningRecognizeResponse::add_results() {
-  // @@protoc_insertion_point(field_add:google.cloud.speech.v1.LongRunningRecognizeResponse.results)
-  return results_.Add();
-}
-inline ::google::protobuf::RepeatedPtrField< ::google::cloud::speech::v1::SpeechRecognitionResult >*
-LongRunningRecognizeResponse::mutable_results() {
-  // @@protoc_insertion_point(field_mutable_list:google.cloud.speech.v1.LongRunningRecognizeResponse.results)
-  return &results_;
-}
-inline const ::google::protobuf::RepeatedPtrField< ::google::cloud::speech::v1::SpeechRecognitionResult >&
-LongRunningRecognizeResponse::results() const {
-  // @@protoc_insertion_point(field_list:google.cloud.speech.v1.LongRunningRecognizeResponse.results)
-  return results_;
-}
-
-// -------------------------------------------------------------------
-
-// LongRunningRecognizeMetadata
-
-// int32 progress_percent = 1;
-inline void LongRunningRecognizeMetadata::clear_progress_percent() {
-  progress_percent_ = 0;
-}
-inline ::google::protobuf::int32 LongRunningRecognizeMetadata::progress_percent() const {
-  // @@protoc_insertion_point(field_get:google.cloud.speech.v1.LongRunningRecognizeMetadata.progress_percent)
-  return progress_percent_;
-}
-inline void LongRunningRecognizeMetadata::set_progress_percent(::google::protobuf::int32 value) {
-  
-  progress_percent_ = value;
-  // @@protoc_insertion_point(field_set:google.cloud.speech.v1.LongRunningRecognizeMetadata.progress_percent)
-}
-
-// .google.protobuf.Timestamp start_time = 2;
-inline bool LongRunningRecognizeMetadata::has_start_time() const {
-  return this != internal_default_instance() && start_time_ != NULL;
-}
-inline void LongRunningRecognizeMetadata::clear_start_time() {
-  if (GetArenaNoVirtual() == NULL && start_time_ != NULL) delete start_time_;
-  start_time_ = NULL;
-}
-inline const ::google::protobuf::Timestamp& LongRunningRecognizeMetadata::start_time() const {
-  const ::google::protobuf::Timestamp* p = start_time_;
-  // @@protoc_insertion_point(field_get:google.cloud.speech.v1.LongRunningRecognizeMetadata.start_time)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Timestamp*>(
-      &::google::protobuf::_Timestamp_default_instance_);
-}
-inline ::google::protobuf::Timestamp* LongRunningRecognizeMetadata::mutable_start_time() {
-  
-  if (start_time_ == NULL) {
-    _slow_mutable_start_time();
-  }
-  // @@protoc_insertion_point(field_mutable:google.cloud.speech.v1.LongRunningRecognizeMetadata.start_time)
-  return start_time_;
-}
-inline ::google::protobuf::Timestamp* LongRunningRecognizeMetadata::release_start_time() {
-  // @@protoc_insertion_point(field_release:google.cloud.speech.v1.LongRunningRecognizeMetadata.start_time)
-  
-  if (GetArenaNoVirtual() != NULL) {
-    return _slow_release_start_time();
-  } else {
-    ::google::protobuf::Timestamp* temp = start_time_;
-    start_time_ = NULL;
-    return temp;
-  }
-}
-inline  void LongRunningRecognizeMetadata::set_allocated_start_time(::google::protobuf::Timestamp* start_time) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete start_time_;
-  }
-  if (start_time != NULL) {
-    _slow_set_allocated_start_time(message_arena, &start_time);
-  }
-  start_time_ = start_time;
-  if (start_time) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:google.cloud.speech.v1.LongRunningRecognizeMetadata.start_time)
-}
-
-// .google.protobuf.Timestamp last_update_time = 3;
-inline bool LongRunningRecognizeMetadata::has_last_update_time() const {
-  return this != internal_default_instance() && last_update_time_ != NULL;
-}
-inline void LongRunningRecognizeMetadata::clear_last_update_time() {
-  if (GetArenaNoVirtual() == NULL && last_update_time_ != NULL) delete last_update_time_;
-  last_update_time_ = NULL;
-}
-inline const ::google::protobuf::Timestamp& LongRunningRecognizeMetadata::last_update_time() const {
-  const ::google::protobuf::Timestamp* p = last_update_time_;
-  // @@protoc_insertion_point(field_get:google.cloud.speech.v1.LongRunningRecognizeMetadata.last_update_time)
-  return p != NULL ? *p : *reinterpret_cast<const ::google::protobuf::Timestamp*>(
-      &::google::protobuf::_Timestamp_default_instance_);
-}
-inline ::google::protobuf::Timestamp* LongRunningRecognizeMetadata::mutable_last_update_time() {
-  
-  if (last_update_time_ == NULL) {
-    _slow_mutable_last_update_time();
-  }
-  // @@protoc_insertion_point(field_mutable:google.cloud.speech.v1.LongRunningRecognizeMetadata.last_update_time)
-  return last_update_time_;
-}
-inline ::google::protobuf::Timestamp* LongRunningRecognizeMetadata::release_last_update_time() {
-  // @@protoc_insertion_point(field_release:google.cloud.speech.v1.LongRunningRecognizeMetadata.last_update_time)
-  
-  if (GetArenaNoVirtual() != NULL) {
-    return _slow_release_last_update_time();
-  } else {
-    ::google::protobuf::Timestamp* temp = last_update_time_;
-    last_update_time_ = NULL;
-    return temp;
-  }
-}
-inline  void LongRunningRecognizeMetadata::set_allocated_last_update_time(::google::protobuf::Timestamp* last_update_time) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete last_update_time_;
-  }
-  if (last_update_time != NULL) {
-    _slow_set_allocated_last_update_time(message_arena, &last_update_time);
-  }
-  last_update_time_ = last_update_time;
-  if (last_update_time) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:google.cloud.speech.v1.LongRunningRecognizeMetadata.last_update_time)
-}
-
-// -------------------------------------------------------------------
-
 // StreamingRecognizeResponse
 
 // .google.rpc.Status error = 1;
@@ -5015,12 +4337,6 @@ inline void LatticeEdge::set_duration(::google::protobuf::int32 value) {
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

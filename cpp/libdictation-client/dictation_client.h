@@ -21,9 +21,9 @@ class DictationClient {
 public:
     DictationClient(const std::string& service_address) : service_address_{ service_address } {}
 
-    gsapi::RecognizeResponse Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content);
+    gsapi::RecognizeResponse Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const;
 
-    std::vector<gsapi::StreamingRecognizeResponse> StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content);
+    std::vector<gsapi::StreamingRecognizeResponse> StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const;
 
 private:
     DictationClient(); // Disable default constructor.

@@ -147,7 +147,7 @@ std::string grpc_status_to_string(const grpc::Status& status) {
 }
 
 
-gsapi::RecognizeResponse DictationClient::Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
+gsapi::RecognizeResponse DictationClient::Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const {
     grpc::ClientContext context;
     if (not config.session_id.empty()) {
         context.AddMetadata("session_id", config.session_id);
@@ -169,7 +169,7 @@ gsapi::RecognizeResponse DictationClient::Recognize(const DictationClientConfig&
 }
 
 
-std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
+std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const {
     grpc::ClientContext context;
     if (not config.session_id.empty()) {
         context.AddMetadata("session_id", config.session_id);
@@ -207,7 +207,6 @@ std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecogni
                     half_closed_stream = true;
                     stream->WritesDone();
                 }
-                writer.detach();
             }
             else {
                 std::cout << "Received response." << std::endl;
