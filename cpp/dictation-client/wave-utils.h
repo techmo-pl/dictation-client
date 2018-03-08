@@ -6,6 +6,7 @@
 
 
 /// WAVE file header structure
+/// Note: Header metadata are not supported.
 struct WAV_HEADER//from sarmata/utils/WaveFile.h
 {
     char               RIFF[4];        // RIFF Header      Magic header

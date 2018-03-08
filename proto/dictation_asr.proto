@@ -13,10 +13,14 @@
 // limitations under the License.
 
 // Modified by Techmo, copyright by Google. Changes include:
-// - removal of `LongRunningRecognize` support (commented out),
-// - modifications of comments, according to how recognition is performed by Techmo,
-// - additions that introduce new features to the original API.
-// Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
+// 1. Additions that introduce new features to the original API. Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
+//    -   `ConfigField` as means to provide additional configuration.
+//    -   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
+//    -   `NO_INPUT_TIMEOUT` speech event to indicate no speech input timeout.
+// 2. Modifications of comments, according to how recognition is performed by Techmo.
+//    -   [*Unused*] tags for fields or values that are not used (ignored when provided in request, never returned in response).
+//    -   [*Unsupported*] tags for fields or values that will result in an error when provided in request.
+// 3. Removal of `LongRunningRecognize` support (commented out).
 syntax = "proto3";
 
 package google.cloud.speech.v1;
@@ -147,7 +151,7 @@ message RecognitionConfig {
 
   // Audio encoding of the data sent in the audio message. All encodings support
   // only 1 channel (mono) audio.
-  // The only encoding supported at he moment is `LINEAR16`. Specifying another
+  // The only encoding supported at the moment is `LINEAR16`. Specifying another
   // encoding will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
   enum AudioEncoding {
     // Not specified. Will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
@@ -163,29 +167,29 @@ message RecognitionConfig {
     // encoding supports 16-bit and 24-bit samples, however, not all fields in
     // `STREAMINFO` are supported.
 
-    // [*Unused*]
+    // [*Unsupported*]
     FLAC = 2;
 
     // @exclude 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 
-    // [*Unused*]
+    // [*Unsupported*]
     MULAW = 3;
 
     // @exclude Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 
-    // [*Unused*]
+    // [*Unsupported*]
     AMR = 4;
 
     // @exclude Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 
-    // [*Unused*]
+    // [*Unsupported*]
     AMR_WB = 5;
 
     // @exclude Opus encoded audio frames in Ogg container
     // ([OggOpus](https://wiki.xiph.org/OggOpus)).
     // `sample_rate_hertz` must be 16000.
 
-    // [*Unused*]
+    // [*Unsupported*]
     OGG_OPUS = 6;
 
     // @exclude Although the use of lossy encodings is not recommended, if a very low
@@ -202,7 +206,7 @@ message RecognitionConfig {
     // is replaced with a single byte containing the block length. Only Speex
     // wideband is supported. `sample_rate_hertz` must be 16000.
 
-    // [*Unused*]
+    // [*Unsupported*]
     SPEEX_WITH_HEADER_BYTE = 7;
   }
 
@@ -219,7 +223,7 @@ message RecognitionConfig {
   // [*Required*] The language of the supplied audio as a
   // [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
   // Example: "en-US".
-  // The only language supported at he moment is Polish (`pl-PL`).
+  // The only language supported at the moment is Polish (`pl-PL`).
   string language_code = 3;
 
   // @exclude See [Language Support](https://cloud.google.com/speech/docs/languages)
@@ -310,7 +314,7 @@ message RecognitionAudio {
     // [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see
     // [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
 
-    // [*Unused*]
+    // [*Unsupported*]
     string uri = 2;
   }
 }

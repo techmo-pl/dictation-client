@@ -32,10 +32,14 @@
 
 ## dictation_asr.proto
 Modified by Techmo, copyright by Google. Changes include:
-- removal of `LongRunningRecognize` support (commented out),
-- modifications of comments, according to how recognition is performed by Techmo,
-- additions that introduce new features to the original API.
-Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
+1. Additions that introduce new features to the original API. Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
+-   `ConfigField` as means to provide additional configuration.
+-   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
+-   `NO_INPUT_TIMEOUT` speech event to indicate no speech input timeout.
+2. Modifications of comments, according to how recognition is performed by Techmo.
+-   [*Unused*] tags for fields or values that are not used (ignored when provided in request, never returned in response).
+-   [*Unsupported*] tags for fields or values that will result in an error when provided in request.
+3. Removal of `LongRunningRecognize` support (commented out).
 
 
 <a name="google.cloud.speech.v1.Speech"/>
@@ -99,7 +103,7 @@ Only `content` is allowed to be supplied.
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | content | [bytes](#bytes) | The audio data bytes encoded as specified in `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a pure binary representation, whereas JSON representations use base64. |
-| uri | [string](#string) | [*Unused*] |
+| uri | [string](#string) | [*Unsupported*] |
 
 
 
@@ -117,7 +121,7 @@ request.
 | ----- | ---- | ----------- |
 | encoding | [RecognitionConfig.AudioEncoding](#google.cloud.speech.v1.RecognitionConfig.AudioEncoding) | [*Required*] Encoding of audio data sent in all `RecognitionAudio` messages. |
 | sample_rate_hertz | [int32](#int32) | [*Required*] Sample rate in Hertz of the audio data sent in all `RecognitionAudio` messages. Valid values are: 8000-48000. 16000 is optimal. For best results, set the sampling rate of the audio source to 16000 Hz. If that's not possible, use the native sample rate of the audio source (instead of re-sampling). |
-| language_code | [string](#string) | [*Required*] The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". The only language supported at he moment is Polish (`pl-PL`). |
+| language_code | [string](#string) | [*Required*] The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". The only language supported at the moment is Polish (`pl-PL`). |
 | max_alternatives | [int32](#int32) | [*Optional*] Maximum number of recognition hypotheses to be returned. Specifically, the maximum number of `SpeechRecognitionAlternative` messages within each `SpeechRecognitionResult`. The server may return fewer than `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of one. If omitted, will return a maximum of one. |
 | profanity_filter | [bool](#bool) | [*Optional*][*Unused*] |
 | speech_contexts | [SpeechContext](#google.cloud.speech.v1.SpeechContext) | [*Optional*][*Unused*] |
@@ -376,19 +380,19 @@ as `enable_word_time_offsets`.
 ### RecognitionConfig.AudioEncoding
 Audio encoding of the data sent in the audio message. All encodings support
 only 1 channel (mono) audio.
-The only encoding supported at he moment is `LINEAR16`. Specifying another
+The only encoding supported at the moment is `LINEAR16`. Specifying another
 encoding will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | ENCODING_UNSPECIFIED | 0 | Not specified. Will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. |
 | LINEAR16 | 1 | Uncompressed 16-bit signed little-endian samples (Linear PCM). |
-| FLAC | 2 | [*Unused*] |
-| MULAW | 3 | [*Unused*] |
-| AMR | 4 | [*Unused*] |
-| AMR_WB | 5 | [*Unused*] |
-| OGG_OPUS | 6 | [*Unused*] |
-| SPEEX_WITH_HEADER_BYTE | 7 | [*Unused*] |
+| FLAC | 2 | [*Unsupported*] |
+| MULAW | 3 | [*Unsupported*] |
+| AMR | 4 | [*Unsupported*] |
+| AMR_WB | 5 | [*Unsupported*] |
+| OGG_OPUS | 6 | [*Unsupported*] |
+| SPEEX_WITH_HEADER_BYTE | 7 | [*Unsupported*] |
 
 
 

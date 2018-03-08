@@ -20,7 +20,6 @@ namespace v1 {
 
 static const char* Speech_method_names[] = {
   "/google.cloud.speech.v1.Speech/Recognize",
-  "/google.cloud.speech.v1.Speech/LongRunningRecognize",
   "/google.cloud.speech.v1.Speech/StreamingRecognize",
 };
 
@@ -31,8 +30,7 @@ std::unique_ptr< Speech::Stub> Speech::NewStub(const std::shared_ptr< ::grpc::Ch
 
 Speech::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
   : channel_(channel), rpcmethod_Recognize_(Speech_method_names[0], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_LongRunningRecognize_(Speech_method_names[1], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_StreamingRecognize_(Speech_method_names[2], ::grpc::RpcMethod::BIDI_STREAMING, channel)
+  , rpcmethod_StreamingRecognize_(Speech_method_names[1], ::grpc::RpcMethod::BIDI_STREAMING, channel)
   {}
 
 ::grpc::Status Speech::Stub::Recognize(::grpc::ClientContext* context, const ::google::cloud::speech::v1::RecognizeRequest& request, ::google::cloud::speech::v1::RecognizeResponse* response) {
@@ -45,18 +43,6 @@ Speech::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
 
 ::grpc::ClientAsyncResponseReader< ::google::cloud::speech::v1::RecognizeResponse>* Speech::Stub::PrepareAsyncRecognizeRaw(::grpc::ClientContext* context, const ::google::cloud::speech::v1::RecognizeRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::ClientAsyncResponseReader< ::google::cloud::speech::v1::RecognizeResponse>::Create(channel_.get(), cq, rpcmethod_Recognize_, context, request, false);
-}
-
-::grpc::Status Speech::Stub::LongRunningRecognize(::grpc::ClientContext* context, const ::google::cloud::speech::v1::LongRunningRecognizeRequest& request, ::google::longrunning::Operation* response) {
-  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_LongRunningRecognize_, context, request, response);
-}
-
-::grpc::ClientAsyncResponseReader< ::google::longrunning::Operation>* Speech::Stub::AsyncLongRunningRecognizeRaw(::grpc::ClientContext* context, const ::google::cloud::speech::v1::LongRunningRecognizeRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::ClientAsyncResponseReader< ::google::longrunning::Operation>::Create(channel_.get(), cq, rpcmethod_LongRunningRecognize_, context, request, true);
-}
-
-::grpc::ClientAsyncResponseReader< ::google::longrunning::Operation>* Speech::Stub::PrepareAsyncLongRunningRecognizeRaw(::grpc::ClientContext* context, const ::google::cloud::speech::v1::LongRunningRecognizeRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::ClientAsyncResponseReader< ::google::longrunning::Operation>::Create(channel_.get(), cq, rpcmethod_LongRunningRecognize_, context, request, false);
 }
 
 ::grpc::ClientReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>* Speech::Stub::StreamingRecognizeRaw(::grpc::ClientContext* context) {
@@ -79,11 +65,6 @@ Speech::Service::Service() {
           std::mem_fn(&Speech::Service::Recognize), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
       Speech_method_names[1],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< Speech::Service, ::google::cloud::speech::v1::LongRunningRecognizeRequest, ::google::longrunning::Operation>(
-          std::mem_fn(&Speech::Service::LongRunningRecognize), this)));
-  AddMethod(new ::grpc::RpcServiceMethod(
-      Speech_method_names[2],
       ::grpc::RpcMethod::BIDI_STREAMING,
       new ::grpc::BidiStreamingHandler< Speech::Service, ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>(
           std::mem_fn(&Speech::Service::StreamingRecognize), this)));
@@ -93,13 +74,6 @@ Speech::Service::~Service() {
 }
 
 ::grpc::Status Speech::Service::Recognize(::grpc::ServerContext* context, const ::google::cloud::speech::v1::RecognizeRequest* request, ::google::cloud::speech::v1::RecognizeResponse* response) {
-  (void) context;
-  (void) request;
-  (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-}
-
-::grpc::Status Speech::Service::LongRunningRecognize(::grpc::ServerContext* context, const ::google::cloud::speech::v1::LongRunningRecognizeRequest* request, ::google::longrunning::Operation* response) {
   (void) context;
   (void) request;
   (void) response;
