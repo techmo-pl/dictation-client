@@ -1,0 +1,14 @@
+grpcio==1.7.0
+grpcio-tools==1.7.0
+protobuf==3.4.0
+gapic-google-cloud-speech-v1
+grpc-google-cloud-speech-v1
+proto-google-cloud-speech-v1
+google-auth
+google-auth-httplib2
+google-cloud-core
+google-cloud-speech
+googleapis-common-protos
+httplib2
+oauth2client
+pydub
