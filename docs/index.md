@@ -33,12 +33,12 @@
 ## dictation_asr.proto
 Modified by Techmo, copyright by Google. Changes include:
 1. Additions that introduce new features to the original API. Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
--   `ConfigField` as means to provide additional configuration.
--   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
--   `NO_INPUT_TIMEOUT` speech event to indicate no speech input timeout.
+   -   `ConfigField` as means to provide additional configuration.
+   -   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
+   -   `NO_INPUT_TIMEOUT` speech event to indicate no speech input timeout.
 2. Modifications of comments, according to how recognition is performed by Techmo.
--   [*Unused*] tags for fields or values that are not used (ignored when provided in request, never returned in response).
--   [*Unsupported*] tags for fields or values that will result in an error when provided in request.
+   -   [*Unused*] tags for fields or values that are not used (ignored when provided in request, never returned in response).
+   -   [*Unsupported*] tags for fields or values that will result in an error when provided in request.
 3. Removal of `LongRunningRecognize` support (commented out).
 
 
@@ -138,7 +138,7 @@ request.
 ### RecognitionLattice
 [**Extension by Techmo**]
 Detailed recognition result (lattice).
-Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
+Returned *only when requested* (`ConfigField`: return-lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
 When requested and not allowed by licence,
 [google.rpc.Code.FAILED_PRECONDITION] will be returned.
 
@@ -227,7 +227,7 @@ A speech recognition result corresponding to a portion of the audio.
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | [*Output-only*] May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). These alternatives are ordered in terms of accuracy, with the top (first) alternative being the most probable, as ranked by the recognizer. |
-| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
+| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: return-lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
 
@@ -244,7 +244,9 @@ request.
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | config | [RecognitionConfig](#google.cloud.speech.v1.RecognitionConfig) | [*Required*] Provides information to the recognizer that specifies how to process the request. |
-| single_utterance | [bool](#bool) | [*Optional*] If `false` or omitted, the recognizer will perform continuous recognition (continuing to wait for and process audio even if the user pauses speaking) until the client closes the input stream (gRPC API) or until the maximum time limit has been reached. May return multiple `StreamingRecognitionResult`s with the `is_final` flag set to `true`. If `true`, the recognizer will detect a single spoken utterance. When it detects that the user has paused or stopped speaking, it will return an `END_OF_SINGLE_UTTERANCE` event and cease recognition. It will return no more than one `StreamingRecognitionResult` with the `is_final` flag set to `true`. |
+| single_utterance | [bool](#bool) | [*Optional*] If `false` or omitted, the recognizer will perform continuous recognition (continuing to wait for and process audio even if the user pauses speaking) until the client closes the input stream (gRPC API) or until the maximum time limit has been reached. May return multiple `StreamingRecognitionResult`s with the `is_final` flag set to `true`.
+
+If `true`, the recognizer will detect a single spoken utterance. When it detects that the user has paused or stopped speaking, it will return an `END_OF_SINGLE_UTTERANCE` event and cease recognition. It will return no more than one `StreamingRecognitionResult` with the `is_final` flag set to `true`. |
 | interim_results | [bool](#bool) | [*Optional*] If `true`, interim results (tentative hypotheses) may be returned as they become available (these interim results are indicated with the `is_final=false` flag). If `false` or omitted, only `is_final=true` result(s) are returned. |
 
 
@@ -264,7 +266,7 @@ that is currently being processed.
 | alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | [*Output-only*] May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). |
 | is_final | [bool](#bool) | [*Output-only*] If `false`, this `StreamingRecognitionResult` represents an interim result that may change. If `true`, this is the final time the speech service will return this particular `StreamingRecognitionResult`, the recognizer will not return any further hypotheses for this portion of the transcript and corresponding audio. |
 | stability | [float](#float) | [*Unused*] |
-| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
+| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: return-lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
 
@@ -306,46 +308,46 @@ be returned while processing audio:
 2. results { alternatives { transcript: "to be a" } stability: 0.01 }
 
 3. results { alternatives { transcript: "to be" } stability: 0.9 }
-results { alternatives { transcript: " or not to be" } stability: 0.01 }
+   results { alternatives { transcript: " or not to be" } stability: 0.01 }
 
 4. results { alternatives { transcript: "to be or not to be"
-confidence: 0.92 }
-alternatives { transcript: "to bee or not to bee" }
-is_final: true }
+                            confidence: 0.92 }
+             alternatives { transcript: "to bee or not to bee" }
+             is_final: true }
 
 5. results { alternatives { transcript: " that's" } stability: 0.01 }
 
 6. results { alternatives { transcript: " that is" } stability: 0.9 }
-results { alternatives { transcript: " the question" } stability: 0.01 }
+   results { alternatives { transcript: " the question" } stability: 0.01 }
 
 7. results { alternatives { transcript: " that is the question"
-confidence: 0.98 }
-alternatives { transcript: " that was the question" }
-is_final: true }
+                            confidence: 0.98 }
+             alternatives { transcript: " that was the question" }
+             is_final: true }
 
 Notes:
 
 - Only two of the above responses #4 and #7 contain final results; they are
-indicated by `is_final: true`. Concatenating these together generates the
-full transcript: "to be or not to be that is the question".
+  indicated by `is_final: true`. Concatenating these together generates the
+  full transcript: "to be or not to be that is the question".
 
 - The others contain interim `results`. #3 and #6 contain two interim
-`results`: the first portion has a high stability and is less likely to
-change; the second portion has a low stability and is very likely to
-change. A UI designer might choose to show only high stability `results`.
+  `results`: the first portion has a high stability and is less likely to
+  change; the second portion has a low stability and is very likely to
+  change. A UI designer might choose to show only high stability `results`.
 
 - The specific `stability` and `confidence` values shown above are only for
-illustrative purposes. Actual values may vary.
+  illustrative purposes. Actual values may vary.
 
 - In each response, only one of these fields will be set:
-`error`,
-`speech_event_type`, or
-one or more (repeated) `results`.
+    `error`,
+    `speech_event_type`, or
+    one or more (repeated) `results`.
 
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| error | [.google.rpc.Status](#google.cloud.speech.v1..google.rpc.Status) | [*Output-only*] If set, returns a [google.rpc.Status][google.rpc.Status] message that specifies the error for the operation. |
+| error | [google.rpc.Status](#google.rpc.Status) | [*Output-only*] If set, returns a [google.rpc.Status][google.rpc.Status] message that specifies the error for the operation. |
 | results | [StreamingRecognitionResult](#google.cloud.speech.v1.StreamingRecognitionResult) | [*Output-only*] This repeated list contains zero or more results that correspond to consecutive portions of the audio currently being processed. It contains zero or one `is_final=true` result (the newly settled portion), followed by zero or more `is_final=false` results. |
 | speech_event_type | [StreamingRecognizeResponse.SpeechEventType](#google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType) | [*Output-only*] Indicates the type of speech event. |
 
@@ -364,8 +366,8 @@ as `enable_word_time_offsets`.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| start_time | [.google.protobuf.Duration](#google.cloud.speech.v1..google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if `enable_word_time_offsets=true`. |
-| end_time | [.google.protobuf.Duration](#google.cloud.speech.v1..google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if `enable_word_time_offsets=true`. |
+| start_time | [google.protobuf.Duration](#google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if `enable_word_time_offsets=true`. |
+| end_time | [google.protobuf.Duration](#google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if `enable_word_time_offsets=true`. |
 | word | [string](#string) | [*Output-only*] The word corresponding to this set of information. |
 
 

@@ -8,7 +8,7 @@ namespace gsapi = google::cloud::speech::v1;
 
 namespace techmo { namespace dictation {
 
-struct DictationClientConfig {
+struct DictationSessionConfig {
     std::string session_id = "";        // Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.
     bool time_offsets = false;          // If true, returns also recognized word time offsets.
     bool single_utterance = true;       // Whether to perform continuous recognition (false) or stop after single utterance when detected pause in speech (true, default).
@@ -21,9 +21,9 @@ class DictationClient {
 public:
     DictationClient(const std::string& service_address) : service_address_{ service_address } {}
 
-    gsapi::RecognizeResponse Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const;
+    gsapi::RecognizeResponse Recognize(const DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const;
 
-    std::vector<gsapi::StreamingRecognizeResponse> StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const;
+    std::vector<gsapi::StreamingRecognizeResponse> StreamingRecognize(const DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const;
 
 private:
     DictationClient(); // Disable default constructor.

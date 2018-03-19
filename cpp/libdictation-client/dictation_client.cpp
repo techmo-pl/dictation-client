@@ -10,7 +10,101 @@
 
 namespace techmo { namespace dictation {
 
-void read_service_settings_option(const DictationClientConfig& config, gsapi::RecognitionConfig& recognition_config) {
+// Forward declarations
+gsapi::RecognizeRequest build_sync_request(const DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content);
+std::vector<gsapi::StreamingRecognizeRequest> build_streaming_request(const DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content);
+bool error_response(const gsapi::StreamingRecognizeResponse& response);
+bool end_of_utterance(const gsapi::StreamingRecognizeResponse& response);
+std::string grpc_status_to_string(const grpc::Status& status);
+
+
+gsapi::RecognizeResponse DictationClient::Recognize(const DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const {
+    grpc::ClientContext context;
+    if (not config.session_id.empty()) {
+        context.AddMetadata("session_id", config.session_id);
+    }
+
+    const gsapi::RecognizeRequest request = build_sync_request(config, audio_sample_rate_hz, audio_byte_content);
+
+    gsapi::RecognizeResponse response;
+
+    auto stub = gsapi::Speech::NewStub(grpc::CreateChannel(service_address_, grpc::InsecureChannelCredentials()));
+
+    const grpc::Status status = stub->Recognize(&context, request, &response);
+
+    if (not status.ok()) {
+        std::cerr << "Recognize RPC failed with status " << grpc_status_to_string(status) << std::endl;
+    }
+
+    return response;
+}
+
+
+std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecognize(const DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const {
+    grpc::ClientContext context;
+    if (not config.session_id.empty()) {
+        context.AddMetadata("session_id", config.session_id);
+    }
+
+    auto stub = gsapi::Speech::NewStub(grpc::CreateChannel(service_address_, grpc::InsecureChannelCredentials()));
+
+    auto stream = stub->StreamingRecognize(&context);
+
+    const auto requests = build_streaming_request(config, audio_sample_rate_hz, audio_byte_content);
+
+    const auto& config_request = requests.front();
+    stream->Write(config_request);
+
+    // When received an error response from the server, the server will not process
+    // additional audio (although it may subsequently return additional results).
+    // The client should stop sending additional audio, half-close the gRPC connection,
+    // and wait for any additional results until the server closes the gRPC connection.
+    std::atomic<bool> half_closed_stream{false};
+
+    std::thread writer([&half_closed_stream, &stream, &requests] {
+        for (auto i = 1; i < requests.size(); ++i) {
+            if (half_closed_stream or not stream->Write(requests[i])) {
+                break;
+            }
+        }
+        if (not half_closed_stream) {
+            half_closed_stream = true;
+            stream->WritesDone();
+        }
+    });
+
+    const auto responses = [&half_closed_stream, &stream, &writer] {
+        std::vector<gsapi::StreamingRecognizeResponse> streaming_received_responses;
+        gsapi::StreamingRecognizeResponse streaming_received_response;
+        while (stream->Read(&streaming_received_response)) {
+            if (error_response(streaming_received_response) || end_of_utterance(streaming_received_response)) {
+                if (not half_closed_stream) {
+                    half_closed_stream = true;
+                    stream->WritesDone();
+                }
+            }
+            else {
+                std::cout << "Received response." << std::endl;
+            }
+            streaming_received_responses.push_back(streaming_received_response);
+        }
+        if (writer.joinable()) {
+            writer.join();
+        }
+        return streaming_received_responses;
+    }();
+
+    const grpc::Status status = stream->Finish();
+
+    if (not status.ok()) {
+        std::cerr << "StreamingRecognize RPC failed with status " << grpc_status_to_string(status) << std::endl;
+    }
+
+    return responses;
+}
+
+
+void read_service_settings_option(const DictationSessionConfig& config, gsapi::RecognitionConfig& recognition_config) {
     const auto& settings_string = config.service_settings;
 
     // split by ';'
@@ -48,7 +142,7 @@ void read_service_settings_option(const DictationClientConfig& config, gsapi::Re
     }
 }
 
-void build_recognition_config(const DictationClientConfig& config, unsigned int sample_rate_hertz, gsapi::RecognitionConfig& recognition_config) {
+void build_recognition_config(const DictationSessionConfig& config, unsigned int sample_rate_hertz, gsapi::RecognitionConfig& recognition_config) {
     recognition_config.set_max_alternatives(config.max_alternatives);
     recognition_config.set_encoding(gsapi::RecognitionConfig_AudioEncoding_LINEAR16);
     recognition_config.set_sample_rate_hertz(sample_rate_hertz);
@@ -59,7 +153,7 @@ void build_recognition_config(const DictationClientConfig& config, unsigned int 
     }
 }
 
-gsapi::RecognizeRequest build_sync_request(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
+gsapi::RecognizeRequest build_sync_request(const DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) {
     gsapi::RecognizeRequest request;
     build_recognition_config(config, audio_sample_rate_hz, *request.mutable_config());
     request.mutable_audio()->set_content(audio_byte_content);
@@ -67,7 +161,7 @@ gsapi::RecognizeRequest build_sync_request(const DictationClientConfig& config, 
     return request;
 }
 
-std::vector<gsapi::StreamingRecognizeRequest> build_streaming_request(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content)
+std::vector<gsapi::StreamingRecognizeRequest> build_streaming_request(const DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content)
 {
     gsapi::StreamingRecognizeRequest request;
     auto& request_streaming_config = *request.mutable_streaming_config();
@@ -144,88 +238,6 @@ std::string grpc_status_to_string(const grpc::Status& status) {
     }();
 
     return status_string + " (" + std::to_string(status.error_code()) + ") " + status.error_message();
-}
-
-
-gsapi::RecognizeResponse DictationClient::Recognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const {
-    grpc::ClientContext context;
-    if (not config.session_id.empty()) {
-        context.AddMetadata("session_id", config.session_id);
-    }
-
-    const gsapi::RecognizeRequest request = build_sync_request(config, audio_sample_rate_hz, audio_byte_content);
-
-    gsapi::RecognizeResponse response;
-
-    auto stub = gsapi::Speech::NewStub(grpc::CreateChannel(service_address_, grpc::InsecureChannelCredentials()));
-
-    const grpc::Status status = stub->Recognize(&context, request, &response);
-
-    if (not status.ok()) {
-        std::cerr << "Recognize RPC failed with status " << grpc_status_to_string(status) << std::endl;
-    }
-
-    return response;
-}
-
-
-std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecognize(const DictationClientConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const {
-    grpc::ClientContext context;
-    if (not config.session_id.empty()) {
-        context.AddMetadata("session_id", config.session_id);
-    }
-
-    auto stub = gsapi::Speech::NewStub(grpc::CreateChannel(service_address_, grpc::InsecureChannelCredentials()));
-
-    auto stream = stub->StreamingRecognize(&context);
-
-    const auto requests = build_streaming_request(config, audio_sample_rate_hz, audio_byte_content);
-
-    const auto& config_request = requests.front();
-    stream->Write(config_request);
-
-    std::atomic<bool> half_closed_stream{false};
-
-    std::thread writer([&half_closed_stream, &stream, &requests] {
-        for (auto i = 1; i < requests.size(); ++i) {
-            if (half_closed_stream or not stream->Write(requests[i])) {
-                break;
-            }
-        }
-        if (not half_closed_stream) {
-            half_closed_stream = true;
-            stream->WritesDone();
-        }
-    });
-
-    const auto responses = [&half_closed_stream, &stream, &writer] {
-        std::vector<gsapi::StreamingRecognizeResponse> streaming_received_responses;
-        gsapi::StreamingRecognizeResponse streaming_received_response;
-        while (stream->Read(&streaming_received_response)) {
-            if (error_response(streaming_received_response) || end_of_utterance(streaming_received_response)) {
-                if (not half_closed_stream) {
-                    half_closed_stream = true;
-                    stream->WritesDone();
-                }
-            }
-            else {
-                std::cout << "Received response." << std::endl;
-            }
-            streaming_received_responses.push_back(streaming_received_response);
-        }
-        if (writer.joinable()) {
-            writer.join();
-        }
-        return streaming_received_responses;
-    }();
-
-    const grpc::Status status = stream->Finish();
-
-    if (not status.ok()) {
-        std::cerr << "StreamingRecognize RPC failed with status " << grpc_status_to_string(status) << std::endl;
-    }
-
-    return responses;
 }
 
 }}
