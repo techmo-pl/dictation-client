@@ -16,8 +16,8 @@ std::string ProtobufMessageToString(const google::protobuf::Message & message) {
     return out_str;
 }
 
-techmo::dictation::DictationClientConfig CreateDictationClientConfig(const po::variables_map& userOptions) {
-    techmo::dictation::DictationClientConfig config;
+techmo::dictation::DictationSessionConfig CreateDictationSessionConfig(const po::variables_map& userOptions) {
+    techmo::dictation::DictationSessionConfig config;
     config.session_id = userOptions["session-id"].as<std::string>();
     config.time_offsets = userOptions["time-offsets"].as<bool>();
     config.single_utterance = userOptions["single-utterance"].as<bool>();
@@ -77,7 +77,7 @@ int main(int argc, const char *const argv[]) {
     }
 
     try {
-        const techmo::dictation::DictationClientConfig config = CreateDictationClientConfig(userOptions);
+        const techmo::dictation::DictationSessionConfig config = CreateDictationSessionConfig(userOptions);
 
         const auto wave = ReadWaveFile(userOptions["wav-path"].as<std::string>());
 

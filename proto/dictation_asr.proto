@@ -465,7 +465,7 @@ message StreamingRecognitionResult {
 
   // [**Extension by Techmo**]
   // Detailed recognition result (lattice).
-  // Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
+  // Returned *only when requested* (`ConfigField`: return-lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
   // When requested and not allowed by licence,
   // [google.rpc.Code.FAILED_PRECONDITION] will be returned.
   repeated RecognitionLattice lattice = 5;
@@ -481,7 +481,7 @@ message SpeechRecognitionResult {
 
   // [**Extension by Techmo**]
   // Detailed recognition result (lattice).
-  // Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
+  // Returned *only when requested* (`ConfigField`: return-lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
   // When requested and not allowed by licence,
   // [google.rpc.Code.FAILED_PRECONDITION] will be returned.
   repeated RecognitionLattice lattice = 5;
@@ -541,7 +541,7 @@ message WordInfo {
 
 // [**Extension by Techmo**]
 // Detailed recognition result (lattice).
-// Returned *only when requested* (`ConfigField`: build_lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
+// Returned *only when requested* (`ConfigField`: return-lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*.
 // When requested and not allowed by licence,
 // [google.rpc.Code.FAILED_PRECONDITION] will be returned.
 message RecognitionLattice {
