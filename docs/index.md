@@ -3,7 +3,7 @@
 
 ### Table of Contents
 
-- [protos/dictation_asr.proto](#protos/dictation_asr.proto)
+- [dictation_asr.proto](#dictation_asr.proto)
     - [Speech](#google.cloud.speech.v1.Speech)
     - [ConfigField](#google.cloud.speech.v1.ConfigField)
     - [LatticeEdge](#google.cloud.speech.v1.LatticeEdge)
@@ -27,10 +27,10 @@
 
 
 
-<a name="protos/dictation_asr.proto"/>
+<a name="dictation_asr.proto"/>
 <p align="right"><a href="#top">Top</a></p>
 
-## protos/dictation_asr.proto
+## dictation_asr.proto
 Modified by Techmo, copyright by Google. Changes include:
 1. Additions that introduce new features to the original API. Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
    -   `ConfigField` as means to provide additional configuration.

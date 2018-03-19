@@ -20,5 +20,5 @@ docker run --rm \
   -v $(pwd)/../proto:/protos \
   -v $(pwd):/templates \
   pseudomuto/protoc-gen-doc \
-  -I/ --doc_opt=/templates/markdownServiceFirst.tmpl,index.md /protos/dictation_asr.proto
+  -I/ --doc_opt=/templates/markdownServiceFirst.tmpl,index.md dictation_asr.proto
 
