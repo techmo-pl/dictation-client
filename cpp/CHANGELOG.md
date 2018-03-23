@@ -1,5 +1,9 @@
 # Dictation ASR gRPC C++ client Changelog
 
+## [1.0.2] - 2018-03-23
+### Changed
+- `DictationSessionConfig` to have fields for sample rate, encoding, language code and to store service settings in a map instead of a string.
+
 ## [1.0.1] - 2018-01-31
 ### Added
 - gRPC status code names printing on error.

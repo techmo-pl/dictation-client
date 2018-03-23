@@ -16,13 +16,53 @@ std::string ProtobufMessageToString(const google::protobuf::Message & message) {
     return out_str;
 }
 
+std::map<std::string, std::string> ReadServiceSettingsOption(const std::string & settings_string) {
+    std::map<std::string, std::string> service_settings;
+    // split by ';'
+    std::vector<std::string> settings_lines;
+    //boost::split(settings_lines, settings_string, boost::is_any_of(";"));
+    std::stringstream settings_stream(settings_string);
+    std::string setting_line;
+    while (std::getline(settings_stream, setting_line, ';')) {
+        settings_lines.push_back(setting_line);
+    }
+
+    if (not settings_lines.empty()) {
+        std::cout << "Passing session settings:" << std::endl;
+        for (const auto & line : settings_lines)
+        {
+            // split by '='
+            std::vector<std::string> key_value;
+            //boost::split(key_value, line, boost::is_any_of("="));
+            std::stringstream key_value_steam(line);
+            std::string field;
+            while (std::getline(key_value_steam, field, '=')) {
+                key_value.push_back(field);
+            }
+
+            if (key_value.size() == 2)
+            {
+                const auto key = key_value[0];
+                service_settings[key] = key_value[1];
+                std::cout << "key: " << key << " | value: " << service_settings[key] << std::endl;
+            }
+            else
+            {
+                std::cout << "Skipping invalid session settings line: " << line << std::endl;
+            }
+        }
+    }
+
+    return service_settings;
+}
+
 techmo::dictation::DictationSessionConfig CreateDictationSessionConfig(const po::variables_map& userOptions) {
     techmo::dictation::DictationSessionConfig config;
     config.session_id = userOptions["session-id"].as<std::string>();
+    config.service_settings = ReadServiceSettingsOption(userOptions["service-settings"].as<std::string>());
     config.time_offsets = userOptions["time-offsets"].as<bool>();
     config.single_utterance = userOptions["single-utterance"].as<bool>();
     config.interim_results = userOptions["interim-results"].as<bool>();
-    config.service_settings = userOptions["service-settings"].as<std::string>();
     config.max_alternatives = userOptions["max-alternatives"].as<int>();
     return config;
 }
@@ -77,7 +117,7 @@ int main(int argc, const char *const argv[]) {
     }
 
     try {
-        const techmo::dictation::DictationSessionConfig config = CreateDictationSessionConfig(userOptions);
+        techmo::dictation::DictationSessionConfig config = CreateDictationSessionConfig(userOptions);
 
         const auto wave = ReadWaveFile(userOptions["wav-path"].as<std::string>());
 
