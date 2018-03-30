@@ -18,6 +18,7 @@
 //
 // Modified by Techmo, copyright by Google. Changes include:
 // 1. Additions that introduce new features to the original API. Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
+//    -   `MP3` audio encoding type.
 //    -   `ConfigField` as means to provide additional configuration.
 //    -   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
 //    -   `NO_INPUT_TIMEOUT` speech event to indicate no speech input timeout.
