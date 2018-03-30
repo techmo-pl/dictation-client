@@ -14,6 +14,7 @@
 
 // Modified by Techmo, copyright by Google. Changes include:
 // 1. Additions that introduce new features to the original API. Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
+//    -   `MP3` audio encoding type.
 //    -   `ConfigField` as means to provide additional configuration.
 //    -   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
 //    -   `NO_INPUT_TIMEOUT` speech event to indicate no speech input timeout.
@@ -159,14 +160,13 @@ message RecognitionConfig {
     // Uncompressed 16-bit signed little-endian samples (Linear PCM).
     LINEAR16 = 1;
 
-    // @exclude [`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+    // [`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio
     // Codec) is the recommended encoding because it is
     // lossless--therefore recognition is not compromised--and
     // requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
     // encoding supports 16-bit and 24-bit samples, however, not all fields in
-    // `STREAMINFO` are supported.
-
-    // [*Unsupported*]
+    // `STREAMINFO` are supported.  
+    // [**Extension by Techmo**] Supported only by `Recognize`. When requested by `StreamingRecognize`, will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. Silently ignores `sample_rate_hertz` and detects real sample rate from file header instead.
     FLAC = 2;
 
     // @exclude 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
@@ -184,12 +184,12 @@ message RecognitionConfig {
     // [*Unsupported*]
     AMR_WB = 5;
 
-    // @exclude Opus encoded audio frames in Ogg container
+    // Opus encoded audio frames in Ogg container
     // ([OggOpus](https://wiki.xiph.org/OggOpus)).
-    // `sample_rate_hertz` must be 16000.
-
-    // [*Unsupported*]
+    // [**Extension by Techmo**] Silently ignores `sample_rate_hertz` and detects real sample rate from file header instead.
     OGG_OPUS = 6;
+
+    // @exclude `sample_rate_hertz` must be 16000.
 
     // @exclude Although the use of lossy encodings is not recommended, if a very low
     // bitrate encoding is required, `OGG_OPUS` is highly preferred over
@@ -207,6 +207,9 @@ message RecognitionConfig {
 
     // [*Unsupported*]
     SPEEX_WITH_HEADER_BYTE = 7;
+
+    // [**Extension by Techmo**] `MP3` (standards ISO/IEC 11172-3 and ISO/IEC 13818-3) Only constant bit rate files are accepted. Silently ignores `sample_rate_hertz` and detects real sample rate from file header instead.
+    MP3 = 8;
   }
 
   // [*Required*] Encoding of audio data sent in all `RecognitionAudio` messages.
@@ -217,6 +220,7 @@ message RecognitionConfig {
   // 16000 is optimal. For best results, set the sampling rate of the audio
   // source to 16000 Hz. If that's not possible, use the native sample rate of
   // the audio source (instead of re-sampling).
+  // [**Extension by Techmo**] Silently ignored for `FLAC`, `OGG_OPUS` and `MP3` encodings. Real sample rate will be detected from file header instead.
   int32 sample_rate_hertz = 2;
 
   // [*Required*] The language of the supplied audio as a

@@ -33,6 +33,7 @@
 ## dictation_asr.proto
 Modified by Techmo, copyright by Google. Changes include:
 1. Additions that introduce new features to the original API. Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
+   -   `MP3` audio encoding type.
    -   `ConfigField` as means to provide additional configuration.
    -   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
    -   `NO_INPUT_TIMEOUT` speech event to indicate no speech input timeout.
@@ -120,7 +121,7 @@ request.
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | encoding | [RecognitionConfig.AudioEncoding](#google.cloud.speech.v1.RecognitionConfig.AudioEncoding) | [*Required*] Encoding of audio data sent in all `RecognitionAudio` messages. |
-| sample_rate_hertz | [int32](#int32) | [*Required*] Sample rate in Hertz of the audio data sent in all `RecognitionAudio` messages. Valid values are: 8000-48000. 16000 is optimal. For best results, set the sampling rate of the audio source to 16000 Hz. If that's not possible, use the native sample rate of the audio source (instead of re-sampling). |
+| sample_rate_hertz | [int32](#int32) | [*Required*] Sample rate in Hertz of the audio data sent in all `RecognitionAudio` messages. Valid values are: 8000-48000. 16000 is optimal. For best results, set the sampling rate of the audio source to 16000 Hz. If that's not possible, use the native sample rate of the audio source (instead of re-sampling). [**Extension by Techmo**] Silently ignored for `FLAC`, `OGG_OPUS` and `MP3` encodings. Real sample rate will be detected from file header instead. |
 | language_code | [string](#string) | [*Required*] The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". The only language supported at the moment is Polish (`pl-PL`). |
 | max_alternatives | [int32](#int32) | [*Optional*] Maximum number of recognition hypotheses to be returned. Specifically, the maximum number of `SpeechRecognitionAlternative` messages within each `SpeechRecognitionResult`. The server may return fewer than `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of one. If omitted, will return a maximum of one. |
 | profanity_filter | [bool](#bool) | [*Optional*][*Unused*] |
@@ -387,12 +388,13 @@ encoding will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.I
 | ---- | ------ | ----------- |
 | ENCODING_UNSPECIFIED | 0 | Not specified. Will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. |
 | LINEAR16 | 1 | Uncompressed 16-bit signed little-endian samples (Linear PCM). |
-| FLAC | 2 | [*Unsupported*] |
+| FLAC | 2 | [`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio Codec) is the recommended encoding because it is lossless--therefore recognition is not compromised--and requires only about half the bandwidth of `LINEAR16`. `FLAC` stream encoding supports 16-bit and 24-bit samples, however, not all fields in `STREAMINFO` are supported. [**Extension by Techmo**] Supported only by `Recognize`. When requested by `StreamingRecognize`, will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. Silently ignores `sample_rate_hertz` and detects real sample rate from file header instead. |
 | MULAW | 3 | [*Unsupported*] |
 | AMR | 4 | [*Unsupported*] |
 | AMR_WB | 5 | [*Unsupported*] |
-| OGG_OPUS | 6 | [*Unsupported*] |
+| OGG_OPUS | 6 | Opus encoded audio frames in Ogg container ([OggOpus](https://wiki.xiph.org/OggOpus)). [**Extension by Techmo**] Silently ignores `sample_rate_hertz` and detects real sample rate from file header instead. |
 | SPEEX_WITH_HEADER_BYTE | 7 | [*Unsupported*] |
+| MP3 | 8 | [**Extension by Techmo**] `MP3` (standards ISO/IEC 11172-3 and ISO/IEC 13818-3) Only constant bit rate files are accepted. Silently ignores `sample_rate_hertz` and detects real sample rate from file header instead. |
 
 
 

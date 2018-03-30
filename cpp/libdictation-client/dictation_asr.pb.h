@@ -117,12 +117,13 @@ enum RecognitionConfig_AudioEncoding {
   RecognitionConfig_AudioEncoding_AMR_WB = 5,
   RecognitionConfig_AudioEncoding_OGG_OPUS = 6,
   RecognitionConfig_AudioEncoding_SPEEX_WITH_HEADER_BYTE = 7,
+  RecognitionConfig_AudioEncoding_MP3 = 8,
   RecognitionConfig_AudioEncoding_RecognitionConfig_AudioEncoding_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   RecognitionConfig_AudioEncoding_RecognitionConfig_AudioEncoding_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool RecognitionConfig_AudioEncoding_IsValid(int value);
 const RecognitionConfig_AudioEncoding RecognitionConfig_AudioEncoding_AudioEncoding_MIN = RecognitionConfig_AudioEncoding_ENCODING_UNSPECIFIED;
-const RecognitionConfig_AudioEncoding RecognitionConfig_AudioEncoding_AudioEncoding_MAX = RecognitionConfig_AudioEncoding_SPEEX_WITH_HEADER_BYTE;
+const RecognitionConfig_AudioEncoding RecognitionConfig_AudioEncoding_AudioEncoding_MAX = RecognitionConfig_AudioEncoding_MP3;
 const int RecognitionConfig_AudioEncoding_AudioEncoding_ARRAYSIZE = RecognitionConfig_AudioEncoding_AudioEncoding_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* RecognitionConfig_AudioEncoding_descriptor();
@@ -711,6 +712,8 @@ class RecognitionConfig : public ::google::protobuf::Message /* @@protoc_inserti
     RecognitionConfig_AudioEncoding_OGG_OPUS;
   static const AudioEncoding SPEEX_WITH_HEADER_BYTE =
     RecognitionConfig_AudioEncoding_SPEEX_WITH_HEADER_BYTE;
+  static const AudioEncoding MP3 =
+    RecognitionConfig_AudioEncoding_MP3;
   static inline bool AudioEncoding_IsValid(int value) {
     return RecognitionConfig_AudioEncoding_IsValid(value);
   }
