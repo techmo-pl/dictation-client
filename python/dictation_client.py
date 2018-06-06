@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from argparse import ArgumentParser
 from utils.wave_loader import load_wave
 from service.dictation_settings import DictationSettings
@@ -7,8 +8,20 @@ from VERSION import DICTATION_CLIENT_VERSION
 
 def print_results(results, args):
     n = 1
+    #if results is not None and len(results) > 0:
+    #  res = results[0]
+    #  print(res['transript'])
     for res in results:
-        print("[{}] {}".format(n, res['transcript']))
+        print("{}".format(res['transcript']))
+        words = res['transcript'].split()
+        ali = res['alignment']
+        if len(words) == len(ali):
+            for i in range(0, len(words)):
+                time = ali[i]
+                print("{} [{}.{:02d} - {}.{:02d}]".format(words[i], time[0].seconds, int(time[0].nanos / 10000000),
+                                                         time[1].seconds, int(time[1].nanos / 10000000)))
+            # print("{}".format(res['alignment']))
+        #n += 1
 
 
 if __name__ == '__main__':
