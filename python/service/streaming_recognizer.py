@@ -73,6 +73,7 @@ class StreamingRecognizer:
             # process response type
             elif recognition.results is not None and len(recognition.results) > 0:
                 first = recognition.results[0]
+                # print(u"results - {}".format(first))
                 if first.is_final:
                     if time_offsets:
                         word_indices = [j for j in range(len(first.alternatives[0].words)) if
@@ -83,16 +84,18 @@ class StreamingRecognizer:
                              in word_indices])
                     else:
                         confirmed_results.append(first.alternatives[0].transcript)
-                    confidence = min(confidence, first.alternatives[0].confidence)
+                        confidence = min(confidence, first.alternatives[0].confidence)
                 else:
                     print(u"Temporal results - {}".format(first))
 
         # build final results
         final_alignment = [[]]
         if time_offsets:
-            final_transc = ' '.join(confirmed_results[0])
+            # final_transc = ' '.join(confirmed_results[0])
+            final_transc = ' '.join([word for resp in confirmed_results for word in resp])
             if alignment:
-                final_alignment = alignment[0]
+                #final_alignment = alignment[0]
+                final_alignment = [align for resp in alignment for align in resp]
         else:
             final_transc = ' '.join(confirmed_results)
 
