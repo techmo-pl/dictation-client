@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from argparse import ArgumentParser
 from utils.wave_loader import load_wave
 from service.dictation_settings import DictationSettings
@@ -5,11 +6,17 @@ from service.streaming_recognizer import StreamingRecognizer
 from VERSION import DICTATION_CLIENT_VERSION
 
 
-def print_results(results, args):
-    n = 1
-    for res in results:
-        print("[{}] {}".format(n, res['transcript']))
+def print_results(results):
 
+    for res in results:
+        print("{}".format(res['transcript']))
+        words = res['transcript'].split()
+        ali = res['alignment']
+        if len(words) == len(ali):
+            for i in range(0, len(words)):
+                time = ali[i]
+                print("{} [{}.{:02d} - {}.{:02d}]".format(words[i], time[0].seconds, int(time[0].nanos / 10000000),
+                                                          time[1].seconds, int(time[1].nanos / 10000000)))
 
 if __name__ == '__main__':
     print("Dictation ASR gRPC client " + DICTATION_CLIENT_VERSION)
@@ -37,5 +44,5 @@ if __name__ == '__main__':
     recognizer = StreamingRecognizer(args.address, settings)
     results = recognizer.recognize(audio)
 
-    print_results(results, args)
+    print_results(results)
 

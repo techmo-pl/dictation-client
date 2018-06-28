@@ -75,12 +75,10 @@ class StreamingRecognizer:
                 first = recognition.results[0]
                 if first.is_final:
                     if time_offsets:
-                        word_indices = [j for j in range(len(first.alternatives[0].words)) if
-                                        first.alternatives[0].words[j].word != '<eps>']
-                        confirmed_results.append([first.alternatives[0].words[i].word for i in word_indices])
-                        alignment.append(
-                            [[first.alternatives[0].words[i].start_time, first.alternatives[0].words[i].end_time] for i
-                             in word_indices])
+                        for word in first.alternatives[0].words:
+                            if word.word != '<eps>':
+                                confirmed_results.append(word.word)
+                                alignment.append([word.start_time, word.end_time])
                     else:
                         confirmed_results.append(first.alternatives[0].transcript)
                     confidence = min(confidence, first.alternatives[0].confidence)
@@ -89,12 +87,10 @@ class StreamingRecognizer:
 
         # build final results
         final_alignment = [[]]
-        if time_offsets:
-            final_transc = ' '.join(confirmed_results[0])
-            if alignment:
-                final_alignment = alignment[0]
-        else:
-            final_transc = ' '.join(confirmed_results)
+        final_transc = ' '.join(confirmed_results)
+
+        if time_offsets and alignment:
+            final_alignment = alignment
 
         return [{
             'transcript': final_transc,
