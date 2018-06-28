@@ -81,7 +81,7 @@ class StreamingRecognizer:
                                 alignment.append([word.start_time, word.end_time])
                     else:
                         confirmed_results.append(first.alternatives[0].transcript)
-                        confidence = min(confidence, first.alternatives[0].confidence)
+                    confidence = min(confidence, first.alternatives[0].confidence)
                 else:
                     print(u"Temporal results - {}".format(first))
 
