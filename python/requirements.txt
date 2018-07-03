@@ -12,3 +12,4 @@ googleapis-common-protos
 httplib2
 oauth2client
 pydub
+pyaudio

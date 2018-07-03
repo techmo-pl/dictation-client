@@ -8,6 +8,9 @@ class DictationSettings:
     def session_id(self):
         return self.args.session_id
 
+    def max_alternatives(self):
+        return self.args.max_alternatives
+
     def time_offsets(self):
         return self.args.time_offsets
 
