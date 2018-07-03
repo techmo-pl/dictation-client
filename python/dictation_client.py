@@ -1,9 +1,25 @@
 #!/usr/bin/python3
 from argparse import ArgumentParser
-from utils.wave_loader import load_wave
+from utils.audio_source import AudioStream
+from utils.mic_source import MicrophoneStream
 from service.dictation_settings import DictationSettings
-from service.streaming_recognizer import StreamingRecognizer
+from service.streaming_recognizer import DictationRecognizer
 from VERSION import DICTATION_CLIENT_VERSION
+
+
+def create_audio_stream(args):
+    # create wave file stream
+    if args.wave is not None:
+        return AudioStream(args.wave)
+
+    # create microphone stream
+    if args.mic:
+        rate = 16000  # [Hz]
+        chunk = int(rate / 10)  # [100 ms]
+        return MicrophoneStream(rate, chunk)
+
+    # default
+    raise ValueError("Unknown media source to create")
 
 
 def print_results(results):
@@ -18,13 +34,15 @@ def print_results(results):
                 print("{} [{}.{:02d} - {}.{:02d}]".format(words[i], time[0].seconds, int(time[0].nanos / 10000000),
                                                           time[1].seconds, int(time[1].nanos / 10000000)))
 
+
 if __name__ == '__main__':
     print("Dictation ASR gRPC client " + DICTATION_CLIENT_VERSION)
 
     parser = ArgumentParser()
     parser.add_argument("--service-address", dest="address", required=True, help="IP address and port (address:port) of a service the client will connect to.", type=str)
-    parser.add_argument("--wave-path", dest="wave", help="Path to wave file with speech to be recognized. Should be mono, 8kHz or 16kHz.", required=True)
+    parser.add_argument("--wave-path", dest="wave", help="Path to wave file with speech to be recognized. Should be mono, 8kHz or 16kHz.")
     parser.add_argument("--session-id", help="Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.", default="", type=str)
+    parser.add_argument("--mic", help="Use microphone as an audio source (instead of wave file).", action='store_true')
     # request configuration section
     parser.add_argument("--time-offsets", help="If set - the recognizer will return also word time offsets.", action="store_true", default=False)
     parser.add_argument("--single-utterance", help="If set - the recognizer will detect a single spoken utterance.", action="store_true", default=False)
@@ -37,12 +55,25 @@ if __name__ == '__main__':
     
     # Stream audio to the ASR engine and print all hypotheses to standard output
     args = parser.parse_args()
-    audio = load_wave(args.wave)
-
+    # audio = load_wave(args.wave)
+    #
     settings = DictationSettings(args)
+    #
+    recognizer = DictationRecognizer(args.address)
+    # results = recognizer.recognize(audio)
+    #
+    # print_results(results)
 
-    recognizer = StreamingRecognizer(args.address, settings)
-    results = recognizer.recognize(audio)
+    # --------------------------
+    # recognize section
+    # --------------------------
+    if args.wave is not None or args.mic:
+        #validate_recognition_settings(settings)
 
-    print_results(results)
+        with create_audio_stream(args) as stream:
+            # generate id
+            #session_id = stream.session_id()
+            #settings.set_session_id(session_id)
 
+            results = recognizer.recognize(stream, settings)
+            print_results(results)
