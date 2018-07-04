@@ -2,7 +2,6 @@
 from argparse import ArgumentParser
 from utils.audio_source import AudioStream
 from utils.mic_source import MicrophoneStream
-#from service.dictation_asr_pb2 import ResponseStatus, EMPTY, START_OF_INPUT
 from service.dictation_settings import DictationSettings
 from service.streaming_recognizer import DictationRecognizer
 from VERSION import DICTATION_CLIENT_VERSION
@@ -86,14 +85,8 @@ if __name__ == '__main__':
     
     # Stream audio to the ASR engine and print all hypotheses to standard output
     args = parser.parse_args()
-    # audio = load_wave(args.wave)
-    #
     settings = DictationSettings(args)
-    #
     recognizer = DictationRecognizer(args.address)
-    # results = recognizer.recognize(audio)
-    #
-    # print_results(results)
 
     # --------------------------
     # recognize section
@@ -102,11 +95,6 @@ if __name__ == '__main__':
         #validate_recognition_settings(settings)
 
         with create_audio_stream(args) as stream:
-            # generate id
-            #session_id = stream.session_id()
-            #settings.set_session_id(session_id)
 
-            #print('Before recognition...')
             results = recognizer.recognize(stream, settings)
-            print('After recognition...')
             print_results(results, stream)

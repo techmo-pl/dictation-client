@@ -24,24 +24,6 @@ class RequestIterator:
         self.eos = False  # indicates whether end of stream message was send (request to stop iterator)
 
     def _config_request(self):
-        # request = dictation_asr_pb2.RecognizeRequest(
-        #     config=dictation_asr_pb2.RecognitionConfig(
-        #         encoding='LINEAR16',  # one of LINEAR16, FLAC, MULAW, AMR, AMR_WB
-        #         sample_rate_hertz=self.audio_stream.frame_rate(),
-        #         language_code='pl-PL',  # a BCP-47 language tag
-        #         enable_word_time_offsets=self.settings.time_offsets(),  # if true, return recognized word time offsets
-        #         max_alternatives=self.settings.max_alternatives
-        #         # no_match_threshold=self.settings.no_match_threshold,
-        #         # timeout_settings=dictation_asr_pb2.StreamingRecognizeResponse(
-        #         #     no_input_timeout=self.settings.no_input_timeout,
-        #         #     recognition_timeout=self.settings.recognition_timeout,
-        #         #     speech_complete_timeout=self.settings.speech_complete_timeout,
-        #         #     speech_incomplete_timeout=self.settings.speech_incomplete_timeout
-        #         ),
-        #     audio=dictation_asr_pb2.RecognitionAudio(
-        #         content=next(self.audio_generator)
-        #         )
-        #     )
         request = dictation_asr_pb2.StreamingRecognizeRequest(
             streaming_config=dictation_asr_pb2.StreamingRecognitionConfig(
                 config=dictation_asr_pb2.RecognitionConfig(
