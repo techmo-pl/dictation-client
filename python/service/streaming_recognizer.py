@@ -48,13 +48,21 @@ class RequestIterator:
                     encoding='LINEAR16',  # one of LINEAR16, FLAC, MULAW, AMR, AMR_WB
                     sample_rate_hertz=self.audio_stream.frame_rate(),
                     language_code='pl-PL',  # a BCP-47 language tag
+<<<<<<< HEAD
                     max_alternatives=self.settings.max_alternatives(),
+=======
+                    max_alternatives=self.settings.max_alternatives,
+>>>>>>> f3913ad359b8d2555c026068e30b6fe6f2b37750
                     enable_word_time_offsets=self.settings.time_offsets(),  # if true, return recognized word time offsets
                 ),
                 single_utterance=True
             ),
             audio_content=dictation_asr_pb2.RecognitionAudio(
+<<<<<<< HEAD
                 content=next(self) #self.audio_generator
+=======
+                content=next(self.audio_generator)
+>>>>>>> f3913ad359b8d2555c026068e30b6fe6f2b37750
             )
         )
 
@@ -97,9 +105,15 @@ class DictationRecognizer:
     def recognize(self, audio_stream, settings):
         metadata = []
         if settings.session_id:
+<<<<<<< HEAD
             metadata = [('session_id', settings.session_id())]
         requests_iterator = RequestIterator(audio_stream, settings)
         return self.service.StreamingRecognize(requests_iterator, metadata=metadata)
+=======
+            metadata = [('session_id', settings.session_id)]
+        requests_iterator = RequestIterator(audio_stream, settings)
+        return self.service.StreamingRecognize(requests_iterator)
+>>>>>>> f3913ad359b8d2555c026068e30b6fe6f2b37750
                                                                 #, metadata=metadata
 
     # def define_grammar(self, grammar_name, grammar):

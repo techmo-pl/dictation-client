@@ -2,7 +2,10 @@
 from argparse import ArgumentParser
 from utils.audio_source import AudioStream
 from utils.mic_source import MicrophoneStream
+<<<<<<< HEAD
 #from service.dictation_asr_pb2 import ResponseStatus, EMPTY, START_OF_INPUT
+=======
+>>>>>>> f3913ad359b8d2555c026068e30b6fe6f2b37750
 from service.dictation_settings import DictationSettings
 from service.streaming_recognizer import DictationRecognizer
 from VERSION import DICTATION_CLIENT_VERSION
@@ -23,6 +26,7 @@ def create_audio_stream(args):
     raise ValueError("Unknown media source to create")
 
 
+<<<<<<< HEAD
 # def print_results(results):
 #
 #     for res in results:
@@ -63,6 +67,10 @@ def print_results(responses, stream):
             # transcript = " ".join([word.transcript for word in res.words])
             print("[{}.] {} ({})".format(n, res.transcript, res.confidence))
             n += 1
+=======
+def print_results(results):
+>>>>>>> f3913ad359b8d2555c026068e30b6fe6f2b37750
+
 
 
 if __name__ == '__main__':
@@ -106,7 +114,12 @@ if __name__ == '__main__':
             #session_id = stream.session_id()
             #settings.set_session_id(session_id)
 
+<<<<<<< HEAD
             #print('Before recognition...')
             results = recognizer.recognize(stream, settings)
             print('After recognition...')
             print_results(results, stream)
+=======
+            results = recognizer.recognize(stream, settings)
+            print_results(results)
+>>>>>>> f3913ad359b8d2555c026068e30b6fe6f2b37750
