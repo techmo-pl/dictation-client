@@ -21,9 +21,11 @@ python dictation_client.py --service-address "192.168.1.1:4321" --wave-path audi
 
 Usage:
 ```
-usage: dictation_client.py [-h] --service-address ADDRESS --wave-path WAVE
-                           [--session-id SESSION_ID] [--time-offsets]
-                           [--single-utterance] [--interim-results]
+usage: dictation_client.py [-h] --service-address ADDRESS [--wave-path WAVE]
+                           [--mic] [--session-id SESSION_ID]
+                           [--max-alternatives MAX_ALTERNATIVES]
+                           [--time-offsets] [--single-utterance]
+                           [--interim-results]
                            [--no-input-timeout NO_INPUT_TIMEOUT]
                            [--speech-complete-timeout SPEECH_COMPLETE_TIMEOUT]
                            [--recognition-timeout RECOGNITION_TIMEOUT]
@@ -35,10 +37,13 @@ optional arguments:
                         client will connect to.
   --wave-path WAVE      Path to wave file with speech to be recognized. Should
                         be mono, 8kHz or 16kHz.
+  --mic			Use microphone as an audio source (instead of wave file).
   --session-id SESSION_ID
                         Session ID to be passed to the service. If not
                         specified, the service will generate a default session
                         ID itself.
+  --max-alternatives MAX_ALTERNATIVES
+			Maximum number of recognition hypotheses to be returned.
   --time-offsets        If set - the recognizer will return also word time
                         offsets.
   --single-utterance    If set - the recognizer will detect a single spoken
