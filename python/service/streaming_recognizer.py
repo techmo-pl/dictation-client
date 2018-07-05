@@ -7,14 +7,13 @@ import grpc
 class RequestIterator:
     """Thread-safe request iterator for streaming recognizer."""
 
-    def __init__(self, audio, settings):
+    def __init__(self, audio_stream, settings):
         # Iterator data
-        self.audio_content = audio["samples"]
+        self.audio_stream = audio_stream
+        self.audio_generator = self.audio_stream.generator()
+
         self.settings = settings
-        self.audio_frame_rate = audio["frame_rate"]
-        frame_len = 200  # const frame len (200ms)
-        sample_width = 2
-        self.frame_samples_size = (self.audio_frame_rate // 1000) * frame_len * sample_width
+
         self.request_builder = {
             True: self._initial_request,
             False: self._normal_request
@@ -22,18 +21,15 @@ class RequestIterator:
         # Iterator state
         self.lock = threading.Lock()
         self.is_initial_request = True
-        self.data_index = 0
+        self.eos = False  # indicates whether end of stream message was send (request to stop iterator)
 
     def _initial_request(self):
-        req = StreamingRecognizer.build_configuration_request(self.audio_frame_rate, self.settings)
+        req = StreamingRecognizer.build_configuration_request(self.audio_stream.frame_rate(), self.settings)
         self.is_initial_request = False
         return req
 
     def _normal_request(self):
-        data = self.audio_content[self.data_index: (self.data_index + self.frame_samples_size)]
-        self.data_index += self.frame_samples_size
-        if self.data_index >= len(self.audio_content):
-            raise StopIteration()
+        data = next(self.audio_generator)
         return dictation_asr_pb2.StreamingRecognizeRequest(audio_content=data)
 
     def __iter__(self):
@@ -70,6 +66,12 @@ class StreamingRecognizer:
         for recognition in recognitions:
             if recognition.error.code:
                 print(u"Received error response: ({}) {}".format(recognition.error.code, recognition.error.message))
+
+            elif recognition.speech_event_type != dictation_asr_pb2.StreamingRecognizeResponse.SPEECH_EVENT_UNSPECIFIED:
+                print(u"Received speech event type: {}".format(
+                    dictation_asr_pb2.StreamingRecognizeResponse.SpeechEventType.Name(recognition.speech_event_type)))
+                requests_iterator.audio_stream.close()
+
             # process response type
             elif recognition.results is not None and len(recognition.results) > 0:
                 first = recognition.results[0]

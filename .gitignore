@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+#Pycharm files
+__pycache__/
+venv/
+.idea/
+
