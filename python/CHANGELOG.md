@@ -7,3 +7,7 @@
 ## [1.0.0] - 2018-02-23
 ### Added
 - Initial implementation.
+
+## [1.1.0] - 2018-07-06
+### Added
+- Microphone as an audio source support.

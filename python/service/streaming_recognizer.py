@@ -62,15 +62,15 @@ class StreamingRecognizer:
         confirmed_results = []
         alignment = []
         confidence = 1.0
-        speech_event_type = dictation_asr_pb2.StreamingRecognizeResponse.SPEECH_EVENT_UNSPECIFIED
 
         for recognition in recognitions:
             if recognition.error.code:
                 print(u"Received error response: ({}) {}".format(recognition.error.code, recognition.error.message))
 
             elif recognition.speech_event_type != dictation_asr_pb2.StreamingRecognizeResponse.SPEECH_EVENT_UNSPECIFIED:
-                speech_event_type = recognition.speech_event_type
-                break
+                print(u"Received speech event type: {}".format(
+                    dictation_asr_pb2.StreamingRecognizeResponse.SpeechEventType.Name(recognition.speech_event_type)))
+                requests_iterator.audio_stream.close()
 
             # process response type
             elif recognition.results is not None and len(recognition.results) > 0:
@@ -97,8 +97,7 @@ class StreamingRecognizer:
         return [{
             'transcript': final_transc,
             'alignment': final_alignment,
-            'confidence': confidence,
-            'SpeechEventType': speech_event_type
+            'confidence': confidence
         }]  # array with one element
 
     @staticmethod

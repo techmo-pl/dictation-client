@@ -4,17 +4,11 @@ from utils.audio_source import AudioStream
 from utils.mic_source import MicrophoneStream
 from service.dictation_settings import DictationSettings
 from service.streaming_recognizer import StreamingRecognizer
-from service.dictation_asr_pb2 import StreamingRecognizeResponse
 from VERSION import DICTATION_CLIENT_VERSION
 
 
 def print_results(results):
-
     for res in results:
-        if res['SpeechEventType'] != StreamingRecognizeResponse.SPEECH_EVENT_UNSPECIFIED:
-            #print('Closing stream.')
-            stream.close()
-
         print("{}".format(res['transcript']))
         words = res['transcript'].split()
         ali = res['alignment']
@@ -73,12 +67,8 @@ if __name__ == '__main__':
     if args.wave is not None or args.mic:
         with create_audio_stream(args) as stream:
             settings = DictationSettings(args)
-
-            # generate id
-            #session_id = stream.session_id()
-            #settings.set_session_id(session_id)
-
             recognizer = StreamingRecognizer(args.address, settings)
+
             print('Recognizing...')
             results = recognizer.recognize(stream)
             print_results(results)
