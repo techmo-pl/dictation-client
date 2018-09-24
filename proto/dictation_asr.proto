@@ -17,7 +17,7 @@
 //    -   `MP3` audio encoding type.
 //    -   `ConfigField` as means to provide additional configuration.
 //    -   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
-//    -   `NO_INPUT_TIMEOUT` speech event to indicate no speech input timeout.
+//    -   Speech events to indicate MRCPv2-related timeouts.
 // 2. Modifications of comments, according to how recognition is performed by Techmo.
 //    -   [*Unused*] tags for fields or values that are not used (ignored when provided in request, never returned in response).
 //    -   [*Unsupported*] tags for fields or values that will result in an error when provided in request.
@@ -30,7 +30,7 @@ import "google/api/annotations.proto";
 //import "google/longrunning/operations.proto";
 //import "google/protobuf/any.proto";
 import "google/protobuf/duration.proto";
-import "google/protobuf/empty.proto";
+//import "google/protobuf/empty.proto";
 //import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
@@ -506,16 +506,74 @@ message StreamingRecognizeResponse {
     // until the server closes the gRPC connection. This event is only sent if
     // `single_utterance` was set to `true`, and is not used otherwise.
     END_OF_SINGLE_UTTERANCE = 1;
-    
+
     // [**Extension by Techmo**]
-    // This event indicates that the server has detected no speech input timeout
-    // and expects no additional speech. Therefore, the server will not process
+    // This event indicates that recognition has started and there was no speech detected
+    // for a certain period of time. The server will not process
     // additional audio (although it may subsequently return additional results).
     // The client should stop sending additional audio data, half-close the gRPC
     // connection, and wait for any additional results until the server closes
     // the gRPC connection.
-    NO_INPUT_TIMEOUT = 4;
+    // MRCPv2-related: [No-Input-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.6)
+    NO_INPUT_TIMEOUT = 2;
+
+    // [**Extension by Techmo**]
+    // This event indicates that recognition has started and there was no result
+    // for a certain period of time. The server will not process
+    // additional audio (although it may subsequently return additional results).
+    // The client should stop sending additional audio data, half-close the gRPC
+    // connection, and wait for any additional results until the server closes
+    // the gRPC connection.
+    // MRCPv2-related: [Recognition-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.7)
+    RECOGNITION_TIMEOUT = 3;
+
+    // [**Extension by Techmo**]
+    // [Speech-Complete-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.15)
+    // This event indicates that recognition has been finalized with a complete result
+    // after specified length of silence after user speech.
+    SPEECH_COMPLETE_TIMEOUT = 4;
+
+    // [**Extension by Techmo**]
+    // [Speech-Incomplete-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.16)
+    // This event indicates that recognition has been finalized with an incomplete result
+    // after specified length of silence after user speech.
+    SPEECH_INCOMPLETE_TIMEOUT = 5;
   }
+
+  // [**Extension by Techmo**]
+  // Indicates the type of speech processing timeout. These are MRCPv2-related.
+//  enum SpeechProcessingTimeoutType {
+    // No speech processing timeout specified.
+//    SPEECH_PROCESSING_TIMEOUT_UNSPECIFIED = 0;
+
+    // [No-Input-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.6)
+    // When recognition has started and there was no speech detected
+    // for a certain period of time. The server will not process
+    // additional audio (although it may subsequently return additional results).
+    // The client should stop sending additional audio data, half-close the gRPC
+    // connection, and wait for any additional results until the server closes
+    // the gRPC connection.
+//    NO_INPUT_TIMEOUT = 1;
+
+    // [Recognition-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.7)
+    // When recognition has started and there was no result
+    // for a certain period of time. The server will not process
+    // additional audio (although it may subsequently return additional results).
+    // The client should stop sending additional audio data, half-close the gRPC
+    // connection, and wait for any additional results until the server closes
+    // the gRPC connection.
+//    RECOGNITION_TIMEOUT = 2;
+
+    // [Speech-Complete-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.15)
+    // When recognition has been finalized with a complete result
+    // after specified length of silence after user speech.
+//    SPEECH_COMPLETE_TIMEOUT = 3;
+
+    // [Speech-Incomplete-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.16)
+    // When recognition has been finalized with an incomplete result
+    // after specified length of silence after user speech.
+//    SPEECH_INCOMPLETE_TIMEOUT = 4;
+//  }
 
   // [*Output only*] If set, returns a [google.rpc.Status][google.rpc.Status] message that
   // specifies the error for the operation.
@@ -529,6 +587,10 @@ message StreamingRecognizeResponse {
 
   // [*Output only*] Indicates the type of speech event.
   SpeechEventType speech_event_type = 4;
+
+  // [**Extension by Techmo**]
+  // [*Output only*] Indicates the type of speech processing timeout.
+//  SpeechProcessingTimeoutType speech_processing_timeout_type = 6;
 }
 
 // A streaming speech recognition result corresponding to a portion of the audio
