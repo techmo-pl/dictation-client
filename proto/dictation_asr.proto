@@ -506,13 +506,6 @@ message StreamingRecognizeResponse {
     // until the server closes the gRPC connection. This event is only sent if
     // `single_utterance` was set to `true`, and is not used otherwise.
     END_OF_SINGLE_UTTERANCE = 1;
-
-    // This event indicates that the server expects no additional speech
-    // due to audio processing termination (although it may subsequently return
-    // additional results). The client should stop sending additional audio data,
-    // half-close the gRPC connection, and wait for any additional results
-    // until the server closes the gRPC connection.
-    STOPPED_ACCEPTING_AUDIO = 2;
   }
 
   // [*Output only*] If set, returns a [google.rpc.Status][google.rpc.Status] message that
@@ -533,30 +526,34 @@ message StreamingRecognizeResponse {
 // that is currently being processed.
 message StreamingRecognitionResult {
   // [**Extension by Techmo**]
-  // Indicates the cause of audio processing termination. These are MRCPv2-related.
-  enum AudioProcessingTerminationCause {
-    // No audio processing termination cause specified.
-    AUDIO_PROCESSING_TERMINATION_CAUSE_UNSPECIFIED = 0;
-
-    // Recognition has started and there was no speech detected
-    // for a certain period of time.
-    // See [No-Input-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.6).
-    NO_INPUT = 1;
-
-    // Recognition has started but has not finished due to too much speech
-    // has been received for a certain period of time.
-    // See [Recognition-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.7).
-    TOO_MUCH_SPEECH = 2;
+  // Indicates the cause of recognition result finalization. These are MRCPv2-related.
+  // See [Completion-Cause](https://tools.ietf.org/html/rfc6787#section-9.4.11).
+  enum ResultFinalizationCause {
+    // No recognition result finalization cause specified.
+    RESULT_FINALIZATION_CAUSE_UNSPECIFIED = 0;
 
     // Recognition has been finalized with a complete result
     // after specified length of silence after user speech.
     // See [Speech-Complete-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.15).
-    SPEECH_COMPLETE = 3;
+    SUCCESS = 1;
+
+    // Recognition has started and there was no speech detected
+    // for a certain period of time.
+    // See [No-Input-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.6).
+    NO_INPUT_TIMEOUT = 2;
+
+    // Recognition has been finalized because speech was too long, with a complete result.
+    // See [Recognition-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.7).
+    SUCCESS_MAXTIME = 3;
 
     // Recognition has been finalized with an incomplete result
     // after specified length of silence after user speech.
     // See [Speech-Incomplete-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.16).
-    SPEECH_INCOMPLETE = 4;
+    PARTIAL_MATCH = 4;
+
+    // Recognition has been finalized because speech was too long, with no result.
+    // See [Recognition-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.7).
+    NO_MATCH_MAXTIME = 5;
   }
 
   // [*Output only*] May contain one or more recognition hypotheses (up to the
@@ -582,8 +579,8 @@ message StreamingRecognitionResult {
   float stability = 3;
 
   // [**Extension by Techmo**]
-  // [*Output only*] Indicates the cause of audio processing termination.
-  AudioProcessingTerminationCause audio_processing_termination_cause = 4;
+  // [*Output only*] Indicates the cause of recognition result finalization.
+  ResultFinalizationCause result_finalization_cause = 4;
 
   // [**Extension by Techmo**]
   // [*Output only*] Detailed recognition result (lattice).
