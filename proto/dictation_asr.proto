@@ -16,8 +16,8 @@
 // 1. Additions that introduce new features to the original API. Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
 //    -   `MP3` audio encoding type.
 //    -   `ConfigField` as means to provide additional configuration.
+//    -   `ResultFinalizationCause` as means to indicate MRCPv2-related recognition result finalization cause.
 //    -   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
-//    -   Speech events to indicate MRCPv2-related timeouts.
 // 2. Modifications of comments, according to how recognition is performed by Techmo.
 //    -   [*Unused*] tags for fields or values that are not used (ignored when provided in request, never returned in response).
 //    -   [*Unsupported*] tags for fields or values that will result in an error when provided in request.

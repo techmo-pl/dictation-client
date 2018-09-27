@@ -15,7 +15,8 @@ def print_results(results):
         if len(words) == len(ali):
             for i in range(0, len(words)):
                 time = ali[i]
-                print("{} [{}.{:02d} - {}.{:02d}]".format(words[i], time[0].seconds, int(time[0].nanos / 10000000),
+                if len(time) > 0:
+                    print("{} [{}.{:02d} - {}.{:02d}]".format(words[i], time[0].seconds, int(time[0].nanos / 10000000),
                                                           time[1].seconds, int(time[1].nanos / 10000000)))
 
 
@@ -58,6 +59,8 @@ if __name__ == '__main__':
     # timeouts
     parser.add_argument("--no-input-timeout", help="MRCP v2 no input timeout [ms].", default=5000, type=int)
     parser.add_argument("--speech-complete-timeout", help="MRCP v2 speech complete timeout [ms].", default=2000,
+                        type=int)
+    parser.add_argument("--speech-incomplete-timeout", help="MRCP v2 speech incomplete timeout [ms].", default=4000,
                         type=int)
     parser.add_argument("--recognition-timeout", help="MRCP v2 recognition timeout [ms].", default=10000, type=int)
 

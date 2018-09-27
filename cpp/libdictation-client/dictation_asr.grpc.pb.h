@@ -2,7 +2,7 @@
 // If you make any local change, they will be lost.
 // source: dictation_asr.proto
 // Original file comments:
-// Copyright 2017 Google Inc.
+// Copyright 2018 Google LLC.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 //    -   `MP3` audio encoding type.
 //    -   `ConfigField` as means to provide additional configuration.
 //    -   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
-//    -   `NO_INPUT_TIMEOUT` speech event to indicate no speech input timeout.
+//    -   Speech events to indicate MRCPv2-related timeouts.
 // 2. Modifications of comments, according to how recognition is performed by Techmo.
 //    -   [*Unused*] tags for fields or values that are not used (ignored when provided in request, never returned in response).
 //    -   [*Unsupported*] tags for fields or values that will result in an error when provided in request.
@@ -77,7 +77,10 @@ class Speech final {
     // `Operation.error` or an `Operation.response` which contains
     // a `LongRunningRecognizeResponse` message.
     //  rpc LongRunningRecognize(LongRunningRecognizeRequest) returns (google.longrunning.Operation) {
-    //    option (google.api.http) = { post: "/v1/speech:longrunningrecognize" body: "*" };
+    //    option (google.api.http) = {
+    //      post: "/v1/speech:longrunningrecognize"
+    //      body: "*"
+    //    };
     //  }
     //
     // Performs bidirectional streaming speech recognition: receive results while
@@ -142,7 +145,10 @@ class Speech final {
     // `Operation.error` or an `Operation.response` which contains
     // a `LongRunningRecognizeResponse` message.
     //  rpc LongRunningRecognize(LongRunningRecognizeRequest) returns (google.longrunning.Operation) {
-    //    option (google.api.http) = { post: "/v1/speech:longrunningrecognize" body: "*" };
+    //    option (google.api.http) = {
+    //      post: "/v1/speech:longrunningrecognize"
+    //      body: "*"
+    //    };
     //  }
     //
     // Performs bidirectional streaming speech recognition: receive results while
