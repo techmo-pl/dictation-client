@@ -169,8 +169,7 @@ bool error_response(const gsapi::StreamingRecognizeResponse& response) {
 }
 
 bool end_of_utterance(const gsapi::StreamingRecognizeResponse& response) {
-    const auto is_eou = response.speech_event_type() == gsapi::StreamingRecognizeResponse_SpeechEventType_END_OF_SINGLE_UTTERANCE
-            || response.speech_event_type() == gsapi::StreamingRecognizeResponse_SpeechEventType_NO_INPUT_TIMEOUT;
+    const auto is_eou = response.speech_event_type() == gsapi::StreamingRecognizeResponse_SpeechEventType_END_OF_SINGLE_UTTERANCE;
 
     if (is_eou) {
         std::cout << "Received end of utterance response." << std::endl;

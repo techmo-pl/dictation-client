@@ -21,6 +21,7 @@
     - [StreamingRecognizeResponse](#google.cloud.speech.v1.StreamingRecognizeResponse)
     - [WordInfo](#google.cloud.speech.v1.WordInfo)
     - [RecognitionConfig.AudioEncoding](#google.cloud.speech.v1.RecognitionConfig.AudioEncoding)
+    - [StreamingRecognitionResult.ResultFinalizationCause](#google.cloud.speech.v1.StreamingRecognitionResult.ResultFinalizationCause)
     - [StreamingRecognizeResponse.SpeechEventType](#google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType)
   
 - [Scalar Value Types](#scalar-value-types)
@@ -35,8 +36,8 @@ Modified by Techmo, copyright by Google. Changes include:
 1. Additions that introduce new features to the original API. Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
    -   `MP3` audio encoding type.
    -   `ConfigField` as means to provide additional configuration.
+   -   `ResultFinalizationCause` as means to indicate MRCPv2-related recognition result finalization cause.
    -   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
-   -   `NO_INPUT_TIMEOUT` speech event to indicate no speech input timeout.
 2. Modifications of comments, according to how recognition is performed by Techmo.
    -   [*Unused*] tags for fields or values that are not used (ignored when provided in request, never returned in response).
    -   [*Unsupported*] tags for fields or values that will result in an error when provided in request.
@@ -127,7 +128,10 @@ request.
 | profanity_filter | [bool](#bool) | [*Optional*][*Unused*] |
 | speech_contexts | [SpeechContext](#google.cloud.speech.v1.SpeechContext) | [*Optional*][*Unused*] |
 | enable_word_time_offsets | [bool](#bool) | [*Optional*] If `true`, the top result includes a list of words and the start and end time offsets (timestamps) for those words. If `false`, no word-level time offset information is returned. The default is `false`. |
+| enable_automatic_punctuation | [bool](#bool) | [*Optional*][*Unused*] |
 | config_fields | [ConfigField](#google.cloud.speech.v1.ConfigField) | [**Extension by Techmo**] [*Optional*] A means to provide additional configuration fields via request. |
+| model | [string](#string) | [*Optional*][*Unused*] |
+| use_enhanced | [bool](#bool) | [*Optional*][*Unused*] |
 
 
 
@@ -180,7 +184,7 @@ messages.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| results | [SpeechRecognitionResult](#google.cloud.speech.v1.SpeechRecognitionResult) | [*Output-only*] Sequential list of transcription results corresponding to sequential portions of audio. |
+| results | [SpeechRecognitionResult](#google.cloud.speech.v1.SpeechRecognitionResult) | [*Output only*] Sequential list of transcription results corresponding to sequential portions of audio. |
 
 
 
@@ -210,9 +214,9 @@ Alternative hypotheses (a.k.a. n-best list).
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| transcript | [string](#string) | [*Output-only*] Transcript text representing the words that the user spoke. |
-| confidence | [float](#float) | [*Output-only*] The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. |
-| words | [WordInfo](#google.cloud.speech.v1.WordInfo) | [*Output-only*] A list of word-specific information for each recognized word. |
+| transcript | [string](#string) | [*Output only*] Transcript text representing the words that the user spoke. |
+| confidence | [float](#float) | [*Output only*] The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. |
+| words | [WordInfo](#google.cloud.speech.v1.WordInfo) | [*Output only*] A list of word-specific information for each recognized word. |
 
 
 
@@ -227,8 +231,8 @@ A speech recognition result corresponding to a portion of the audio.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | [*Output-only*] May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). These alternatives are ordered in terms of accuracy, with the top (first) alternative being the most probable, as ranked by the recognizer. |
-| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: return-lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
+| alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | [*Output only*] May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). These alternatives are ordered in terms of accuracy, with the top (first) alternative being the most probable, as ranked by the recognizer. |
+| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] [*Output only*] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: return-lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
 
@@ -262,10 +266,11 @@ that is currently being processed.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | [*Output-only*] May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). |
-| is_final | [bool](#bool) | [*Output-only*] If `false`, this `StreamingRecognitionResult` represents an interim result that may change. If `true`, this is the final time the speech service will return this particular `StreamingRecognitionResult`, the recognizer will not return any further hypotheses for this portion of the transcript and corresponding audio. |
+| alternatives | [SpeechRecognitionAlternative](#google.cloud.speech.v1.SpeechRecognitionAlternative) | [*Output only*] May contain one or more recognition hypotheses (up to the maximum specified in `max_alternatives`). These alternatives are ordered in terms of accuracy, with the top (first) alternative being the most probable, as ranked by the recognizer. |
+| is_final | [bool](#bool) | [*Output only*] If `false`, this `StreamingRecognitionResult` represents an interim result that may change. If `true`, this is the final time the speech service will return this particular `StreamingRecognitionResult`, the recognizer will not return any further hypotheses for this portion of the transcript and corresponding audio. |
 | stability | [float](#float) | [*Unused*] |
-| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: return-lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
+| result_finalization_cause | [StreamingRecognitionResult.ResultFinalizationCause](#google.cloud.speech.v1.StreamingRecognitionResult.ResultFinalizationCause) | [**Extension by Techmo**] [*Output only*] Indicates the cause of recognition result finalization. |
+| lattice | [RecognitionLattice](#google.cloud.speech.v1.RecognitionLattice) | [**Extension by Techmo**] [*Output only*] Detailed recognition result (lattice). Returned *only when requested* (`ConfigField`: return-lattice=true in `RecognitionConfig` Message), *only for final* (`is_final = true`) results, and *only when it's allowed by licence*. When requested and not allowed by licence, [google.rpc.Code.FAILED_PRECONDITION] will be returned. |
 
 
 
@@ -346,9 +351,9 @@ Notes:
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| error | [google.rpc.Status](#google.rpc.Status) | [*Output-only*] If set, returns a [google.rpc.Status][google.rpc.Status] message that specifies the error for the operation. |
-| results | [StreamingRecognitionResult](#google.cloud.speech.v1.StreamingRecognitionResult) | [*Output-only*] This repeated list contains zero or more results that correspond to consecutive portions of the audio currently being processed. It contains zero or one `is_final=true` result (the newly settled portion), followed by zero or more `is_final=false` results. |
-| speech_event_type | [StreamingRecognizeResponse.SpeechEventType](#google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType) | [*Output-only*] Indicates the type of speech event. |
+| error | [google.rpc.Status](#google.rpc.Status) | [*Output only*] If set, returns a [google.rpc.Status][google.rpc.Status] message that specifies the error for the operation. |
+| results | [StreamingRecognitionResult](#google.cloud.speech.v1.StreamingRecognitionResult) | [*Output only*] This repeated list contains zero or more results that correspond to consecutive portions of the audio currently being processed. It contains zero or one `is_final=true` result (the newly settled portion), followed by zero or more `is_final=false` results (the interim results). |
+| speech_event_type | [StreamingRecognizeResponse.SpeechEventType](#google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType) | [*Output only*] Indicates the type of speech event. |
 
 
 
@@ -365,9 +370,9 @@ as `enable_word_time_offsets`.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| start_time | [google.protobuf.Duration](#google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if `enable_word_time_offsets=true`. |
-| end_time | [google.protobuf.Duration](#google.protobuf.Duration) | [*Output-only*] Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if `enable_word_time_offsets=true`. |
-| word | [string](#string) | [*Output-only*] The word corresponding to this set of information. |
+| start_time | [google.protobuf.Duration](#google.protobuf.Duration) | [*Output only*] Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if `enable_word_time_offsets=true`. |
+| end_time | [google.protobuf.Duration](#google.protobuf.Duration) | [*Output only*] Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if `enable_word_time_offsets=true`. |
+| word | [string](#string) | [*Output only*] The word corresponding to this set of information. |
 
 
 
@@ -379,22 +384,38 @@ as `enable_word_time_offsets`.
 <a name="google.cloud.speech.v1.RecognitionConfig.AudioEncoding"/>
 
 ### RecognitionConfig.AudioEncoding
-Audio encoding of the data sent in the audio message. All encodings support
-only 1 channel (mono) audio.
-The only encoding supported at the moment is `LINEAR16`. Specifying another
-encoding will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
+The encoding of the audio data sent in the request.
+All encodings support only 1 channel (mono) audio.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | ENCODING_UNSPECIFIED | 0 | Not specified. Will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. |
 | LINEAR16 | 1 | Uncompressed 16-bit signed little-endian samples (Linear PCM). |
-| FLAC | 2 | [`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio Codec) is the recommended encoding because it is lossless--therefore recognition is not compromised--and requires only about half the bandwidth of `LINEAR16`. `FLAC` stream encoding supports 16-bit and 24-bit samples, however, not all fields in `STREAMINFO` are supported. [**Extension by Techmo**] Supported only by `Recognize`. When requested by `StreamingRecognize`, will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. Silently ignores `sample_rate_hertz` and detects real sample rate from file header instead. |
+| FLAC | 2 | `FLAC` (Free Lossless Audio Codec) is the recommended encoding because it is lossless--therefore recognition is not compromised--and requires only about half the bandwidth of `LINEAR16`. `FLAC` stream encoding supports 16-bit and 24-bit samples, however, not all fields in `STREAMINFO` are supported. [**Extension by Techmo**] Supported only by `Recognize`. When requested by `StreamingRecognize`, will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. Silently ignores `sample_rate_hertz` and detects real sample rate from file header instead. |
 | MULAW | 3 | [*Unsupported*] |
 | AMR | 4 | [*Unsupported*] |
 | AMR_WB | 5 | [*Unsupported*] |
 | OGG_OPUS | 6 | Opus encoded audio frames in Ogg container ([OggOpus](https://wiki.xiph.org/OggOpus)). [**Extension by Techmo**] Silently ignores `sample_rate_hertz` and detects real sample rate from file header instead. |
 | SPEEX_WITH_HEADER_BYTE | 7 | [*Unsupported*] |
 | MP3 | 8 | [**Extension by Techmo**] `MP3` (standards ISO/IEC 11172-3 and ISO/IEC 13818-3) Only constant bit rate files are accepted. Silently ignores `sample_rate_hertz` and detects real sample rate from file header instead. |
+
+
+
+<a name="google.cloud.speech.v1.StreamingRecognitionResult.ResultFinalizationCause"/>
+
+### StreamingRecognitionResult.ResultFinalizationCause
+[**Extension by Techmo**]
+Indicates the cause of recognition result finalization. These are MRCPv2-related.
+See [Completion-Cause](https://tools.ietf.org/html/rfc6787#section-9.4.11).
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RESULT_FINALIZATION_CAUSE_UNSPECIFIED | 0 | No recognition result finalization cause specified. |
+| SUCCESS | 1 | Recognition has been finalized with a complete result after specified length of silence after user speech. See [Speech-Complete-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.15). |
+| NO_INPUT_TIMEOUT | 2 | Recognition has started and there was no speech detected for a certain period of time. See [No-Input-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.6). |
+| SUCCESS_MAXTIME | 3 | Recognition has been finalized because speech was too long, with a complete result. See [Recognition-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.7). |
+| PARTIAL_MATCH | 4 | Recognition has been finalized with an incomplete result after specified length of silence after user speech. See [Speech-Incomplete-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.16). |
+| NO_MATCH_MAXTIME | 5 | Recognition has been finalized because speech was too long, with no result. See [Recognition-Timeout](https://tools.ietf.org/html/rfc6787#section-9.4.7). |
 
 
 
@@ -407,7 +428,6 @@ Indicates the type of speech event.
 | ---- | ------ | ----------- |
 | SPEECH_EVENT_UNSPECIFIED | 0 | No speech event specified. |
 | END_OF_SINGLE_UTTERANCE | 1 | This event indicates that the server has detected the end of the user's speech utterance and expects no additional speech. Therefore, the server will not process additional audio (although it may subsequently return additional results). The client should stop sending additional audio data, half-close the gRPC connection, and wait for any additional results until the server closes the gRPC connection. This event is only sent if `single_utterance` was set to `true`, and is not used otherwise. |
-| NO_INPUT_TIMEOUT | 4 | [**Extension by Techmo**] This event indicates that the server has detected no speech input timeout and expects no additional speech. Therefore, the server will not process additional audio (although it may subsequently return additional results). The client should stop sending additional audio data, half-close the gRPC connection, and wait for any additional results until the server closes the gRPC connection. |
 
 
  <!-- end enums -->

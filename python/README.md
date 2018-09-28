@@ -28,6 +28,7 @@ usage: dictation_client.py [-h] --service-address ADDRESS [--wave-path WAVE]
                            [--interim-results]
                            [--no-input-timeout NO_INPUT_TIMEOUT]
                            [--speech-complete-timeout SPEECH_COMPLETE_TIMEOUT]
+                           [--speech-incomplete-timeout SPEECH_INCOMPLETE_TIMEOUT]
                            [--recognition-timeout RECOGNITION_TIMEOUT]
 
 optional arguments:
@@ -37,13 +38,15 @@ optional arguments:
                         client will connect to.
   --wave-path WAVE      Path to wave file with speech to be recognized. Should
                         be mono, 8kHz or 16kHz.
-  --mic			Use microphone as an audio source (instead of wave file).
+  --mic                 Use microphone as an audio source (instead of wave
+                        file).
   --session-id SESSION_ID
                         Session ID to be passed to the service. If not
                         specified, the service will generate a default session
                         ID itself.
   --max-alternatives MAX_ALTERNATIVES
-			Maximum number of recognition hypotheses to be returned.
+                        Maximum number of recognition hypotheses to be
+                        returned.
   --time-offsets        If set - the recognizer will return also word time
                         offsets.
   --single-utterance    If set - the recognizer will detect a single spoken
@@ -53,6 +56,8 @@ optional arguments:
                         MRCP v2 no input timeout [ms].
   --speech-complete-timeout SPEECH_COMPLETE_TIMEOUT
                         MRCP v2 speech complete timeout [ms].
+  --speech-incomplete-timeout SPEECH_INCOMPLETE_TIMEOUT
+                        MRCP v2 speech incomplete timeout [ms].
   --recognition-timeout RECOGNITION_TIMEOUT
                         MRCP v2 recognition timeout [ms].
 ```

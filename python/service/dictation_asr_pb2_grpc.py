@@ -44,7 +44,10 @@ class SpeechServicer(object):
     `Operation.error` or an `Operation.response` which contains
     a `LongRunningRecognizeResponse` message.
     rpc LongRunningRecognize(LongRunningRecognizeRequest) returns (google.longrunning.Operation) {
-    option (google.api.http) = { post: "/v1/speech:longrunningrecognize" body: "*" };
+    option (google.api.http) = {
+    post: "/v1/speech:longrunningrecognize"
+    body: "*"
+    };
     }
 
     Performs bidirectional streaming speech recognition: receive results while
