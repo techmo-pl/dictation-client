@@ -1,6 +1,6 @@
 Python implementation of Dictation ASR gRPC client.
 
-To regenerate sources from `.proto`, run:
+[Optional] To regenerate sources from `.proto`, run:
 ```
 ./make_proto.sh
 ```
