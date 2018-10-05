@@ -1,7 +1,7 @@
 #!/bin/bash
 # coding=utf-8
 
-set -euo pipefail
+set -eo pipefail
 
 virtualenv -p python3 proto_env
 # shellcheck disable=SC1091
