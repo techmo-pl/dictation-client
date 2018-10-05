@@ -1,6 +1,8 @@
 #!/bin/bash
 # coding=utf-8
 
+set -euo pipefail
+
 virtualenv -p python3 proto_env
 # shellcheck disable=SC1091
 source proto_env/bin/activate
