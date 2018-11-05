@@ -8,7 +8,7 @@ google-auth
 google-auth-httplib2
 google-cloud-core
 google-cloud-speech
-googleapis-common-protos
+googleapis-common-protos==1.5.3
 httplib2
 oauth2client
 pydub
