@@ -66,6 +66,7 @@ class StreamingRecognizer:
         for recognition in recognitions:
             if recognition.error.code:
                 print(u"Received error response: ({}) {}".format(recognition.error.code, recognition.error.message))
+                requests_iterator.audio_stream.close()
 
             elif recognition.speech_event_type != dictation_asr_pb2.StreamingRecognizeResponse.SPEECH_EVENT_UNSPECIFIED:
                 print(u"Received speech event type: {}".format(
