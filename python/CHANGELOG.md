@@ -1,5 +1,9 @@
 # Dictation ASR gRPC Python client Changelog
 
+## [2.1.0] - 2018-12-12
+### Added
+- Support for setting gRPC deadline (how long the client is willing to wait for a reply from the server).
+
 ## [2.0.0] - 2018-09-28
 ### Added
 - Returning recognition result finalization cause to API.
