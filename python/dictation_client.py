@@ -47,6 +47,9 @@ if __name__ == '__main__':
     parser.add_argument("--session-id",
                         help="Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.",
                         default="", type=str)
+    parser.add_argument("--grpc-timeout",
+                        help="Timeout in milliseconds used to set gRPC deadline - how long the client is willing to wait for a reply from the server. If not specified, the service will set the deadline to a very large number.",
+                        default=0, type=int)
     # request configuration section
     parser.add_argument("--max-alternatives", help="Maximum number of recognition hypotheses to be returned.",
                         default=1, type=int)

@@ -11,6 +11,7 @@
 namespace techmo { namespace dictation {
 
 // Forward declarations
+void prepare_context(grpc::ClientContext& context, const DictationSessionConfig& config);
 gsapi::RecognizeRequest build_sync_request(const DictationSessionConfig& config, const std::string& audio_byte_content);
 std::vector<gsapi::StreamingRecognizeRequest> build_streaming_request(const DictationSessionConfig& config, const std::string& audio_byte_content);
 bool error_response(const gsapi::StreamingRecognizeResponse& response);
@@ -19,17 +20,15 @@ std::string grpc_status_to_string(const grpc::Status& status);
 
 
 gsapi::RecognizeResponse DictationClient::Recognize(DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const {
-    grpc::ClientContext context;
-    if (not config.session_id.empty()) {
-        context.AddMetadata("session_id", config.session_id);
-    }
-
     config.audio_sample_rate_hz = audio_sample_rate_hz;
     const gsapi::RecognizeRequest request = build_sync_request(config, audio_byte_content);
 
     gsapi::RecognizeResponse response;
 
     auto stub = gsapi::Speech::NewStub(grpc::CreateChannel(service_address_, grpc::InsecureChannelCredentials()));
+
+    grpc::ClientContext context;
+    prepare_context(context, config);
 
     const grpc::Status status = stub->Recognize(&context, request, &response);
 
@@ -42,12 +41,10 @@ gsapi::RecognizeResponse DictationClient::Recognize(DictationSessionConfig& conf
 
 
 std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecognize(DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const {
-    grpc::ClientContext context;
-    if (not config.session_id.empty()) {
-        context.AddMetadata("session_id", config.session_id);
-    }
-
     auto stub = gsapi::Speech::NewStub(grpc::CreateChannel(service_address_, grpc::InsecureChannelCredentials()));
+
+    grpc::ClientContext context;
+    prepare_context(context, config);
 
     auto stream = stub->StreamingRecognize(&context);
 
@@ -105,6 +102,15 @@ std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecogni
     return responses;
 }
 
+
+void prepare_context(grpc::ClientContext& context, const DictationSessionConfig& config) {
+    if (not config.session_id.empty()) {
+        context.AddMetadata("session_id", config.session_id);
+    }
+    if (config.grpc_timeout > 0) {
+        context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds{ config.grpc_timeout });
+    }
+}
 
 void fill_additional_settings(const DictationSessionConfig& config, gsapi::RecognitionConfig& recognition_config) {
     for (const auto& entry : config.service_settings) {

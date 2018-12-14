@@ -59,6 +59,7 @@ std::map<std::string, std::string> ReadServiceSettingsOption(const std::string &
 techmo::dictation::DictationSessionConfig CreateDictationSessionConfig(const po::variables_map& userOptions) {
     techmo::dictation::DictationSessionConfig config;
     config.session_id = userOptions["session-id"].as<std::string>();
+    config.grpc_timeout = userOptions["grpc-timeout"].as<int>();
     config.service_settings = ReadServiceSettingsOption(userOptions["service-settings"].as<std::string>());
     config.time_offsets = userOptions["time-offsets"].as<bool>();
     config.single_utterance = userOptions["single-utterance"].as<bool>();
@@ -72,12 +73,15 @@ po::options_description CreateOptionsDescription(void) {
     po::options_description optionsDescription("Dictation ASR gRPC client options:");
     optionsDescription.add_options()
             ("help", "Print help message.")
-            ("service-address", po::value<std::string>(),
+            ("service-address", po::value<std::string>()->required(),
              "IP address and port (address:port) of a service the client will connect to.")
-            ("wav-path", po::value<std::string>(),
+            ("wav-path", po::value<std::string>()->required(),
              "Path to wave file with audio content to be sent to service via RPC.")
             ("session-id", po::value<std::string>()->default_value(""),
              "Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.")
+            ("grpc-timeout", po::value<int>()->default_value(0), "Timeout in milliseconds used to set gRPC deadline - "
+             "how long the client is willing to wait for a reply from the server. "
+             "If not specified, the service will set the deadline to a very large number.")
             ("streaming", "If present, will perform asynchronous RPC. This is obligatory for audio content larger than 3.5 MB.")
             ("time-offsets", po::value<bool>()->default_value(false),
              "If true, returns also recognized word time offsets.")
@@ -97,22 +101,19 @@ int main(int argc, const char *const argv[]) {
     po::variables_map userOptions;
     try {
         po::store(po::command_line_parser(argc, argv).options(optionsDescription).run(), userOptions);
+
+        std::cout << "Dictation ASR gRPC client " << LIBDICTATION_CLIENT_VERSION << std::endl;
+
+        if (userOptions.empty() or userOptions.count("help")) {
+            std::cout << optionsDescription;
+            return 0;
+        }
+
         po::notify(userOptions);
     }
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
-        return 1;
-    }
-
-    if (userOptions.count("help")) {
         std::cout << optionsDescription;
-        return 0;
-    }
-
-    std::cout << "Dictation ASR gRPC client " << LIBDICTATION_CLIENT_VERSION << std::endl;
-
-    if (not userOptions.count("wav-path") || not userOptions.count("service-address")) {//bad usage
-        std::cerr << "Usage: " << argv[0] << " --wav-path /path/to/audio.wav --service-address host:address" << std::endl;
         return 1;
     }
 

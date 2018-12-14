@@ -10,6 +10,8 @@ namespace techmo { namespace dictation {
 
 struct DictationSessionConfig {
     std::string session_id = "";        // Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.
+                                        // Session ID is the best way to match log's from client application with these on server side.
+    int grpc_timeout = 0;               // Timeout in milliseconds used to set gRPC deadline - how long the client is willing to wait for a reply from the server.
     std::map<std::string, std::string> service_settings; // A map of <key, value> pairs defining settings to be sent to service via gRPC request.
     bool time_offsets = false;          // If true, returns also recognized word time offsets.
     bool single_utterance = true;       // Whether to perform continuous recognition (false) or stop after single utterance when detected pause in speech (true, default).

@@ -53,11 +53,14 @@ class StreamingRecognizer:
     def recognize_audio_content(self, requests_iterator):
         time_offsets = self.settings.time_offsets()
 
+        timeout=None
+        if self.settings.grpc_timeout() > 0:
+            timeout = self.settings.grpc_timeout() / 1000 # milliseconds to seconds
         metadata = []
         if self.settings.session_id():
             metadata = [('session_id', self.settings.session_id())]
 
-        recognitions = self.service.StreamingRecognize(requests_iterator, metadata=metadata)
+        recognitions = self.service.StreamingRecognize(requests_iterator, timeout=timeout, metadata=metadata)
 
         confirmed_results = []
         alignment = []

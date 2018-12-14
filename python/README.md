@@ -23,6 +23,7 @@ Usage:
 ```
 usage: dictation_client.py [-h] --service-address ADDRESS [--wave-path WAVE]
                            [--mic] [--session-id SESSION_ID]
+                           [--grpc-timeout GRPC_TIMEOUT]
                            [--max-alternatives MAX_ALTERNATIVES]
                            [--time-offsets] [--single-utterance]
                            [--interim-results]
@@ -44,6 +45,11 @@ optional arguments:
                         Session ID to be passed to the service. If not
                         specified, the service will generate a default session
                         ID itself.
+  --grpc-timeout GRPC_TIMEOUT
+                        Timeout in milliseconds used to set gRPC deadline -
+                        how long the client is willing to wait for a reply
+                        from the server. If not specified, the service will
+                        set the deadline to a very large number.
   --max-alternatives MAX_ALTERNATIVES
                         Maximum number of recognition hypotheses to be
                         returned.
@@ -61,4 +67,3 @@ optional arguments:
   --recognition-timeout RECOGNITION_TIMEOUT
                         MRCP v2 recognition timeout [ms].
 ```
-

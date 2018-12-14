@@ -52,7 +52,14 @@ Options:
   --session-id arg            Session ID to be passed to the service. If not 
                               specified, the service will generate a default 
                               session ID itself.
-  --streaming                 If present, will perform asynchronous RPC. This is obligatory for audio content larger than 3.5 MB.
+  --grpc-timeout arg (=0)     Timeout in milliseconds used to set gRPC deadline
+                              - how long the client is willing to wait for a 
+                              reply from the server. If not specified, the 
+                              service will set the deadline to a very large 
+                              number.
+  --streaming                 If present, will perform asynchronous RPC. This 
+                              is obligatory for audio content larger than 3.5 
+                              MB.
   --time-offsets arg (=0)     If true, returns also recognized word time 
                               offsets.
   --single-utterance arg (=1) Whether to perform continuous recognition (false)
