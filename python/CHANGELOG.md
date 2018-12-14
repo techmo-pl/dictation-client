@@ -4,6 +4,10 @@
 ### Added
 - Support for setting gRPC deadline (how long the client is willing to wait for a reply from the server).
 
+## [2.0.1] - 2018-11-21
+### Fixed
+- Stream is now half-closed after reading an error response.
+
 ## [2.0.0] - 2018-09-28
 ### Added
 - Returning recognition result finalization cause to API.
