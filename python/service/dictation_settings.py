@@ -10,6 +10,9 @@ class DictationSettings:
 
     def grpc_timeout(self):
         return self.args.grpc_timeout
+    
+    def context(self):
+        return self.args.context
 
     def max_alternatives(self):
         return self.args.max_alternatives

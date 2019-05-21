@@ -51,6 +51,7 @@ if __name__ == '__main__':
                         help="Timeout in milliseconds used to set gRPC deadline - how long the client is willing to wait for a reply from the server. If not specified, the service will set the deadline to a very large number.",
                         default=0, type=int)
     # request configuration section
+    parser.add_argument("--context", help="Keyphrase for selecting a dedicated domain model. If not specified, general language model will be used", default='general', type=str)
     parser.add_argument("--max-alternatives", help="Maximum number of recognition hypotheses to be returned.",
                         default=1, type=int)
     parser.add_argument("--time-offsets", help="If set - the recognizer will return also word time offsets.",

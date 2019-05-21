@@ -117,7 +117,8 @@ class StreamingRecognizer:
                     max_alternatives=1,  # maximum number of returned hypotheses
                 ),
                 single_utterance=settings.single_utterance(),
-                interim_results=settings.interim_results()
+                interim_results=settings.interim_results(),
+                context=settings.context(),
             )
             # no audio data in first request (config only)
         )
