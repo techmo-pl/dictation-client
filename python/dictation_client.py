@@ -66,6 +66,7 @@ if __name__ == '__main__':
     parser.add_argument("--speech-incomplete-timeout", help="MRCP v2 speech incomplete timeout [ms].", default=4000,
                         type=int)
     parser.add_argument("--recognition-timeout", help="MRCP v2 recognition timeout [ms].", default=10000, type=int)
+    parser.add_argument("--context-phrase", help="Specifies which context model to use.", default="", type=str)
 
     # Stream audio to the ASR engine and print all hypotheses to standard output
     args = parser.parse_args()

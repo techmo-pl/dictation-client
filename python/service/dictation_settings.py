@@ -30,3 +30,6 @@ class DictationSettings:
             "speech-incomplete-timeout": str(self.args.speech_incomplete_timeout),
             "recognition-timeout": str(self.args.recognition_timeout),
         }
+
+    def context_phrase(self):
+        return self.args.context_phrase

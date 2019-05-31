@@ -66,4 +66,5 @@ optional arguments:
                         MRCP v2 speech incomplete timeout [ms].
   --recognition-timeout RECOGNITION_TIMEOUT
                         MRCP v2 recognition timeout [ms].
+  --context-phrase      Specifies which context model to use.
 ```
