@@ -65,6 +65,7 @@ techmo::dictation::DictationSessionConfig CreateDictationSessionConfig(const po:
     config.single_utterance = userOptions["single-utterance"].as<bool>();
     config.interim_results = userOptions["interim-results"].as<bool>();
     config.max_alternatives = userOptions["max-alternatives"].as<int>();
+    config.context_phrase = userOptions["context-phrase"].as<std::string>();
     return config;
 }
 
@@ -92,7 +93,9 @@ po::options_description CreateOptionsDescription(void) {
             ("service-settings", po::value<std::string>()->default_value(""),
              "Semicolon-separated list of key=value pairs defining settings to be sent to service via gRPC request")
             ("max-alternatives", po::value<int>()->default_value(1),
-             "Maximum number of recognition hypotheses to be returned.");
+             "Maximum number of recognition hypotheses to be returned.")
+            ("context-phrase", po::value<std::string>()->default_value(""),
+             "Specifies which context model to use.");
     return optionsDescription;
 }
 
