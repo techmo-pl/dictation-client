@@ -78,6 +78,7 @@ class StreamingRecognizer:
             elif recognition.results is not None and len(recognition.results) > 0:
                 first = recognition.results[0]
                 if first.is_final:
+                    alt_results = []
                     for alternative in first.alternatives:
                         confirmed_results = []
                         alignment = []
@@ -91,14 +92,18 @@ class StreamingRecognizer:
                             confirmed_results.append(alternative.transcript)
                         confidence = min(confidence, alternative.confidence)
                         transcript = ' '.join(confirmed_results)
-                        results.append({
+                        alt_results.append({
                             'transcript': transcript,
                             'alignment': alignment,
                             'confidence': confidence})
+                    if self.settings.max_alternatives() == 1:  # for backwards compatibility
+                        results.append(alt_results[0])
+                    else:
+                        results.append(alt_results)
                 else:
                     print(u"Temporal results - {}".format(first))
 
-        return [results]
+        return results
 
     @staticmethod
     def build_configuration_request(sampling_rate, settings):
