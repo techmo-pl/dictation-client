@@ -62,9 +62,7 @@ class StreamingRecognizer:
 
         recognitions = self.service.StreamingRecognize(requests_iterator, timeout=timeout, metadata=metadata)
 
-        confirmed_results = []
-        alignment = []
-        confidence = 1.0
+        results = []
 
         for recognition in recognitions:
             if recognition.error.code:
@@ -80,29 +78,27 @@ class StreamingRecognizer:
             elif recognition.results is not None and len(recognition.results) > 0:
                 first = recognition.results[0]
                 if first.is_final:
-                    if time_offsets:
-                        for word in first.alternatives[0].words:
-                            if word.word != '<eps>':
-                                confirmed_results.append(word.word)
-                                alignment.append([word.start_time, word.end_time])
-                    else:
-                        confirmed_results.append(first.alternatives[0].transcript)
-                    confidence = min(confidence, first.alternatives[0].confidence)
+                    for alternative in first.alternatives:
+                        confirmed_results = []
+                        alignment = []
+                        confidence = 1.0
+                        if time_offsets:
+                            for word in alternative.words:
+                                if word.word != '<eps>':
+                                    confirmed_results.append(word.word)
+                                    alignment.append([word.start_time, word.end_time])
+                        else:
+                            confirmed_results.append(alternative.transcript)
+                        confidence = min(confidence, alternative.confidence)
+                        transcript = ' '.join(confirmed_results)
+                        results.append({
+                            'transcript': transcript,
+                            'alignment': alignment,
+                            'confidence': confidence})
                 else:
                     print(u"Temporal results - {}".format(first))
 
-        # build final results
-        final_alignment = [[]]
-        final_transc = ' '.join(confirmed_results)
-
-        if time_offsets and alignment:
-            final_alignment = alignment
-
-        return [{
-            'transcript': final_transc,
-            'alignment': final_alignment,
-            'confidence': confidence
-        }]  # array with one element
+        return [results]
 
     @staticmethod
     def build_configuration_request(sampling_rate, settings):
@@ -114,7 +110,7 @@ class StreamingRecognizer:
                     # See https://g.co/cloud/speech/docs/languages for a list of supported languages.
                     language_code='pl-PL',  # a BCP-47 language tag
                     enable_word_time_offsets=settings.time_offsets(),  # if true, return recognized word time offsets
-                    max_alternatives=1,  # maximum number of returned hypotheses
+                    max_alternatives=settings.max_alternatives(),  # maximum number of returned hypotheses
                 ),
                 single_utterance=settings.single_utterance(),
                 interim_results=settings.interim_results()

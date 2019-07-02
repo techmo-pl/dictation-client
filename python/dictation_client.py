@@ -8,16 +8,20 @@ from VERSION import DICTATION_CLIENT_VERSION
 
 
 def print_results(results):
-    for res in results:
-        print("{}".format(res['transcript']))
-        words = res['transcript'].split()
-        ali = res['alignment']
-        if len(words) == len(ali):
-            for i in range(0, len(words)):
-                time = ali[i]
-                if len(time) > 0:
-                    print("{} [{}.{:02d} - {}.{:02d}]".format(words[i], time[0].seconds, int(time[0].nanos / 10000000),
-                                                          time[1].seconds, int(time[1].nanos / 10000000)))
+    print("\n=====")
+    for res_vec in results:
+        for res in res_vec:
+            if res['transcript'] != '':
+                print("\n{}".format(res['transcript']))
+                words = res['transcript'].split()
+                ali = res['alignment']
+                if len(words) == len(ali):
+                    for i in range(0, len(words)):
+                        time = ali[i]
+                        if len(time) > 0:
+                            print("{} [{}.{:02d} - {}.{:02d}]".format(words[i], time[0].seconds, int(time[0].nanos / 10000000),
+                                                                  time[1].seconds, int(time[1].nanos / 10000000)))
+        print("\n=====")
 
 
 def create_audio_stream(args):
