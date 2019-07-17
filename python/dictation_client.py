@@ -8,13 +8,12 @@ from VERSION import DICTATION_CLIENT_VERSION
 
 
 def print_results(results):
-    print("\n=====")
     for alternatives in results:
         if not isinstance(alternatives, list):
             alternatives = [alternatives]
         if alternatives[0]['transcript'] != '':  # ignore empty recognitions
             for res in alternatives:
-                print("\n{}".format(res['transcript']))
+                print("{}".format(res['transcript']))
                 words = res['transcript'].split()
                 ali = res['alignment']
                 if len(words) == len(ali):
@@ -23,7 +22,6 @@ def print_results(results):
                         if len(time) > 0:
                             print("{} [{}.{:02d} - {}.{:02d}]".format(words[i], time[0].seconds, int(time[0].nanos / 10000000),
                                                                   time[1].seconds, int(time[1].nanos / 10000000)))
-            print("\n=====")
 
 
 def create_audio_stream(args):
