@@ -116,7 +116,7 @@ class StreamingRecognizer:
         )
         if (settings.context_phrase()):
             speech_context = recognition_config.speech_contexts.add()
-            speech_context.append(settings.context_phrase())
+            speech_context.phrases.append(settings.context_phrase())
 
         return recognition_config
 
