@@ -20,8 +20,8 @@
 // 1. Additions that introduce new features to the original API. Extensions (parts that were added to the original document) by Techmo are marked with [**Extension by Techmo**] tag.
 //    -   `MP3` audio encoding type.
 //    -   `ConfigField` as means to provide additional configuration.
+//    -   `ResultFinalizationCause` as means to indicate MRCPv2-related recognition result finalization cause.
 //    -   `RecognitionLattice` and `LatticeEdge` as means to return detailed recognition results.
-//    -   Speech events to indicate MRCPv2-related timeouts.
 // 2. Modifications of comments, according to how recognition is performed by Techmo.
 //    -   [*Unused*] tags for fields or values that are not used (ignored when provided in request, never returned in response).
 //    -   [*Unsupported*] tags for fields or values that will result in an error when provided in request.
@@ -31,22 +31,34 @@
 
 #include "dictation_asr.pb.h"
 
-#include <grpc++/impl/codegen/async_stream.h>
-#include <grpc++/impl/codegen/async_unary_call.h>
-#include <grpc++/impl/codegen/method_handler_impl.h>
-#include <grpc++/impl/codegen/proto_utils.h>
-#include <grpc++/impl/codegen/rpc_method.h>
-#include <grpc++/impl/codegen/service_type.h>
-#include <grpc++/impl/codegen/status.h>
-#include <grpc++/impl/codegen/stub_options.h>
-#include <grpc++/impl/codegen/sync_stream.h>
+#include <functional>
+#include <grpcpp/impl/codegen/async_generic_service.h>
+#include <grpcpp/impl/codegen/async_stream.h>
+#include <grpcpp/impl/codegen/async_unary_call.h>
+#include <grpcpp/impl/codegen/client_callback.h>
+#include <grpcpp/impl/codegen/client_context.h>
+#include <grpcpp/impl/codegen/completion_queue.h>
+#include <grpcpp/impl/codegen/method_handler_impl.h>
+#include <grpcpp/impl/codegen/proto_utils.h>
+#include <grpcpp/impl/codegen/rpc_method.h>
+#include <grpcpp/impl/codegen/server_callback.h>
+#include <grpcpp/impl/codegen/server_context.h>
+#include <grpcpp/impl/codegen/service_type.h>
+#include <grpcpp/impl/codegen/status.h>
+#include <grpcpp/impl/codegen/stub_options.h>
+#include <grpcpp/impl/codegen/sync_stream.h>
 
-namespace grpc {
+namespace grpc_impl {
 class CompletionQueue;
-class Channel;
-class RpcService;
 class ServerCompletionQueue;
 class ServerContext;
+}  // namespace grpc_impl
+
+namespace grpc {
+namespace experimental {
+template <typename RequestT, typename ResponseT>
+class MessageAllocator;
+}  // namespace experimental
 }  // namespace grpc
 
 namespace google {
@@ -94,6 +106,31 @@ class Speech final {
     std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>> PrepareAsyncStreamingRecognize(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>>(PrepareAsyncStreamingRecognizeRaw(context, cq));
     }
+    class experimental_async_interface {
+     public:
+      virtual ~experimental_async_interface() {}
+      // Performs synchronous speech recognition: receive results after all audio
+      // has been sent and processed.
+      virtual void Recognize(::grpc::ClientContext* context, const ::google::cloud::speech::v1::RecognizeRequest* request, ::google::cloud::speech::v1::RecognizeResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Recognize(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::google::cloud::speech::v1::RecognizeResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Recognize(::grpc::ClientContext* context, const ::google::cloud::speech::v1::RecognizeRequest* request, ::google::cloud::speech::v1::RecognizeResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      virtual void Recognize(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::google::cloud::speech::v1::RecognizeResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      // Performs asynchronous speech recognition: receive results via the
+      // google.longrunning.Operations interface. Returns either an
+      // `Operation.error` or an `Operation.response` which contains
+      // a `LongRunningRecognizeResponse` message.
+      //  rpc LongRunningRecognize(LongRunningRecognizeRequest) returns (google.longrunning.Operation) {
+      //    option (google.api.http) = {
+      //      post: "/v1/speech:longrunningrecognize"
+      //      body: "*"
+      //    };
+      //  }
+      //
+      // Performs bidirectional streaming speech recognition: receive results while
+      // sending audio. This method is only available via the gRPC API (not REST).
+      virtual void StreamingRecognize(::grpc::ClientContext* context, ::grpc::experimental::ClientBidiReactor< ::google::cloud::speech::v1::StreamingRecognizeRequest,::google::cloud::speech::v1::StreamingRecognizeResponse>* reactor) = 0;
+    };
+    virtual class experimental_async_interface* experimental_async() { return nullptr; }
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::cloud::speech::v1::RecognizeResponse>* AsyncRecognizeRaw(::grpc::ClientContext* context, const ::google::cloud::speech::v1::RecognizeRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::cloud::speech::v1::RecognizeResponse>* PrepareAsyncRecognizeRaw(::grpc::ClientContext* context, const ::google::cloud::speech::v1::RecognizeRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -120,16 +157,32 @@ class Speech final {
     std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>> PrepareAsyncStreamingRecognize(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>>(PrepareAsyncStreamingRecognizeRaw(context, cq));
     }
+    class experimental_async final :
+      public StubInterface::experimental_async_interface {
+     public:
+      void Recognize(::grpc::ClientContext* context, const ::google::cloud::speech::v1::RecognizeRequest* request, ::google::cloud::speech::v1::RecognizeResponse* response, std::function<void(::grpc::Status)>) override;
+      void Recognize(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::google::cloud::speech::v1::RecognizeResponse* response, std::function<void(::grpc::Status)>) override;
+      void Recognize(::grpc::ClientContext* context, const ::google::cloud::speech::v1::RecognizeRequest* request, ::google::cloud::speech::v1::RecognizeResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      void Recognize(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::google::cloud::speech::v1::RecognizeResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      void StreamingRecognize(::grpc::ClientContext* context, ::grpc::experimental::ClientBidiReactor< ::google::cloud::speech::v1::StreamingRecognizeRequest,::google::cloud::speech::v1::StreamingRecognizeResponse>* reactor) override;
+     private:
+      friend class Stub;
+      explicit experimental_async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class experimental_async_interface* experimental_async() override { return &async_stub_; }
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class experimental_async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::google::cloud::speech::v1::RecognizeResponse>* AsyncRecognizeRaw(::grpc::ClientContext* context, const ::google::cloud::speech::v1::RecognizeRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::google::cloud::speech::v1::RecognizeResponse>* PrepareAsyncRecognizeRaw(::grpc::ClientContext* context, const ::google::cloud::speech::v1::RecognizeRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>* StreamingRecognizeRaw(::grpc::ClientContext* context) override;
     ::grpc::ClientAsyncReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>* AsyncStreamingRecognizeRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
     ::grpc::ClientAsyncReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>* PrepareAsyncStreamingRecognizeRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::RpcMethod rpcmethod_Recognize_;
-    const ::grpc::RpcMethod rpcmethod_StreamingRecognize_;
+    const ::grpc::internal::RpcMethod rpcmethod_Recognize_;
+    const ::grpc::internal::RpcMethod rpcmethod_StreamingRecognize_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -158,7 +211,7 @@ class Speech final {
   template <class BaseClass>
   class WithAsyncMethod_Recognize : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_Recognize() {
       ::grpc::Service::MarkMethodAsync(0);
@@ -167,7 +220,7 @@ class Speech final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Recognize(::grpc::ServerContext* context, const ::google::cloud::speech::v1::RecognizeRequest* request, ::google::cloud::speech::v1::RecognizeResponse* response) final override {
+    ::grpc::Status Recognize(::grpc::ServerContext* /*context*/, const ::google::cloud::speech::v1::RecognizeRequest* /*request*/, ::google::cloud::speech::v1::RecognizeResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -178,7 +231,7 @@ class Speech final {
   template <class BaseClass>
   class WithAsyncMethod_StreamingRecognize : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_StreamingRecognize() {
       ::grpc::Service::MarkMethodAsync(1);
@@ -187,7 +240,7 @@ class Speech final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StreamingRecognize(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeResponse, ::google::cloud::speech::v1::StreamingRecognizeRequest>* stream) final override {
+    ::grpc::Status StreamingRecognize(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeResponse, ::google::cloud::speech::v1::StreamingRecognizeRequest>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -197,9 +250,63 @@ class Speech final {
   };
   typedef WithAsyncMethod_Recognize<WithAsyncMethod_StreamingRecognize<Service > > AsyncService;
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_Recognize : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_Recognize() {
+      ::grpc::Service::experimental().MarkMethodCallback(0,
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::google::cloud::speech::v1::RecognizeRequest, ::google::cloud::speech::v1::RecognizeResponse>(
+          [this](::grpc::ServerContext* context,
+                 const ::google::cloud::speech::v1::RecognizeRequest* request,
+                 ::google::cloud::speech::v1::RecognizeResponse* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->Recognize(context, request, response, controller);
+                 }));
+    }
+    void SetMessageAllocatorFor_Recognize(
+        ::grpc::experimental::MessageAllocator< ::google::cloud::speech::v1::RecognizeRequest, ::google::cloud::speech::v1::RecognizeResponse>* allocator) {
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::google::cloud::speech::v1::RecognizeRequest, ::google::cloud::speech::v1::RecognizeResponse>*>(
+          ::grpc::Service::experimental().GetHandler(0))
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_Recognize() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Recognize(::grpc::ServerContext* /*context*/, const ::google::cloud::speech::v1::RecognizeRequest* /*request*/, ::google::cloud::speech::v1::RecognizeResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void Recognize(::grpc::ServerContext* /*context*/, const ::google::cloud::speech::v1::RecognizeRequest* /*request*/, ::google::cloud::speech::v1::RecognizeResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_StreamingRecognize : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_StreamingRecognize() {
+      ::grpc::Service::experimental().MarkMethodCallback(1,
+        new ::grpc_impl::internal::CallbackBidiHandler< ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>(
+          [this] { return this->StreamingRecognize(); }));
+    }
+    ~ExperimentalWithCallbackMethod_StreamingRecognize() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status StreamingRecognize(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeResponse, ::google::cloud::speech::v1::StreamingRecognizeRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::experimental::ServerBidiReactor< ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>* StreamingRecognize() {
+      return new ::grpc_impl::internal::UnimplementedBidiReactor<
+        ::google::cloud::speech::v1::StreamingRecognizeRequest, ::google::cloud::speech::v1::StreamingRecognizeResponse>;}
+  };
+  typedef ExperimentalWithCallbackMethod_Recognize<ExperimentalWithCallbackMethod_StreamingRecognize<Service > > ExperimentalCallbackService;
+  template <class BaseClass>
   class WithGenericMethod_Recognize : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_Recognize() {
       ::grpc::Service::MarkMethodGeneric(0);
@@ -208,7 +315,7 @@ class Speech final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Recognize(::grpc::ServerContext* context, const ::google::cloud::speech::v1::RecognizeRequest* request, ::google::cloud::speech::v1::RecognizeResponse* response) final override {
+    ::grpc::Status Recognize(::grpc::ServerContext* /*context*/, const ::google::cloud::speech::v1::RecognizeRequest* /*request*/, ::google::cloud::speech::v1::RecognizeResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -216,7 +323,7 @@ class Speech final {
   template <class BaseClass>
   class WithGenericMethod_StreamingRecognize : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_StreamingRecognize() {
       ::grpc::Service::MarkMethodGeneric(1);
@@ -225,25 +332,112 @@ class Speech final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StreamingRecognize(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeResponse, ::google::cloud::speech::v1::StreamingRecognizeRequest>* stream) final override {
+    ::grpc::Status StreamingRecognize(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeResponse, ::google::cloud::speech::v1::StreamingRecognizeRequest>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
+  class WithRawMethod_Recognize : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_Recognize() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_Recognize() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Recognize(::grpc::ServerContext* /*context*/, const ::google::cloud::speech::v1::RecognizeRequest* /*request*/, ::google::cloud::speech::v1::RecognizeResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRecognize(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_StreamingRecognize : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_StreamingRecognize() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_StreamingRecognize() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status StreamingRecognize(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeResponse, ::google::cloud::speech::v1::StreamingRecognizeRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestStreamingRecognize(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(1, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_Recognize : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_Recognize() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(0,
+        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->Recognize(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_Recognize() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Recognize(::grpc::ServerContext* /*context*/, const ::google::cloud::speech::v1::RecognizeRequest* /*request*/, ::google::cloud::speech::v1::RecognizeResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void Recognize(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_StreamingRecognize : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_StreamingRecognize() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(1,
+        new ::grpc_impl::internal::CallbackBidiHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this] { return this->StreamingRecognize(); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_StreamingRecognize() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status StreamingRecognize(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::google::cloud::speech::v1::StreamingRecognizeResponse, ::google::cloud::speech::v1::StreamingRecognizeRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::experimental::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* StreamingRecognize() {
+      return new ::grpc_impl::internal::UnimplementedBidiReactor<
+        ::grpc::ByteBuffer, ::grpc::ByteBuffer>;}
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_Recognize : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_Recognize() {
       ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::StreamedUnaryHandler< ::google::cloud::speech::v1::RecognizeRequest, ::google::cloud::speech::v1::RecognizeResponse>(std::bind(&WithStreamedUnaryMethod_Recognize<BaseClass>::StreamedRecognize, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::google::cloud::speech::v1::RecognizeRequest, ::google::cloud::speech::v1::RecognizeResponse>(std::bind(&WithStreamedUnaryMethod_Recognize<BaseClass>::StreamedRecognize, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_Recognize() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Recognize(::grpc::ServerContext* context, const ::google::cloud::speech::v1::RecognizeRequest* request, ::google::cloud::speech::v1::RecognizeResponse* response) final override {
+    ::grpc::Status Recognize(::grpc::ServerContext* /*context*/, const ::google::cloud::speech::v1::RecognizeRequest* /*request*/, ::google::cloud::speech::v1::RecognizeResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }

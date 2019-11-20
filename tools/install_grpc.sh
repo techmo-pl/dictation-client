@@ -2,7 +2,7 @@
 # coding=utf-8
 
 jobs=32
-version="v1.7.2"
+version="v1.24.3"
 [ $# -ge 1 ] && jobs=$1
 [ $# -ge 2 ] && version="$2"
 
@@ -31,7 +31,7 @@ git submodule update --init
 
 # zlib
 cd third_party/zlib
-./configure
+CFLAGS="-fPIC" ./configure
 make -j $jobs
 cd ../..
 

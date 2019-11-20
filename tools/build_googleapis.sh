@@ -1,6 +1,6 @@
 #!/bin/bash
 
-grpc_root=/opt/grpc_v1.7.2
+grpc_root=/opt/grpc_v1.24.3
 cd submodules/googleapis
 
 jobs=32
