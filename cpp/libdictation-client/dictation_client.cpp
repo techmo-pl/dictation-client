@@ -129,6 +129,10 @@ void build_recognition_config(const DictationSessionConfig& config, gsapi::Recog
     if (not config.service_settings.empty()) {
         fill_additional_settings(config, recognition_config);
     }
+    if (!config.context_phrase.empty()) {
+        gsapi::SpeechContext* speech_context = recognition_config.add_speech_contexts();
+        speech_context->add_phrases(context_phrase);
+    }
 }
 
 gsapi::RecognizeRequest build_sync_request(const DictationSessionConfig& config, const std::string& audio_byte_content) {

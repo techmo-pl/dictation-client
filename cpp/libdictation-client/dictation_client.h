@@ -21,6 +21,7 @@ struct DictationSessionConfig {
     int audio_sample_rate_hz = 0;       // Sampling frequency in hertz of audio data.
     std::string language_code = "pl-PL";// The language of the supplied audio as a BCP-47 language tag.
     int max_alternatives = 1;           // Maximum number of recognition hypotheses to be returned.
+    std::string context_phrase;         // Specifies which context model to use.
 };
 
 class DictationClient {

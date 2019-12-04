@@ -105,17 +105,26 @@ class StreamingRecognizer:
         }]  # array with one element
 
     @staticmethod
+    def build_recognition_config(sampling_rate, settings):
+        recognition_config = dictation_asr_pb2.RecognitionConfig(
+            encoding='LINEAR16',  # one of LINEAR16, FLAC, MULAW, AMR, AMR_WB
+            sample_rate_hertz=sampling_rate,  # the rate in hertz
+            # See https://g.co/cloud/speech/docs/languages for a list of supported languages.
+            language_code='pl-PL',  # a BCP-47 language tag
+            enable_word_time_offsets=settings.time_offsets(),  # if true, return recognized word time offsets
+            max_alternatives=1,  # maximum number of returned hypotheses
+        )
+        if (settings.context_phrase()):
+            speech_context = recognition_config.speech_contexts.add()
+            speech_context.phrases.append(settings.context_phrase())
+
+        return recognition_config
+
+    @staticmethod
     def build_configuration_request(sampling_rate, settings):
         config_req = dictation_asr_pb2.StreamingRecognizeRequest(
             streaming_config=dictation_asr_pb2.StreamingRecognitionConfig(
-                config=dictation_asr_pb2.RecognitionConfig(
-                    encoding='LINEAR16',  # one of LINEAR16, FLAC, MULAW, AMR, AMR_WB
-                    sample_rate_hertz=sampling_rate,  # the rate in hertz
-                    # See https://g.co/cloud/speech/docs/languages for a list of supported languages.
-                    language_code='pl-PL',  # a BCP-47 language tag
-                    enable_word_time_offsets=settings.time_offsets(),  # if true, return recognized word time offsets
-                    max_alternatives=1,  # maximum number of returned hypotheses
-                ),
+                config=StreamingRecognizer.build_recognition_config(sampling_rate, settings),
                 single_utterance=settings.single_utterance(),
                 interim_results=settings.interim_results()
             )
