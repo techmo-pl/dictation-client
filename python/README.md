@@ -18,8 +18,9 @@ pip install -r requirements.txt
 
 Run:
 ```
-python dictation_client.py --service-address "185.110.50.61:62075" --wave-path audio.wav
+python dictation_client.py --service-address "<ip_address_of_the_service>" --wave-path audio.wav
 ```
+CAUTION: replace _<ip_address_of_the_service>_ with a valid address
 
 # Troubleshooting
 A set of common errors may occur.  Below are the steps to fix some of the issues.
@@ -78,7 +79,7 @@ Once this is installed, try running the `pip install -r requirements.txt` again.
 ## Using the client fails with _Connect failed_ error
 ### Problem
 ```shell script
-python dictation_client.py --service-address "185.110.50.61:62075" --wave-path ~/tasks/4_12_2040_io/test_data/105_2040_InternalTests_01/Spkr001_bot_questions/105_2040_InternalTests_01_Spkr001_bot_questions_001.wav
+python dictation_client.py --service-address "<ip_address_of_the_service>" --wave-path ~/tasks/4_12_2040_io/test_data/105_2040_InternalTests_01/Spkr001_bot_questions/105_2040_InternalTests_01_Spkr001_bot_questions_001.wav
 
 /home/damian/python_envs/.dictation_client_venv35/lib/python3.5/site-packages/pydub/utils.py:165: RuntimeWarning: Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work
   warn("Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work", RuntimeWarning)
