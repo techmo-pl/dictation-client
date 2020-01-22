@@ -30,6 +30,9 @@ class RequestIterator:
 
     def _normal_request(self):
         data = next(self.audio_generator)
+        if data == None:
+            raise StopIteration
+
         return dictation_asr_pb2.StreamingRecognizeRequest(audio_content=data)
 
     def __iter__(self):

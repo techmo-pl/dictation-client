@@ -4,9 +4,14 @@ This changelog is intended for tracking content changes in whole reposiotry.
 We are using single version and changelog for all components.
 Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
 
-## [2.1.1] - 2020-01-22
+## [2.2.0] - 2020-01-22
 ### Changed
+ - [CPP, python, tools] Switch GRPC version to 1.24.3.
  - [CPP, python] - Switch to single CHANGELOG.md and consistent version for all components.
+
+### Fixed
+ - [python] Change to request iterator to stop on null data.
+
 
 ## [2.1.0] - 2018-12-12
 ### Added
