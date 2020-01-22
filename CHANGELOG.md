@@ -1,0 +1,54 @@
+# Techmo dictation-client repository Changelog
+
+This changelog is intended for tracking content changes in whole reposiotry. 
+We are using single version and changelog for all components.
+Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
+
+## [2.1.1] - 2020-01-22
+### Changed
+ - [CPP, python] - Switch to single CHANGELOG.md and consistent version for all components.
+
+## [2.1.0] - 2018-12-12
+### Added
+- [CPP, python] Support for setting gRPC deadline (how long the client is willing to wait for a reply from the server).
+
+
+## [2.0.1] - 2018-11-21
+### Fixed
+- [python] Stream is now half-closed after reading an error response.
+
+
+## [2.0.0] - 2018-09-28
+### Added
+- [CPP, python] Returning recognition result finalization cause to API.
+- [python] Support for speech incomplete timeout setting.
+
+### Removed
+- [CPP, python] `NO_INPUT_TIMEOUT` speech event type from API.
+
+
+## [1.1.0] - 2018-07-06
+### Added
+- [python] Microphone as an audio source support.
+
+
+## [1.0.2] - 2018-03-23
+### Changed
+- [CPP] `DictationSessionConfig` to have fields for sample rate, encoding, language code and to store service settings in a map instead of a string.
+
+
+## [1.0.1] - 2018-01-31
+### Added
+- [CPP] gRPC status code names printing on error.
+
+### Changed
+- [CPP] Updates in Readmes.
+
+### Fixed
+- [CPP] sh to bash in tools scripts.
+- [python] Handling multiple response from server (`single-utterance == false`) for single wave file
+
+
+## [1.0.0] - 2018-01-25
+### Added
+- [CPP] Initial implementation.
