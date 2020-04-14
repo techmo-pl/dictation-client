@@ -131,7 +131,7 @@ void build_recognition_config(const DictationSessionConfig& config, gsapi::Recog
     }
     if (!config.context_phrase.empty()) {
         gsapi::SpeechContext* speech_context = recognition_config.add_speech_contexts();
-        speech_context->add_phrases(context_phrase);
+        speech_context->add_phrases(config.context_phrase);
     }
 }
 
