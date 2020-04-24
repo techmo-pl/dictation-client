@@ -1,6 +1,7 @@
 #include <sstream>
 #include <atomic>
 #include <thread>
+#include <iostream>
 
 #include <grpc++/grpc++.h>
 
@@ -19,9 +20,9 @@ bool end_of_utterance(const gsapi::StreamingRecognizeResponse& response);
 std::string grpc_status_to_string(const grpc::Status& status);
 
 
-gsapi::RecognizeResponse DictationClient::Recognize(DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const {
-    config.audio_sample_rate_hz = audio_sample_rate_hz;
-    const gsapi::RecognizeRequest request = build_sync_request(config, audio_byte_content);
+gsapi::RecognizeResponse DictationClient::Recognize(DictationSessionConfig& config, const WAV_DATA& wav_data) const {
+    config.audio_sample_rate_hz = wav_data.header.samplesPerSec;
+    const gsapi::RecognizeRequest request = build_sync_request(config, wav_data.audioBytes);
 
     gsapi::RecognizeResponse response;
 
@@ -40,7 +41,7 @@ gsapi::RecognizeResponse DictationClient::Recognize(DictationSessionConfig& conf
 }
 
 
-std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecognize(DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const {
+std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecognize(DictationSessionConfig& config, const WAV_DATA& wav_data) const {
     auto stub = gsapi::Speech::NewStub(grpc::CreateChannel(service_address_, grpc::InsecureChannelCredentials()));
 
     grpc::ClientContext context;
@@ -48,8 +49,9 @@ std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecogni
 
     auto stream = stub->StreamingRecognize(&context);
 
-    config.audio_sample_rate_hz = audio_sample_rate_hz;
-    const auto requests = build_streaming_request(config, audio_byte_content);
+    config.audio_sample_rate_hz = wav_data.header.samplesPerSec;
+    config.bytes_per_sec = wav_data.header.bytesPerSec;
+    const auto requests = build_streaming_request(config, wav_data.audioBytes);
 
     const auto& config_request = requests.front();
     stream->Write(config_request);
@@ -61,7 +63,11 @@ std::vector<gsapi::StreamingRecognizeResponse> DictationClient::StreamingRecogni
     std::atomic<bool> half_closed_stream{false};
 
     std::thread writer([&half_closed_stream, &stream, &requests] {
+        const auto frame_length = 20; //[ms]
+        auto delay = frame_length;
+        
         for (auto i = 1; i < requests.size(); ++i) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(delay));
             if (half_closed_stream or not stream->Write(requests[i])) {
                 break;
             }
@@ -155,7 +161,7 @@ std::vector<gsapi::StreamingRecognizeRequest> build_streaming_request(const Dict
     requests.push_back(request);
 
     unsigned int frame_length = 20;//milliseconds [ms]
-    unsigned int frame_size = frame_length * config.audio_sample_rate_hz / 1000;//samples
+    unsigned int frame_size = frame_length * config.bytes_per_sec / 1000;//samples
     for (auto i = 0; i < audio_byte_content.length(); i += frame_size)
     {
         gsapi::StreamingRecognizeRequest request;

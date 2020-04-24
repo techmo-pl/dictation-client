@@ -8,8 +8,14 @@ WAV_DATA ReadWaveFile(const std::string & wavePath)
 {
     static_assert(sizeof(WAV_HEADER) == 44, "sizeof(WAV_HEADER) is not equal to 44, disable alignment");
     std::fstream wav_file(wavePath, std::ios::binary | std::ios::in);
+    if (!wav_file.is_open()) {
+        throw std::runtime_error{"Could not open file " + wavePath + " !"};
+    }
     WAV_DATA wave;
     wav_file.read((char*)(&wave.header), sizeof(wave.header));
+    if (wave.header.numOfChan != 1){
+        throw std::runtime_error{"Only waves with single channel (mono) are supported."};
+    }
     if (wave.header.subchunk2ID[0] != 'd' || wave.header.subchunk2ID[1] != 'a' || wave.header.subchunk2ID[2] != 't' || wave.header.subchunk2ID[3] != 'a') {
         throw std::runtime_error{"Waves with metadata are not supported."};
     }
@@ -35,7 +41,6 @@ void WriteWaveFile(const std::string & wavePath, unsigned int sampleRate, const 
     _header.blockAlign = 1 * 16/8;
     _header.bitsPerSample = 16;
     memcpy(_header.subchunk2ID, "data", 4);
-    _header.subchunk2Size = 0;
     _header.subchunk2Size = (unsigned)audioBytes.size();
     _header.chunkSize = 36 + _header.subchunk2Size;
 
