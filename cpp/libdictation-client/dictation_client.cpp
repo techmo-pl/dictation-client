@@ -1,7 +1,6 @@
 #include <sstream>
 #include <atomic>
 #include <thread>
-#include <iostream>
 
 #include <grpc++/grpc++.h>
 
