@@ -3,6 +3,8 @@
 
 #include "dictation_asr.grpc.pb.h"
 
+#include "../dictation-client/wave-utils.h"
+
 
 namespace gsapi = google::cloud::speech::v1;
 
@@ -18,7 +20,8 @@ struct DictationSessionConfig {
     bool interim_results = false;       // Whether to receive interim results (true) or not (false, default).
     gsapi::RecognitionConfig_AudioEncoding encoding = gsapi::RecognitionConfig_AudioEncoding_LINEAR16;
                                         // Encoding of audio data.
-    int audio_sample_rate_hz = 0;       // Sampling frequency in hertz of audio data.
+    unsigned int audio_sample_rate_hz = 0;       // Sampling frequency in hertz of audio data.
+    unsigned int bytes_per_sec = 0;     // Bytes per second
     std::string language_code = "pl-PL";// The language of the supplied audio as a BCP-47 language tag.
     int max_alternatives = 1;           // Maximum number of recognition hypotheses to be returned.
     std::string context_phrase;         // Specifies which context model to use.
@@ -28,9 +31,9 @@ class DictationClient {
 public:
     DictationClient(const std::string& service_address) : service_address_{ service_address } {}
 
-    gsapi::RecognizeResponse Recognize(DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const;
+    gsapi::RecognizeResponse Recognize(DictationSessionConfig& config, const WAV_DATA& wav_data) const;
 
-    std::vector<gsapi::StreamingRecognizeResponse> StreamingRecognize(DictationSessionConfig& config, unsigned int audio_sample_rate_hz, const std::string& audio_byte_content) const;
+    std::vector<gsapi::StreamingRecognizeResponse> StreamingRecognize(DictationSessionConfig& config, const WAV_DATA& wav_data) const;
 
 private:
     DictationClient(); // Disable default constructor.

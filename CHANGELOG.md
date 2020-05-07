@@ -1,8 +1,13 @@
-# Techmo dictation-client repository Changelog
+# Techmo dictation-client repository changelog
 
-This changelog is intended for tracking content changes in whole reposiotry. 
+This changelog is intended for tracking content changes in whole repository.
 We are using single version and changelog for all components.
-Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
+Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
+
+## [2.2.1] - 2020-01-22
+### Changed
+ - [CPP] - Added realtime processing in streaming mode.
+ - [CPP] - Added check if input wav is mono channel.
 
 ## [2.2.0] - 2020-01-22
 ### Changed

@@ -128,14 +128,14 @@ int main(int argc, const char *const argv[]) {
         techmo::dictation::DictationClient dictation_client{ userOptions["service-address"].as<std::string>() };
 
         if (userOptions.count("streaming")) {
-            const auto responses = dictation_client.StreamingRecognize(config, wave.header.samplesPerSec, wave.audioBytes);
+            const auto responses = dictation_client.StreamingRecognize(config, wave);
 
             for (const auto& response : responses) {
                 std::cout << ProtobufMessageToString(response) << std::endl;
             }
         }
         else {
-            const gsapi::RecognizeResponse response = dictation_client.Recognize(config, wave.header.samplesPerSec, wave.audioBytes);
+            const gsapi::RecognizeResponse response = dictation_client.Recognize(config, wave);
 
             std::cout << ProtobufMessageToString(response) << std::endl;
         }
