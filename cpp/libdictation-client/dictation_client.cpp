@@ -34,7 +34,7 @@ namespace {
         std::string root = read_file(ssl_directory + "/ca.crt");
         grpc::SslCredentialsOptions opts = {root, key, cert};
 
-        return SslCredentials(opts);
+        return grpc::SslCredentials(opts);
     }
 }
 
