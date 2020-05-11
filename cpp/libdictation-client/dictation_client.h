@@ -29,7 +29,11 @@ struct DictationSessionConfig {
 
 class DictationClient {
 public:
-    DictationClient(const std::string& service_address) : service_address_{ service_address } {}
+    DictationClient(const std::string& service_address, const std::string& ssl_directory)
+        : service_address_{ service_address }
+        , ssl_directory_{ ssl_directory }
+    {
+    }
 
     gsapi::RecognizeResponse Recognize(DictationSessionConfig& config, const WAV_DATA& wav_data) const;
 
@@ -39,6 +43,7 @@ private:
     DictationClient(); // Disable default constructor.
 
     const std::string service_address_;    // IP address and port (address:port) of a service the client will connect to.
+    const std::string ssl_directory_;
 };
 
 }}
