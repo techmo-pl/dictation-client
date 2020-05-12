@@ -4,13 +4,9 @@ This changelog is intended for tracking content changes in whole repository.
 We are using single version and changelog for all components.
 Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
 
-## [2.4.0] - 2020-05-12
+## [2.3.0] - 2020-05-12
 ### Added
- - [python] - `ssl-dir` option [bool], for enabling ssl communication.
-
-## [2.3.0] - 2020-05-11
-### Added
- - [CPP] - `ssl-dir` option [bool], for enabling ssl communication.
+ - [CPP, python] - `ssl-dir` option [bool], for enabling ssl communication.
 
 ## [2.2.1] - 2020-01-22
 ### Changed
