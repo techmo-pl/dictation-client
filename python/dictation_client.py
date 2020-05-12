@@ -41,6 +41,8 @@ if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument("--service-address", dest="address", required=True,
                         help="IP address and port (address:port) of a service the client will connect to.", type=str)
+    parser.add_argument("--ssl-dir", dest="ssl_directory", default="",
+                        help="If set to a path with ssl credential files (client.crt, client.key, ca.crt), use ssl authentication. Otherwise use insecure channel (default).", type=str)
     parser.add_argument("--wave-path", dest="wave",
                         help="Path to wave file with speech to be recognized. Should be mono, 8kHz or 16kHz.")
     parser.add_argument("--mic", help="Use microphone as an audio source (instead of wave file).", action='store_true')
@@ -74,7 +76,7 @@ if __name__ == '__main__':
     if args.wave is not None or args.mic:
         with create_audio_stream(args) as stream:
             settings = DictationSettings(args)
-            recognizer = StreamingRecognizer(args.address, settings)
+            recognizer = StreamingRecognizer(args.address, args.ssl_directory, settings)
 
             print('Recognizing...')
             results = recognizer.recognize(stream)
