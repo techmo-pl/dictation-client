@@ -76,6 +76,8 @@ po::options_description CreateOptionsDescription(void) {
             ("help", "Print help message.")
             ("service-address", po::value<std::string>()->required(),
              "IP address and port (address:port) of a service the client will connect to.")
+            ("ssl-dir", po::value<std::string>()->default_value(""),
+             "If set to a path with ssl credential files (client.crt, client.key, ca.crt), use ssl authentication. Otherwise use insecure channel (default).")
             ("wav-path", po::value<std::string>()->required(),
              "Path to wave file with audio content to be sent to service via RPC.")
             ("session-id", po::value<std::string>()->default_value(""),
@@ -125,7 +127,10 @@ int main(int argc, const char *const argv[]) {
 
         const auto wave = ReadWaveFile(userOptions["wav-path"].as<std::string>());
 
-        techmo::dictation::DictationClient dictation_client{ userOptions["service-address"].as<std::string>() };
+        techmo::dictation::DictationClient dictation_client{
+            userOptions["service-address"].as<std::string>(),
+            userOptions["ssl-dir"].as<std::string>(),
+        };
 
         if (userOptions.count("streaming")) {
             const auto responses = dictation_client.StreamingRecognize(config, wave);
