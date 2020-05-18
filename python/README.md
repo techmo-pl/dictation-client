@@ -7,9 +7,9 @@ Python implementation of Dictation ASR gRPC client.
 This might be required when using other gRPC or Protocol Buffers version.
 
 To run:
- - Use Python 3.5 with virtual environment and install required packages:
+ - Use Python 3.x with virtual environment and install required packages:
 ```
-virtualenv -p python3.5 venv
+virtualenv -p python3.x venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -21,7 +21,8 @@ python dictation_client.py --service-address "192.168.1.1:4321" --wave-path audi
 
 Usage:
 ```
-usage: dictation_client.py [-h] --service-address ADDRESS [--wave-path WAVE]
+usage: dictation_client.py [-h] --service-address ADDRESS
+                           [--ssl-dir SSL_DIRECTORY] [--wave-path WAVE]
                            [--mic] [--session-id SESSION_ID]
                            [--grpc-timeout GRPC_TIMEOUT]
                            [--max-alternatives MAX_ALTERNATIVES]
@@ -31,12 +32,18 @@ usage: dictation_client.py [-h] --service-address ADDRESS [--wave-path WAVE]
                            [--speech-complete-timeout SPEECH_COMPLETE_TIMEOUT]
                            [--speech-incomplete-timeout SPEECH_INCOMPLETE_TIMEOUT]
                            [--recognition-timeout RECOGNITION_TIMEOUT]
+                           [--context-phrase CONTEXT_PHRASE]
 
 optional arguments:
   -h, --help            show this help message and exit
   --service-address ADDRESS
                         IP address and port (address:port) of a service the
                         client will connect to.
+  --ssl-dir SSL_DIRECTORY
+                        If set to a path with ssl credential files
+                        (client.crt, client.key, ca.crt), use ssl
+                        authentication. Otherwise use insecure channel
+                        (default).
   --wave-path WAVE      Path to wave file with speech to be recognized. Should
                         be mono, 8kHz or 16kHz.
   --mic                 Use microphone as an audio source (instead of wave
@@ -66,5 +73,5 @@ optional arguments:
                         MRCP v2 speech incomplete timeout [ms].
   --recognition-timeout RECOGNITION_TIMEOUT
                         MRCP v2 recognition timeout [ms].
-  --context-phrase      Specifies which context model to use.
-```
+  --context-phrase CONTEXT_PHRASE
+                        Specifies which context model to use.
