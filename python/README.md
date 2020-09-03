@@ -10,7 +10,7 @@ After cloning git repository download submodules:
 ```
 git submodule update --init
 ```
-(this command has to be invoked from projects root directory)
+(this command has to be invoked from the project's root directory)
 
 If you are not using git, you have to manually download `googleapis` submodule. 
 To do this, open project repository in web browser, go to the `submodules` directory and use the link located there to open the relevant commit in the googleapis repository. Then download it, unpack and copy all files to the `submodules/googleapis` directory.
@@ -25,7 +25,7 @@ To install virtualenv on Ubuntu is enough to use command:
 sudo apt-get install virtualenv
 ```
 
-Then install the required dependencies inside the virtual environment (this step only needs to be done the first time, for the next startups it is enough to use the existing virtual environment).
+Then install the required dependencies inside the virtual environment (this step only needs to be done the first time, for the further usage it is enough to use the existing virtual environment).
 
 
 - On Linux:
@@ -82,13 +82,13 @@ source venv/bin/activate
 ```
 .\venv\Scripts\activate
 ```
-Then tun Dictation client. Sample use:
+Then run Dictation client. Sample use:
 
 ```
 python dictation_client.py --service-address "192.168.1.1:4321" --wave-path audio.wav
 ```
 
-For each request you have to provide the service address and the audio source (wav file or microphone)
+For each request you have to provide the service address and the audio source (wav file or microphone).
 
 
 ### Usage:
@@ -234,7 +234,7 @@ pcm.rear cards.pcm.rear
 pcm.center_lfe cards.pcm.center_lfe
 pcm.side cards.pcm.side
 ```
-To ged rid of warnings, comment also several lines below, starting with `pcm.surround`.
+To get rid of warnings, comment also several lines below, starting with `pcm.surround`.
 
 Then save and close file.
 
