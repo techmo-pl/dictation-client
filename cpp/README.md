@@ -1,48 +1,77 @@
-C++ implementation of Dictation ASR gRPC client.
+# C++ implementation of Dictation ASR gRPC client
 
-Contents:
+## Contents:
 - `libdictation-client`     Library implementing communication with Techmo Dictation ASR gRPC service.
 - `dictation-client`        Example of program using the library.
 
 This project uses cmake build.
 
-Dependencies are:
-- Boost     provided as `boost_pkg`
-    Default location: `/opt/boost_1.60.0`
-    If not installed, from parent directory run `sudo ./tools/install_boost.sh`
-- gRPC      provided as `grpc_pkg`
-    Default location: `/opt/grpc_v1.24.3`
-    If not installed, from parent directory run `sudo ./tools/install_grpc.sh`
-- OpenSSL   provided as `ssl_pkg`
-- DL        provided as `dl_pkg`
 
-Required steps before build:
-- Build googleapis. From parent directory run:
+## Dependencies:
+
+- **cmke** (installation in Ubuntu: `sudo snap install cmake --classic`)
+- **git** (installation in Ubuntu: `sudo apt install -y git`)
+- **gcc** (installation in Ubuntu: `sudo apt install -y gcc`)
+- **g++** (installation in Ubuntu: `sudo apt install -y g++`)
+- **make** (installation in Ubuntu: `sudo apt install -y make`)
+- **autoconf** (installation in Ubuntu: `sudo apt-get install -y autoconf`)
+- **libtool** (installation in Ubuntu: `sudo apt-get install -y libtool`)
+- **Boost** provided as `boost_pkg`
+    
+    Default location: `/opt/boost_1.60.0`
+    
+    If not installed, from parent directory run: `sudo ./tools/install_boost.sh 8`
+    
+    **Note:** the number at the end of the command above specifies number of parallel jobs, and should be set appropriately depending on the machine (eg. 32 on strong server machine, 1 on small virtualbox instance)
+
+- **gRPC** provided as `grpc_pkg`
+    
+    Default location: `/opt/grpc_v1.24.3`
+    
+    If not installed, from parent directory run `sudo ./tools/install_grpc.sh 8`
+    
+    **Note:** the number at the end of the command above specifies number of parallel jobs, and should be set appropriately depending on the machine (eg. 32 on strong server machine, 1 on small virtualbox instance)
+
+- **OpenSSL** provided as `ssl_pkg` (installation in Ubuntu: `sudo apt-get install libssl-dev`)
+- **DL** provided as `dl_pkg` (this one should be already installed in your OS)
+
+
+## Required steps before build:
+
+- download googleapis submodule:
 ```
 git submodule update --init --recursive
+```
+- build googleapis:
+```
 ./tools/build_googleapis.sh
 ```
-Note: This build is allowed to fail in general but some of the files are required.
-The script checks if all required files have been built
-Message "All required googleapis files found." means success in that case.
+**Note:** This build might generate some errors, however, if the message "All required googleapis files found" pops up, it means that overall process was successful.
+
+The other steps described below should be performed inside `cpp` directory.
 
 To regenerate sources from `.proto`, run:
 ```
 ./make_proto.sh
 ```
-This might be required when using other gRPC or Protocol Buffers version.
+This might be required when using other gRPC or Protocol Buffers versions.
 
-Build:
-```
-mkdir build && cd build && cmake .. && make -j 4
-```
 
-Run:
+## Build:
+```
+mkdir build && cd build && cmake .. && make -j 4 && cd ..
+```
+**Note:** the number in the command above specifies number of parallel jobs, and should be set appropriately depending on the machine.
+If you are not sure how to set it, use `4` like in example above.
+
+
+## Run:
 ```
 ./build/dictation_client --service-address 192.168.1.1:4321 --wav-path /path/to/audio.wav
 ```
+**Note:** in command above you have to replace sample service address and path to audio file with real values
 
-Options:
+## Options:
 ```
   --help                      Print help message.
   --service-address arg       IP address and port (address:port) of a service
