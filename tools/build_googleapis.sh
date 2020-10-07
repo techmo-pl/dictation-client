@@ -1,7 +1,7 @@
 #!/bin/bash
 
 grpc_root=/opt/grpc_v1.24.3
-cd submodules/dictation-client/submodules/googleapis
+cd submodules/googleapis
 
 jobs=32
 [ $# -ge 1 ] && jobs=$1
