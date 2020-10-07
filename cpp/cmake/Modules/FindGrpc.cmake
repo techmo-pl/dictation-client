@@ -21,17 +21,20 @@ endif()
 set (Grpc_INCLUDE_DIRS
         ${Grpc_ROOT}/include
         ${Grpc_ROOT}/third_party/protobuf/src
-#        ${Grpc_ROOT}/third_party/boringssl/include
+        ${Grpc_ROOT}/third_party/boringssl/include
         )
 
 
 set (Grpc_LIBRARIES
-        ${Grpc_ROOT}/libs/opt/libgrpc++.a
-        ${Grpc_ROOT}/libs/opt/libgrpc.a
-        ${Grpc_ROOT}/libs/opt/libgrpc_unsecure.a
-        ${Grpc_ROOT}/libs/opt/libgrpc++_reflection.a
-        ${Grpc_ROOT}/third_party/zlib/libz.a
-        ${Grpc_ROOT}/third_party/protobuf/src/.libs/libprotobuf.a
+        ${Grpc_ROOT}/build/libgrpc++.a
+        ${Grpc_ROOT}/build/libgrpc.a
+        ${Grpc_ROOT}/build/libgrpc_unsecure.a
+        ${Grpc_ROOT}/build/libgrpc++_reflection.a
+        ${Grpc_ROOT}/build/libgpr.a
+        ${Grpc_ROOT}/build/libaddress_sorting.a
+        ${Grpc_ROOT}/build/third_party/zlib/libz.a
+        ${Grpc_ROOT}/build/third_party/protobuf//libprotobuf.a
+        ${Grpc_ROOT}/build/third_party/cares/cares/lib/libcares.a
         )
 
 message("Found Grpc (include ${Grpc_INCLUDE_DIRS}; library: ${Grpc_LIBRARIES})")

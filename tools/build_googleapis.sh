@@ -1,23 +1,25 @@
 #!/bin/bash
 
 grpc_root=/opt/grpc_v1.24.3
-cd submodules/googleapis
+cd submodules/dictation-client/submodules/googleapis
 
 jobs=32
 [ $# -ge 1 ] && jobs=$1
 
-proto_root="${grpc_root}/third_party/protobuf/src"
+proto_src="${grpc_root}/third_party/protobuf/src"
+protoc="${grpc_root}/build/third_party/protobuf/protoc"
+plugin="$grpc_root/build/grpc_cpp_plugin"
 
-#rebuild - necesseary fornewer versions
+# rebuild - necesseary fornewer versions
 make clean
 
-make -j $jobs GRPCPLUGIN=${grpc_root}/bins/opt/grpc_cpp_plugin PROTOINCLUDE=${proto_root} PROTOC=${proto_root}/protoc LANGUAGE=cpp #|| exit 1
+make -j $jobs GRPCPLUGIN=${plugin} PROTOINCLUDE=${proto_src} PROTOC=${protoc} LANGUAGE=cpp #|| exit 1
 # This build is allowed to fail in general but some of the files are required.
 # Check for required files:
 
-required_files=(    "google/api/annotations" 
-                    "google/longrunning/operations" 
-                    "google/rpc/status" 
+required_files=(    "google/api/annotations"
+                    "google/longrunning/operations"
+                    "google/rpc/status"
 )
 
 extensions=( ".pb.h" ".pb.cc" ".grpc.pb.h" ".grpc.pb.cc" )
