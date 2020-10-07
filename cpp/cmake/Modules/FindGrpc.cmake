@@ -33,7 +33,7 @@ set (Grpc_LIBRARIES
         ${Grpc_ROOT}/build/libgpr.a
         ${Grpc_ROOT}/build/libaddress_sorting.a
         ${Grpc_ROOT}/build/third_party/zlib/libz.a
-        ${Grpc_ROOT}/build/third_party/protobuf//libprotobuf.a
+        ${Grpc_ROOT}/build/third_party/protobuf/libprotobuf.a
         ${Grpc_ROOT}/build/third_party/cares/cares/lib/libcares.a
         )
 
