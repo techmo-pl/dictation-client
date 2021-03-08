@@ -1,10 +1,10 @@
-import pyaudio
+import sounddevice
 import queue
 
 
 class MicrophoneStream(object):
     """Opens a recording stream as a generator yielding the audio chunks."""
-    """It's directly copied from GOOGLE example: 
+    """It's directly copied from GOOGLE example:
     https://cloud.google.com/speech/docs/streaming-recognize#speech-streaming-recognize-python """
 
     def __init__(self, rate, chunk):
@@ -16,36 +16,32 @@ class MicrophoneStream(object):
         self.closed = True
 
     def __enter__(self):
-        self._audio_interface = pyaudio.PyAudio()
-        self._audio_stream = self._audio_interface.open(
-            format=pyaudio.paInt16,
+        self._audio_stream = sounddevice.RawInputStream(
+            samplerate=self._rate,
+            blocksize=self._chunk,
             # The API currently only supports 1-channel (mono) audio
             # https://goo.gl/z757pE
-            channels=1, rate=self._rate,
-            input=True, frames_per_buffer=self._chunk,
-            # Run the audio stream asynchronously to fill the buffer object.
-            # This is necessary so that the input device's buffer doesn't
-            # overflow while the calling thread makes network requests, etc.
-            stream_callback=self._fill_buffer,
+            channels=1,
+            dtype='int16',
+            callback=self._fill_buffer
         )
 
+        self._audio_stream.start()
         self.closed = False
 
         return self
 
     def __exit__(self, type, value, traceback):
-        self._audio_stream.stop_stream()
         self._audio_stream.close()
         self.closed = True
         # Signal the generator to terminate so that the client's
         # streaming_recognize method will not block the process termination.
         self._buff.put(None)
-        self._audio_interface.terminate()
 
-    def _fill_buffer(self, in_data, frame_count, time_info, status_flags):
+    def _fill_buffer(self, in_data, frames, time, status):
         """Continuously collect data from the audio stream, into the buffer."""
-        self._buff.put(in_data)
-        return None, pyaudio.paContinue
+        self._buff.put(bytes(in_data))
+        return None
 
     def close(self):
         self.closed = True
