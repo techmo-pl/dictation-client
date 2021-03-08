@@ -9,7 +9,7 @@ This project uses cmake build.
 
 ## Dependencies:
 
-- **cmke** (installation in Ubuntu: `sudo snap install cmake --classic`)
+- **cmake** (installation in Ubuntu: `sudo snap install cmake --classic`)
 - **git** (installation in Ubuntu: `sudo apt install -y git`)
 - **gcc** (installation in Ubuntu: `sudo apt install -y gcc`)
 - **g++** (installation in Ubuntu: `sudo apt install -y g++`)
