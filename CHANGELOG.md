@@ -4,6 +4,10 @@ This changelog is intended for tracking content changes in whole repository.
 We are using single version and changelog for all components.
 Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
 
+## [2.3.1] - 2021-03-08
+### Added
+ - [python] - Used `sounddevice` instead of `pyaudio` to avoid warnings and crashes on several devices.
+
 ## [2.3.0] - 2020-05-12
 ### Added
  - [CPP, python] - `ssl-dir` option [bool], for enabling ssl communication.
