@@ -1,8 +1,40 @@
-## Python implementation of Dictation ASR gRPC client.
+# Python implementation of Dictation ASR gRPC client.
 
 
-### Before run
+## Docker usage
 
+#### Build docker image
+
+To prepare docker image with Python implementation of Dictation client, open project's main directory and run:
+
+```
+docker build -f Dockerfile-python -t dictation-client-python:2.3.0 . 
+```
+
+When the build process is complete, you will receive a message:
+```
+Successfully tagged dictation-client-python:2.3.0
+```
+
+#### Run Dictation client
+
+To use Dictation client on Docker container, go to `dictation-client/python/docker` directory and run `run_dictation_cilent_python.sh` script.
+
+To send simple request to the Dictation service, use:
+```
+./run_dictation_cilent_python.sh --service-address IP_ADDRESS:PORT --filename WAV_FILE_NAME
+```
+
+To print list of available options, use:
+```
+./run_dictation_cilent_python.sh --help
+```
+Audio files to be transcribed should be placed inside `dictation-client/python/docker/wav` directory.
+TLS credentials should be placed inside `dictation-client/python/docker/tls` directory, if used.
+
+
+
+## Local instance usage
 
 #### Submodules
 
@@ -71,7 +103,7 @@ This might be required when using other gRPC or Protocol Buffers version.
 
  
 
-### Run:
+### Run Dictation client:
 
 To run Dictation client, activate virtual environment first:
 - On Linux:

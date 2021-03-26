@@ -1,0 +1,39 @@
+FROM ubuntu:20.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+ADD ./python /dictation_client
+
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        ca-certificates \
+        checkinstall \
+        libbz2-dev \
+        libc6-dev \
+        libgdbm-dev \
+        libncursesw5-dev \
+        libreadline-gplv2-dev \
+        libsqlite3-dev \
+        libssl-dev \
+        python3-pip \
+        tk-dev \
+		wget
+
+RUN cd /usr/src \
+	&& wget https://www.python.org/ftp/python/3.6.10/Python-3.6.10.tgz \
+	&& tar xzf Python-3.6.10.tgz \
+	&& cd Python-3.6.10 \
+	&& ./configure --enable-optimizations \
+	&& make altinstall
+
+WORKDIR /dictation_client
+
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get install -y --no-install-recommends \
+        portaudio19-dev \
+        python3-pip \
+        python3-dev \
+    && pip3 install -r requirements.txt
