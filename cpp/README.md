@@ -1,13 +1,48 @@
 # C++ implementation of Dictation ASR gRPC client
 
-## Contents:
+
+## Docker usage
+
+#### Build docker image
+
+To prepare docker image with C++ implementation of Dictation client, open project's main directory and run:
+
+```
+docker build -f Dockerfile-cpp -t dictation-client-cpp:2.3.0 . 
+```
+
+When the build process is complete, you will receive a message:
+```
+Successfully tagged dictation-client-cpp:2.3.0
+```
+
+#### Run Dictation client
+
+To use Dictation client on Docker container, go to `dictation-client/cpp/docker` directory and run `run_dictation_cilent_cpp.sh` script.
+
+To send simple request to the Dictation service, use:
+```
+./run_dictation_cilent_cpp.sh --service-address IP_ADDRESS:PORT --filename WAV_FILE_NAME
+```
+
+To print list of available options, use:
+```
+./run_dictation_cilent_cpp.sh --help
+```
+Audio files to be transcribed should be placed inside `dictation-client/cpp/docker/wav` directory.
+TLS credentials should be placed inside `dictation-client/cpp/docker/tls` directory, if used.
+
+
+## Local instance usage
+
+### Contents:
 - `libdictation-client`     Library implementing communication with Techmo Dictation ASR gRPC service.
 - `dictation-client`        Example of program using the library.
 
 This project uses cmake build.
 
 
-## Dependencies:
+### Dependencies:
 
 - **cmake** (installation in Ubuntu: `sudo snap install cmake --classic`)
 - **git** (installation in Ubuntu: `sudo apt install -y git`)
@@ -36,7 +71,7 @@ This project uses cmake build.
 - **DL** provided as `dl_pkg` (this one should be already installed in your OS)
 
 
-## Required steps before build:
+### Required steps before build:
 
 - download googleapis submodule:
 ```
@@ -57,7 +92,7 @@ To regenerate sources from `.proto`, run:
 This might be required when using other gRPC or Protocol Buffers versions.
 
 
-## Build:
+### Build:
 ```
 mkdir build && cd build && cmake .. && make -j 4 && cd ..
 ```
@@ -65,13 +100,13 @@ mkdir build && cd build && cmake .. && make -j 4 && cd ..
 If you are not sure how to set it, use `4` like in example above.
 
 
-## Run:
+### Run:
 ```
 ./build/dictation_client --service-address 192.168.1.1:4321 --wav-path /path/to/audio.wav
 ```
 **Note:** in command above you have to replace sample service address and path to audio file with real values
 
-## Options:
+### Options:
 ```
   --help                      Print help message.
   --service-address arg       IP address and port (address:port) of a service

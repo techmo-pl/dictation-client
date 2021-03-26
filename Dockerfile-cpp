@@ -1,0 +1,31 @@
+FROM ubuntu:20.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+ADD ./cpp /dictation-client/cpp
+ADD ./tools /dictation-client/tools
+ADD ./submodules /dictation-client/submodules
+
+WORKDIR /dictation-client
+
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get install -y --no-install-recommends \
+    automake \
+    autoconf \
+    ca-certificates \
+    cmake \
+    g++ \
+    gcc \
+    git \
+    libssl-dev \
+    libtool \
+    make \
+    wget
+
+RUN ./tools/install_boost.sh 2 \
+    && ./tools/install_grpc.sh 2
+
+RUN ./tools/build_googleapis.sh
+
+RUN cd cpp && mkdir build && cd build && cmake .. && make -j 4 && cd ..
