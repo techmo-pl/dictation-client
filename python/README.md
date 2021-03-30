@@ -10,7 +10,7 @@ To prepare docker image with Python implementation of Dictation client, open pro
 ```
 docker build -f Dockerfile-python -t dictation-client-python:2.3.0 . 
 ```
-
+The build process will take several minutes.
 When the build process is complete, you will receive a message:
 ```
 Successfully tagged dictation-client-python:2.3.0
