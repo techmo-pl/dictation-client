@@ -10,7 +10,7 @@ To prepare docker image with C++ implementation of Dictation client, open projec
 ```
 docker build -f Dockerfile-cpp -t dictation-client-cpp:2.3.0 . 
 ```
-
+**Note:** the build process may take several dozen minutes. If you don't want to wait so long, use python implementation instead.
 When the build process is complete, you will receive a message:
 ```
 Successfully tagged dictation-client-cpp:2.3.0

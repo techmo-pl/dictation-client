@@ -12,8 +12,6 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
 
 
-# --- Default values --- #
-
 docker_image="dictation-client-cpp:2.3.0"
 
 service_address="UNSPECIFIED"
@@ -43,7 +41,6 @@ tls_dir_option=""
 streaming_option=""
 time_offsets_option=""
 
-# --- /Default values --- #
 
 usage() {
 
