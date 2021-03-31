@@ -37,10 +37,10 @@ venv/
 .idea/
 
 # ignore files in directory `wav`
-**/wav/*
+cpp/docker/wav/*
 
 # ignore files in directory `tls`
-**/tls/*
+cpp/docker/tls/*
 
 # but keep the directories with .gitkeep file
 !/**/.gitkeep
