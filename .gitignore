@@ -36,3 +36,12 @@ __pycache__/
 venv/
 .idea/
 
+# ignore files in directory `wav`
+wav/*
+# but keep the directory
+!wav/.gitkeep
+
+# ignore files in directory `txt`
+txt/*
+# but keep the directory
+!txt/.gitkeep
