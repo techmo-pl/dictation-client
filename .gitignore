@@ -37,11 +37,10 @@ venv/
 .idea/
 
 # ignore files in directory `wav`
-wav/*
-# but keep the directory
-!wav/.gitkeep
+**/wav/*
 
-# ignore files in directory `txt`
-txt/*
-# but keep the directory
-!txt/.gitkeep
+# ignore files in directory `tls`
+**/tls/*
+
+# but keep the directories with .gitkeep file
+!/**/.gitkeep
