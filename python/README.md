@@ -15,7 +15,7 @@ To check required dependencies and prepare virtual environment, run:
 
 ### Run
 
-To run Dictation client, use `run.sh` script, eg:
+To run Dictation client, use `run.sh` script, e.g.:
 ```
 ./run --service-address IP_ADDRESS:PORT --wave-path INPUT_WAVE
 ```
