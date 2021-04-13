@@ -76,7 +76,7 @@ else
         while true; do
             read -p "The required package 'python3-dev' is not installed. Do you want to install it now? [y/n]" yn
             case $yn in
-                [Yy]*) sudo apt-get update && apt-get install -y python3-dev; break ;;
+                [Yy]*) sudo apt-get update && sudo apt-get install -y python3-dev; break ;;
                 [Nn]*) exit 0 ;;
             esac
         done
@@ -86,7 +86,7 @@ else
         while true; do
             read -p "The required package 'portaudio19-dev' is not installed. Do you want to install it now? [y/n]" yn
             case $yn in
-                [Yy]*) sudo apt-get update && apt-get install -y portaudio19-dev; break ;;
+                [Yy]*) sudo apt-get update && sudo apt-get install -y portaudio19-dev; break ;;
                 [Nn]*) exit 0 ;;
             esac
         done
@@ -96,7 +96,7 @@ else
         while true; do
             read -p "The required package 'python3-pip' is not installed. Do you want to install it now? [y/n]" yn
             case $yn in
-                [Yy]*) sudo apt-get update && apt-get install -y python3-pip; break ;;
+                [Yy]*) sudo apt-get update && sudo apt-get install -y python3-pip; break ;;
                 [Nn]*) exit 0 ;;
             esac
         done
