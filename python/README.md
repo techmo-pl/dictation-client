@@ -1,8 +1,33 @@
-## Python implementation of Dictation ASR gRPC client.
+# Python implementation of Dictation ASR gRPC client.
+
+
+## Basic Usage
+
+Dictation client includes scripts for automatic environment configuration and launching on systems from the Debian Linux family. For launching Dictation client on other Linux-based OS or Windows, check out "Manual Usage" section.
 
 
 ### Before run
 
+To check required dependencies and prepare virtual environment, run:
+```
+./setup.sh
+```
+
+### Run
+
+To run Dictation client, use `run.sh` script, eg:
+```
+./run --service-address IP_ADDRESS:PORT --wave-path INPUT_WAVE
+```
+To print usage description, use:
+```
+./run --help
+```
+
+
+## Manual Usage
+
+### Before run
 
 #### Submodules
 
@@ -30,10 +55,10 @@ Then install the required dependencies inside the virtual environment (this step
 
 - On Linux:
 
-Use Python 3.6 with virtual environment and install required packages (you can use a different version of Python, but for newer versions it may require building some dependencies manually):
+Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3.6 venv
+virtualenv -p python3 venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -71,7 +96,7 @@ This might be required when using other gRPC or Protocol Buffers version.
 
  
 
-### Run:
+### Run
 
 To run Dictation client, activate virtual environment first:
 - On Linux:
