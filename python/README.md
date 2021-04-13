@@ -58,8 +58,8 @@ Then install the required dependencies inside the virtual environment (this step
 Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3 venv
-source venv/bin/activate
+virtualenv -p python3 .env
+source .env/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -72,11 +72,11 @@ Set-ExecutionPolicy RemoteSigned
 ```
 then confirm your choice.
 
-Use Python 3.6 with virtual environment and install required packages (you can use a different version of Python, but for newer versions it may require building some dependencies manually):
+Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3.6 venv
-.\venv\Scripts\activate
+virtualenv -p python3.6 .env
+.\.env\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -101,11 +101,11 @@ This might be required when using other gRPC or Protocol Buffers version.
 To run Dictation client, activate virtual environment first:
 - On Linux:
 ```
-source venv/bin/activate
+source .env/bin/activate
 ```
 - On Windows:
 ```
-.\venv\Scripts\activate
+.\.env\Scripts\activate
 ```
 Then run Dictation client. Sample use:
 
