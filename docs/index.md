@@ -199,7 +199,7 @@ Context phrase that switches the model used during recognition. If the phrase co
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| phrases | [string](#string)[] | First element of array conatins "context phrase" which allows to use particular context model for the recognition |
+| phrases | [string](#string)[] | First element of array contains "context phrase" which allows to use particular context model for the recognition |
 
 
 

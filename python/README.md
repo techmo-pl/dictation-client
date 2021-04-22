@@ -1,6 +1,5 @@
 # Python implementation of Dictation ASR gRPC client.
 
-
 ## Docker usage
 
 #### Build docker image
@@ -312,7 +311,4 @@ Installing FFmpeg framework is not necessary to run the application, however it 
 FFmpeg can be downloaded from https://ffmpeg.org/download.html
 
 On Ubuntu/Debian Linux OS you can download and install FFmpeg directly from official repositories.
-
-
-
 
