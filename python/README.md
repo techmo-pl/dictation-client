@@ -36,7 +36,35 @@ TLS credentials should be placed inside `dictation-client/python/docker/tls` dir
 
 ## Local instance usage
 
-#### Submodules
+### Basic Usage
+
+Dictation client includes scripts for automatic environment configuration and launching on systems from the Debian Linux family. For launching Dictation client on other Linux-based OS or Windows, check out "Manual Usage" section.
+
+
+##### Before run
+
+To check required dependencies and prepare virtual environment, run:
+```
+./setup.sh
+```
+
+##### Run
+
+To run Dictation client, use `run.sh` script, e.g.:
+```
+./run --service-address IP_ADDRESS:PORT --wave-path INPUT_WAVE
+```
+To print usage description, use:
+```
+./run --help
+```
+
+
+### Manual Usage
+
+#### Before run
+
+##### Submodules
 
 After cloning git repository download submodules:
 ```
@@ -48,7 +76,7 @@ If you are not using git, you have to manually download `googleapis` submodule.
 To do this, open project repository in web browser, go to the `submodules` directory and use the link located there to open the relevant commit in the googleapis repository. Then download it, unpack and copy all files to the `submodules/googleapis` directory.
 
 
-#### Dependencies
+##### Dependencies
 
 If you don't have virtualenv yet, install it first (https://virtualenv.pypa.io/en/stable/installation.html)
 To install virtualenv on Ubuntu is enough to use command:
@@ -62,11 +90,11 @@ Then install the required dependencies inside the virtual environment (this step
 
 - On Linux:
 
-Use Python 3.6 with virtual environment and install required packages (you can use a different version of Python, but for newer versions it may require building some dependencies manually):
+Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3.6 venv
-source venv/bin/activate
+virtualenv -p python3 .env
+source .env/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -79,11 +107,11 @@ Set-ExecutionPolicy RemoteSigned
 ```
 then confirm your choice.
 
-Use Python 3.6 with virtual environment and install required packages (you can use a different version of Python, but for newer versions it may require building some dependencies manually):
+Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3.6 venv
-.\venv\Scripts\activate
+virtualenv -p python3.6 .env
+.\.env\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -93,7 +121,7 @@ To switch back PowerShell execution policy to the default, use command:
 Set-ExecutionPolicy Restricted
 ```
 
-#### Proto sources
+##### Proto sources
 
 [Optional] To regenerate sources from `.proto`, run:
 ```
@@ -103,16 +131,16 @@ This might be required when using other gRPC or Protocol Buffers version.
 
  
 
-### Run Dictation client:
+#### Run
 
 To run Dictation client, activate virtual environment first:
 - On Linux:
 ```
-source venv/bin/activate
+source .env/bin/activate
 ```
 - On Windows:
 ```
-.\venv\Scripts\activate
+.\.env\Scripts\activate
 ```
 Then run Dictation client. Sample use:
 
