@@ -126,14 +126,12 @@ request.
 | language_code | [string](#string) | [*Required*] The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". The only language supported at the moment is Polish (`pl-PL`). |
 | max_alternatives | [int32](#int32) | [*Optional*] Maximum number of recognition hypotheses to be returned. Specifically, the maximum number of `SpeechRecognitionAlternative` messages within each `SpeechRecognitionResult`. The server may return fewer than `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of one. If omitted, will return a maximum of one. |
 | profanity_filter | [bool](#bool) | [*Optional*][*Unused*] |
-| speech_contexts | [SpeechContext](#google.cloud.speech.v1.SpeechContext) | [*Optional*][*Unused*] |
+| speech_contexts | [SpeechContext](#google.cloud.speech.v1.SpeechContext)[] | [*Optional*] Array of SpeechContext. Allows to send a "context phrase" that switches language model for current recognition |
 | enable_word_time_offsets | [bool](#bool) | [*Optional*] If `true`, the top result includes a list of words and the start and end time offsets (timestamps) for those words. If `false`, no word-level time offset information is returned. The default is `false`. |
 | enable_automatic_punctuation | [bool](#bool) | [*Optional*][*Unused*] |
 | config_fields | [ConfigField](#google.cloud.speech.v1.ConfigField) | [**Extension by Techmo**] [*Optional*] A means to provide additional configuration fields via request. |
 | model | [string](#string) | [*Optional*][*Unused*] |
 | use_enhanced | [bool](#bool) | [*Optional*][*Unused*] |
-
-
 
 
 
@@ -194,12 +192,14 @@ messages.
 <a name="google.cloud.speech.v1.SpeechContext"/>
 
 ### SpeechContext
-[*Unused*]
+
+
+Context phrase that switches the model used during recognition. If the phrase correctly identifies the context model used in service, it will be used instead of the general model for the current recognition. Due to compatibility with Google API, the object is defined as a list of strings, but only the first element of the list is used as the context phrase, the rest are ignored if present.
 
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| phrases | [string](#string) | [*Unused*] |
+| phrases | [string](#string)[] | First element of array contains "context phrase" which allows to use particular context model for the recognition |
 
 
 
