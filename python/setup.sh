@@ -5,7 +5,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 
-check_package () {
+install_package () {
     # $1 - package name
     # $2 - if == "sudo" use sudo
 
@@ -53,20 +53,20 @@ fi
 if [ $(dpkg-query -W -f='${Status}' sudo 2>/dev/null | grep -c "ok installed") -eq 0 ];
 then
     #sudo not installed (eg. docker container)
-    check_package "python3-dev"
-    check_package "portaudio19-dev"
-    check_package "python3-pip"
-    check_package "virtualenv"
+    install_package "python3-dev"
+    install_package "portaudio19-dev"
+    install_package "python3-pip"
+    install_package "virtualenv"
 else
     #sudo installed
-    check_package "python3-dev" "sudo"
-    check_package "portaudio19-dev" "sudo"
-    check_package "python3-pip" "sudo"
-    check_package "virtualenv" "sudo"
+    install_package "python3-dev" "sudo"
+    install_package "portaudio19-dev" "sudo"
+    install_package "python3-pip" "sudo"
+    install_package "virtualenv" "sudo"
 fi
 
 virtualenv -p python3 .env
 source .env/bin/activate
 pip install -r requirements.txt
 
-echo "Setup finished!"
+echo "Setup finished!" 
