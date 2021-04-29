@@ -18,16 +18,16 @@ Successfully tagged dictation-client-cpp:2.3.0
 
 #### Run Dictation client
 
-To use Dictation client on Docker container, go to `dictation-client/cpp/docker` directory and run `run_dictation_cilent_cpp.sh` script.
+To use Dictation client on Docker container, go to `dictation-client/cpp/docker` directory and run `run_dictation_client_cpp.sh` script.
 
 To send simple request to the Dictation service, use:
 ```
-./run_dictation_cilent_cpp.sh --service-address IP_ADDRESS:PORT --filename WAV_FILE_NAME
+./run_dictation_client_cpp.sh --service-address IP_ADDRESS:PORT --filename WAV_FILE_NAME
 ```
 
 To print list of available options, use:
 ```
-./run_dictation_cilent_cpp.sh --help
+./run_dictation_client_cpp.sh --help
 ```
 Audio files to be transcribed should be placed inside `dictation-client/cpp/docker/wav` directory.
 TLS credentials should be placed inside `dictation-client/cpp/docker/tls` directory, if used.
