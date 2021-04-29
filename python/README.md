@@ -17,16 +17,16 @@ Successfully tagged dictation-client-python:2.3.0
 
 #### Run Dictation client
 
-To use Dictation client on Docker container, go to `dictation-client/python/docker` directory and run `run_dictation_cilent_python.sh` script.
+To use Dictation client on Docker container, go to `dictation-client/python/docker` directory and run `run_dictation_client_python.sh` script.
 
 To send simple request to the Dictation service, use:
 ```
-./run_dictation_cilent_python.sh --service-address IP_ADDRESS:PORT --filename WAV_FILE_NAME
+./run_dictation_client_python.sh --service-address IP_ADDRESS:PORT --filename WAV_FILE_NAME
 ```
 
 To print list of available options, use:
 ```
-./run_dictation_cilent_python.sh --help
+./run_dictation_client_python.sh --help
 ```
 Audio files to be transcribed should be placed inside `dictation-client/python/docker/wav` directory.
 TLS credentials should be placed inside `dictation-client/python/docker/tls` directory, if used.
