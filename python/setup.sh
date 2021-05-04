@@ -4,7 +4,6 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-
 install_package () {
     # $1 - package name
     # $2 - if == "sudo" use sudo
@@ -17,7 +16,7 @@ install_package () {
                 [Yy]*)
                 if [ $# -eq 2 ] && [ $2 == "sudo" ];
                 then
-                    sudo apt-get update && sudo apt-get install -y "$1"; 
+                    sudo apt-get update && sudo apt-get install -y "$1";
                 else
                     apt-get update && apt-get install -y "$1";
                 fi;
@@ -27,7 +26,6 @@ install_package () {
         done
     fi
 }
-
 
 # check Python version
 
@@ -56,13 +54,51 @@ then
     install_package "python3-dev"
     install_package "portaudio19-dev"
     install_package "python3-pip"
-    install_package "virtualenv"
 else
     #sudo installed
     install_package "python3-dev" "sudo"
     install_package "portaudio19-dev" "sudo"
     install_package "python3-pip" "sudo"
-    install_package "virtualenv" "sudo"
+fi
+
+# check if virtualenv >= 16.2 is installed
+set +e
+virtualenv --version 2>&1 > /dev/null
+virtualenv_version=$(virtualenv --version) 2>&1 > /dev/null
+virtualenv_is_installed=$?
+set -e
+if [ "$virtualenv_is_installed" -ne 0 ];
+then
+    while true; do
+        read -p "The required package virtualenv is not installed. Do you want to install it now? [y/n]" yn
+        case $yn in
+            [Yy]*)
+                pip3 install virtualenv==16.2;
+                break ;;
+            [Nn]*)
+                echo "Permission to install the required package has not been granted. Exiting...";
+                exit 0 ;;
+        esac
+    done
+else
+    # check virtualenv version
+    version=$(echo $virtualenv_version | cut -f1 -d.)
+    subversion=$(echo $virtualenv_version | cut -f2 -d.)
+
+    if [[ "$version" -lt 16 || "$version" -eq 16 && "$subversion" -lt 2 ]];
+    then
+        while true; do
+            read -p "Installed version of virtualenv package ($virtualenv_version) is too old. Do you want to install newer version now? [y/n]" yn
+            case $yn in
+                [Yy]*)
+                    pip3 install virtualenv==16.2;
+                    break ;;
+                [Nn]*)
+                    echo "Permission to install the required package has not been granted. Exiting...";
+                    exit 0 ;;
+            esac
+        done
+    fi
 fi
 
 virtualenv -p python3 .env
