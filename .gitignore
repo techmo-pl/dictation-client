@@ -36,6 +36,9 @@ __pycache__/
 venv/
 .idea/
 
+#python virtual environment
+.env/
+
 # ignore files in directory `wav`
 python/docker/wav/*
 
