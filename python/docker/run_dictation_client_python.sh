@@ -4,7 +4,7 @@
 # This script sends request to dictation service using dictation client inside docker container
 # Requires "dictation-client-python:2.3.0" docker image loaded locally
 
-#set -euo pipefail
+set -euo pipefail
 IFS=$'\n\t'
 
 SCRIPT=$(realpath "$0")
@@ -114,8 +114,5 @@ echo "${opts[@]}"
 
 IFS=$'\n\t'
 
-#set -- $opts
-
-#IFS=$'\x20'
 docker run --rm -it -v "${SCRIPTPATH}:/volumen" --network host "${docker_image}" \
 python3 /dictation_client/dictation_client.py "${opts[@]}"
