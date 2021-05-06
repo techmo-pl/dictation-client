@@ -13,14 +13,16 @@ install_package () {
             read -p "The required package $1 is not installed. Do you want to install it now? [y/n]" yn
             case $yn in
                 [Yy]*)
-                if [ $# -eq 2 ] && [ $2 == "sudo" ];
-                then
-                    sudo apt-get update && sudo apt-get install -y "$1";
-                else
-                    apt-get update && apt-get install -y "$1";
-                fi;
-                break ;;
-                [Nn]*) exit 0 ;;
+                    if [ $# -eq 2 ] && [ $2 == "sudo" ];
+                    then
+                        sudo apt-get update && sudo apt-get install -y "$1";
+                    else
+                        apt-get update && apt-get install -y "$1";
+                    fi;
+                    break ;;
+                [Nn]*) 
+                    echo "Permission to install the required package has not been granted. Exiting...";
+                    exit 0 ;;
             esac
         done
     fi
@@ -48,7 +50,7 @@ fi
 # check if sudo is installed
 
 sudo_str=""
-if [ $(dpkg-query -W -f='${Status}' sudo 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+if [ $(dpkg-query -W -f='${Status}' sudo 2>/dev/null | grep -c "ok installed") -ne 0 ]; then
     sudo_str="sudo"
 fi
 
