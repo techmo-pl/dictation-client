@@ -63,7 +63,6 @@ install_package "python3-pip" "${sudo_str}"
 # check if virtualenv >= 16.2 is installed
 
 set +e
-virtualenv --version 2>&1 > /dev/null
 virtualenv_version=$(virtualenv --version) 2>&1 > /dev/null
 virtualenv_is_installed=$?
 set -e
