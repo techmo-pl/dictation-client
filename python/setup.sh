@@ -13,7 +13,7 @@ install_package () {
             read -p "The required package $1 is not installed. Do you want to install it now? [y/n]" yn
             case $yn in
                 [Yy]*)
-                    if [ $# -eq 2 ] && [ $2 == "sudo" ];
+                    if [[ $# -eq 2 ]] && [[ $2 == "sudo" ]];
                     then
                         sudo apt-get update && sudo apt-get install -y "$1";
                     else
