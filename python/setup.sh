@@ -7,7 +7,6 @@ IFS=$'\n\t'
 install_package () {
     # $1 - package name
     # $2 - if == "sudo" use sudo
-
     if [ $(dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -c "ok installed") -eq 0 ];
     then
         while true; do
@@ -46,22 +45,21 @@ if [[ ! "$python_version" =~ ^(3\.5|3\.6|3\.7|3\.8|3\.9)$ ]]; then
     exit 0
 fi
 
-# check required packages
+# check if sudo is installed
 
+sudo_str=""
 if [ $(dpkg-query -W -f='${Status}' sudo 2>/dev/null | grep -c "ok installed") -eq 0 ];
-then
-    #sudo not installed (eg. docker container)
-    install_package "python3-dev"
-    install_package "portaudio19-dev"
-    install_package "python3-pip"
-else
-    #sudo installed
-    install_package "python3-dev" "sudo"
-    install_package "portaudio19-dev" "sudo"
-    install_package "python3-pip" "sudo"
+    sudo_str="sudo"
 fi
 
+# install required packages
+
+install_package "python3-dev" "${sudo_str}"
+install_package "portaudio19-dev" "${sudo_str}"
+install_package "python3-pip" "${sudo_str}"
+
 # check if virtualenv >= 16.2 is installed
+
 set +e
 virtualenv --version 2>&1 > /dev/null
 virtualenv_version=$(virtualenv --version) 2>&1 > /dev/null
