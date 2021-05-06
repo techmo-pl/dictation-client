@@ -48,7 +48,7 @@ fi
 # check if sudo is installed
 
 sudo_str=""
-if [ $(dpkg-query -W -f='${Status}' sudo 2>/dev/null | grep -c "ok installed") -eq 0 ];
+if [ $(dpkg-query -W -f='${Status}' sudo 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
     sudo_str="sudo"
 fi
 
