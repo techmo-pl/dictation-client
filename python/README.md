@@ -2,9 +2,9 @@
 
 ## Docker usage
 
-#### Build docker image
+### Build docker image
 
-To prepare docker image with Python implementation of Dictation client, open project's main directory and run:
+To prepare a docker image with Python implementation of the Dictation Client, open the project's main directory and run following command:
 
 ```
 docker build -f Dockerfile-python -t dictation-client-python:2.3.0 . 
@@ -15,21 +15,21 @@ When the build process is complete, you will receive a message:
 Successfully tagged dictation-client-python:2.3.0
 ```
 
-#### Run Dictation client
+### Run Dictation client
 
-To use Dictation client on Docker container, go to `dictation-client/python/docker` directory and run `run_dictation_client_python.sh` script.
+To use the Dictation Client on Docker container, go to the `dictation-client/python/docker` directory and run `run_dictation_client_python.sh` script.
 
-To send simple request to the Dictation service, use:
+To send a simple request to the Dictation service, use:
 ```
 ./run_dictation_client_python.sh --service-address IP_ADDRESS:PORT --filename WAV_FILE_NAME
 ```
 
-To print list of available options, use:
+To print the list of available options, use:
 ```
 ./run_dictation_client_python.sh --help
 ```
-Audio files to be transcribed should be placed inside `dictation-client/python/docker/wav` directory.
-TLS credentials should be placed inside `dictation-client/python/docker/tls` directory, if used.
+Audio files to be transcribed should be placed inside the `dictation-client/python/docker/wav` directory.
+TLS credentials should be placed inside the `dictation-client/python/docker/tls` directory, if used.
 
 
 
@@ -37,23 +37,23 @@ TLS credentials should be placed inside `dictation-client/python/docker/tls` dir
 
 ### Basic Usage
 
-Dictation client includes scripts for automatic environment configuration and launching on systems from the Debian Linux family. For launching Dictation client on other Linux-based OS or Windows, check out "Manual Usage" section.
+Dictation Client includes a scripts for automatic environment configuration and launching on systems from the Debian Linux family. For launching the Dictation Client on other Linux-based OS or Windows, check out the "Manual Usage" section.
 
 
-##### Before run
+#### Before run
 
-To check required dependencies and prepare virtual environment, run:
+To install required dependencies and to prepare virtual environment, run:
 ```
 ./setup.sh
 ```
 
-##### Run
+#### Run
 
-To run Dictation client, use `run.sh` script, e.g.:
+To run the Dictation Client, use the `run.sh` script, e.g.:
 ```
 ./run --service-address IP_ADDRESS:PORT --wave-path INPUT_WAVE
 ```
-To print usage description, use:
+To print the usage description, use:
 ```
 ./run --help
 ```
@@ -65,9 +65,9 @@ To print usage description, use:
 
 ##### Submodules
 
-After cloning git repository download submodules:
+After cloning a git repository, download submodules:
 ```
-git submodule update --init
+git submodule update --init --recursive
 ```
 (this command has to be invoked from the project's root directory)
 
@@ -78,18 +78,14 @@ To do this, open project repository in web browser, go to the `submodules` direc
 ##### Dependencies
 
 If you don't have virtualenv yet, install it first (https://virtualenv.pypa.io/en/stable/installation.html)
-To install virtualenv on Ubuntu is enough to use command:
-
-```
-sudo apt-get install virtualenv
-```
+On Debian/Ubuntu OS this package can be installed by using `setup.sh` script.
 
 Then install the required dependencies inside the virtual environment (this step only needs to be done the first time, for the further usage it is enough to use the existing virtual environment).
 
 
 - On Linux:
 
-Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
+Use Python 3 with the virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
 virtualenv -p python3 .env
@@ -99,7 +95,7 @@ pip install -r requirements.txt
 
 - On Windows 10:
 
-Temporarily change the PowerShell execution policy to allow scripting. Start PowerShell with `Run as Administrator` and use command:
+Temporarily change the PowerShell's execution policy to allow scripting. Start the PowerShell with `Run as Administrator` and use command:
 
 ```
 Set-ExecutionPolicy RemoteSigned
@@ -109,12 +105,12 @@ then confirm your choice.
 Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3.6 .env
+virtualenv -p python3 .env
 .\.env\Scripts\activate
 pip install -r requirements.txt
 ```
 
-To switch back PowerShell execution policy to the default, use command:
+To switch back PowerShell's execution policy to the default, use command:
 
 ```
 Set-ExecutionPolicy Restricted
@@ -122,7 +118,7 @@ Set-ExecutionPolicy Restricted
 
 ##### Proto sources
 
-[Optional] To regenerate sources from `.proto`, run:
+[Optional] To regenerate the sources from `.proto`, run:
 ```
 ./make_proto.sh
 ```
@@ -132,7 +128,7 @@ This might be required when using other gRPC or Protocol Buffers version.
 
 #### Run
 
-To run Dictation client, activate virtual environment first:
+To run the Dictation Client, activate the virtual environment first:
 - On Linux:
 ```
 source .env/bin/activate
@@ -141,7 +137,7 @@ source .env/bin/activate
 ```
 .\.env\Scripts\activate
 ```
-Then run Dictation client. Sample use:
+Then run Dictation Client. Sample use:
 
 ```
 python dictation_client.py --service-address "192.168.1.1:4321" --wave-path audio.wav
@@ -150,23 +146,12 @@ python dictation_client.py --service-address "192.168.1.1:4321" --wave-path audi
 For each request you have to provide the service address and the audio source (wav file or microphone).
 
 
-### Usage:
+## Usage:
 ```
-usage: dictation_client.py [-h] --service-address ADDRESS
-                           [--ssl-dir SSL_DIRECTORY] [--wave-path WAVE]
-                           [--mic] [--session-id SESSION_ID]
-                           [--grpc-timeout GRPC_TIMEOUT]
-                           [--max-alternatives MAX_ALTERNATIVES]
-                           [--time-offsets] [--single-utterance]
-                           [--interim-results]
-                           [--no-input-timeout NO_INPUT_TIMEOUT]
-                           [--speech-complete-timeout SPEECH_COMPLETE_TIMEOUT]
-                           [--speech-incomplete-timeout SPEECH_INCOMPLETE_TIMEOUT]
-                           [--recognition-timeout RECOGNITION_TIMEOUT]
-                           [--context-phrase CONTEXT_PHRASE]
+Basic usage: dictation_client.py --service-address ADDRESS --wave-path WAVE
 ```
 
-optional arguments:
+Available options:
 ```
   -h, --help            show this help message and exit
   --service-address ADDRESS
@@ -211,12 +196,11 @@ optional arguments:
 ```
 
 
-### Troubleshooting
+## Troubleshooting
 
+### Dependencies
 
-#### Dependencies
-
-If process of installing dependencies fails with message similar to this one:
+If process of installing dependencies fails with the message similar to this one:
 
 ```
         src/_portaudiomodule.c:28:10: fatal error: Python.h: No such file or directory
@@ -225,15 +209,11 @@ If process of installing dependencies fails with message similar to this one:
             compilation terminated.
             error: command '/usr/bin/x86_64-linux-gnu-gcc' failed with exit code 1
 ```
-it means that python3-dev package is missing.
-
-On Ubuntu OS you can use:
-```
-sudo apt-get install python3-dev
-```
+it means that `python3-dev` package is missing.
+On Debian/Ubuntu OS this package can be installed by using `setup.sh` script.
 
 
-If process of installing dependencies fails with message similar to this one:
+If process of installing dependencies fails with the message similar to this one:
 
 ```
         src/_portaudiomodule.c:29:10: fatal error: portaudio.h: No such file or directory
@@ -244,30 +224,27 @@ If process of installing dependencies fails with message similar to this one:
 ```
 it means that PortAudio library is missing.
 PortAudio can be downloaded from: http://www.portaudio.com/download.html.
-On Ubuntu you can install portaudio using following command:
-```
-sudo apt-get install -y portaudio19-dev
-```
+On Debian/Ubuntu OS this package can be installed by using `setup.sh` script.
 
 
-#### Microphone
+### Microphone
 
-To use microphone as audio source instead of wav file, use `--mic` option.
-It allows to send audio data directly from microphone, however it does not provide information when to finish the recognition.
-For this reason in most cases `--mic` should be followed by `--single-utterance` option, which stops recognition after first spotted utterance.
+To use a microphone as the audio source instead of the wav file, use `--mic` option.
+It allows to send audio data directly from the microphone, however it does not provide information when to finish the recognition.
+For this reason in most cases `--mic` should be followed by the `--single-utterance` option, which stops the recognition after a first spotted utterance.
 
 If the only output you receive is:
 ```
 Received speech event type: END_OF_SINGLE_UTTERANCE
 ```
-check that your microphone is connected and properly configured.
+check if your microphone is connected and properly configured.
 
 
-#### ALSA Configuration
+### ALSA Configuration
 
-On Linux operating systems using Advanced Linux Sound Architecture (ALSA) minor configuration changes may be necessary before first use.
+On the Linux operating systems using Advanced Linux Sound Architecture (ALSA) minor configuration changes may be necessary before the first use.
 
-If you get following output after runing request:
+If you get the following output after runing request:
 ```
 Dictation ASR gRPC client 2.3.0
 ALSA lib pcm_dsnoop.c:618:(snd_pcm_dsnoop_open) unable to open slave
@@ -278,15 +255,14 @@ ALSA lib pcm_route.c:867:(find_matching_chmap) Found no matching channel map
 ALSA lib pcm_route.c:867:(find_matching_chmap) Found no matching channel map
 ALSA lib pcm_route.c:867:(find_matching_chmap) Found no matching channel map
 ```
-that means you need to modify audio interfaces configuration.
+that means you need to modify the audio interfaces configuration.
 
-In such case, open `/usr/share/alsa/alsa.conf` file with root privileges, e.g.:
+In such case, open the `/usr/share/alsa/alsa.conf` file with root privileges, e.g.:
 ```
-sudo nano /usr/share/alsa/alsa.conf
+sudo vim /usr/share/alsa/alsa.conf
 ```
 
-In `#  PCM interface` section find and comment (using #) 
-all lines that defines interfaces marked as 'Unknown':
+In the `#  PCM interface` section find and comment (using #) all lines that defines interfaces marked as 'Unknown':
 
 ```
 pcm.rear cards.pcm.rear
@@ -295,20 +271,19 @@ pcm.side cards.pcm.side
 ```
 To get rid of warnings, comment also several lines below, starting with `pcm.surround`.
 
-Then save and close file.
+Then save and close the file.
 
 
-#### FFmpeg
+### FFmpeg
 
-If FFmpeg framework is not installed, the following warning appears in the program output:
+If the FFmpeg framework is not installed, the following warning appears in the program output:
 
 ```
 RuntimeWarning: Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work
   warn("Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work", RuntimeWarning)
 ```
-Installing FFmpeg framework is not necessary to run the application, however it may be useful stuff for everyone working with sound files.
+Installing the FFmpeg framework is not necessary to run the application, however it may be a useful stuff for everyone working with the sound files.
 
-FFmpeg can be downloaded from https://ffmpeg.org/download.html
+FFmpeg can be downloaded from: https://ffmpeg.org/download.html
 
-On Ubuntu/Debian Linux OS you can download and install FFmpeg directly from official repositories.
-
+On the Ubuntu/Debian Linux OS you can download and install FFmpeg directly from the official repositories.
