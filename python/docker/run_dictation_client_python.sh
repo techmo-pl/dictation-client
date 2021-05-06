@@ -67,6 +67,9 @@ while getopts "f:hms:-:" optchar; do
                 interim-results)  
                     opts+=( "--interim-results" )
                     ;;
+                mic)
+                    opts+=("--mic")
+                    ;;
                 filename=*)
                     val=${OPTARG#*=}
                     opt=${OPTARG%=$val}
@@ -106,13 +109,6 @@ while getopts "f:hms:-:" optchar; do
             ;;
     esac
 done
-
-echo "opts:" 
-
-IFS=$'\n'; 
-echo "${opts[@]}"
-
-IFS=$'\n\t'
 
 docker run --rm -it -v "${SCRIPTPATH}:/volumen" --network host "${docker_image}" \
 python3 /dictation_client/dictation_client.py "${opts[@]}"
