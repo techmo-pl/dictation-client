@@ -73,10 +73,7 @@ while getopts "f:hms:-:" optchar; do
                     ls /tmp/pulseaudio.socket > /dev/null 2>&1
                     if [ $? -ne 0 ];
                     then
-                        echo "1"
                         pactl load-module module-native-protocol-unix socket=/tmp/pulseaudio.socket > /dev/null 2>&1
-                    else    
-                        echo "2"
                     fi
                     set -e
                     ;;
@@ -106,6 +103,13 @@ while getopts "f:hms:-:" optchar; do
             ;;
         m)  
             opts+=("--mic")
+            set +e
+            ls /tmp/pulseaudio.socket > /dev/null 2>&1
+            if [ $? -ne 0 ];
+            then
+                pactl load-module module-native-protocol-unix socket=/tmp/pulseaudio.socket > /dev/null 2>&1
+            fi
+            set -e
             ;;
         s)  
             val=${OPTARG#*=}
@@ -133,4 +137,4 @@ docker run --rm -it --privileged \
 -u `id -u`:`id -g` \
 --network host \
 "${docker_image}" \
-python3 /dictation_client/dictation_client.py "${opts[@]}"
+python3 /dictation_client/dictation_client.py "${opts[@]}"  2>/dev/null
