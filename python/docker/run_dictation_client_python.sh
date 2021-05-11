@@ -129,7 +129,7 @@ docker run --rm -it --privileged \
 --env PULSE_SERVER=unix:/tmp/pulseaudio.socket \
 --env PULSE_COOKIE=/tmp/pulseaudio.cookie \
 -v "${SCRIPTPATH}:/volumen" \
--v /home/jan/.config/pulse/cookie:/tmp/pulseaudio.cookie \
+-v /home/$USER/.config/pulse/cookie:/tmp/pulseaudio.cookie \
 -v /etc/passwd:/etc/passwd \
 -v /dev/snd:/dev/snd \
 -v /tmp/pulseaudio.socket:/tmp/pulseaudio.socket \
