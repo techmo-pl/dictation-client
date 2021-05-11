@@ -69,6 +69,16 @@ while getopts "f:hms:-:" optchar; do
                     ;;
                 mic)
                     opts+=("--mic")
+                    set +e
+                    ls /tmp/pulseaudio.socket > /dev/null 2>&1
+                    if [ $? -ne 0 ];
+                    then
+                        echo "1"
+                        pactl load-module module-native-protocol-unix socket=/tmp/pulseaudio.socket > /dev/null 2>&1
+                    else    
+                        echo "2"
+                    fi
+                    set -e
                     ;;
                 filename=*)
                     val=${OPTARG#*=}
@@ -110,5 +120,17 @@ while getopts "f:hms:-:" optchar; do
     esac
 done
 
-docker run --rm -it -v "${SCRIPTPATH}:/volumen" --network host "${docker_image}" \
+
+docker run --rm -it --privileged \
+--env PULSE_SERVER=unix:/tmp/pulseaudio.socket \
+--env PULSE_COOKIE=/tmp/pulseaudio.cookie \
+-v "${SCRIPTPATH}:/volumen" \
+-v /home/jan/.config/pulse/cookie:/tmp/pulseaudio.cookie \
+-v /etc/passwd:/etc/passwd \
+-v /dev/snd:/dev/snd \
+-v /tmp/pulseaudio.socket:/tmp/pulseaudio.socket \
+-v /usr/share/alsa/alsa.conf:/usr/share/alsa/alsa.conf:ro \
+-u `id -u`:`id -g` \
+--network host \
+"${docker_image}" \
 python3 /dictation_client/dictation_client.py "${opts[@]}"
