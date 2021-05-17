@@ -3,20 +3,31 @@
 
 ## Docker usage
 
-#### Build docker image
+### Submodules
 
-To prepare docker image with C++ implementation of Dictation client, open project's main directory and run:
+After cloning a git repository, download submodules:
+```
+git submodule update --init --recursive
+```
+(this command has to be invoked from the project's root directory)
+
+If you are not using git, you have to manually download the `googleapis` submodule. 
+To do this, open project repository in web browser, go to the `submodules` directory and use the link located there to open the relevant commit in the googleapis repository. Then download it, unpack and copy all files to the `submodules/googleapis` directory.
+
+### Build docker image
+
+To prepare the docker image with C++ implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
 docker build -f Dockerfile-cpp -t dictation-client-cpp:2.3.0 . 
 ```
-**Note:** the build process may take several dozen minutes. If you don't want to wait so long, use python implementation instead.
+**Note:** the build process may take a several dozen minutes. If you don't want to wait so long, use the python implementation instead.
 When the build process is complete, you will receive a message:
 ```
 Successfully tagged dictation-client-cpp:2.3.0
 ```
 
-#### Run Dictation client
+### Run Dictation client
 
 To use Dictation client on Docker container, go to `dictation-client/cpp/docker` directory and run `run_dictation_client_cpp.sh` script.
 
@@ -105,6 +116,7 @@ If you are not sure how to set it, use `4` like in example above.
 ./build/dictation_client --service-address 192.168.1.1:4321 --wav-path /path/to/audio.wav
 ```
 **Note:** in command above you have to replace sample service address and path to audio file with real values
+
 
 ### Options:
 ```
