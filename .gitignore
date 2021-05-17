@@ -36,11 +36,20 @@ __pycache__/
 venv/
 .idea/
 
+#python virtual environment
+.env/
+
 # ignore files in directory `wav`
 cpp/docker/wav/*
 
 # ignore files in directory `tls`
 cpp/docker/tls/*
+
+# ignore files in directory `wav`
+python/docker/wav/*
+
+# ignore files in directory `tls`
+python/docker/tls/*
 
 # but keep the directories with .gitkeep file
 !/**/.gitkeep
