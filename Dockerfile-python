@@ -1,0 +1,19 @@
+FROM python:3.6-slim
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+ADD ./python /dictation_client
+
+WORKDIR /dictation_client
+
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        portaudio19-dev \
+        python3-pip \
+        python3-dev \
+    && apt-get clean \
+	&& rm -fr /var/lib/apt/lists/* \
+	&& rm -fr /var/cache/apt/* \
+    && pip3 install -r requirements.txt 
