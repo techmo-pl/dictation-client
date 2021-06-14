@@ -66,7 +66,7 @@ This project uses cmake build.
     
     Default location: `/opt/boost_1.60.0`
     
-    If not installed, from parent directory run: `sudo ./tools/install_boost.sh 8`
+    If not installed, from parent directory run: `sudo ./tools/install_boost.sh 4`
     
     **Note:** the number at the end of the command above specifies number of parallel jobs, and should be set appropriately depending on the machine (eg. 32 on strong server machine, 1 on small virtualbox instance)
 
@@ -74,7 +74,7 @@ This project uses cmake build.
     
     Default location: `/opt/grpc_v1.24.3`
     
-    If not installed, from parent directory run `sudo ./tools/install_grpc.sh 8`
+    If not installed, from parent directory run `sudo ./tools/install_grpc.sh 4`
     
     **Note:** the number at the end of the command above specifies number of parallel jobs, and should be set appropriately depending on the machine (eg. 32 on strong server machine, 1 on small virtualbox instance)
 
