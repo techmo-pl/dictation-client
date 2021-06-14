@@ -122,7 +122,7 @@ while getopts "f:hms:-:" optchar; do
     esac
 done
 
-docker run --rm -it --privileged \
+docker run --rm -it \
 --env PULSE_SERVER=unix:/tmp/pulseaudio.socket \
 --env PULSE_COOKIE=/tmp/pulseaudio.cookie \
 -v "${SCRIPTPATH}:/volume" \
@@ -131,6 +131,7 @@ docker run --rm -it --privileged \
 -v /tmp/pulseaudio.socket:/tmp/pulseaudio.socket \
 -v /usr/share/alsa/alsa.conf:/usr/share/alsa/alsa.conf:ro \
 -u `id -u`:`id -g` \
+--group-add audio \
 --network host \
 "${docker_image}" \
 python3 /dictation_client/dictation_client.py "${opts[@]}"  2>/dev/null
