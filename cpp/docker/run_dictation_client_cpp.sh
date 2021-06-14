@@ -49,7 +49,7 @@ while getopts "f:hs:-:" optchar; do
                     usage; exit 0 
                     ;;
                 tls)  
-                    opts+=( "--ssl-dir" "/volumen/tls" )
+                    opts+=( "--ssl-dir" "/volume/tls" )
                     ;;
                 time-offsets)  
                     opts+=( "--time-offsets=true" )
@@ -66,7 +66,7 @@ while getopts "f:hs:-:" optchar; do
                 filename=*)
                     val=${OPTARG#*=}
                     opt=${OPTARG%=$val}
-                    opts+=( "--wav-path" "/volumen/wav/${val##*/}" )
+                    opts+=( "--wav-path" "/volume/wav/${val##*/}" )
                     ;;
                 *=*)
                     val=${OPTARG#*=}
@@ -82,7 +82,7 @@ while getopts "f:hs:-:" optchar; do
         f)                      
             val=${OPTARG#*=}
             opt=${OPTARG%=$val}
-            opts+=( "--wav-path" "/volumen/wav/${val##*/}" )
+            opts+=( "--wav-path" "/volume/wav/${val##*/}" )
             ;;
         h)  
             usage; exit 0 
@@ -99,5 +99,5 @@ while getopts "f:hs:-:" optchar; do
     esac
 done
 
-docker run --rm -it -v "${SCRIPTPATH}:/volumen" --network host "${docker_image}"  \
+docker run --rm -it -v "${SCRIPTPATH}:/volume" --network host "${docker_image}"  \
 ./cpp/build/dictation_client "${opts[@]}"
