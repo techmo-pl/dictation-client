@@ -14,18 +14,26 @@ RUN apt-get update \
     automake \
     autoconf \
     ca-certificates \
-    cmake \
+    curl \
     g++ \
     gcc \
     git \
     libssl-dev \
     libtool \
     make \
+    unzip \
     wget
 
-RUN ./tools/install_boost.sh 2 \
-    && ./tools/install_grpc.sh 2
+RUN curl -fsSL "https://github.com/Kitware/CMake/releases/download/v3.20.3/cmake-3.20.3-Linux-x86_64.sh" -o cmake-linux.sh \
+ && sh cmake-linux.sh -- --skip-license --prefix=/usr && rm cmake-linux.sh
+
+RUN curl -fsSL "https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-linux.zip" -o ninja-linux.zip \
+ && unzip ninja-linux.zip -d /usr/bin \ 
+ && rm ninja-linux.zip 
+
+RUN ./tools/install_boost.sh 4 \
+    && ./tools/install_grpc.sh 4
 
 RUN ./tools/build_googleapis.sh
-
-RUN cd cpp && mkdir build && cd build && cmake .. && make -j 4 && cd ..
+                                                                                      
+RUN cd cpp && cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release && cmake --build build -- -j 4
