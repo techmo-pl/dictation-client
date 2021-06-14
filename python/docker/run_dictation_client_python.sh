@@ -56,7 +56,7 @@ while getopts "f:hms:-:" optchar; do
                     usage; exit 0 
                     ;;
                 tls)  
-                    opts+=( "--ssl-dir" "/volumen/tls" )
+                    opts+=( "--ssl-dir" "/volume/tls" )
                     ;;
                 time-offsets)  
                     opts+=( "--time-offsets" )
@@ -69,11 +69,17 @@ while getopts "f:hms:-:" optchar; do
                     ;;
                 mic)
                     opts+=("--mic")
+                    set +e
+                    if [ ! -S /tmp/pulseaudio.socket ];
+                    then
+                        pactl load-module module-native-protocol-unix socket=/tmp/pulseaudio.socket > /dev/null 2>&1
+                    fi
+                    set -e
                     ;;
                 filename=*)
                     val=${OPTARG#*=}
                     opt=${OPTARG%=$val}
-                    opts+=( "--wave-path" "/volumen/wav/${val##*/}" )
+                    opts+=( "--wave-path" "/volume/wav/${val##*/}" )
                     ;;
                 *=*)
                     val=${OPTARG#*=}
@@ -89,13 +95,19 @@ while getopts "f:hms:-:" optchar; do
         f)                      
             val=${OPTARG#*=}
             opt=${OPTARG%=$val}
-            opts+=( "--wave-path" "/volumen/wav/${val##*/}" )
+            opts+=( "--wave-path" "/volume/wav/${val##*/}" )
             ;;
         h)  
             usage; exit 0 
             ;;
         m)  
             opts+=("--mic")
+            set +e
+            if [ ! -S /tmp/pulseaudio.socket ];
+            then
+                pactl load-module module-native-protocol-unix socket=/tmp/pulseaudio.socket > /dev/null 2>&1
+            fi
+            set -e
             ;;
         s)  
             val=${OPTARG#*=}
@@ -110,5 +122,16 @@ while getopts "f:hms:-:" optchar; do
     esac
 done
 
-docker run --rm -it -v "${SCRIPTPATH}:/volumen" --network host "${docker_image}" \
-python3 /dictation_client/dictation_client.py "${opts[@]}"
+docker run --rm -it \
+--env PULSE_SERVER=unix:/tmp/pulseaudio.socket \
+--env PULSE_COOKIE=/tmp/pulseaudio.cookie \
+-v "${SCRIPTPATH}:/volume" \
+-v /home/$USER/.config/pulse/cookie:/tmp/pulseaudio.cookie \
+-v /dev/snd:/dev/snd \
+-v /tmp/pulseaudio.socket:/tmp/pulseaudio.socket \
+-v /usr/share/alsa/alsa.conf:/usr/share/alsa/alsa.conf:ro \
+-u `id -u`:`id -g` \
+--group-add audio \
+--network host \
+"${docker_image}" \
+python3 /dictation_client/dictation_client.py "${opts[@]}"  2>/dev/null
