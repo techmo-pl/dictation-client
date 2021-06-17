@@ -21,3 +21,4 @@ RUN apt-get update \
     && pip3 install -r requirements.txt 
 
     ADD ./tools/pulseaudio.docker.conf /etc/pulse/client.conf
+    
