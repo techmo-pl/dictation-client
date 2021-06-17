@@ -14,14 +14,12 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     automake \
     autoconf \
+    build-essential \
     ca-certificates \
     curl \
-    g++ \
-    gcc \
     git \
     libssl-dev \
     libtool \
-    make \
     unzip \
     wget
 
