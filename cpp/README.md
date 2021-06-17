@@ -3,6 +3,13 @@
 
 ## Docker usage
 
+### Prerequisites
+
+To use Dictation Client on Docker, Docker Engine have to be installed (recommended version 20.10.0 or higher).
+
+For details about Docker Engine installation, check out: https://docs.docker.com/engine/install/
+
+
 ### Submodules
 
 After cloning a git repository, download submodules:
