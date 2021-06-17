@@ -11,8 +11,8 @@ git submodule update --init --recursive
 ```
 (this command has to be invoked from the project's root directory)
 
-If you are not using git, you have to manually download the `googleapis` submodule. 
-To do this, open project repository in web browser, go to the `submodules` directory and use the link located there to open the relevant commit in the googleapis repository. Then download it, unpack and copy all files to the `submodules/googleapis` directory.
+If project was downloaded without using git, `googleapis` submodule have to be downloaded manually. 
+In this case open project repository in web browser, go to the `submodules` directory and use the link located there to open the relevant commit in the googleapis repository. Then download it, unpack and copy all files to the `submodules/googleapis` directory.
 
 ### Build docker image
 
@@ -21,8 +21,9 @@ To prepare the docker image with C++ implementation of the Dictation Client, ope
 ```
 docker build -f Dockerfile-cpp -t dictation-client-cpp:2.3.0 . 
 ```
-**Note:** the build process may take a several dozen minutes. If you don't want to wait so long, use the python implementation instead.
-When the build process is complete, you will receive a message:
+**Note:** The build process may take a several dozen minutes (for shorter build time use the python implementation instead).
+
+When the build process is complete, following a message will be shown:
 ```
 Successfully tagged dictation-client-cpp:2.3.0
 ```
@@ -68,7 +69,7 @@ This project uses cmake build.
     
     If not installed, from parent directory run: `sudo ./tools/install_boost.sh 4`
     
-    **Note:** the number at the end of the command above specifies number of parallel jobs, and should be set appropriately depending on the machine (eg. 32 on strong server machine, 1 on small virtualbox instance)
+    **Note:** The number at the end of the command above specifies number of parallel jobs, and should be set appropriately depending on the machine (eg. 32 on strong server machine, 1 on small virtualbox instance)
 
 - **gRPC** provided as `grpc_pkg`
     
@@ -76,10 +77,10 @@ This project uses cmake build.
     
     If not installed, from parent directory run `sudo ./tools/install_grpc.sh 4`
     
-    **Note:** the number at the end of the command above specifies number of parallel jobs, and should be set appropriately depending on the machine (eg. 32 on strong server machine, 1 on small virtualbox instance)
+    **Note:** The number at the end of the command above specifies number of parallel jobs, and should be set appropriately depending on the machine (eg. 32 on strong server machine, 1 on small virtualbox instance)
 
 - **OpenSSL** provided as `ssl_pkg` (installation in Ubuntu: `sudo apt-get install libssl-dev`)
-- **DL** provided as `dl_pkg` (this one should be already installed in your OS)
+- **DL** provided as `dl_pkg`
 
 
 ### Required steps before build:
@@ -107,15 +108,15 @@ This might be required when using other gRPC or Protocol Buffers versions.
 ```
 mkdir build && cd build && cmake .. && make -j 4 && cd ..
 ```
-**Note:** the number in the command above specifies number of parallel jobs, and should be set appropriately depending on the machine.
-If you are not sure how to set it, use `4` like in example above.
+**Note:** The number in the command above specifies number of parallel jobs, and should be set appropriately depending on the machine.
+Default value `4` should be appropriate for the average personal computer.
 
 
 ### Run:
 ```
 ./build/dictation_client --service-address 192.168.1.1:4321 --wav-path /path/to/audio.wav
 ```
-**Note:** in command above you have to replace sample service address and path to audio file with real values
+**Note:** In command above sample service address and path to audio file have to be replaced with the actual values.
 
 
 ### Options:
