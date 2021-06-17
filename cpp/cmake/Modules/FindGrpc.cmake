@@ -1,4 +1,4 @@
-# - Try to find Grpc
+#  - Try to find Grpc
 # Once done, this will define
 #
 #  Grpc_FOUND - system has Grpc
@@ -21,6 +21,7 @@ endif()
 set (Grpc_INCLUDE_DIRS
         ${Grpc_ROOT}/include
         ${Grpc_ROOT}/third_party/protobuf/src
+        ${Grpc_ROOT}/third_party/boringssl/include
         )
 
 

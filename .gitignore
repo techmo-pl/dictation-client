@@ -40,6 +40,12 @@ venv/
 .env/
 
 # ignore files in directory `wav`
+cpp/docker/wav/*
+
+# ignore files in directory `tls`
+cpp/docker/tls/*
+
+# ignore files in directory `wav`
 python/docker/wav/*
 
 # ignore files in directory `tls`

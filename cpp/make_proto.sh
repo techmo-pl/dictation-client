@@ -24,3 +24,4 @@ ${PROTOC}   -I${path_i} \
             --cpp_out=${path_o} \
             --grpc_out=${path_o} \
             ${path_i}/dictation_asr.proto
+            
