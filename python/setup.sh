@@ -73,6 +73,7 @@ then
         case $yn in
             [Yy]*)
                 pip3 install virtualenv==16.2;
+                export PATH="$PATH:$HOME/.local/bin"
                 break ;;
             [Nn]*)
                 echo "Permission to install the required package has not been granted. Exiting...";
@@ -91,6 +92,7 @@ else
             case $yn in
                 [Yy]*)
                     pip3 install virtualenv==16.2;
+                    export PATH="$PATH:$HOME/.local/bin"
                     break ;;
                 [Nn]*)
                     echo "Permission to install the required package has not been granted. Exiting...";
