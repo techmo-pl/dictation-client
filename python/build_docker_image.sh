@@ -9,11 +9,11 @@ SCRIPTPATH=$(dirname "${SCRIPT}")
 
 COMMIT_TAG=""
 
-if [ -z "$1" ]
+if [[ "$#" -eq 0 ]]
 then
-    COMMIT_TAG=$(awk < "${SCRIPTPATH}"/version.py '/__version__/ { print $NF }' | cut -d\" -f2)
+    COMMIT_TAG=$(awk < "${SCRIPTPATH}"/VERSION.py '/__version__/ { print $NF }' | cut -d\" -f2)
 else
-    COMMIT_TAG=$1
+    COMMIT_TAG="$1"
 fi
 
 docker build -f "${SCRIPTPATH}/Dockerfile" -t dictation-client-python:"${COMMIT_TAG}" "${SCRIPTPATH}/.."
