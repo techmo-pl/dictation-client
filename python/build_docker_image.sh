@@ -11,7 +11,7 @@ COMMIT_TAG=""
 
 if [ -z "$1" ]
 then
-    echo "No commit tag provided!"
+    COMMIT_TAG=$(awk < "${SCRIPTPATH}"/version.py '/__version__/ { print $NF }' | cut -d\" -f2)
 else
     COMMIT_TAG=$1
 fi

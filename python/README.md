@@ -4,11 +4,13 @@
 
 ### Build docker image
 
-To prepare a docker image with Python implementation of the Dictation Client, use the building script and provide an image tag as an argument:
+To prepare a docker image with Python implementation of the Dictation Client, use the building script:
 
 ```
-./build_docker_image.sh 2.3.0 
+./build_docker_image.sh
 ```
+(To set custom image tag, use the tag name as optional argument, e.g.: `./build_docker_image.sh custom_tag`)
+
 The build process will take several minutes.
 When the build process is complete, you will receive a message:
 ```
