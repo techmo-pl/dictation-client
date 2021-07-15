@@ -10,7 +10,6 @@ RUN ./setup.sh -y
 
 RUN apt-get clean \
 	&& rm -fr /var/lib/apt/lists/* \
-	&& rm -fr /var/cache/apt/* \
-    && pip3 install -r requirements.txt 
+	&& rm -fr /var/cache/apt/* 
 
 ADD ./tools/pulseaudio.docker.conf /etc/pulse/client.conf
