@@ -1,7 +1,8 @@
 setuptools==50.3.2
-grpcio==1.24.3
-grpcio-tools==1.24.3
-protobuf==3.11.3
+grpcio==1.38.1
+grpcio-tools==1.38.1
+google-api-core==1.27.0
+protobuf==3.12.0
 gapic-google-cloud-speech-v1==0.15.3
 grpc-google-cloud-speech-v1==0.8.1
 proto-google-cloud-speech-v1==0.15.3

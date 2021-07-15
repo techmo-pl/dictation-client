@@ -4,10 +4,10 @@
 
 ### Build docker image
 
-To prepare a docker image with Python implementation of the Dictation Client, open the project's main directory and run following command:
+To prepare a docker image with Python implementation of the Dictation Client, use the building script and provide an image tag as an argument:
 
 ```
-docker build -f Dockerfile-python -t dictation-client-python:2.3.0 . 
+./build_docker_image.sh 2.3.0 
 ```
 The build process will take several minutes.
 When the build process is complete, you will receive a message:
