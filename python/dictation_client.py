@@ -4,7 +4,7 @@ from utils.audio_source import AudioStream
 from utils.mic_source import MicrophoneStream
 from service.dictation_settings import DictationSettings
 from service.streaming_recognizer import StreamingRecognizer
-from VERSION import DICTATION_CLIENT_VERSION
+from VERSION import __version__
 
 
 def print_results(results):
@@ -36,7 +36,7 @@ def create_audio_stream(args):
 
 
 if __name__ == '__main__':
-    print("Dictation ASR gRPC client " + DICTATION_CLIENT_VERSION)
+    print("Dictation ASR gRPC client " + __version__)
 
     parser = ArgumentParser()
     parser.add_argument("--service-address", dest="address", required=True,
