@@ -1,0 +1,49 @@
+name: CI/CD
+on: [push, pull_request]
+jobs:
+
+  python-build:
+    name: Run test suite
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: checkout code
+      uses: actions/checkout@v2
+
+    - name: build docker image and push to repository
+      with:
+        REPOSITORY: jaredharet/private
+        DOCKER_LOGIN: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
+      run: |
+        cd python
+        ./build_docker_image.sh "${GITHUB_REF##*/}"
+        docker login -u "${DOCKER_LOGIN}" -p "${DOCKER_PASSWORD}" docker.io
+        docker tag dictation-client-python:"${GITHUB_REF##*/}" "${REPOSITORY}":dictation-client-python-"${GITHUB_REF##*/}"
+        docker push "${REPOSITORY}":dictation-client-python-"${GITHUB_REF##*/}"
+        
+
+  # cpp-build:
+
+
+  # test:
+  #   name: Run test suite
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     COMPOSE_FILE: .ci/docker-compose.yml
+  #     DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  #     DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v2
+
+  #   - name: Login to DockerHub
+  #     run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+  #   - name: Build docker images
+  #     run: docker-compose build
+
+  #   - name: Run tests
+  #     run: docker-compose run test
