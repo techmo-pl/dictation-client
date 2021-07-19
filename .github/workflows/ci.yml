@@ -10,7 +10,7 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v2
       - name: build docker image and push to repository
-        with:
+        env:
           REPOSITORY: jaredharet/private
           DOCKER_LOGIN: ${{ secrets.DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
