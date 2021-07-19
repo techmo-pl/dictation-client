@@ -3,14 +3,12 @@ on: [push, pull_request]
 jobs:
 
   python-build:
-    name: Run test suite
+    name: Python image build
     runs-on: ubuntu-latest
 
     steps:
-
     - name: checkout code
       uses: actions/checkout@v2
-
     - name: build docker image and push to repository
       with:
         REPOSITORY: jaredharet/private
