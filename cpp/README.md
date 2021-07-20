@@ -23,11 +23,13 @@ In this case open project repository in web browser, go to the `submodules` dire
 
 ### Build docker image
 
-To prepare the docker image with C++ implementation of the Dictation Client, open project's main directory and run following command:
+To prepare the docker image with C++ implementation of the Dictation Client, use the building script:
 
 ```
-docker build -f Dockerfile-cpp -t dictation-client-cpp:2.3.0 . 
+./build_docker_image.sh
 ```
+(To set custom image tag, use the tag name as optional argument, e.g.: `./build_docker_image.sh custom_tag`)
+
 **Note:** The build process may take a several dozen minutes (for shorter build time use the python implementation instead).
 
 When the build process is complete, following a message will be shown:
