@@ -68,8 +68,8 @@ jobs:
     - name: Run tests
       run: docker run --rm "${REPOSITORY}":dictation-client-python-dev-"${GITHUB_REF##*/}" ./tests/test_service.sh
 
-      
-test-cpp-service:
+
+  test-cpp-service:
     name: Test C++ service
     needs: cpp-build
     runs-on: ubuntu-latest
