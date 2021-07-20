@@ -19,7 +19,7 @@ jobs:
           ./build_docker_image.sh "${GITHUB_REF##*/}"
           docker login -u "${DOCKER_LOGIN}" -p "${DOCKER_PASSWORD}" docker.io
           docker tag dictation-client-python:"${GITHUB_REF##*/}" "${REPOSITORY}":dictation-client-python-dev-"${GITHUB_REF##*/}"
-          docker push "${REPOSITORY}":dictation-client-python-dev"${GITHUB_REF##*/}"
+          docker push "${REPOSITORY}":dictation-client-python-dev-"${GITHUB_REF##*/}"
 
   cpp-build:
     name: C++ image build
@@ -39,8 +39,8 @@ jobs:
           cd cpp
           ./build_docker_image.sh "${GITHUB_REF##*/}"
           docker login -u "${DOCKER_LOGIN}" -p "${DOCKER_PASSWORD}" docker.io
-          docker tag dictation-client-cpp:"${GITHUB_REF##*/}" "${REPOSITORY}":dictation-client-cpp-dev"${GITHUB_REF##*/}"
-          docker push "${REPOSITORY}":dictation-client-cpp-dev"${GITHUB_REF##*/}"
+          docker tag dictation-client-cpp:"${GITHUB_REF##*/}" "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}"
+          docker push "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}"
 
 
   # test:
