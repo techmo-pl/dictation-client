@@ -40,31 +40,31 @@ function check_output () {
 
 echo
 echo "Testing: basic recognition"
-cmd="${SCRIPTPATH}/../cpp/build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave}"
+cmd="${SCRIPTPATH}/../run.sh --service-address ${test_service_address} --wave-path ${test_wave}"
 phrase="serwis testowy"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --interim-results"
-cmd="${SCRIPTPATH}/../cpp/build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --interim-results"
+cmd="${SCRIPTPATH}/../run.sh --service-address ${test_service_address} --wave-path ${test_wave} --interim-results"
 phrase="serwis"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --grpc-timeout"
-cmd="${SCRIPTPATH}/../cpp/build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --grpc-timeout 50"
+cmd="${SCRIPTPATH}/../run.sh --service-address ${test_service_address} --wave-path ${test_wave} --grpc-timeout 50"
 phrase="\"grpc_status\":4}"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --time-offsets"
-cmd="${SCRIPTPATH}/../cpp/build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --time-offsets"
+cmd="${SCRIPTPATH}/../run.sh --service-address ${test_service_address} --wave-path ${test_wave} --time-offsets"
 phrase="testowy \[0.51 - 1.20\]"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --recognition-timeout"
-cmd="${SCRIPTPATH}/../cpp/build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --recognition-timeout 10"
+cmd="${SCRIPTPATH}/../run.sh --service-address ${test_service_address} --wave-path ${test_wave} --recognition-timeout 10"
 phrase="serwis"
 check_output "${cmd}" "${phrase}"
 
