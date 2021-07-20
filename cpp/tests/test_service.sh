@@ -1,4 +1,4 @@
-#!/bin/bash
+##!/bin/bash
 # coding=utf-8
 
 set -euo pipefail
@@ -40,32 +40,26 @@ function check_output () {
 
 echo
 echo "Testing: basic recognition"
-cmd="${SCRIPTPATH}/../cpp/build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave}"
+cmd="${SCRIPTPATH}/../build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave}"
 phrase="serwis testowy"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --interim-results"
-cmd="${SCRIPTPATH}/../cpp/build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --interim-results"
+cmd="${SCRIPTPATH}/../build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --interim-results true"
 phrase="serwis"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --grpc-timeout"
-cmd="${SCRIPTPATH}/../cpp/build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --grpc-timeout 50"
-phrase="\"grpc_status\":4}"
+cmd="${SCRIPTPATH}/../build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --grpc-timeout 50"
+phrase="DEADLINE_EXCEEDED"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --time-offsets"
-cmd="${SCRIPTPATH}/../cpp/build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --time-offsets"
-phrase="testowy \[0.51 - 1.20\]"
-check_output "${cmd}" "${phrase}"
-
-echo
-echo "Testing: --recognition-timeout"
-cmd="${SCRIPTPATH}/../cpp/build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --recognition-timeout 10"
-phrase="serwis"
+cmd="${SCRIPTPATH}/../build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --time-offsets true"
+phrase="word: \"serwis\""
 check_output "${cmd}" "${phrase}"
 
 
