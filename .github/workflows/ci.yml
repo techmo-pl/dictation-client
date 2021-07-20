@@ -89,4 +89,4 @@ jobs:
       run: docker pull "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}"
 
     - name: Run tests
-      run: docker run --rm "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}" ./tests/test_service.sh
+      run: docker run --rm "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}" ./cpp/tests/test_service.sh
