@@ -4,18 +4,19 @@
 # This script sends request to dictation service using dictation client inside docker container
 # Requires "dictation-client-cpp:2.3.0" docker image loaded locally
 
-
 set -euo pipefail
 IFS=$'\n\t'
 
+IMAGE_VERSION=2.3.1
+
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
-docker_image="dictation-client-cpp:2.3.0"
+docker_image="dictation-client-cpp:${IMAGE_VERSION}"
 
 usage() {
 
 echo "
-Dictation ASR gRPC client 2.3.0
+Dictation ASR gRPC client ${IMAGE_VERSION}
 Dictation ASR gRPC client options:
   -h, --help            Print help message.
   -s=ADDRESS, --service-address=ADDRESS   
