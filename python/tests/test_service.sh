@@ -10,6 +10,8 @@ SCRIPTPATH=$(dirname "${SCRIPT}")
 test_result="fail"
 test_service_address="demo.devtechmo.pl:51190"
 test_wave="${SCRIPTPATH}/data/test.wav"
+test_context_wave="${SCRIPTPATH}/data/test_context.wav"
+
 
 function on_exit {
 
@@ -66,6 +68,12 @@ echo
 echo "Testing: --recognition-timeout"
 cmd="${SCRIPTPATH}/../run.sh --service-address ${test_service_address} --wave-path ${test_wave} --recognition-timeout 10"
 phrase="serwis"
+check_output "${cmd}" "${phrase}"
+
+echo
+echo "Testing: --context-phrase"
+cmd="${SCRIPTPATH}/../run.sh --service-address ${test_service_address} --wave-path ${test_context_wave} --context-phrase context"
+phrase="przedsięwzięcie"
 check_output "${cmd}" "${phrase}"
 
 

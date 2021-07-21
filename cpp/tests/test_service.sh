@@ -10,6 +10,7 @@ SCRIPTPATH=$(dirname "${SCRIPT}")
 test_result="fail"
 test_service_address="demo.devtechmo.pl:51190"
 test_wave="${SCRIPTPATH}/data/test.wav"
+test_context_wave="${SCRIPTPATH}/data/test_context.wav"
 
 function on_exit {
 
@@ -60,6 +61,12 @@ echo
 echo "Testing: --time-offsets"
 cmd="${SCRIPTPATH}/../build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --time-offsets true"
 phrase="nanos: 60000000"
+check_output "${cmd}" "${phrase}"
+
+echo
+echo "Testing: --context-phrase"
+cmd="${SCRIPTPATH}/../build/dictation_client --service-address ${test_service_address} --wav-path ${test_context_wave} --context-phrase context"
+phrase="przedsi\\\\304\\\\231wzi\\\\304\\\\231cie"
 check_output "${cmd}" "${phrase}"
 
 
