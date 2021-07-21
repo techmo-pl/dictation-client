@@ -46,8 +46,8 @@ check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --interim-results"
-cmd="${SCRIPTPATH}/../build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --interim-results true"
-phrase="serwis"
+cmd="${SCRIPTPATH}/../build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --streaming --interim-results true"
+phrase="transcript: \"serwis\""
 check_output "${cmd}" "${phrase}"
 
 echo
@@ -59,7 +59,7 @@ check_output "${cmd}" "${phrase}"
 echo
 echo "Testing: --time-offsets"
 cmd="${SCRIPTPATH}/../build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave} --time-offsets true"
-phrase="word: \"serwis\""
+phrase="nanos: 60000000"
 check_output "${cmd}" "${phrase}"
 
 
