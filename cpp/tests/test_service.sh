@@ -33,9 +33,9 @@ function check_output () {
     phrase="$2"
 
     set +e
-    output=$({ eval "$cmd"  1>&2; }  2>&1 )
+    output=$({ eval "$cmd"  1>&2; }  2>&1 ) # we want grep over output whether the command succeeds or not
     set -e
-    echo "${output}" | grep "$phrase" > /dev/null 2>&1; #if this line returns non 0 code, 'set -e' will cause exit 
+    echo "${output}" | grep "$phrase" > /dev/null 2>&1; # if this line returns non-0-code, 'set -e' will cause exit 
     echo "--> OK"
 }
 
