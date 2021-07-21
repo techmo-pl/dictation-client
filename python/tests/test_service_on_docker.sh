@@ -27,6 +27,7 @@ function on_exit {
         echo " SERVICE TEST COMPLETED SUCCESSFULLY!" 
         echo "-------------------------------------"
     fi
+    rm "${SCRIPTPATH}/../docker/wav/ci_tmp_test.wav" "${SCRIPTPATH}/../docker/wav/ci_tmp_test_context.wav"
 }
 trap on_exit EXIT
 
