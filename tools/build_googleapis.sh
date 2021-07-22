@@ -1,9 +1,9 @@
 #!/bin/bash
 
-grpc_root=/opt/grpc_v1.24.3
+grpc_root=/opt/grpc_v1.38.1
 cd submodules/googleapis
 
-jobs=32
+jobs=8
 [ $# -ge 1 ] && jobs=$1
 
 proto_src="${grpc_root}/third_party/protobuf/src"
