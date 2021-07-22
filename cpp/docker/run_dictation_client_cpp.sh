@@ -18,7 +18,10 @@ usage() {
 echo "
 Dictation ASR gRPC client ${IMAGE_VERSION}
 Dictation ASR gRPC client options:
+
   -h, --help            Print help message.
+  --custom-image=IMAGE:TAG
+                        Uses a custom docker image instead of the default.
   -s=ADDRESS, --service-address=ADDRESS   
                         IP address and port (address:port) of a service the client will connect to.
   --tls                 If set, uses tls authentication, otherwise use insecure channel (default). The tls credential files (client.crt, client.key, ca.crt) should be placed inside 'tls' directory.
@@ -46,6 +49,9 @@ while getopts "f:hs:-:" optchar; do
     case "${optchar}" in
         -)
             case "${OPTARG}" in
+                custom-image=*)   
+                    docker_image=${OPTARG#*=}
+                    ;;
                 help)   
                     usage; exit 0 
                     ;;

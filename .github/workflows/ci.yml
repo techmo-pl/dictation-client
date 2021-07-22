@@ -68,7 +68,7 @@ jobs:
     - name: Run tests
       run: |
         docker run --rm "${REPOSITORY}":dictation-client-python-dev-"${GITHUB_REF##*/}" ./tests/test_service.sh
-        ./python/tests/test_service_on_docker.sh
+        ./python/tests/test_service_on_docker.sh "${REPOSITORY}":dictation-client-python-dev-"${GITHUB_REF##*/}"
 
   test-cpp-service:
     name: Test C++ service
@@ -92,4 +92,4 @@ jobs:
     - name: Run tests
       run: |
         docker run --rm "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}" ./cpp/tests/test_service.sh
-        ./cpp/tests/test_service_on_docker.sh
+        ./cpp/tests/test_service_on_docker.sh "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}"

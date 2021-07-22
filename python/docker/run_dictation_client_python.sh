@@ -20,6 +20,8 @@ echo "
 Dictation ASR gRPC client ${IMAGE_VERSION}
 
   -h, --help            show this help message and exit
+  --custom-image=IMAGE:TAG
+                        Uses a custom docker image instead of the default.
   -s=ADDRESS, --service-address=ADDRESS
                         IP address and port (address:port) of a service the client will connect to.
   -f=WAVE, --filename=WAVE   
@@ -54,6 +56,9 @@ while getopts "f:hms:-:" optchar; do
     case "${optchar}" in
         -)
             case "${OPTARG}" in
+                custom-image=*)   
+                    docker_image=${OPTARG#*=}
+                    ;;
                 help)   
                     usage; exit 0 
                     ;;

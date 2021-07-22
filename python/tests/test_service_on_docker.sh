@@ -7,6 +7,8 @@ IFS=$'\n\t'
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
 
+service_image="$1"
+
 test_result="fail"
 test_service_address="demo.devtechmo.pl:51190"
 
@@ -46,37 +48,37 @@ function check_output () {
 
 echo
 echo "Testing: basic recognition"
-cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --service-address=${test_service_address} --filename=${test_wave}"
+cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --custom-image=${service_image} --service-address=${test_service_address} --filename=${test_wave}"
 phrase="serwis testowy"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --interim-results"
-cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --service-address=${test_service_address} --filename=${test_wave} --interim-results"
+cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --custom-image=${service_image} --service-address=${test_service_address} --filename=${test_wave} --interim-results"
 phrase="serwis"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --grpc-timeout"
-cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --service-address=${test_service_address} --filename=${test_wave} --grpc-timeout=50"
+cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --custom-image=${service_image} --service-address=${test_service_address} --filename=${test_wave} --grpc-timeout=50"
 phrase="\"grpc_status\":4}"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --time-offsets"
-cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --service-address=${test_service_address} --filename=${test_wave} --time-offsets"
+cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --custom-image=${service_image} --service-address=${test_service_address} --filename=${test_wave} --time-offsets"
 phrase="testowy \[0.51 - 1.20\]"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --recognition-timeout"
-cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --service-address=${test_service_address} --filename=${test_wave} --recognition-timeout=10"
+cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --custom-image=${service_image} --service-address=${test_service_address} --filename=${test_wave} --recognition-timeout=10"
 phrase="serwis"
 check_output "${cmd}" "${phrase}"
 
 echo
 echo "Testing: --context-phrase"
-cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --service-address=${test_service_address} --filename=${test_context_wave} --context-phrase=context"
+cmd="${SCRIPTPATH}/../docker/run_dictation_client_python.sh --custom-image=${service_image} --service-address=${test_service_address} --filename=${test_context_wave} --context-phrase=context"
 phrase="przedsięwzięcie"
 check_output "${cmd}" "${phrase}"
 
