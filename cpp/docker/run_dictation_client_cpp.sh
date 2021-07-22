@@ -106,5 +106,5 @@ while getopts "f:hs:-:" optchar; do
     esac
 done
 
-docker run --rm -it -v "${SCRIPTPATH}:/volume" --network host "${docker_image}"  \
+docker run --rm -v "${SCRIPTPATH}:/volume" --network host "${docker_image}"  \
 ./cpp/build/dictation_client "${opts[@]}"
