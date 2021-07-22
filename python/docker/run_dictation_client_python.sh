@@ -129,7 +129,7 @@ while getopts "f:hms:-:" optchar; do
     esac
 done
 
-docker run --rm -it \
+docker run --rm \
 --env PULSE_SERVER=unix:/tmp/pulseaudio.socket \
 --env PULSE_COOKIE=/tmp/pulseaudio.cookie \
 -v "${SCRIPTPATH}:/volume" \
