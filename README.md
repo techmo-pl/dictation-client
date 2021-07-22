@@ -1,4 +1,7 @@
 # dictation-client
+
+![CI-CD Actions Status](https://github.com/jaredharet/dictation-client/actions/workflows/ci/badge.svg)
+
 Dictation ASR gRPC client
 
 Contents:  
