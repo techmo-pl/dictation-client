@@ -15,13 +15,13 @@ test_context_wave="${SCRIPTPATH}/data/test_context.wav"
 function on_exit {
 
     if [[ $test_result == "fail" ]]; then
-        echo "---------------------"
-        echo " SERVICE TEST FAILED!" 
-        echo "---------------------"
+        echo "-------------------------------------------------"
+        echo " SERVICE TEST WITH SCRIPT FOR LOCAL USAGE FAILED!" 
+        echo "-------------------------------------------------"
     else
-        echo "-------------------------------------"
-        echo " SERVICE TEST COMPLETED SUCCESSFULLY!" 
-        echo "-------------------------------------"
+        echo "-----------------------------------------------------------------"
+        echo " SERVICE TEST WITH SCRIPT FOR LOCAL USAGE COMPLETED SUCCESSFULLY!" 
+        echo "-----------------------------------------------------------------"
     fi
 }
 trap on_exit EXIT
@@ -38,6 +38,12 @@ function check_output () {
     echo "${output}" | grep "$phrase" > /dev/null 2>&1; # if this line returns non-0-code, 'set -e' will cause exit 
     echo "--> OK"
 }
+
+
+echo
+echo "------------------------------------------"
+echo " SERVICE TEST WITH SCRIPT FOR LOCAL USAGE"
+echo "------------------------------------------"
 
 echo
 echo "Testing: basic recognition"

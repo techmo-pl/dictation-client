@@ -21,13 +21,13 @@ test_context_wave="ci_tmp_test_context.wav"
 function on_exit {
 
     if [[ $test_result == "fail" ]]; then
-        echo "---------------------"
-        echo " SERVICE TEST FAILED!" 
-        echo "---------------------"
+        echo "--------------------------------------------------"
+        echo " SERVICE TEST WITH SCRIPT FOR DOCKER USAGE FAILED!" 
+        echo "--------------------------------------------------"
     else
-        echo "-------------------------------------"
-        echo " SERVICE TEST COMPLETED SUCCESSFULLY!" 
-        echo "-------------------------------------"
+        echo "------------------------------------------------------------------"
+        echo " SERVICE TEST WITH SCRIPT FOR DOCKER USAGE COMPLETED SUCCESSFULLY!" 
+        echo "------------------------------------------------------------------"
     fi
     rm "${SCRIPTPATH}/../docker/wav/ci_tmp_test.wav" "${SCRIPTPATH}/../docker/wav/ci_tmp_test_context.wav"
 }
@@ -45,6 +45,11 @@ function check_output () {
     echo "${output}" | grep "$phrase" > /dev/null 2>&1; # if this line returns non-0-code, 'set -e' will cause exit 
     echo "--> OK"
 }
+
+echo
+echo "------------------------------------------"
+echo " SERVICE TEST WITH SCRIPT FOR DOCKER USAGE"
+echo "------------------------------------------"
 
 echo
 echo "Testing: basic recognition"
