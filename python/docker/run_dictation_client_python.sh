@@ -141,4 +141,4 @@ docker run --rm \
 --group-add audio \
 --network host \
 "${docker_image}" \
-/dictation_client_python/run.sh "${opts[@]}" # 2>/dev/null
+/dictation_client_python/run.sh "${opts[@]}" 2>/dev/null
