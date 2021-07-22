@@ -1,4 +1,5 @@
-name: ci
+#name: ci
+name: CI/CD
 on: [push, pull_request]
 jobs:
 
