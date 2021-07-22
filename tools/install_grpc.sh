@@ -2,6 +2,7 @@
 # coding=utf-8
 
 set -euo pipefail
+IFS=$'\n\t'
 
 jobs=4
 version="v1.38.1"
@@ -29,7 +30,8 @@ hash ninja 2> /dev/null && ninja="-GNinja" || ninja=
 
 # cares
 cd "${grpc_path}/third_party/cares/cares"
-cmake -S . -B build "${ninja}" -DCMAKE_BUILD_TYPE=Release -DCARES_STATIC=ON && cmake --build build -- -j "${jobs}"
+cmake -S . -B build "${ninja}" -DCMAKE_BUILD_TYPE=Release -DCARES_STATIC=ON
+cmake --build build -- -j "${jobs}"
 
 # zlib
 cd "${grpc_path}/third_party/zlib"
@@ -38,7 +40,8 @@ make -j "$jobs"
 
 # build grpc
 cd "${grpc_path}"
-cmake -S . -B build "${ninja}" -DCMAKE_BUILD_TYPE=Release -DgRPC_SSL_PROVIDER=package && cmake --build build -- -j "${jobs}"
+cmake -S . -B build "${ninja}" -DCMAKE_BUILD_TYPE=Release -DgRPC_SSL_PROVIDER=package
+cmake --build build -- -j "${jobs}"
 
 
 # install abseil cpp
