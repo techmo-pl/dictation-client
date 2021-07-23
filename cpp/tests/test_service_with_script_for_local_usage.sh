@@ -39,7 +39,6 @@ function check_output () {
     echo "--> OK"
 }
 
-
 echo
 echo "------------------------------------------"
 echo " SERVICE TEST WITH SCRIPT FOR LOCAL USAGE"
