@@ -39,11 +39,13 @@ function check_output () {
     echo "--> OK"
 }
 
+
 echo
 echo "------------------------------------------"
 echo " SERVICE TEST WITH SCRIPT FOR LOCAL USAGE"
 echo "------------------------------------------"
 echo
+
 echo "Testing: basic recognition"
 cmd="${SCRIPTPATH}/../build/dictation_client --service-address ${test_service_address} --wav-path ${test_wave}"
 phrase="serwis testowy"
