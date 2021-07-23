@@ -1,6 +1,6 @@
 # dictation-client
 
-<!-- ![ci Actions Status](https://github.com/JaredHaret/dictation-client/workflows/ci/badge.svg) -->
+![ci Actions Status](https://github.com/JaredHaret/dictation-client/workflows/ci/badge.svg)
 
 Dictation ASR gRPC client
 

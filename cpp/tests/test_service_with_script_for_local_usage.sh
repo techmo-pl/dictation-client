@@ -1,7 +1,8 @@
 #!/bin/bash
 # coding=utf-8
 
-set -euo pipefail
+#set -euo pipefail
+set -x
 IFS=$'\n\t'
 
 SCRIPT=$(realpath "$0")
@@ -32,9 +33,10 @@ function check_output () {
     cmd="$1"
     phrase="$2"
 
-    set +e
+    #set +e
     output=$({ eval "$cmd"  1>&2; }  2>&1 ) # we want grep over output whether the command succeeds or not
-    set -e
+    echo "output=$output"
+    #set -e
     echo "${output}" | grep "$phrase" > /dev/null 2>&1; # if this line returns non-0-code, 'set -e' will cause exit 
     echo "--> OK"
 }
