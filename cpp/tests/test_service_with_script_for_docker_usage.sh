@@ -1,8 +1,7 @@
 #!/bin/bash
 # coding=utf-8
 
-#set -euo pipefail
-set -x
+set -euo pipefail
 IFS=$'\n\t'
 
 SCRIPT=$(realpath "$0")
@@ -40,10 +39,10 @@ function check_output () {
     cmd="$1"
     phrase="$2"
 
-    #set +e
+    set +e
     output=$({ eval "$cmd"  1>&2; }  2>&1 ) # we want grep over output whether the command succeeds or not
     echo "output=$output"
-    #set -e
+    set -e
     echo "${output}" | grep "$phrase" > /dev/null 2>&1; # if this line returns non-0-code, 'set -e' will cause exit 
     echo "--> OK"
 }
@@ -52,7 +51,9 @@ echo
 echo "------------------------------------------"
 echo " SERVICE TEST WITH SCRIPT FOR DOCKER USAGE"
 echo "------------------------------------------"
-
+#########
+set -x
+#########
 echo
 echo "Testing: basic recognition"
 cmd="${SCRIPTPATH}/../docker/run_dictation_client_cpp.sh --custom-image=${service_image} --service-address=${test_service_address} --filename=${test_wave}"
