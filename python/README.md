@@ -248,11 +248,7 @@ On the Linux operating systems using Advanced Linux Sound Architecture (ALSA) mi
 
 If you get the following output after runing request:
 ```
-<<<<<<< HEAD
-Dictation ASR gRPC client 2.3.1
-=======
 Dictation ASR gRPC client 2.3.2
->>>>>>> origin/master
 ALSA lib pcm_dsnoop.c:618:(snd_pcm_dsnoop_open) unable to open slave
 ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear
 ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe
