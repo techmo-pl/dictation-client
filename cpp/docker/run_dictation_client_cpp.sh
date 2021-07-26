@@ -2,12 +2,12 @@
 # coding=utf-8
 
 # This script sends request to dictation service using dictation client inside docker container
-# Requires "dictation-client-cpp:2.3.0" docker image loaded locally
+# Requires "dictation-client-cpp:$IMAGE_VERSION" docker image loaded locally
 
 set -euo pipefail
 IFS=$'\n\t'
 
-IMAGE_VERSION=2.3.1
+IMAGE_VERSION=2.3.2
 
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")

@@ -34,7 +34,7 @@ To prepare the docker image with C++ implementation of the Dictation Client, use
 
 When the build process is complete, following a message will be shown:
 ```
-Successfully tagged dictation-client-cpp:2.3.0
+Successfully tagged dictation-client-cpp:2.3.2
 ```
 
 ### Run Dictation client
@@ -82,7 +82,7 @@ This project uses cmake build.
 
 - **gRPC** provided as `grpc_pkg`
     
-    Default location: `/opt/grpc_v1.24.3`
+    Default location: `/opt/grpc_v1.38.1`
     
     If not installed, from parent directory run `sudo ./tools/install_grpc.sh 4`
     

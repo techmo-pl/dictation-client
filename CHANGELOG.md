@@ -4,6 +4,12 @@ This changelog is intended for tracking content changes in whole repository.
 We are using single version and changelog for all components.
 Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
 
+## [2.3.2] - 2021-07-21
+### Changed
+ - [CPP, python, tools] Switch GRPC version to 1.38.1
+ - [python] Protobuf version upgraded to 3.12.2
+
+
 ## [2.3.1] - 2020-07-10
 ### Changed
  - Protobuf version in gRPC upgraded to 3.11.3
