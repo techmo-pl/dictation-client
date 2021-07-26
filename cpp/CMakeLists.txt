@@ -27,13 +27,14 @@ set_property(TARGET ssl_pkg
         PROPERTY INTERFACE_LINK_LIBRARIES ${OPENSSL_LIBRARIES})
 
 # *************** GRPC **************** #
-set(Grpc_ROOT /opt/grpc_v1.24.3)
+set(Grpc_ROOT /opt/grpc_v1.38.1)
 find_package(Grpc REQUIRED)
 add_library(grpc_pkg INTERFACE IMPORTED)
 set_property(TARGET grpc_pkg
         PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Grpc_INCLUDE_DIRS})
 set_property(TARGET grpc_pkg
         PROPERTY INTERFACE_LINK_LIBRARIES ${Grpc_LIBRARIES})
+
 
 # *************** Boost **************** #
 set(Boost_USE_STATIC_LIBS ON)
