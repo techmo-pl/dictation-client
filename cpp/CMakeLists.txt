@@ -40,8 +40,8 @@ set_property(TARGET grpc_pkg
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME ON)
-set(BOOST_ROOT /opt/boost_1_60_0)
-find_package(Boost 1.60.0 REQUIRED system filesystem log locale program_options regex thread wserialization serialization)
+set(BOOST_ROOT /opt/boost_1_74_0)
+find_package(Boost 1.74.0 REQUIRED system filesystem log locale program_options regex thread wserialization serialization)
 add_library(boost_pkg INTERFACE IMPORTED)
 set_property(TARGET boost_pkg
         PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS})
