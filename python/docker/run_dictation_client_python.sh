@@ -16,7 +16,6 @@ docker_image="dictation-client-python:${IMAGE_VERSION}"
 usage() {
 
 echo "
-
 Dictation ASR gRPC client ${IMAGE_VERSION}
 
   -h, --help            show this help message and exit

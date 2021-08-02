@@ -77,8 +77,8 @@ install_package "python3-dev" "${sudo_str}"
 install_package "portaudio19-dev" "${sudo_str}"
 install_package "python3-pip" "${sudo_str}"
 
-
 rm -rf .env
+
 python3 -m venv .env
 source .env/bin/activate
 pip3 install --upgrade pip
