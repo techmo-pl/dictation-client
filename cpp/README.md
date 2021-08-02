@@ -72,7 +72,7 @@ This project uses cmake build.
 - **libtool** (installation in Ubuntu: `sudo apt-get install -y libtool`)
 - **Boost** provided as `boost_pkg`
     
-    Default location: `/opt/boost_1.60.0`
+    Default location: `/opt/boost_1_74_0`
     
     If not installed, from parent directory run: `sudo ./tools/install_boost.sh 4`
     
