@@ -12,25 +12,25 @@ jobs:
 
     steps:
     - name: checkout code
-        uses: actions/checkout@v2
+      uses: actions/checkout@v2
     
     - name: set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
 
     - name: initialize submodules
-        run: git submodule update --init --recursive --progress --depth 1
+      run: git submodule update --init --recursive --progress --depth 1
 
     - name: build docker image
-        run: |
-          cd python
-          ./build_docker_image.sh "${GITHUB_REF##*/}"
+      run: |
+        cd python
+        ./build_docker_image.sh "${GITHUB_REF##*/}"
 
     - name: run tests
-        run: |
-          docker run --rm dictation-client-python:"${GITHUB_REF##*/}" ./tests/test_service_with_script_for_local_usage.sh
-          ./python/tests/test_service_with_script_for_docker_usage.sh dictation-client-python:"${GITHUB_REF##*/}"
+      run: |
+        docker run --rm dictation-client-python:"${GITHUB_REF##*/}" ./tests/test_service_with_script_for_local_usage.sh
+        ./python/tests/test_service_with_script_for_docker_usage.sh dictation-client-python:"${GITHUB_REF##*/}"
 
 
   test-cpp-service:
@@ -42,10 +42,10 @@ jobs:
 
     steps:
     - name: checkout code
-        uses: actions/checkout@v2
+      uses: actions/checkout@v2
 
     - name: initialize submodules
-        run: git submodule update --init --recursive --progress --depth 1
+      run: git submodule update --init --recursive --progress --depth 1
 
     - name: build docker image
       run: |
@@ -56,4 +56,3 @@ jobs:
       run: |
         docker run --rm dictation-client-cpp:"${GITHUB_REF##*/}" ./cpp/tests/test_service_with_script_for_local_usage.sh
         ./cpp/tests/test_service_with_script_for_docker_usage.sh dictation-client-cpp:"${GITHUB_REF##*/}"
-        
