@@ -2,94 +2,58 @@ name: ci
 on: [push, pull_request]
 jobs:
 
-  python-build:
-    name: Python image build
-    runs-on: ubuntu-latest
+  test-python-service:
+    name: Test Python service
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-20.04]
+        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - name: checkout code
+    - name: checkout code
         uses: actions/checkout@v2
+    
+    - name: set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
 
-      - name: build docker image and push to repository
-        env:
-          REPOSITORY: jaredharet/private
-          DOCKER_LOGIN: ${{ secrets.DOCKER_USER }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
+    - name: initialize submodules
+        run: git submodule update --init --recursive --progress --depth 1
+
+    - name: build docker image
         run: |
           cd python
           ./build_docker_image.sh "${GITHUB_REF##*/}"
-          docker login -u "${DOCKER_LOGIN}" -p "${DOCKER_PASSWORD}" docker.io
-          docker tag dictation-client-python:"${GITHUB_REF##*/}" "${REPOSITORY}":dictation-client-python-dev-"${GITHUB_REF##*/}"
-          docker push "${REPOSITORY}":dictation-client-python-dev-"${GITHUB_REF##*/}"
 
-  cpp-build:
-    name: C++ image build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v2
-
-      - name: initialize submodules
-        run: git submodule update --init --recursive --progress --depth 1
-
-      - name: build docker image and push to repository
-        env:
-          REPOSITORY: jaredharet/private
-          DOCKER_LOGIN: ${{ secrets.DOCKER_USER }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
+    - name: run tests
         run: |
-          cd cpp
-          ./build_docker_image.sh "${GITHUB_REF##*/}"
-          docker login -u "${DOCKER_LOGIN}" -p "${DOCKER_PASSWORD}" docker.io
-          docker tag dictation-client-cpp:"${GITHUB_REF##*/}" "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}"
-          docker push "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}"
+          docker run --rm dictation-client-python:"${GITHUB_REF##*/}" ./tests/test_service_with_script_for_local_usage.sh
+          ./python/tests/test_service_with_script_for_docker_usage.sh dictation-client-python:"${GITHUB_REF##*/}"
 
-
-  test-python-service:
-    name: Test Python service
-    needs: python-build
-    runs-on: ubuntu-latest
-    env:
-      REPOSITORY: jaredharet/private
-      DOCKER_USER: ${{ secrets.DOCKER_USER }}
-      DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Login to DockerHub
-      run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-
-    - name: Pull docker image
-      run: docker pull "${REPOSITORY}":dictation-client-python-dev-"${GITHUB_REF##*/}"
-
-    - name: Run tests
-      run: |
-        docker run --rm "${REPOSITORY}":dictation-client-python-dev-"${GITHUB_REF##*/}" ./tests/test_service_with_script_for_local_usage.sh
-        ./python/tests/test_service_with_script_for_docker_usage.sh "${REPOSITORY}":dictation-client-python-dev-"${GITHUB_REF##*/}"
 
   test-cpp-service:
     name: Test C++ service
-    needs: cpp-build
-    runs-on: ubuntu-latest
-    env:
-      REPOSITORY: jaredharet/private
-      DOCKER_USER: ${{ secrets.DOCKER_USER }}
-      DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-20.04]
+    runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: checkout code
+        uses: actions/checkout@v2
 
-    - name: Login to DockerHub
-      run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - name: initialize submodules
+        run: git submodule update --init --recursive --progress --depth 1
 
-    - name: Pull docker image
-      run: docker pull "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}"
-
-    - name: Run tests
+    - name: build docker image
       run: |
-        docker run --rm "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}" ./cpp/tests/test_service_with_script_for_local_usage.sh
-        ./cpp/tests/test_service_with_script_for_docker_usage.sh "${REPOSITORY}":dictation-client-cpp-dev-"${GITHUB_REF##*/}"
+        cd cpp
+        ./build_docker_image.sh "${GITHUB_REF##*/}"
+
+    - name: run tests
+      run: |
+        docker run --rm dictation-client-cpp:"${GITHUB_REF##*/}" ./cpp/tests/test_service_with_script_for_local_usage.sh
+        ./cpp/tests/test_service_with_script_for_docker_usage.sh dictation-client-cpp:"${GITHUB_REF##*/}"
+        
