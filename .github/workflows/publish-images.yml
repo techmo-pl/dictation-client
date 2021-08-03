@@ -7,7 +7,7 @@ jobs:
 
   python-build:
     name: Build and publish Python image
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - name: checkout code
@@ -27,7 +27,7 @@ jobs:
 
   cpp-build:
     name: Build and publish C++ image
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - name: checkout code
