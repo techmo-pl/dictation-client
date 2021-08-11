@@ -53,11 +53,11 @@ To install required dependencies and to prepare virtual environment, run:
 
 To run the Dictation Client, use the `run.sh` script, e.g.:
 ```
-./run --service-address IP_ADDRESS:PORT --wave-path INPUT_WAVE
+./run.sh --service-address IP_ADDRESS:PORT --wave-path INPUT_WAVE
 ```
 To print the usage description, use:
 ```
-./run --help
+./run.sh --help
 ```
 
 

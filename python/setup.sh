@@ -6,7 +6,7 @@ IFS=$'\n\t'
 
 automatic_install_mode="false"
 
-if [[ "$1" == "-y" ]]
+if [[ $# -eq 1 ]] && [[ "$1" == "-y" ]]
 then
     automatic_install_mode="true"
 fi
