@@ -34,7 +34,7 @@ To prepare the docker image with C++ implementation of the Dictation Client, use
 
 When the build process is complete, following a message will be shown:
 ```
-Successfully tagged dictation-client-cpp:2.3.2
+Successfully tagged dictation-client-cpp:2.3.4
 ```
 
 ### Run Dictation client

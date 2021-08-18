@@ -4,6 +4,10 @@ This changelog is intended for tracking content changes in whole repository.
 We are using single version and changelog for all components.
 Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
 
+## [2.3.4] - 2020-05-12
+### Changed
+ - [CPP, python] - renamed `ssl-dir` option [bool] to `tls-dir`.
+
 ## [2.3.3] - 2021-08-01
 ### Changed
  - [CPP] Upgrade Boost version to 1.74.0
