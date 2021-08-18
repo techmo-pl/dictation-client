@@ -76,8 +76,8 @@ po::options_description CreateOptionsDescription(void) {
             ("help", "Print help message.")
             ("service-address", po::value<std::string>()->required(),
              "IP address and port (address:port) of a service the client will connect to.")
-            ("ssl-dir", po::value<std::string>()->default_value(""),
-             "If set to a path with ssl credential files (client.crt, client.key, ca.crt), use ssl authentication. Otherwise use insecure channel (default).")
+            ("tls-dir", po::value<std::string>()->default_value(""),
+             "If set to a path with SSL/TLS credential files (client.crt, client.key, ca.crt), use SSL/TLS authentication. Otherwise use insecure channel (default).")
             ("wav-path", po::value<std::string>()->required(),
              "Path to wave file with audio content to be sent to service via RPC.")
             ("session-id", po::value<std::string>()->default_value(""),
@@ -129,7 +129,7 @@ int main(int argc, const char *const argv[]) {
 
         techmo::dictation::DictationClient dictation_client{
             userOptions["service-address"].as<std::string>(),
-            userOptions["ssl-dir"].as<std::string>(),
+            userOptions["tls-dir"].as<std::string>(),
         };
 
         if (userOptions.count("streaming")) {

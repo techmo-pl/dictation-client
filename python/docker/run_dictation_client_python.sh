@@ -26,7 +26,7 @@ Dictation ASR gRPC client ${IMAGE_VERSION}
   -f=WAVE, --filename=WAVE
                         Name of the wave file with speech to be recognized. File should be inside 'wav' directory. Should be mono, 8kHz or 16kHz.
   -m, --mic             Use microphone as an audio source (instead of wave file).
-  --tls                 If set, uses tls authentication, otherwise use insecure channel (default). The tls credential files (client.crt, client.key, ca.crt) should be placed inside 'tls' directory.
+  --tls                 If set, uses SSL/TLS authentication, otherwise use insecure channel (default). The tls credential files (client.crt, client.key, ca.crt) should be placed inside 'tls' directory.
   --session-id=SESSION_ID
                         Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.
   --grpc-timeout=GRPC_TIMEOUT
@@ -62,7 +62,7 @@ while getopts "f:hms:-:" optchar; do
                     usage; exit 0
                     ;;
                 tls)
-                    opts+=( "--ssl-dir" "/volume/tls" )
+                    opts+=( "--tls-dir" "/volume/tls" )
                     ;;
                 time-offsets)
                     opts+=( "--time-offsets" )

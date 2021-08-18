@@ -24,7 +24,7 @@ Dictation ASR gRPC client options:
                         Uses a custom docker image instead of the default.
   -s=ADDRESS, --service-address=ADDRESS
                         IP address and port (address:port) of a service the client will connect to.
-  --tls                 If set, uses tls authentication, otherwise use insecure channel (default). The tls credential files (client.crt, client.key, ca.crt) should be placed inside 'tls' directory.
+  --tls                 If set, uses SSL/TLS authentication, otherwise use insecure channel (default). The tls credential files (client.crt, client.key, ca.crt) should be placed inside 'tls' directory.
   -f=WAVE, --filename=WAVE
                         Path to wave file with audio content to be sent to service via RPC.
   --session-id=SESSION_ID
@@ -56,7 +56,7 @@ while getopts "f:hs:-:" optchar; do
                     usage; exit 0
                     ;;
                 tls)
-                    opts+=( "--ssl-dir" "/volume/tls" )
+                    opts+=( "--tls-dir" "/volume/tls" )
                     ;;
                 time-offsets)
                     opts+=( "--time-offsets=true" )
