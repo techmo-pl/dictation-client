@@ -1,6 +1,8 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.04 AS build-stage
 
 ARG DEBIAN_FRONTEND=noninteractive
+
+LABEL dictation_client_cpp_build_stage_tmp=true
 
 ADD ./cpp /dictation-client/cpp
 ADD ./proto /dictation-client/proto
@@ -36,3 +38,19 @@ RUN ./tools/install_boost.sh 4 \
 RUN ./tools/build_googleapis.sh && cd cpp && ./make_proto.sh
                                                                                       
 RUN cd cpp && cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release && cmake --build build -- -j 4
+
+RUN strip cpp/build/dictation_client
+
+# ----------------------------------------------------------------------------------------------------- #
+
+FROM ubuntu:20.04 
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+LABEL maintainer="<jan.wozniak@techmo.pl>"
+
+COPY --from=build-stage /dictation-client/cpp/build/dictation_client /dictation-client/cpp/build/dictation_client
+COPY --from=build-stage /dictation-client/submodules/ /dictation-client/submodules/
+COPY --from=build-stage /opt /opt
+
+WORKDIR /dictation-client

@@ -17,3 +17,5 @@ else
 fi
 
 docker build -f "${SCRIPTPATH}/Dockerfile" -t dictation-client-cpp:"${COMMIT_TAG}" "${SCRIPTPATH}/.."
+
+docker rmi "$(docker images --filter=label=dictation_client_cpp_build_stage_tmp=true -q)"
