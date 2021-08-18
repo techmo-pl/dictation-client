@@ -2,9 +2,11 @@ FROM python:3.6-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ADD ./python /dictation_client_python
+ADD ./python /dictation-client/python
+ADD ./proto /dictation-client/proto
+ADD ./submodules /dictation-client/submodules
 
-WORKDIR /dictation_client_python
+WORKDIR /dictation-client/python
 
 RUN ./setup.sh -y
 

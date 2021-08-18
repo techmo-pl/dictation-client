@@ -3,10 +3,11 @@
 
 set -eo pipefail
 
-virtualenv -p python3 proto_env
-# shellcheck disable=SC1091
-source proto_env/bin/activate
-pip install grpcio-tools==1.7.0
+python3 -m venv proto_env
+source .env/bin/activate
+pip3 install --upgrade pip
+pip3 install wheel
+pip3 install grpcio-tools==1.38.1
 
 function cleanup() {
     # shellcheck disable=SC1091

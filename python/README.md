@@ -90,9 +90,11 @@ Then install the required dependencies inside the virtual environment (this step
 Use Python 3 with the virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3 .env
+python3 -m venv .env
 source .env/bin/activate
-pip install -r requirements.txt
+pip3 install --upgrade pip
+pip3 install wheel
+pip3 install -r requirements.txt
 ```
 
 - On Windows 10:
@@ -107,9 +109,11 @@ then confirm your choice.
 Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3 .env
-.\.env\Scripts\activate
-pip install -r requirements.txt
+python3 -m venv .env
+source .env/bin/activate
+pip3 install --upgrade pip
+pip3 install wheel
+pip3 install -r requirements.txt
 ```
 
 To switch back PowerShell's execution policy to the default, use command:
@@ -120,12 +124,10 @@ Set-ExecutionPolicy Restricted
 
 ##### Proto sources
 
-[Optional] To regenerate the sources from `.proto`, run:
+To build the sources from `.proto`, run:
 ```
 ./make_proto.sh
 ```
-This might be required when using other gRPC or Protocol Buffers version.
-
  
 
 #### Run
@@ -159,9 +161,9 @@ Available options:
   --service-address ADDRESS
                         IP address and port (address:port) of a service the
                         client will connect to.
-  --ssl-dir SSL_DIRECTORY
-                        If set to a path with ssl credential files
-                        (client.crt, client.key, ca.crt), use ssl
+  --tls-dir TLS_DIRECTORY
+                        If set to a path with SSL/TLS credential files
+                        (client.crt, client.key, ca.crt), use SSL/TLS
                         authentication. Otherwise use insecure channel
                         (default).
   --wave-path WAVE      Path to wave file with speech to be recognized. Should

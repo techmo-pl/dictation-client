@@ -7,7 +7,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-IMAGE_VERSION=2.3.2
+IMAGE_VERSION=2.3.3
 
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
@@ -23,7 +23,7 @@ Dictation ASR gRPC client ${IMAGE_VERSION}
                         Uses a custom docker image instead of the default.
   -s=ADDRESS, --service-address=ADDRESS
                         IP address and port (address:port) of a service the client will connect to.
-  -f=WAVE, --filename=WAVE   
+  -f=WAVE, --filename=WAVE
                         Name of the wave file with speech to be recognized. File should be inside 'wav' directory. Should be mono, 8kHz or 16kHz.
   -m, --mic             Use microphone as an audio source (instead of wave file).
   --tls                 If set, uses tls authentication, otherwise use insecure channel (default). The tls credential files (client.crt, client.key, ca.crt) should be placed inside 'tls' directory.
@@ -55,22 +55,22 @@ while getopts "f:hms:-:" optchar; do
     case "${optchar}" in
         -)
             case "${OPTARG}" in
-                custom-image=*)   
+                custom-image=*)
                     docker_image=${OPTARG#*=}
                     ;;
-                help)   
-                    usage; exit 0 
+                help)
+                    usage; exit 0
                     ;;
-                tls)  
+                tls)
                     opts+=( "--ssl-dir" "/volume/tls" )
                     ;;
-                time-offsets)  
+                time-offsets)
                     opts+=( "--time-offsets" )
                     ;;
-                single-utterance)  
+                single-utterance)
                     opts+=( "--single-utterance" )
                     ;;
-                interim-results)  
+                interim-results)
                     opts+=( "--interim-results" )
                     ;;
                 mic)
@@ -98,15 +98,15 @@ while getopts "f:hms:-:" optchar; do
                     fi
                     ;;
             esac;;
-        f)                      
+        f)
             val=${OPTARG#*=}
             opt=${OPTARG%=$val}
             opts+=( "--wave-path" "/volume/wav/${val##*/}" )
             ;;
-        h)  
-            usage; exit 0 
+        h)
+            usage; exit 0
             ;;
-        m)  
+        m)
             opts+=("--mic")
             set +e
             if [ ! -S /tmp/pulseaudio.socket ];
@@ -115,7 +115,7 @@ while getopts "f:hms:-:" optchar; do
             fi
             set -e
             ;;
-        s)  
+        s)
             val=${OPTARG#*=}
             opt=${OPTARG%=$val}
             opts+=( "--service-address" "${val}" )
@@ -140,4 +140,4 @@ docker run --rm \
 --group-add audio \
 --network host \
 "${docker_image}" \
-/dictation_client_python/run.sh "${opts[@]}"
+/dictation-client/python/run.sh "${opts[@]}"
