@@ -272,10 +272,10 @@ message RecognitionConfig {
   bool profanity_filter = 5;
 
   // @exclude [*Optional*] array of [SpeechContext][google.cloud.speech.v1.SpeechContext].
-  // A means to provide context to assist the speech recognition. For more
-  // information, see [Phrase Hints](/speech-to-text/docs/basics#phrase-hints).
+  // First element of the array is used to identify context model to be used 
+  // in current recognition.
 
-  // [*Optional*][*Unused*]
+  // [*Optional*]
   repeated SpeechContext speech_contexts = 6;
 
   // [*Optional*] If `true`, the top result includes a list of words and
@@ -354,17 +354,15 @@ message RecognitionConfig {
 // @exclude Provides "hints" to the speech recognizer to favor specific words and phrases
 // in the results.
 
-// [*Unused*]
 message SpeechContext {
 
-  // @exclude [*Optional*] A list of strings containing words and phrases "hints" so that
-  // the speech recognition is more likely to recognize them. This can be used
-  // to improve the accuracy for specific words and phrases, for example, if
-  // specific commands are typically spoken by the user. This can also be used
-  // to add additional words to the vocabulary of the recognizer. See
-  // [usage limits](/speech-to-text/quotas#content).
-
-  // [*Unused*]
+  // @exclude [*Optional*] Can be used to send a context phrase that switches the model 
+  // used during recognition. If the phrase correctly identifies the context model 
+  // used in service, it will be used instead of the general model for the current recognition. 
+  // Due to compatibility with Google API, the object is defined as a list of strings, 
+  // but only the first element of the list is used as the context phrase, 
+  // the rest are ignored if present.
+  
   repeated string phrases = 1;
 }
 
