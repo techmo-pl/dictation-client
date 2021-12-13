@@ -1,14 +1,13 @@
 from pydub import AudioSegment
 import os
 
-
 class AudioStream(object):
 
     def __init__(self, audio_path):
         if not os.path.exists(audio_path):
             raise ValueError("Wave file does not exist at: {}".format(audio_path))
 
-        self.audio_segment = AudioSegment.from_wav(audio_path)
+        self.audio_segment = AudioSegment.from_file(audio_path)
         self.audio_path = audio_path
 
         if self.audio_segment.channels != 1:
