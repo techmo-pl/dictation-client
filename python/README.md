@@ -23,14 +23,14 @@ To use the Dictation Client on Docker container, go to the `dictation-client/pyt
 
 To send a simple request to the Dictation service, use:
 ```
-./run_dictation_client_python.sh --service-address IP_ADDRESS:PORT --filename WAV_FILE_NAME
+./run_dictation_client_python.sh --service-address IP_ADDRESS:PORT --filename AUDIO_FILE_NAME
 ```
 
 To print the list of available options, use:
 ```
 ./run_dictation_client_python.sh --help
 ```
-Audio files to be transcribed should be placed inside the `dictation-client/python/docker/wav` directory.
+Audio files to be transcribed should be placed inside the `dictation-client/python/docker/audio` directory.
 TLS credentials should be placed inside the `dictation-client/python/docker/tls` directory, if used.
 
 
@@ -53,7 +53,7 @@ To install required dependencies and to prepare virtual environment, run:
 
 To run the Dictation Client, use the `run.sh` script, e.g.:
 ```
-./run.sh --service-address IP_ADDRESS:PORT --wave-path INPUT_WAVE
+./run.sh --service-address IP_ADDRESS:PORT --audio-path INPUT_AUDIO_FILE
 ```
 To print the usage description, use:
 ```
@@ -142,15 +142,15 @@ source .env/bin/activate
 Then run Dictation Client. Sample use:
 
 ```
-python dictation_client.py --service-address "192.168.1.1:4321" --wave-path audio.wav
+python dictation_client.py --service-address "192.168.1.1:4321" --audio-path audio.wav
 ```
 
-For each request you have to provide the service address and the audio source (wav file or microphone).
+Each request must be provided with the address of the service and the audio source (wav/ogg/mp3 file or microphone).
 
 
 ## Usage:
 ```
-Basic usage: dictation_client.py --service-address ADDRESS --wave-path WAVE
+Basic usage: dictation_client.py --service-address ADDRESS --audio-path AUDIO_FILE_NAME
 ```
 
 Available options:
@@ -159,15 +159,14 @@ Available options:
   --service-address ADDRESS
                         IP address and port (address:port) of a service the
                         client will connect to.
+  --audio-path AUDIO    Path to the audio file with speech to be recognized. 
+                        It should be mono wav/ogg/mp3, 8kHz or 16kHz.
+  --mic                 Use microphone as an audio source (instead of audio file).
   --ssl-dir SSL_DIRECTORY
                         If set to a path with ssl credential files
                         (client.crt, client.key, ca.crt), use ssl
                         authentication. Otherwise use insecure channel
                         (default).
-  --wave-path WAVE      Path to wave file with speech to be recognized. Should
-                        be mono, 8kHz or 16kHz.
-  --mic                 Use microphone as an audio source (instead of wave
-                        file).
   --session-id SESSION_ID
                         Session ID to be passed to the service. If not
                         specified, the service will generate a default session
@@ -231,7 +230,7 @@ On Debian/Ubuntu OS this package can be installed by using `setup.sh` script.
 
 ### Microphone
 
-To use a microphone as the audio source instead of the wav file, use `--mic` option.
+To use a microphone as the audio source instead of the audio file, use `--mic` option.
 It allows to send audio data directly from the microphone, however it does not provide information when to finish the recognition.
 For this reason in most cases `--mic` should be followed by the `--single-utterance` option, which stops the recognition after a first spotted utterance.
 
