@@ -3,7 +3,7 @@
 
 #include "dictation_asr.grpc.pb.h"
 
-#include "../dictation-client/wave-utils.h"
+#include "../dictation-client/audio-utils.h"
 
 
 namespace gsapi = google::cloud::speech::v1;

@@ -18,8 +18,10 @@ RUN apt-get update \
     ca-certificates \
     curl \
     git \
+    libogg-dev \
     libssl-dev \
     libtool \
+    libvorbis-dev \
     unzip \
     wget
 
