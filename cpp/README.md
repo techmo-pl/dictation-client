@@ -26,13 +26,13 @@ In this case open project repository in web browser, go to the `submodules` dire
 To prepare the docker image with C++ implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
-docker build -f Dockerfile-cpp -t dictation-client-cpp:2.3.2 . 
+docker build -f Dockerfile-cpp -t dictation-client-cpp:2.4.0 . 
 ```
 **Note:** The build process may take a several dozen minutes (for shorter build time use the python implementation instead).
 
 When the build process is complete, following a message will be shown:
 ```
-Successfully tagged dictation-client-cpp:2.3.2
+Successfully tagged dictation-client-cpp:2.4.0
 ```
 
 ### Run Dictation client
@@ -70,8 +70,10 @@ This project uses cmake build.
 - **make** (installation in Ubuntu: `sudo apt install -y make`)
 - **autoconf** (installation in Ubuntu: `sudo apt-get install -y autoconf`)
 - **libtool** (installation in Ubuntu: `sudo apt-get install -y libtool`)
+- **libogg** (installation in Ubuntu: `sudo apt-get install libogg-dev`)
+- **libvorbis, vorbisenc, vorbisfile** (installation in Ubuntu: `sudo apt-get install libvorbis-dev`)
 - **Boost** provided as `boost_pkg`
-    
+
     Default location: `/opt/boost_1_74_0`
     
     If not installed, from parent directory run: `sudo ./tools/install_boost.sh 4`
