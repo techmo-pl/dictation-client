@@ -31,11 +31,17 @@ struct WAV_DATA
     std::string audioBytes;
 };
 
+/// Creates default WAVE_HEADER struct instance for audio bytes given as std::string
+WAV_HEADER CreateWaveHeader(unsigned int sampleRate, const std::string & audioBytes);
+
 /// Reads at given path WAVE file header into WAV_HEADER struct and audio bytes into std::string.
-WAV_DATA ReadWaveFile(const std::string & wavePath);
+WAV_DATA ReadWaveFile(const std::string & audioPath);
+
+/// Decodes audio from Ogg Vorbis file and on it's basis it creates a new WAV_DATA object
+WAV_DATA ReadOggFile(const std::string & audioPath);
 
 /// Writes at given path WAVE file with given sample rate [Hz] and audio bytes as std::string.
-void WriteWaveFile(const std::string & wavePath, unsigned int sampleRate, const std::string & audioBytes);
+void WriteWaveFile(const std::string & audioPath, unsigned int sampleRate, const std::string & audioBytes);
 
 
 #endif /* __WAVE_UTILS_H__ */

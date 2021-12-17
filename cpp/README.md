@@ -26,13 +26,14 @@ In this case open project repository in web browser, go to the `submodules` dire
 To prepare the docker image with C++ implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
-docker build -f Dockerfile-cpp -t dictation-client-cpp:2.3.2 . 
+docker build -f Dockerfile-cpp -t dictation-client-cpp:2.4.0 .
 ```
+
 **Note:** The build process may take a several dozen minutes (for shorter build time use the python implementation instead).
 
 When the build process is complete, following a message will be shown:
 ```
-Successfully tagged dictation-client-cpp:2.3.2
+Successfully tagged dictation-client-cpp:2.4.0
 ```
 
 ### Run Dictation client
@@ -41,14 +42,14 @@ To use Dictation client on Docker container, go to `dictation-client/cpp/docker`
 
 To send simple request to the Dictation service, use:
 ```
-./run_dictation_client_cpp.sh --service-address IP_ADDRESS:PORT --filename WAV_FILE_NAME
+./run_dictation_client_cpp.sh --service-address IP_ADDRESS:PORT --filename AUDIO_FILE_NAME
 ```
 
 To print list of available options, use:
 ```
 ./run_dictation_client_cpp.sh --help
 ```
-Audio files to be transcribed should be placed inside `dictation-client/cpp/docker/wav` directory.
+Audio files to be transcribed should be placed inside `dictation-client/cpp/docker/audio` directory.
 TLS credentials should be placed inside `dictation-client/cpp/docker/tls` directory, if used.
 
 
@@ -70,8 +71,10 @@ This project uses cmake build.
 - **make** (installation in Ubuntu: `sudo apt install -y make`)
 - **autoconf** (installation in Ubuntu: `sudo apt-get install -y autoconf`)
 - **libtool** (installation in Ubuntu: `sudo apt-get install -y libtool`)
+- **libogg** (installation in Ubuntu: `sudo apt-get install libogg-dev`)
+- **libvorbis, vorbisenc, vorbisfile** (installation in Ubuntu: `sudo apt-get install libvorbis-dev`)
 - **Boost** provided as `boost_pkg`
-    
+
     Default location: `/opt/boost_1_74_0`
     
     If not installed, from parent directory run: `sudo ./tools/install_boost.sh 4`
@@ -121,7 +124,7 @@ Default value `4` should be appropriate for the average personal computer.
 
 ### Run:
 ```
-./build/dictation_client --service-address 192.168.1.1:4321 --wav-path /path/to/audio.wav
+./build/dictation_client --service-address 192.168.1.1:4321 --audio-path /path/to/audio/file
 ```
 **Note:** In command above sample service address and path to audio file have to be replaced with the actual values.
 
@@ -135,8 +138,8 @@ Default value `4` should be appropriate for the average personal computer.
                               (client.crt, client.key, ca.crt), use ssl
                               authentication. Otherwise use insecure channel
                               (default).
-  --wav-path arg              Path to wave file with audio content to be sent
-                              to service via RPC.
+  --audio-path arg            Path to the audio file with speech to be recognized. 
+                              It should be mono wav/ogg/mp3, 8kHz or 16kHz.
   --session-id arg            Session ID to be passed to the service. If not
                               specified, the service will generate a default
                               session ID itself.

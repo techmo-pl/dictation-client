@@ -21,9 +21,9 @@ def print_results(results):
 
 
 def create_audio_stream(args):
-    # create wave file stream
-    if args.wave is not None:
-        return AudioStream(args.wave)
+    # create audio file stream
+    if args.audio is not None:
+        return AudioStream(args.audio)
 
     # create microphone stream
     if args.mic:
@@ -38,14 +38,14 @@ def create_audio_stream(args):
 if __name__ == '__main__':
     print("Dictation ASR gRPC client " + __version__)
 
-    parser = ArgumentParser()
-    parser.add_argument("--service-address", dest="address", required=True,
+    parser = ArgumentParser(allow_abbrev=False)
+    parser.add_argument("--service-address", "-s", dest="address", required=True,
                         help="IP address and port (address:port) of a service the client will connect to.", type=str)
+    parser.add_argument("--audio-path", "-a", dest="audio",
+                        help="Path to the audio file with speech to be recognized. It should be mono wav/ogg/mp3, 8kHz or 16kHz.")
+    parser.add_argument("--mic", help="Use microphone as an audio source (instead of audio file).", action='store_true')
     parser.add_argument("--ssl-dir", dest="ssl_directory", default="",
                         help="If set to a path with ssl credential files (client.crt, client.key, ca.crt), use ssl authentication. Otherwise use insecure channel (default).", type=str)
-    parser.add_argument("--wave-path", dest="wave",
-                        help="Path to wave file with speech to be recognized. Should be mono, 8kHz or 16kHz.")
-    parser.add_argument("--mic", help="Use microphone as an audio source (instead of wave file).", action='store_true')
     parser.add_argument("--session-id",
                         help="Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.",
                         default="", type=str)
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     # Stream audio to the ASR engine and print all hypotheses to standard output
     args = parser.parse_args()
 
-    if args.wave is not None or args.mic:
+    if args.audio is not None or args.mic:
         with create_audio_stream(args) as stream:
             settings = DictationSettings(args)
             recognizer = StreamingRecognizer(args.address, args.ssl_directory, settings)

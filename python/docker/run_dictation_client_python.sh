@@ -7,7 +7,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-IMAGE_VERSION=2.3.2
+IMAGE_VERSION=2.4.0
 
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
@@ -21,9 +21,9 @@ Dictation ASR gRPC client ${IMAGE_VERSION}
   -h, --help            show this help message and exit
   -s=ADDRESS, --service-address=ADDRESS
                         IP address and port (address:port) of a service the client will connect to.
-  -f=WAVE, --filename=WAVE   
-                        Name of the wave file with speech to be recognized. File should be inside 'wav' directory. Should be mono, 8kHz or 16kHz.
-  -m, --mic             Use microphone as an audio source (instead of wave file).
+  -f=AUDIO, --filename=AUDIO   
+                        Name of the audio file with speech to be recognized. File should be inside 'audio' directory. It should be mono wav/ogg/mp3, 8kHz or 16kHz.
+  -m, --mic             Use microphone as an audio source (instead of audio file).
   --tls                 If set, uses tls authentication, otherwise use insecure channel (default). The tls credential files (client.crt, client.key, ca.crt) should be placed inside 'tls' directory.
   --session-id=SESSION_ID
                         Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.
@@ -80,7 +80,7 @@ while getopts "f:hms:-:" optchar; do
                 filename=*)
                     val=${OPTARG#*=}
                     opt=${OPTARG%=$val}
-                    opts+=( "--wave-path" "/volume/wav/${val##*/}" )
+                    opts+=( "--audio-path" "/volume/audio/${val##*/}" )
                     ;;
                 *=*)
                     val=${OPTARG#*=}
@@ -96,7 +96,7 @@ while getopts "f:hms:-:" optchar; do
         f)                      
             val=${OPTARG#*=}
             opt=${OPTARG%=$val}
-            opts+=( "--wave-path" "/volume/wav/${val##*/}" )
+            opts+=( "--audio-path" "/volume/audio/${val##*/}" )
             ;;
         h)  
             usage; exit 0 
@@ -135,4 +135,4 @@ docker run --rm -it \
 --group-add audio \
 --network host \
 "${docker_image}" \
-/dictation_client_python/run.sh "${opts[@]}"  2>/dev/null
+/dictation_client_python/run.sh "${opts[@]}"

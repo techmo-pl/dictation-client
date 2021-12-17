@@ -3,10 +3,9 @@
 #include <boost/program_options.hpp>
 #include <google/protobuf/text_format.h>
 
-#include "wave-utils.h"
+#include "audio-utils.h"
 #include "dictation_client.h"
 #include "VERSION.h"
-
 
 namespace po = boost::program_options;
 
@@ -78,8 +77,8 @@ po::options_description CreateOptionsDescription(void) {
              "IP address and port (address:port) of a service the client will connect to.")
             ("ssl-dir", po::value<std::string>()->default_value(""),
              "If set to a path with ssl credential files (client.crt, client.key, ca.crt), use ssl authentication. Otherwise use insecure channel (default).")
-            ("wav-path", po::value<std::string>()->required(),
-             "Path to wave file with audio content to be sent to service via RPC.")
+            ("audio-path", po::value<std::string>()->required(),
+             "Path to the audio file with speech to be recognized. It should be mono wav/ogg/mp3, 8kHz or 16kHz.")
             ("session-id", po::value<std::string>()->default_value(""),
              "Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.")
             ("grpc-timeout", po::value<int>()->default_value(0), "Timeout in milliseconds used to set gRPC deadline - "
@@ -100,6 +99,7 @@ po::options_description CreateOptionsDescription(void) {
              "Specifies which context model to use.");
     return optionsDescription;
 }
+
 
 int main(int argc, const char *const argv[]) {
     po::options_description optionsDescription(CreateOptionsDescription());
@@ -125,7 +125,20 @@ int main(int argc, const char *const argv[]) {
     try {
         techmo::dictation::DictationSessionConfig config = CreateDictationSessionConfig(userOptions);
 
-        const auto wave = ReadWaveFile(userOptions["wav-path"].as<std::string>());
+        std::string audio_path=userOptions["audio-path"].as<std::string>();
+
+        WAV_DATA wav_data;
+
+        if(audio_path.substr(audio_path.find_last_of(".") + 1) == "wav") {
+            wav_data = ReadWaveFile(audio_path);
+        } 
+        else if(audio_path.substr(audio_path.find_last_of(".") + 1) == "ogg") {
+            wav_data = ReadOggFile(audio_path);
+        } 
+        else {
+            std::cout << "Error: not supported audio file. Only *.wav and *.ogg files are supported." << std::endl;
+            return 1;
+        }
 
         techmo::dictation::DictationClient dictation_client{
             userOptions["service-address"].as<std::string>(),
@@ -133,14 +146,14 @@ int main(int argc, const char *const argv[]) {
         };
 
         if (userOptions.count("streaming")) {
-            const auto responses = dictation_client.StreamingRecognize(config, wave);
+            const auto responses = dictation_client.StreamingRecognize(config, wav_data);
 
             for (const auto& response : responses) {
                 std::cout << ProtobufMessageToString(response) << std::endl;
             }
         }
         else {
-            const gsapi::RecognizeResponse response = dictation_client.Recognize(config, wave);
+            const gsapi::RecognizeResponse response = dictation_client.Recognize(config, wav_data);
 
             std::cout << ProtobufMessageToString(response) << std::endl;
         }
