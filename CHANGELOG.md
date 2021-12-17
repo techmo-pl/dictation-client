@@ -15,10 +15,6 @@ Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp
 ### Changed
  - [CPP] Upgrade Boost version to 1.74.0
 
-## [2.3.3] - 2021-08-01
-### Changed
- - [CPP] Upgrade Boost version to 1.74.0
-
 ## [2.3.2] - 2021-07-21
 ### Changed
  - [CPP, python, tools] Switch GRPC version to 1.38.1
