@@ -47,13 +47,6 @@ set_property(TARGET boost_pkg
 set_property(TARGET boost_pkg
         PROPERTY INTERFACE_LINK_LIBRARIES ${Boost_LIBRARIES})
 
-## *************** Vorbis **************** #
-#find_package(Vorbis REQUIRED)
-#add_library(vorbis_pkg INTERFACE IMPORTED)
-#set_property(TARGET vorbis_pkg
-#		PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${Vorbis_INCLUDE_DIRS})
-#set_property(TARGET vorbis_pkg
-#		PROPERTY INTERFACE_LINK_LIBRARIES ${Vorbis_LIBRARIES})
 
 
 # ********************************************* #
