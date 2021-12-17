@@ -142,7 +142,7 @@ source .venv/bin/activate
 Then run Dictation Client. Sample use:
 
 ```
-python dictation_client.py --service-address "192.168.1.1:4321" --audio-path audio.wav
+python dictation_client.py --service-address "192.168.1.1:4321" --audio-path path/to/audio/file
 ```
 
 Each request must be provided with the address of the service and the audio source (wav/ogg/mp3 file or microphone).
