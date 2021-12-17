@@ -4,6 +4,17 @@ This changelog is intended for tracking content changes in whole repository.
 We are using single version and changelog for all components.
 Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
 
+
+## [2.4.0] - 2021-12-17
+### Added
+ - [CPP, python] Ogg Vorbis files handling
+### Changed
+ - [CPP, python] `wav-path` option renamed to `audio-path`
+
+## [2.3.3] - 2021-08-01
+### Changed
+ - [CPP] Upgrade Boost version to 1.74.0
+
 ## [2.3.3] - 2021-08-01
 ### Changed
  - [CPP] Upgrade Boost version to 1.74.0
