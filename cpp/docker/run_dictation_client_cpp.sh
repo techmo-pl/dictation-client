@@ -68,7 +68,7 @@ while getopts "f:hs:-:" optchar; do
                 filename=*)
                     val=${OPTARG#*=}
                     opt=${OPTARG%=$val}
-                    opts+=( "--audio-path" "/volume/wav/${val##*/}" )
+                    opts+=( "--audio-path" "/volume/audio/${val##*/}" )
                     ;;
                 *=*)
                     val=${OPTARG#*=}
@@ -84,7 +84,7 @@ while getopts "f:hs:-:" optchar; do
         f)                      
             val=${OPTARG#*=}
             opt=${OPTARG%=$val}
-            opts+=( "--audio-path" "/volume/wav/${val##*/}" )
+            opts+=( "--audio-path" "/volume/audio/${val##*/}" )
             ;;
         h)  
             usage; exit 0 
