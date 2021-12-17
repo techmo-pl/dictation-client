@@ -8,7 +8,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-IMAGE_VERSION=2.3.2
+IMAGE_VERSION=2.4.0
 
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
@@ -23,7 +23,7 @@ Dictation ASR gRPC client options:
   -s=ADDRESS, --service-address=ADDRESS   
                         IP address and port (address:port) of a service the client will connect to.
   --tls                 If set, uses tls authentication, otherwise use insecure channel (default). The tls credential files (client.crt, client.key, ca.crt) should be placed inside 'tls' directory.
-  -f=WAVE, --filename=WAVE        
+  -f=AUDIO, --filename=AUDIO        
                         Path to wave file with audio content to be sent to service via RPC.
   --session-id=SESSION_ID                
                         Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.
@@ -68,7 +68,7 @@ while getopts "f:hs:-:" optchar; do
                 filename=*)
                     val=${OPTARG#*=}
                     opt=${OPTARG%=$val}
-                    opts+=( "--wav-path" "/volume/wav/${val##*/}" )
+                    opts+=( "--audio-path" "/volume/wav/${val##*/}" )
                     ;;
                 *=*)
                     val=${OPTARG#*=}
@@ -84,7 +84,7 @@ while getopts "f:hs:-:" optchar; do
         f)                      
             val=${OPTARG#*=}
             opt=${OPTARG%=$val}
-            opts+=( "--wav-path" "/volume/wav/${val##*/}" )
+            opts+=( "--audio-path" "/volume/wav/${val##*/}" )
             ;;
         h)  
             usage; exit 0 
