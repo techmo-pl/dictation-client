@@ -118,6 +118,15 @@ To switch back PowerShell's execution policy to the default, use command:
 Set-ExecutionPolicy Restricted
 ```
 
+**FFmpeg** - is additional dependency required to process audio files other than PCM wav.
+FFmpeg can be found at `https://ffmpeg.org/`.
+On Ubuntu OS it is possible to install ffmpeg directly from default repository:
+
+```
+apt-get update && apt-get install ffmpeg
+```
+
+
 ##### Proto sources
 
 [Optional] To regenerate the sources from `.proto`, run:
