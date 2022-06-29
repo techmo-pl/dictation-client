@@ -8,7 +8,10 @@ WORKDIR /dictation_client_python
 
 RUN ./setup.sh -y
 
-RUN apt-get clean \
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get install -y --no-install-recommends ffmpeg \
+	&& apt-get clean \
 	&& rm -fr /var/lib/apt/lists/* \
 	&& rm -fr /var/cache/apt/* 
 

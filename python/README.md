@@ -14,7 +14,7 @@ To prepare a docker image with Python implementation of the Dictation Client, us
 The build process will take several minutes.
 When the build process is complete, you will receive a message:
 ```
-Successfully tagged dictation-client-python:2.3.2
+Successfully tagged dictation-client-python:2.4.0
 ```
 
 ### Run Dictation client
@@ -23,14 +23,14 @@ To use the Dictation Client on Docker container, go to the `dictation-client/pyt
 
 To send a simple request to the Dictation service, use:
 ```
-./run_dictation_client_python.sh --service-address IP_ADDRESS:PORT --filename WAV_FILE_NAME
+./run_dictation_client_python.sh --service-address IP_ADDRESS:PORT --filename AUDIO_FILE_NAME
 ```
 
 To print the list of available options, use:
 ```
 ./run_dictation_client_python.sh --help
 ```
-Audio files to be transcribed should be placed inside the `dictation-client/python/docker/wav` directory.
+Audio files to be transcribed should be placed inside the `dictation-client/python/docker/audio` directory.
 TLS credentials should be placed inside the `dictation-client/python/docker/tls` directory, if used.
 
 
@@ -53,7 +53,7 @@ To install required dependencies and to prepare virtual environment, run:
 
 To run the Dictation Client, use the `run.sh` script, e.g.:
 ```
-./run.sh --service-address IP_ADDRESS:PORT --wave-path INPUT_WAVE
+./run.sh --service-address IP_ADDRESS:PORT --audio-path INPUT_AUDIO_FILE
 ```
 To print the usage description, use:
 ```
@@ -90,8 +90,8 @@ Then install the required dependencies inside the virtual environment (this step
 Use Python 3 with the virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3 .env
-source .env/bin/activate
+virtualenv -p python3 .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -107,8 +107,8 @@ then confirm your choice.
 Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3 .env
-.\.env\Scripts\activate
+virtualenv -p python3 .venv
+.\.venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -117,6 +117,15 @@ To switch back PowerShell's execution policy to the default, use command:
 ```
 Set-ExecutionPolicy Restricted
 ```
+
+**FFmpeg** - is additional dependency required to process audio files other than PCM wav.
+FFmpeg can be found at `https://ffmpeg.org/`.
+On Ubuntu OS it is possible to install ffmpeg directly from default repository:
+
+```
+apt-get update && apt-get install ffmpeg
+```
+
 
 ##### Proto sources
 
@@ -133,24 +142,24 @@ This might be required when using other gRPC or Protocol Buffers version.
 To run the Dictation Client, activate the virtual environment first:
 - On Linux:
 ```
-source .env/bin/activate
+source .venv/bin/activate
 ```
 - On Windows:
 ```
-.\.env\Scripts\activate
+.\.venv\Scripts\activate
 ```
 Then run Dictation Client. Sample use:
 
 ```
-python dictation_client.py --service-address "192.168.1.1:4321" --wave-path audio.wav
+python dictation_client.py --service-address "192.168.1.1:4321" --audio-path path/to/audio/file
 ```
 
-For each request you have to provide the service address and the audio source (wav file or microphone).
+Each request must be provided with the address of the service and the audio source (wav/ogg/mp3 file or microphone).
 
 
 ## Usage:
 ```
-Basic usage: dictation_client.py --service-address ADDRESS --wave-path WAVE
+Basic usage: dictation_client.py --service-address ADDRESS --audio-path AUDIO_FILE_NAME
 ```
 
 Available options:
@@ -159,15 +168,14 @@ Available options:
   --service-address ADDRESS
                         IP address and port (address:port) of a service the
                         client will connect to.
+  --audio-path AUDIO    Path to the audio file with speech to be recognized. 
+                        It should be mono wav/ogg/mp3, 8kHz or 16kHz.
+  --mic                 Use microphone as an audio source (instead of audio file).
   --ssl-dir SSL_DIRECTORY
                         If set to a path with ssl credential files
                         (client.crt, client.key, ca.crt), use ssl
                         authentication. Otherwise use insecure channel
                         (default).
-  --wave-path WAVE      Path to wave file with speech to be recognized. Should
-                        be mono, 8kHz or 16kHz.
-  --mic                 Use microphone as an audio source (instead of wave
-                        file).
   --session-id SESSION_ID
                         Session ID to be passed to the service. If not
                         specified, the service will generate a default session
@@ -231,7 +239,7 @@ On Debian/Ubuntu OS this package can be installed by using `setup.sh` script.
 
 ### Microphone
 
-To use a microphone as the audio source instead of the wav file, use `--mic` option.
+To use a microphone as the audio source instead of the audio file, use `--mic` option.
 It allows to send audio data directly from the microphone, however it does not provide information when to finish the recognition.
 For this reason in most cases `--mic` should be followed by the `--single-utterance` option, which stops the recognition after a first spotted utterance.
 
@@ -248,7 +256,7 @@ On the Linux operating systems using Advanced Linux Sound Architecture (ALSA) mi
 
 If you get the following output after runing request:
 ```
-Dictation ASR gRPC client 2.3.2
+Dictation ASR gRPC client 2.4.0
 ALSA lib pcm_dsnoop.c:618:(snd_pcm_dsnoop_open) unable to open slave
 ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear
 ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe

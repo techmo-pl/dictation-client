@@ -1,7 +1,7 @@
 project(dictation_client)
 
 add_executable(${PROJECT_NAME}
-        wave-utils.cpp wave-utils.h
+        audio-utils.cpp audio-utils.h
         main.cpp
         )
 
@@ -18,6 +18,10 @@ target_link_libraries(${PROJECT_NAME}
         ssl_pkg
         boost_pkg
         dl_pkg
+        ogg
+        vorbis
+        vorbisenc
+        vorbisfile
         )
 
 set_target_properties(${PROJECT_NAME}
