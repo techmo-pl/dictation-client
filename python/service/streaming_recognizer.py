@@ -45,9 +45,9 @@ class RequestIterator:
 
 
 class StreamingRecognizer:
-    def __init__(self, address, ssl_directory, settings_args):
+    def __init__(self, address, tls_directory, settings_args):
         # Use ArgumentParser to parse settings
-        self.service = dictation_asr_pb2_grpc.SpeechStub(StreamingRecognizer.create_channel(address, ssl_directory))
+        self.service = dictation_asr_pb2_grpc.SpeechStub(StreamingRecognizer.create_channel(address, tls_directory))
         self.settings = settings_args
 
     def recognize(self, audio):
@@ -109,8 +109,8 @@ class StreamingRecognizer:
         }]  # array with one element
 
     @staticmethod
-    def create_channel(address, ssl_directory):
-        if not ssl_directory:
+    def create_channel(address, tls_directory):
+        if not tls_directory:
             return grpc.insecure_channel(address)
 
         def read_file(path):
@@ -118,9 +118,9 @@ class StreamingRecognizer:
                 return file.read()
 
         return grpc.secure_channel(address, grpc.ssl_channel_credentials(
-            read_file(os.path.join(ssl_directory, 'ca.crt')),
-            read_file(os.path.join(ssl_directory, 'client.key')),
-            read_file(os.path.join(ssl_directory, 'client.crt')),
+            read_file(os.path.join(tls_directory, 'ca.crt')),
+            read_file(os.path.join(tls_directory, 'client.key')),
+            read_file(os.path.join(tls_directory, 'client.crt')),
         ))
 
     @staticmethod

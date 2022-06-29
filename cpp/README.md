@@ -134,8 +134,8 @@ Default value `4` should be appropriate for the average personal computer.
   --help                      Print help message.
   --service-address arg       IP address and port (address:port) of a service
                               the client will connect to.
-  --ssl-dir arg               If set to a path with ssl credential files
-                              (client.crt, client.key, ca.crt), use ssl
+  --tls-dir arg               If set to a path with TLS/SSL credential files
+                              (client.crt, client.key, ca.crt), use TLS
                               authentication. Otherwise use insecure channel
                               (default).
   --audio-path arg            Path to the audio file with speech to be recognized. 

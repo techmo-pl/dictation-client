@@ -51,7 +51,7 @@ while getopts "f:hs:-:" optchar; do
                     usage; exit 0 
                     ;;
                 tls)  
-                    opts+=( "--ssl-dir" "/volume/tls" )
+                    opts+=( "--tls-dir" "/volume/tls" )
                     ;;
                 time-offsets)  
                     opts+=( "--time-offsets=true" )

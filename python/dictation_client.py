@@ -44,8 +44,8 @@ if __name__ == '__main__':
     parser.add_argument("--audio-path", "-a", dest="audio",
                         help="Path to the audio file with speech to be recognized. It should be mono wav/ogg/mp3, 8kHz or 16kHz.")
     parser.add_argument("--mic", help="Use microphone as an audio source (instead of audio file).", action='store_true')
-    parser.add_argument("--ssl-dir", dest="ssl_directory", default="",
-                        help="If set to a path with ssl credential files (client.crt, client.key, ca.crt), use ssl authentication. Otherwise use insecure channel (default).", type=str)
+    parser.add_argument("--tls-dir", dest="tls_directory", default="",
+                        help="If set to a path with TLS/SSL credential files (client.crt, client.key, ca.crt), use TLS authentication. Otherwise use insecure channel (default).", type=str)
     parser.add_argument("--session-id",
                         help="Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.",
                         default="", type=str)
@@ -76,7 +76,7 @@ if __name__ == '__main__':
     if args.audio is not None or args.mic:
         with create_audio_stream(args) as stream:
             settings = DictationSettings(args)
-            recognizer = StreamingRecognizer(args.address, args.ssl_directory, settings)
+            recognizer = StreamingRecognizer(args.address, args.tls_directory, settings)
 
             print('Recognizing...')
             results = recognizer.recognize(stream)

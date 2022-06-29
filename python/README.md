@@ -171,9 +171,9 @@ Available options:
   --audio-path AUDIO    Path to the audio file with speech to be recognized. 
                         It should be mono wav/ogg/mp3, 8kHz or 16kHz.
   --mic                 Use microphone as an audio source (instead of audio file).
-  --ssl-dir SSL_DIRECTORY
-                        If set to a path with ssl credential files
-                        (client.crt, client.key, ca.crt), use ssl
+  --tls-dir TLS_DIRECTORY
+                        If set to a path with TLS/SSL credential files
+                        (client.crt, client.key, ca.crt), use tls
                         authentication. Otherwise use insecure channel
                         (default).
   --session-id SESSION_ID
