@@ -11,6 +11,8 @@ add_library(${PROJECT_NAME}
         ${GOOGLEAPIS_SOURCE_FILES}
         dictation_asr.grpc.pb.cc dictation_asr.grpc.pb.h
         dictation_asr.pb.cc dictation_asr.pb.h
+        health.grpc.pb.cc health.grpc.pb.h
+        health.pb.cc health.pb.h
         dictation_client.cpp dictation_client.h
         VERSION.h
         )

@@ -77,13 +77,15 @@ po::options_description CreateOptionsDescription(void) {
              "IP address and port (address:port) of a service the client will connect to.")
             ("tls-dir", po::value<std::string>()->default_value(""),
              "If set to a path with TLS/SSL credential files (client.crt, client.key, ca.crt), use TLS authentication. Otherwise use insecure channel (default).")
-            ("audio-path", po::value<std::string>()->required(),
+            ("audio-path", po::value<std::string>()->default_value(""),
              "Path to the audio file with speech to be recognized. It should be mono wav/ogg/mp3, 8kHz or 16kHz.")
             ("session-id", po::value<std::string>()->default_value(""),
              "Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.")
             ("grpc-timeout", po::value<int>()->default_value(0), "Timeout in milliseconds used to set gRPC deadline - "
              "how long the client is willing to wait for a reply from the server. "
              "If not specified, the service will set the deadline to a very large number.")
+            ("wait-for-service-start", po::value<int>()->default_value(0),
+             "Wait for the service start for a given duration in seconds")
             ("streaming", "If present, will perform asynchronous RPC. This is obligatory for audio content larger than 3.5 MB.")
             ("time-offsets", po::value<bool>()->default_value(false),
              "If true, returns also recognized word time offsets.")
@@ -125,7 +127,28 @@ int main(int argc, const char *const argv[]) {
     try {
         techmo::dictation::DictationSessionConfig config = CreateDictationSessionConfig(userOptions);
 
-        std::string audio_path=userOptions["audio-path"].as<std::string>();
+        techmo::dictation::DictationClient dictation_client{
+            userOptions["service-address"].as<std::string>(),
+            userOptions["tls-dir"].as<std::string>(),
+        };
+
+        auto wait_for_service_timeout = userOptions["wait-for-service-start"].as<int>();
+        if (wait_for_service_timeout > 0) {
+            auto health_status = dictation_client.CheckHealth(wait_for_service_timeout);
+            /* NAGIOS return codes :
+             * https://nagios-plugins.org/doc/guidelines.html#AEN78 */
+            if (health_status == health::HealthCheckResponse::NOT_SERVING)
+                return 2;
+            else if (health_status != health::HealthCheckResponse::SERVING)
+                return 3;
+        }
+
+        std::string audio_path = userOptions["audio-path"].as<std::string>();
+
+        if (audio_path.empty())
+        {
+            return 0;
+        }
 
         WAV_DATA wav_data;
 
@@ -139,11 +162,6 @@ int main(int argc, const char *const argv[]) {
             std::cout << "Error: not supported audio file. Only *.wav and *.ogg files are supported." << std::endl;
             return 1;
         }
-
-        techmo::dictation::DictationClient dictation_client{
-            userOptions["service-address"].as<std::string>(),
-            userOptions["tls-dir"].as<std::string>(),
-        };
 
         if (userOptions.count("streaming")) {
             const auto responses = dictation_client.StreamingRecognize(config, wav_data);
