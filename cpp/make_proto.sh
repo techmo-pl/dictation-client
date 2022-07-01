@@ -8,6 +8,7 @@ grpc_root="/opt/grpc_v1.38.1"
 PROTOC="$grpc_root/build/third_party/protobuf/protoc"
 PLUGIN="--plugin=protoc-gen-grpc=$grpc_root/build/grpc_cpp_plugin"
 GAPIS="../submodules/googleapis"
+PROTOBUF="../submodules/googleapis"
 
 if [ ! -x ${PROTOC} ]; then
     echo "${PROTOC}; no such file."
@@ -19,7 +20,7 @@ path_i="../proto"
 path_o="libdictation-client"
 ${PROTOC}   -I${path_i} \
             -I${GAPIS} \
-            -I${GAPIS}/third_party/protobuf/src \
+            -I${PROTOBUF}/src \
             ${PLUGIN} \
             --cpp_out=${path_o} \
             --grpc_out=${path_o} \
