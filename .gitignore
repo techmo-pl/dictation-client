@@ -39,6 +39,9 @@ venv/
 #python virtual environment
 .env/
 
+#googleapis sources
+googleapis_files/*
+
 # ignore files in directory `wav`
 cpp/docker/wav/*
 

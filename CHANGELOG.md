@@ -7,6 +7,7 @@ Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp
 ## [2.4.1] - 2022-06-29
 ### Changed
  - [CPP, python] `ssl-dir` option renamed to `tls-dir`
+ - [CPP] Use googleapis and protobuf from /opt/grpc_v1.38.1 insteaf of submodules
 
 ## [2.4.0] - 2021-12-17
 ### Added
