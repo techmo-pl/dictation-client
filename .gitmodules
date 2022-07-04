@@ -1,6 +1,0 @@
-[submodule "submodules/googleapis"]
-	path = submodules/googleapis
-	url = https://github.com/googleapis/googleapis.git
-[submodule "submodules/protobuf"]
-	path = submodules/protobuf
-	url = https://github.com/protocolbuffers/protobuf.git
