@@ -39,7 +39,7 @@ required_files=(    "google/api/annotations"
                     "google/rpc/status"
 )
 
-extensions=( ".pb.h" ".pb.cc" ".grpc.pb.h" ".grpc.pb.cc")
+extensions=( ".pb.h" ".pb.cc" ".grpc.pb.h" ".grpc.pb.cc" )
 
 ok=true
 for file in ${required_files[@]}; do
