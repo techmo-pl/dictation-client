@@ -6,7 +6,7 @@ set -eo pipefail
 python3 -m venv proto_env
 # shellcheck disable=SC1091
 source proto_env/bin/activate
-pip install grpcio-tools==1.7.0
+pip install grpcio-tools==1.38.1
 
 function cleanup() {
     # shellcheck disable=SC1091
@@ -19,7 +19,7 @@ path_i="../proto"
 path_o="service"
 python3 -m grpc_tools.protoc \
 	        -I${path_i} \
-            -I../submodules/googleapis \
+            -I../googleapis_files \
             --python_out=${path_o} \
             --grpc_python_out=${path_o} \
             ${path_i}/dictation_asr.proto
