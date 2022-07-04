@@ -10,9 +10,9 @@ SCRIPTPATH=$(dirname "${SCRIPT}")
 grpc_root="/opt/grpc_v1.38.1"
 
 PROTOC="$grpc_root/build/third_party/protobuf/protoc"
+PROTOBUF="$grpc_root/third_party/protobuf/src"
 PLUGIN="--plugin=protoc-gen-grpc=$grpc_root/build/grpc_cpp_plugin"
-GAPIS="${SCRIPTPATH}/../submodules/googleapis"
-PROTOBUF="${SCRIPTPATH}/../submodules/protobuf"
+GAPIS="${SCRIPTPATH}/../googleapis_files"
 
 if [ ! -x ${PROTOC} ]; then
     echo "${PROTOC}; no such file."
@@ -24,7 +24,7 @@ path_i="${SCRIPTPATH}/../proto"
 path_o="${SCRIPTPATH}/libdictation-client"
 ${PROTOC}   -I${path_i} \
             -I${GAPIS} \
-            -I${PROTOBUF}/src \
+            -I${PROTOBUF} \
             ${PLUGIN} \
             --cpp_out=${path_o} \
             --grpc_out=${path_o} \
