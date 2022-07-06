@@ -29,9 +29,9 @@ struct DictationSessionConfig {
 
 class DictationClient {
 public:
-    DictationClient(const std::string& service_address, const std::string& ssl_directory)
+    DictationClient(const std::string& service_address, const std::string& tls_directory)
         : service_address_{ service_address }
-        , ssl_directory_{ ssl_directory }
+        , tls_directory_{ tls_directory }
     {
     }
 
@@ -43,7 +43,7 @@ private:
     DictationClient(); // Disable default constructor.
 
     const std::string service_address_;    // IP address and port (address:port) of a service the client will connect to.
-    const std::string ssl_directory_;
+    const std::string tls_directory_;
 };
 
 }}

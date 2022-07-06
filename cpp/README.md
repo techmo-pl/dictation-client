@@ -26,14 +26,14 @@ In this case open project repository in web browser, go to the `submodules` dire
 To prepare the docker image with C++ implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
-docker build -f Dockerfile-cpp -t dictation-client-cpp:2.4.0 .
+docker build -f Dockerfile-cpp -t dictation-client-cpp:2.4.1 .
 ```
 
 **Note:** The build process may take a several dozen minutes (for shorter build time use the python implementation instead).
 
 When the build process is complete, following a message will be shown:
 ```
-Successfully tagged dictation-client-cpp:2.4.0
+Successfully tagged dictation-client-cpp:2.4.1
 ```
 
 ### Run Dictation client
@@ -134,8 +134,8 @@ Default value `4` should be appropriate for the average personal computer.
   --help                      Print help message.
   --service-address arg       IP address and port (address:port) of a service
                               the client will connect to.
-  --ssl-dir arg               If set to a path with ssl credential files
-                              (client.crt, client.key, ca.crt), use ssl
+  --tls-dir arg               If set to a path with TLS/SSL credential files
+                              (client.crt, client.key, ca.crt), use TLS
                               authentication. Otherwise use insecure channel
                               (default).
   --audio-path arg            Path to the audio file with speech to be recognized. 

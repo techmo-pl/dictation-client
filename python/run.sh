@@ -10,6 +10,6 @@ IFS=$'\n\t'
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
 
-source "${SCRIPTPATH}/.venv/bin/activate"
+source "${SCRIPTPATH}/.env/bin/activate"
 export PYTHONIOENCODING=utf8
 python3 "${SCRIPTPATH}/dictation_client.py" "$@"

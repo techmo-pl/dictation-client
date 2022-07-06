@@ -1,1 +1,1 @@
-static constexpr auto LIBDICTATION_CLIENT_VERSION = "2.4.0";
+static constexpr auto LIBDICTATION_CLIENT_VERSION = "2.4.1";

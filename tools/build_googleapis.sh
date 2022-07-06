@@ -1,7 +1,24 @@
 #!/bin/bash
 
+SCRIPT=$(realpath "$0")
+SCRIPTPATH=$(dirname "${SCRIPT}")
+
+function cleanup()
+{
+    rm -rf "${tmp_dir}"
+}
+trap cleanup EXIT
+
+
 grpc_root=/opt/grpc_v1.38.1
-cd submodules/googleapis
+
+tmp_dir="${SCRIPTPATH}/../tmp_googleapis"
+target_dir="${SCRIPTPATH}/../googleapis_files"
+
+mkdir "${target_dir}"
+
+cp -r "${grpc_root}/third_party/googleapis/" "${tmp_dir}"
+cd "${tmp_dir}"
 
 jobs=8
 [ $# -ge 1 ] && jobs=$1
@@ -41,6 +58,7 @@ if ! $ok; then
     exit 1
 fi
 
-echo "All required googleapis files found."
+cp -r gens "${target_dir}"
+cp -r google "${target_dir}"
 
-cd ../..
+echo "All required googleapis files found."

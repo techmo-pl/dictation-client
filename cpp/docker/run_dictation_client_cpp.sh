@@ -8,7 +8,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-IMAGE_VERSION=2.4.0
+IMAGE_VERSION=2.4.1
 
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
@@ -51,7 +51,7 @@ while getopts "f:hs:-:" optchar; do
                     usage; exit 0 
                     ;;
                 tls)  
-                    opts+=( "--ssl-dir" "/volume/tls" )
+                    opts+=( "--tls-dir" "/volume/tls" )
                     ;;
                 time-offsets)  
                     opts+=( "--time-offsets=true" )

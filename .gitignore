@@ -39,6 +39,12 @@ venv/
 #python virtual environment
 .env/
 
+#googleapis sources
+googleapis_files/*
+
+#protobuf sources
+cpp/libdictation-client/dictation_asr.*
+
 # ignore files in directory `wav`
 cpp/docker/wav/*
 

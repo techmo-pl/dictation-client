@@ -14,7 +14,7 @@ To prepare a docker image with Python implementation of the Dictation Client, us
 The build process will take several minutes.
 When the build process is complete, you will receive a message:
 ```
-Successfully tagged dictation-client-python:2.4.0
+Successfully tagged dictation-client-python:2.4.1
 ```
 
 ### Run Dictation client
@@ -79,9 +79,6 @@ To do this, open project repository in web browser, go to the `submodules` direc
 
 ##### Dependencies
 
-If you don't have virtualenv yet, install it first (https://virtualenv.pypa.io/en/stable/installation.html)
-On Debian/Ubuntu OS this package can be installed by using `setup.sh` script.
-
 Then install the required dependencies inside the virtual environment (this step only needs to be done the first time, for the further usage it is enough to use the existing virtual environment).
 
 
@@ -90,8 +87,8 @@ Then install the required dependencies inside the virtual environment (this step
 Use Python 3 with the virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3 .venv
-source .venv/bin/activate
+python3 -m venv .env
+source .env/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -107,8 +104,8 @@ then confirm your choice.
 Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
 
 ```
-virtualenv -p python3 .venv
-.\.venv\Scripts\activate
+python3 -m venv .env
+.\.env\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -142,11 +139,11 @@ This might be required when using other gRPC or Protocol Buffers version.
 To run the Dictation Client, activate the virtual environment first:
 - On Linux:
 ```
-source .venv/bin/activate
+source .env/bin/activate
 ```
 - On Windows:
 ```
-.\.venv\Scripts\activate
+.\.env\Scripts\activate
 ```
 Then run Dictation Client. Sample use:
 
@@ -171,9 +168,9 @@ Available options:
   --audio-path AUDIO    Path to the audio file with speech to be recognized. 
                         It should be mono wav/ogg/mp3, 8kHz or 16kHz.
   --mic                 Use microphone as an audio source (instead of audio file).
-  --ssl-dir SSL_DIRECTORY
-                        If set to a path with ssl credential files
-                        (client.crt, client.key, ca.crt), use ssl
+  --tls-dir TLS_DIRECTORY
+                        If set to a path with TLS/SSL credential files
+                        (client.crt, client.key, ca.crt), use tls
                         authentication. Otherwise use insecure channel
                         (default).
   --session-id SESSION_ID
@@ -256,7 +253,7 @@ On the Linux operating systems using Advanced Linux Sound Architecture (ALSA) mi
 
 If you get the following output after runing request:
 ```
-Dictation ASR gRPC client 2.4.0
+Dictation ASR gRPC client 2.4.1
 ALSA lib pcm_dsnoop.c:618:(snd_pcm_dsnoop_open) unable to open slave
 ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear
 ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe
