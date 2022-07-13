@@ -85,7 +85,8 @@ po::options_description CreateOptionsDescription(void) {
              "how long the client is willing to wait for a reply from the server. "
              "If not specified, the service will set the deadline to a very large number.")
             ("wait-for-service-start", po::value<int>()->default_value(0),
-             "Wait for the service start for a given duration in seconds")
+             "Wait for the service start for a given duration in seconds. "
+             "Additionally print service health status, but only for a non-zero timeout value. (defaults to 0)")
             ("streaming", "If present, will perform asynchronous RPC. This is obligatory for audio content larger than 3.5 MB.")
             ("time-offsets", po::value<bool>()->default_value(false),
              "If true, returns also recognized word time offsets.")

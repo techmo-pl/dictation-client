@@ -53,7 +53,7 @@ if __name__ == '__main__':
     parser.add_argument("--grpc-timeout",
                         help="Timeout in milliseconds used to set gRPC deadline - how long the client is willing to wait for a reply from the server. If not specified, the service will set the deadline to a very large number.",
                         default=0, type=int)
-    parser.add_argument("--wait-for-service-start", help="Wait for the service start for a given duration in seconds", default=0, type=int)
+    parser.add_argument("--wait-for-service-start", help="Wait for the service start for a given duration in seconds. Additionally print service health status, but only for a non-zero timeout value. (defaults to 0)", default=0, type=int)
     # request configuration section
     parser.add_argument("--max-alternatives", help="Maximum number of recognition hypotheses to be returned.",
                         default=1, type=int)

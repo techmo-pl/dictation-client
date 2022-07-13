@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.5)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules" ${CMAKE_MODULE_PATH})
 
-project(dictation-client VERSION 2.4.1 LANGUAGES CXX)
+project(dictation-client VERSION 2.5.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 
