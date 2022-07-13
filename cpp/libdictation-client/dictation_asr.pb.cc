@@ -14,317 +14,231 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ConfigField_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_LatticeEdge_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RecognitionAudio_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_RecognitionConfig_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RecognitionLattice_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SpeechContext_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SpeechRecognitionAlternative_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SpeechRecognitionResult_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_StreamingRecognitionConfig_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_StreamingRecognitionResult_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_dictation_5fasr_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_WordInfo_dictation_5fasr_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_google_2fprotobuf_2fduration_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Duration_google_2fprotobuf_2fduration_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_google_2frpc_2fstatus_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Status_google_2frpc_2fstatus_2eproto;
+
+PROTOBUF_PRAGMA_INIT_SEG
 namespace google {
 namespace cloud {
 namespace speech {
 namespace v1 {
-class RecognizeRequestDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RecognizeRequest> _instance;
-} _RecognizeRequest_default_instance_;
-class StreamingRecognizeRequestDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<StreamingRecognizeRequest> _instance;
-  const ::google::cloud::speech::v1::StreamingRecognitionConfig* streaming_config_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr audio_content_;
-} _StreamingRecognizeRequest_default_instance_;
-class StreamingRecognitionConfigDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<StreamingRecognitionConfig> _instance;
-} _StreamingRecognitionConfig_default_instance_;
-class RecognitionConfigDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RecognitionConfig> _instance;
-} _RecognitionConfig_default_instance_;
-class SpeechContextDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SpeechContext> _instance;
-} _SpeechContext_default_instance_;
-class ConfigFieldDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ConfigField> _instance;
-} _ConfigField_default_instance_;
-class RecognitionAudioDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RecognitionAudio> _instance;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr content_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr uri_;
-} _RecognitionAudio_default_instance_;
-class RecognizeResponseDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RecognizeResponse> _instance;
-} _RecognizeResponse_default_instance_;
-class StreamingRecognizeResponseDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<StreamingRecognizeResponse> _instance;
-} _StreamingRecognizeResponse_default_instance_;
-class StreamingRecognitionResultDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<StreamingRecognitionResult> _instance;
-} _StreamingRecognitionResult_default_instance_;
-class SpeechRecognitionResultDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SpeechRecognitionResult> _instance;
-} _SpeechRecognitionResult_default_instance_;
-class SpeechRecognitionAlternativeDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SpeechRecognitionAlternative> _instance;
-} _SpeechRecognitionAlternative_default_instance_;
-class WordInfoDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<WordInfo> _instance;
-} _WordInfo_default_instance_;
-class RecognitionLatticeDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RecognitionLattice> _instance;
-} _RecognitionLattice_default_instance_;
-class LatticeEdgeDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<LatticeEdge> _instance;
-} _LatticeEdge_default_instance_;
+constexpr RecognizeRequest::RecognizeRequest(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : config_(nullptr)
+  , audio_(nullptr){}
+struct RecognizeRequestDefaultTypeInternal {
+  constexpr RecognizeRequestDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~RecognizeRequestDefaultTypeInternal() {}
+  union {
+    RecognizeRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT RecognizeRequestDefaultTypeInternal _RecognizeRequest_default_instance_;
+constexpr StreamingRecognizeRequest::StreamingRecognizeRequest(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : _oneof_case_{}{}
+struct StreamingRecognizeRequestDefaultTypeInternal {
+  constexpr StreamingRecognizeRequestDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~StreamingRecognizeRequestDefaultTypeInternal() {}
+  union {
+    StreamingRecognizeRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StreamingRecognizeRequestDefaultTypeInternal _StreamingRecognizeRequest_default_instance_;
+constexpr StreamingRecognitionConfig::StreamingRecognitionConfig(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : config_(nullptr)
+  , single_utterance_(false)
+  , interim_results_(false){}
+struct StreamingRecognitionConfigDefaultTypeInternal {
+  constexpr StreamingRecognitionConfigDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~StreamingRecognitionConfigDefaultTypeInternal() {}
+  union {
+    StreamingRecognitionConfig _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StreamingRecognitionConfigDefaultTypeInternal _StreamingRecognitionConfig_default_instance_;
+constexpr RecognitionConfig::RecognitionConfig(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : speech_contexts_()
+  , config_fields_()
+  , language_code_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , model_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , encoding_(0)
+
+  , sample_rate_hertz_(0)
+  , max_alternatives_(0)
+  , profanity_filter_(false)
+  , enable_word_time_offsets_(false)
+  , enable_automatic_punctuation_(false)
+  , use_enhanced_(false){}
+struct RecognitionConfigDefaultTypeInternal {
+  constexpr RecognitionConfigDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~RecognitionConfigDefaultTypeInternal() {}
+  union {
+    RecognitionConfig _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT RecognitionConfigDefaultTypeInternal _RecognitionConfig_default_instance_;
+constexpr SpeechContext::SpeechContext(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : phrases_(){}
+struct SpeechContextDefaultTypeInternal {
+  constexpr SpeechContextDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~SpeechContextDefaultTypeInternal() {}
+  union {
+    SpeechContext _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SpeechContextDefaultTypeInternal _SpeechContext_default_instance_;
+constexpr ConfigField::ConfigField(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : key_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , value_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+struct ConfigFieldDefaultTypeInternal {
+  constexpr ConfigFieldDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~ConfigFieldDefaultTypeInternal() {}
+  union {
+    ConfigField _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ConfigFieldDefaultTypeInternal _ConfigField_default_instance_;
+constexpr RecognitionAudio::RecognitionAudio(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : _oneof_case_{}{}
+struct RecognitionAudioDefaultTypeInternal {
+  constexpr RecognitionAudioDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~RecognitionAudioDefaultTypeInternal() {}
+  union {
+    RecognitionAudio _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT RecognitionAudioDefaultTypeInternal _RecognitionAudio_default_instance_;
+constexpr RecognizeResponse::RecognizeResponse(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : results_(){}
+struct RecognizeResponseDefaultTypeInternal {
+  constexpr RecognizeResponseDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~RecognizeResponseDefaultTypeInternal() {}
+  union {
+    RecognizeResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT RecognizeResponseDefaultTypeInternal _RecognizeResponse_default_instance_;
+constexpr StreamingRecognizeResponse::StreamingRecognizeResponse(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : results_()
+  , error_(nullptr)
+  , speech_event_type_(0)
+{}
+struct StreamingRecognizeResponseDefaultTypeInternal {
+  constexpr StreamingRecognizeResponseDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~StreamingRecognizeResponseDefaultTypeInternal() {}
+  union {
+    StreamingRecognizeResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StreamingRecognizeResponseDefaultTypeInternal _StreamingRecognizeResponse_default_instance_;
+constexpr StreamingRecognitionResult::StreamingRecognitionResult(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : alternatives_()
+  , lattice_()
+  , is_final_(false)
+  , stability_(0)
+  , result_finalization_cause_(0)
+{}
+struct StreamingRecognitionResultDefaultTypeInternal {
+  constexpr StreamingRecognitionResultDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~StreamingRecognitionResultDefaultTypeInternal() {}
+  union {
+    StreamingRecognitionResult _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StreamingRecognitionResultDefaultTypeInternal _StreamingRecognitionResult_default_instance_;
+constexpr SpeechRecognitionResult::SpeechRecognitionResult(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : alternatives_()
+  , lattice_(){}
+struct SpeechRecognitionResultDefaultTypeInternal {
+  constexpr SpeechRecognitionResultDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~SpeechRecognitionResultDefaultTypeInternal() {}
+  union {
+    SpeechRecognitionResult _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SpeechRecognitionResultDefaultTypeInternal _SpeechRecognitionResult_default_instance_;
+constexpr SpeechRecognitionAlternative::SpeechRecognitionAlternative(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : words_()
+  , transcript_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , confidence_(0){}
+struct SpeechRecognitionAlternativeDefaultTypeInternal {
+  constexpr SpeechRecognitionAlternativeDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~SpeechRecognitionAlternativeDefaultTypeInternal() {}
+  union {
+    SpeechRecognitionAlternative _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SpeechRecognitionAlternativeDefaultTypeInternal _SpeechRecognitionAlternative_default_instance_;
+constexpr WordInfo::WordInfo(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : word_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , start_time_(nullptr)
+  , end_time_(nullptr){}
+struct WordInfoDefaultTypeInternal {
+  constexpr WordInfoDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~WordInfoDefaultTypeInternal() {}
+  union {
+    WordInfo _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT WordInfoDefaultTypeInternal _WordInfo_default_instance_;
+constexpr RecognitionLattice::RecognitionLattice(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : final_nodes_()
+  , _final_nodes_cached_byte_size_()
+  , edges_(){}
+struct RecognitionLatticeDefaultTypeInternal {
+  constexpr RecognitionLatticeDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~RecognitionLatticeDefaultTypeInternal() {}
+  union {
+    RecognitionLattice _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT RecognitionLatticeDefaultTypeInternal _RecognitionLattice_default_instance_;
+constexpr LatticeEdge::LatticeEdge(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : symbol_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , start_node_(0)
+  , end_node_(0)
+  , language_cost_(0)
+  , acoustic_cost_(0)
+  , duration_(0){}
+struct LatticeEdgeDefaultTypeInternal {
+  constexpr LatticeEdgeDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~LatticeEdgeDefaultTypeInternal() {}
+  union {
+    LatticeEdge _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT LatticeEdgeDefaultTypeInternal _LatticeEdge_default_instance_;
 }  // namespace v1
 }  // namespace speech
 }  // namespace cloud
 }  // namespace google
-static void InitDefaultsscc_info_ConfigField_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_ConfigField_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::ConfigField();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::ConfigField::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ConfigField_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ConfigField_dictation_5fasr_2eproto}, {}};
-
-static void InitDefaultsscc_info_LatticeEdge_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_LatticeEdge_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::LatticeEdge();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::LatticeEdge::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_LatticeEdge_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_LatticeEdge_dictation_5fasr_2eproto}, {}};
-
-static void InitDefaultsscc_info_RecognitionAudio_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_RecognitionAudio_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::RecognitionAudio();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::RecognitionAudio::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RecognitionAudio_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_RecognitionAudio_dictation_5fasr_2eproto}, {}};
-
-static void InitDefaultsscc_info_RecognitionConfig_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_RecognitionConfig_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::RecognitionConfig();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::RecognitionConfig::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_RecognitionConfig_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_RecognitionConfig_dictation_5fasr_2eproto}, {
-      &scc_info_SpeechContext_dictation_5fasr_2eproto.base,
-      &scc_info_ConfigField_dictation_5fasr_2eproto.base,}};
-
-static void InitDefaultsscc_info_RecognitionLattice_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_RecognitionLattice_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::RecognitionLattice();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::RecognitionLattice::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RecognitionLattice_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_RecognitionLattice_dictation_5fasr_2eproto}, {
-      &scc_info_LatticeEdge_dictation_5fasr_2eproto.base,}};
-
-static void InitDefaultsscc_info_RecognizeRequest_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_RecognizeRequest_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::RecognizeRequest();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::RecognizeRequest::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_RecognizeRequest_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_RecognizeRequest_dictation_5fasr_2eproto}, {
-      &scc_info_RecognitionConfig_dictation_5fasr_2eproto.base,
-      &scc_info_RecognitionAudio_dictation_5fasr_2eproto.base,}};
-
-static void InitDefaultsscc_info_RecognizeResponse_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_RecognizeResponse_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::RecognizeResponse();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::RecognizeResponse::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RecognizeResponse_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_RecognizeResponse_dictation_5fasr_2eproto}, {
-      &scc_info_SpeechRecognitionResult_dictation_5fasr_2eproto.base,}};
-
-static void InitDefaultsscc_info_SpeechContext_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_SpeechContext_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::SpeechContext();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::SpeechContext::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SpeechContext_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_SpeechContext_dictation_5fasr_2eproto}, {}};
-
-static void InitDefaultsscc_info_SpeechRecognitionAlternative_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_SpeechRecognitionAlternative_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::SpeechRecognitionAlternative();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::SpeechRecognitionAlternative::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_SpeechRecognitionAlternative_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_SpeechRecognitionAlternative_dictation_5fasr_2eproto}, {
-      &scc_info_WordInfo_dictation_5fasr_2eproto.base,}};
-
-static void InitDefaultsscc_info_SpeechRecognitionResult_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_SpeechRecognitionResult_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::SpeechRecognitionResult();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::SpeechRecognitionResult::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SpeechRecognitionResult_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_SpeechRecognitionResult_dictation_5fasr_2eproto}, {
-      &scc_info_SpeechRecognitionAlternative_dictation_5fasr_2eproto.base,
-      &scc_info_RecognitionLattice_dictation_5fasr_2eproto.base,}};
-
-static void InitDefaultsscc_info_StreamingRecognitionConfig_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_StreamingRecognitionConfig_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::StreamingRecognitionConfig();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::StreamingRecognitionConfig::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_StreamingRecognitionConfig_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_StreamingRecognitionConfig_dictation_5fasr_2eproto}, {
-      &scc_info_RecognitionConfig_dictation_5fasr_2eproto.base,}};
-
-static void InitDefaultsscc_info_StreamingRecognitionResult_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_StreamingRecognitionResult_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::StreamingRecognitionResult();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::StreamingRecognitionResult::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_StreamingRecognitionResult_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_StreamingRecognitionResult_dictation_5fasr_2eproto}, {
-      &scc_info_SpeechRecognitionAlternative_dictation_5fasr_2eproto.base,
-      &scc_info_RecognitionLattice_dictation_5fasr_2eproto.base,}};
-
-static void InitDefaultsscc_info_StreamingRecognizeRequest_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_StreamingRecognizeRequest_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::StreamingRecognizeRequest();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::StreamingRecognizeRequest::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_StreamingRecognizeRequest_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_StreamingRecognizeRequest_dictation_5fasr_2eproto}, {
-      &scc_info_StreamingRecognitionConfig_dictation_5fasr_2eproto.base,}};
-
-static void InitDefaultsscc_info_StreamingRecognizeResponse_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_StreamingRecognizeResponse_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::StreamingRecognizeResponse();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::StreamingRecognizeResponse::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_StreamingRecognizeResponse_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_StreamingRecognizeResponse_dictation_5fasr_2eproto}, {
-      &scc_info_Status_google_2frpc_2fstatus_2eproto.base,
-      &scc_info_StreamingRecognitionResult_dictation_5fasr_2eproto.base,}};
-
-static void InitDefaultsscc_info_WordInfo_dictation_5fasr_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::google::cloud::speech::v1::_WordInfo_default_instance_;
-    new (ptr) ::google::cloud::speech::v1::WordInfo();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::google::cloud::speech::v1::WordInfo::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_WordInfo_dictation_5fasr_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_WordInfo_dictation_5fasr_2eproto}, {
-      &scc_info_Duration_google_2fprotobuf_2fduration_2eproto.base,}};
-
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_dictation_5fasr_2eproto[15];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_dictation_5fasr_2eproto[3];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_dictation_5fasr_2eproto = nullptr;
@@ -342,8 +256,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_dictation_5fasr_2eproto::offse
   ~0u,  // no _extensions_
   PROTOBUF_FIELD_OFFSET(::google::cloud::speech::v1::StreamingRecognizeRequest, _oneof_case_[0]),
   ~0u,  // no _weak_field_map_
-  offsetof(::google::cloud::speech::v1::StreamingRecognizeRequestDefaultTypeInternal, streaming_config_),
-  offsetof(::google::cloud::speech::v1::StreamingRecognizeRequestDefaultTypeInternal, audio_content_),
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   PROTOBUF_FIELD_OFFSET(::google::cloud::speech::v1::StreamingRecognizeRequest, streaming_request_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::google::cloud::speech::v1::StreamingRecognitionConfig, _internal_metadata_),
@@ -387,8 +301,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_dictation_5fasr_2eproto::offse
   ~0u,  // no _extensions_
   PROTOBUF_FIELD_OFFSET(::google::cloud::speech::v1::RecognitionAudio, _oneof_case_[0]),
   ~0u,  // no _weak_field_map_
-  offsetof(::google::cloud::speech::v1::RecognitionAudioDefaultTypeInternal, content_),
-  offsetof(::google::cloud::speech::v1::RecognitionAudioDefaultTypeInternal, uri_),
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   PROTOBUF_FIELD_OFFSET(::google::cloud::speech::v1::RecognitionAudio, audio_source_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::google::cloud::speech::v1::RecognizeResponse, _internal_metadata_),
@@ -580,34 +494,19 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
   &::descriptor_table_google_2fprotobuf_2fduration_2eproto,
   &::descriptor_table_google_2frpc_2fstatus_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_dictation_5fasr_2eproto_sccs[15] = {
-  &scc_info_ConfigField_dictation_5fasr_2eproto.base,
-  &scc_info_LatticeEdge_dictation_5fasr_2eproto.base,
-  &scc_info_RecognitionAudio_dictation_5fasr_2eproto.base,
-  &scc_info_RecognitionConfig_dictation_5fasr_2eproto.base,
-  &scc_info_RecognitionLattice_dictation_5fasr_2eproto.base,
-  &scc_info_RecognizeRequest_dictation_5fasr_2eproto.base,
-  &scc_info_RecognizeResponse_dictation_5fasr_2eproto.base,
-  &scc_info_SpeechContext_dictation_5fasr_2eproto.base,
-  &scc_info_SpeechRecognitionAlternative_dictation_5fasr_2eproto.base,
-  &scc_info_SpeechRecognitionResult_dictation_5fasr_2eproto.base,
-  &scc_info_StreamingRecognitionConfig_dictation_5fasr_2eproto.base,
-  &scc_info_StreamingRecognitionResult_dictation_5fasr_2eproto.base,
-  &scc_info_StreamingRecognizeRequest_dictation_5fasr_2eproto.base,
-  &scc_info_StreamingRecognizeResponse_dictation_5fasr_2eproto.base,
-  &scc_info_WordInfo_dictation_5fasr_2eproto.base,
-};
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_dictation_5fasr_2eproto_once;
-static bool descriptor_table_dictation_5fasr_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_dictation_5fasr_2eproto = {
-  &descriptor_table_dictation_5fasr_2eproto_initialized, descriptor_table_protodef_dictation_5fasr_2eproto, "dictation_asr.proto", 3201,
-  &descriptor_table_dictation_5fasr_2eproto_once, descriptor_table_dictation_5fasr_2eproto_sccs, descriptor_table_dictation_5fasr_2eproto_deps, 15, 3,
+  false, false, 3201, descriptor_table_protodef_dictation_5fasr_2eproto, "dictation_asr.proto", 
+  &descriptor_table_dictation_5fasr_2eproto_once, descriptor_table_dictation_5fasr_2eproto_deps, 3, 15,
   schemas, file_default_instances, TableStruct_dictation_5fasr_2eproto::offsets,
-  file_level_metadata_dictation_5fasr_2eproto, 15, file_level_enum_descriptors_dictation_5fasr_2eproto, file_level_service_descriptors_dictation_5fasr_2eproto,
+  file_level_metadata_dictation_5fasr_2eproto, file_level_enum_descriptors_dictation_5fasr_2eproto, file_level_service_descriptors_dictation_5fasr_2eproto,
 };
+PROTOBUF_ATTRIBUTE_WEAK const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable* descriptor_table_dictation_5fasr_2eproto_getter() {
+  return &descriptor_table_dictation_5fasr_2eproto;
+}
 
 // Force running AddDescriptors() at dynamic initialization time.
-static bool dynamic_init_dummy_dictation_5fasr_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_dictation_5fasr_2eproto), true);
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_dictation_5fasr_2eproto(&descriptor_table_dictation_5fasr_2eproto);
 namespace google {
 namespace cloud {
 namespace speech {
@@ -700,12 +599,6 @@ constexpr int StreamingRecognitionResult::ResultFinalizationCause_ARRAYSIZE;
 
 // ===================================================================
 
-void RecognizeRequest::InitAsDefaultInstance() {
-  ::google::cloud::speech::v1::_RecognizeRequest_default_instance_._instance.get_mutable()->config_ = const_cast< ::google::cloud::speech::v1::RecognitionConfig*>(
-      ::google::cloud::speech::v1::RecognitionConfig::internal_default_instance());
-  ::google::cloud::speech::v1::_RecognizeRequest_default_instance_._instance.get_mutable()->audio_ = const_cast< ::google::cloud::speech::v1::RecognitionAudio*>(
-      ::google::cloud::speech::v1::RecognitionAudio::internal_default_instance());
-}
 class RecognizeRequest::_Internal {
  public:
   static const ::google::cloud::speech::v1::RecognitionConfig& config(const RecognizeRequest* msg);
@@ -720,48 +613,15 @@ const ::google::cloud::speech::v1::RecognitionAudio&
 RecognizeRequest::_Internal::audio(const RecognizeRequest* msg) {
   return *msg->audio_;
 }
-void RecognizeRequest::unsafe_arena_set_allocated_config(
-    ::google::cloud::speech::v1::RecognitionConfig* config) {
-  if (GetArenaNoVirtual() == nullptr) {
-    delete config_;
-  }
-  config_ = config;
-  if (config) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.cloud.speech.v1.RecognizeRequest.config)
-}
-void RecognizeRequest::unsafe_arena_set_allocated_audio(
-    ::google::cloud::speech::v1::RecognitionAudio* audio) {
-  if (GetArenaNoVirtual() == nullptr) {
-    delete audio_;
-  }
-  audio_ = audio;
-  if (audio) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.cloud.speech.v1.RecognizeRequest.audio)
-}
-RecognizeRequest::RecognizeRequest()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.RecognizeRequest)
-}
 RecognizeRequest::RecognizeRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:google.cloud.speech.v1.RecognizeRequest)
 }
 RecognizeRequest::RecognizeRequest(const RecognizeRequest& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_config()) {
     config_ = new ::google::cloud::speech::v1::RecognitionConfig(*from.config_);
   } else {
@@ -776,19 +636,20 @@ RecognizeRequest::RecognizeRequest(const RecognizeRequest& from)
 }
 
 void RecognizeRequest::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_RecognizeRequest_dictation_5fasr_2eproto.base);
-  ::memset(&config_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&audio_) -
-      reinterpret_cast<char*>(&config_)) + sizeof(audio_));
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&config_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&audio_) -
+    reinterpret_cast<char*>(&config_)) + sizeof(audio_));
 }
 
 RecognizeRequest::~RecognizeRequest() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.RecognizeRequest)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void RecognizeRequest::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
   if (this != internal_default_instance()) delete config_;
   if (this != internal_default_instance()) delete audio_;
 }
@@ -802,11 +663,6 @@ void RecognizeRequest::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void RecognizeRequest::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const RecognizeRequest& RecognizeRequest::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RecognizeRequest_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void RecognizeRequest::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.RecognizeRequest)
@@ -814,24 +670,22 @@ void RecognizeRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == nullptr && config_ != nullptr) {
+  if (GetArena() == nullptr && config_ != nullptr) {
     delete config_;
   }
   config_ = nullptr;
-  if (GetArenaNoVirtual() == nullptr && audio_ != nullptr) {
+  if (GetArena() == nullptr && audio_ != nullptr) {
     delete audio_;
   }
   audio_ = nullptr;
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* RecognizeRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // .google.cloud.speech.v1.RecognitionConfig config = 1;
       case 1:
@@ -849,11 +703,14 @@ const char* RecognizeRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -891,7 +748,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.RecognizeRequest)
   return target;
@@ -946,7 +803,7 @@ void RecognizeRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 void RecognizeRequest::MergeFrom(const RecognizeRequest& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.RecognizeRequest)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -978,24 +835,23 @@ bool RecognizeRequest::IsInitialized() const {
 
 void RecognizeRequest::InternalSwap(RecognizeRequest* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(config_, other->config_);
-  swap(audio_, other->audio_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(RecognizeRequest, audio_)
+      + sizeof(RecognizeRequest::audio_)
+      - PROTOBUF_FIELD_OFFSET(RecognizeRequest, config_)>(
+          reinterpret_cast<char*>(&config_),
+          reinterpret_cast<char*>(&other->config_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata RecognizeRequest::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[0]);
 }
-
 
 // ===================================================================
 
-void StreamingRecognizeRequest::InitAsDefaultInstance() {
-  ::google::cloud::speech::v1::_StreamingRecognizeRequest_default_instance_.streaming_config_ = const_cast< ::google::cloud::speech::v1::StreamingRecognitionConfig*>(
-      ::google::cloud::speech::v1::StreamingRecognitionConfig::internal_default_instance());
-  ::google::cloud::speech::v1::_StreamingRecognizeRequest_default_instance_.audio_content_.UnsafeSetDefault(
-      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
 class StreamingRecognizeRequest::_Internal {
  public:
   static const ::google::cloud::speech::v1::StreamingRecognitionConfig& streaming_config(const StreamingRecognizeRequest* msg);
@@ -1006,7 +862,7 @@ StreamingRecognizeRequest::_Internal::streaming_config(const StreamingRecognizeR
   return *msg->streaming_request_.streaming_config_;
 }
 void StreamingRecognizeRequest::set_allocated_streaming_config(::google::cloud::speech::v1::StreamingRecognitionConfig* streaming_config) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
   clear_streaming_request();
   if (streaming_config) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
@@ -1020,22 +876,15 @@ void StreamingRecognizeRequest::set_allocated_streaming_config(::google::cloud::
   }
   // @@protoc_insertion_point(field_set_allocated:google.cloud.speech.v1.StreamingRecognizeRequest.streaming_config)
 }
-StreamingRecognizeRequest::StreamingRecognizeRequest()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.StreamingRecognizeRequest)
-}
 StreamingRecognizeRequest::StreamingRecognizeRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:google.cloud.speech.v1.StreamingRecognizeRequest)
 }
 StreamingRecognizeRequest::StreamingRecognizeRequest(const StreamingRecognizeRequest& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   clear_has_streaming_request();
   switch (from.streaming_request_case()) {
     case kStreamingConfig: {
@@ -1054,17 +903,17 @@ StreamingRecognizeRequest::StreamingRecognizeRequest(const StreamingRecognizeReq
 }
 
 void StreamingRecognizeRequest::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_StreamingRecognizeRequest_dictation_5fasr_2eproto.base);
-  clear_has_streaming_request();
+clear_has_streaming_request();
 }
 
 StreamingRecognizeRequest::~StreamingRecognizeRequest() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.StreamingRecognizeRequest)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void StreamingRecognizeRequest::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
   if (has_streaming_request()) {
     clear_streaming_request();
   }
@@ -1079,24 +928,18 @@ void StreamingRecognizeRequest::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena
 void StreamingRecognizeRequest::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const StreamingRecognizeRequest& StreamingRecognizeRequest::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_StreamingRecognizeRequest_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void StreamingRecognizeRequest::clear_streaming_request() {
 // @@protoc_insertion_point(one_of_clear_start:google.cloud.speech.v1.StreamingRecognizeRequest)
   switch (streaming_request_case()) {
     case kStreamingConfig: {
-      if (GetArenaNoVirtual() == nullptr) {
+      if (GetArena() == nullptr) {
         delete streaming_request_.streaming_config_;
       }
       break;
     }
     case kAudioContent: {
-      streaming_request_.audio_content_.Destroy(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-          GetArenaNoVirtual());
+      streaming_request_.audio_content_.Destroy(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
       break;
     }
     case STREAMING_REQUEST_NOT_SET: {
@@ -1114,16 +957,14 @@ void StreamingRecognizeRequest::Clear() {
   (void) cached_has_bits;
 
   clear_streaming_request();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* StreamingRecognizeRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // .google.cloud.speech.v1.StreamingRecognitionConfig streaming_config = 1;
       case 1:
@@ -1142,11 +983,14 @@ const char* StreamingRecognizeRequest::_InternalParse(const char* ptr, ::PROTOBU
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -1182,7 +1026,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.StreamingRecognizeRequest)
   return target;
@@ -1242,7 +1086,7 @@ void StreamingRecognizeRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message
 void StreamingRecognizeRequest::MergeFrom(const StreamingRecognizeRequest& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.StreamingRecognizeRequest)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1281,22 +1125,19 @@ bool StreamingRecognizeRequest::IsInitialized() const {
 
 void StreamingRecognizeRequest::InternalSwap(StreamingRecognizeRequest* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   swap(streaming_request_, other->streaming_request_);
   swap(_oneof_case_[0], other->_oneof_case_[0]);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata StreamingRecognizeRequest::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[1]);
 }
-
 
 // ===================================================================
 
-void StreamingRecognitionConfig::InitAsDefaultInstance() {
-  ::google::cloud::speech::v1::_StreamingRecognitionConfig_default_instance_._instance.get_mutable()->config_ = const_cast< ::google::cloud::speech::v1::RecognitionConfig*>(
-      ::google::cloud::speech::v1::RecognitionConfig::internal_default_instance());
-}
 class StreamingRecognitionConfig::_Internal {
  public:
   static const ::google::cloud::speech::v1::RecognitionConfig& config(const StreamingRecognitionConfig* msg);
@@ -1306,35 +1147,15 @@ const ::google::cloud::speech::v1::RecognitionConfig&
 StreamingRecognitionConfig::_Internal::config(const StreamingRecognitionConfig* msg) {
   return *msg->config_;
 }
-void StreamingRecognitionConfig::unsafe_arena_set_allocated_config(
-    ::google::cloud::speech::v1::RecognitionConfig* config) {
-  if (GetArenaNoVirtual() == nullptr) {
-    delete config_;
-  }
-  config_ = config;
-  if (config) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.cloud.speech.v1.StreamingRecognitionConfig.config)
-}
-StreamingRecognitionConfig::StreamingRecognitionConfig()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.StreamingRecognitionConfig)
-}
 StreamingRecognitionConfig::StreamingRecognitionConfig(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:google.cloud.speech.v1.StreamingRecognitionConfig)
 }
 StreamingRecognitionConfig::StreamingRecognitionConfig(const StreamingRecognitionConfig& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_config()) {
     config_ = new ::google::cloud::speech::v1::RecognitionConfig(*from.config_);
   } else {
@@ -1347,19 +1168,20 @@ StreamingRecognitionConfig::StreamingRecognitionConfig(const StreamingRecognitio
 }
 
 void StreamingRecognitionConfig::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_StreamingRecognitionConfig_dictation_5fasr_2eproto.base);
-  ::memset(&config_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&interim_results_) -
-      reinterpret_cast<char*>(&config_)) + sizeof(interim_results_));
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&config_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&interim_results_) -
+    reinterpret_cast<char*>(&config_)) + sizeof(interim_results_));
 }
 
 StreamingRecognitionConfig::~StreamingRecognitionConfig() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.StreamingRecognitionConfig)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void StreamingRecognitionConfig::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
   if (this != internal_default_instance()) delete config_;
 }
 
@@ -1372,11 +1194,6 @@ void StreamingRecognitionConfig::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Aren
 void StreamingRecognitionConfig::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const StreamingRecognitionConfig& StreamingRecognitionConfig::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_StreamingRecognitionConfig_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void StreamingRecognitionConfig::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.StreamingRecognitionConfig)
@@ -1384,23 +1201,21 @@ void StreamingRecognitionConfig::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == nullptr && config_ != nullptr) {
+  if (GetArena() == nullptr && config_ != nullptr) {
     delete config_;
   }
   config_ = nullptr;
   ::memset(&single_utterance_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&interim_results_) -
       reinterpret_cast<char*>(&single_utterance_)) + sizeof(interim_results_));
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* StreamingRecognitionConfig::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // .google.cloud.speech.v1.RecognitionConfig config = 1;
       case 1:
@@ -1412,24 +1227,27 @@ const char* StreamingRecognitionConfig::_InternalParse(const char* ptr, ::PROTOB
       // bool single_utterance = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          single_utterance_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          single_utterance_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // bool interim_results = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          interim_results_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          interim_results_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -1471,7 +1289,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.StreamingRecognitionConfig)
   return target;
@@ -1529,7 +1347,7 @@ void StreamingRecognitionConfig::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Messag
 void StreamingRecognitionConfig::MergeFrom(const StreamingRecognitionConfig& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.StreamingRecognitionConfig)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1564,33 +1382,29 @@ bool StreamingRecognitionConfig::IsInitialized() const {
 
 void StreamingRecognitionConfig::InternalSwap(StreamingRecognitionConfig* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(config_, other->config_);
-  swap(single_utterance_, other->single_utterance_);
-  swap(interim_results_, other->interim_results_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(StreamingRecognitionConfig, interim_results_)
+      + sizeof(StreamingRecognitionConfig::interim_results_)
+      - PROTOBUF_FIELD_OFFSET(StreamingRecognitionConfig, config_)>(
+          reinterpret_cast<char*>(&config_),
+          reinterpret_cast<char*>(&other->config_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata StreamingRecognitionConfig::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[2]);
 }
-
 
 // ===================================================================
 
-void RecognitionConfig::InitAsDefaultInstance() {
-}
 class RecognitionConfig::_Internal {
  public:
 };
 
-RecognitionConfig::RecognitionConfig()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.RecognitionConfig)
-}
 RecognitionConfig::RecognitionConfig(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena),
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   speech_contexts_(arena),
   config_fields_(arena) {
   SharedCtor();
@@ -1599,19 +1413,18 @@ RecognitionConfig::RecognitionConfig(::PROTOBUF_NAMESPACE_ID::Arena* arena)
 }
 RecognitionConfig::RecognitionConfig(const RecognitionConfig& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       speech_contexts_(from.speech_contexts_),
       config_fields_(from.config_fields_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   language_code_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_language_code().empty()) {
-    language_code_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_language_code(),
-      GetArenaNoVirtual());
+    language_code_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_language_code(), 
+      GetArena());
   }
   model_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_model().empty()) {
-    model_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_model(),
-      GetArenaNoVirtual());
+    model_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_model(), 
+      GetArena());
   }
   ::memcpy(&encoding_, &from.encoding_,
     static_cast<size_t>(reinterpret_cast<char*>(&use_enhanced_) -
@@ -1620,21 +1433,22 @@ RecognitionConfig::RecognitionConfig(const RecognitionConfig& from)
 }
 
 void RecognitionConfig::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_RecognitionConfig_dictation_5fasr_2eproto.base);
-  language_code_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  model_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&encoding_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&use_enhanced_) -
-      reinterpret_cast<char*>(&encoding_)) + sizeof(use_enhanced_));
+language_code_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+model_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&encoding_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&use_enhanced_) -
+    reinterpret_cast<char*>(&encoding_)) + sizeof(use_enhanced_));
 }
 
 RecognitionConfig::~RecognitionConfig() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.RecognitionConfig)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void RecognitionConfig::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
   language_code_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   model_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -1648,11 +1462,6 @@ void RecognitionConfig::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void RecognitionConfig::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const RecognitionConfig& RecognitionConfig::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RecognitionConfig_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void RecognitionConfig::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.RecognitionConfig)
@@ -1662,26 +1471,24 @@ void RecognitionConfig::Clear() {
 
   speech_contexts_.Clear();
   config_fields_.Clear();
-  language_code_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-  model_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  language_code_.ClearToEmpty();
+  model_.ClearToEmpty();
   ::memset(&encoding_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&use_enhanced_) -
       reinterpret_cast<char*>(&encoding_)) + sizeof(use_enhanced_));
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* RecognitionConfig::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // .google.cloud.speech.v1.RecognitionConfig.AudioEncoding encoding = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_encoding(static_cast<::google::cloud::speech::v1::RecognitionConfig_AudioEncoding>(val));
         } else goto handle_unusual;
@@ -1689,7 +1496,7 @@ const char* RecognitionConfig::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
       // int32 sample_rate_hertz = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          sample_rate_hertz_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          sample_rate_hertz_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1705,14 +1512,14 @@ const char* RecognitionConfig::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
       // int32 max_alternatives = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          max_alternatives_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          max_alternatives_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // bool profanity_filter = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          profanity_filter_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          profanity_filter_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1731,14 +1538,14 @@ const char* RecognitionConfig::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
       // bool enable_word_time_offsets = 8;
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
-          enable_word_time_offsets_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          enable_word_time_offsets_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // bool enable_automatic_punctuation = 11;
       case 11:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 88)) {
-          enable_automatic_punctuation_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          enable_automatic_punctuation_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1766,17 +1573,20 @@ const char* RecognitionConfig::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
       // bool use_enhanced = 14;
       case 14:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 112)) {
-          use_enhanced_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          use_enhanced_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -1877,7 +1687,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.RecognitionConfig)
   return target;
@@ -1986,7 +1796,7 @@ void RecognitionConfig::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) 
 void RecognitionConfig::MergeFrom(const RecognitionConfig& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.RecognitionConfig)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -2041,43 +1851,33 @@ bool RecognitionConfig::IsInitialized() const {
 
 void RecognitionConfig::InternalSwap(RecognitionConfig* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   speech_contexts_.InternalSwap(&other->speech_contexts_);
   config_fields_.InternalSwap(&other->config_fields_);
-  language_code_.Swap(&other->language_code_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  model_.Swap(&other->model_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(encoding_, other->encoding_);
-  swap(sample_rate_hertz_, other->sample_rate_hertz_);
-  swap(max_alternatives_, other->max_alternatives_);
-  swap(profanity_filter_, other->profanity_filter_);
-  swap(enable_word_time_offsets_, other->enable_word_time_offsets_);
-  swap(enable_automatic_punctuation_, other->enable_automatic_punctuation_);
-  swap(use_enhanced_, other->use_enhanced_);
+  language_code_.Swap(&other->language_code_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  model_.Swap(&other->model_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(RecognitionConfig, use_enhanced_)
+      + sizeof(RecognitionConfig::use_enhanced_)
+      - PROTOBUF_FIELD_OFFSET(RecognitionConfig, encoding_)>(
+          reinterpret_cast<char*>(&encoding_),
+          reinterpret_cast<char*>(&other->encoding_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata RecognitionConfig::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[3]);
 }
-
 
 // ===================================================================
 
-void SpeechContext::InitAsDefaultInstance() {
-}
 class SpeechContext::_Internal {
  public:
 };
 
-SpeechContext::SpeechContext()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.SpeechContext)
-}
 SpeechContext::SpeechContext(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena),
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   phrases_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
@@ -2085,23 +1885,22 @@ SpeechContext::SpeechContext(::PROTOBUF_NAMESPACE_ID::Arena* arena)
 }
 SpeechContext::SpeechContext(const SpeechContext& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       phrases_(from.phrases_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:google.cloud.speech.v1.SpeechContext)
 }
 
 void SpeechContext::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SpeechContext_dictation_5fasr_2eproto.base);
 }
 
 SpeechContext::~SpeechContext() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.SpeechContext)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void SpeechContext::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
 }
 
 void SpeechContext::ArenaDtor(void* object) {
@@ -2113,11 +1912,6 @@ void SpeechContext::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void SpeechContext::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const SpeechContext& SpeechContext::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SpeechContext_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void SpeechContext::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.SpeechContext)
@@ -2126,16 +1920,14 @@ void SpeechContext::Clear() {
   (void) cached_has_bits;
 
   phrases_.Clear();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* SpeechContext::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // repeated string phrases = 1;
       case 1:
@@ -2153,11 +1945,14 @@ const char* SpeechContext::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -2189,7 +1984,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.SpeechContext)
   return target;
@@ -2238,7 +2033,7 @@ void SpeechContext::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 void SpeechContext::MergeFrom(const SpeechContext& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.SpeechContext)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -2265,65 +2060,57 @@ bool SpeechContext::IsInitialized() const {
 
 void SpeechContext::InternalSwap(SpeechContext* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   phrases_.InternalSwap(&other->phrases_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata SpeechContext::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[4]);
 }
-
 
 // ===================================================================
 
-void ConfigField::InitAsDefaultInstance() {
-}
 class ConfigField::_Internal {
  public:
 };
 
-ConfigField::ConfigField()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.ConfigField)
-}
 ConfigField::ConfigField(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:google.cloud.speech.v1.ConfigField)
 }
 ConfigField::ConfigField(const ConfigField& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_key().empty()) {
-    key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_key(),
-      GetArenaNoVirtual());
+    key_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_key(), 
+      GetArena());
   }
   value_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_value().empty()) {
-    value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_value(),
-      GetArenaNoVirtual());
+    value_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_value(), 
+      GetArena());
   }
   // @@protoc_insertion_point(copy_constructor:google.cloud.speech.v1.ConfigField)
 }
 
 void ConfigField::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ConfigField_dictation_5fasr_2eproto.base);
-  key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  value_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+value_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ConfigField::~ConfigField() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.ConfigField)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void ConfigField::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
   key_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   value_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -2337,11 +2124,6 @@ void ConfigField::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void ConfigField::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ConfigField& ConfigField::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ConfigField_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void ConfigField::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.ConfigField)
@@ -2349,18 +2131,16 @@ void ConfigField::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  key_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-  value_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-  _internal_metadata_.Clear();
+  key_.ClearToEmpty();
+  value_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* ConfigField::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // string key = 1;
       case 1:
@@ -2382,11 +2162,14 @@ const char* ConfigField::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -2428,7 +2211,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.ConfigField)
   return target;
@@ -2483,7 +2266,7 @@ void ConfigField::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 void ConfigField::MergeFrom(const ConfigField& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.ConfigField)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -2515,46 +2298,32 @@ bool ConfigField::IsInitialized() const {
 
 void ConfigField::InternalSwap(ConfigField* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  key_.Swap(&other->key_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  value_.Swap(&other->value_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  key_.Swap(&other->key_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  value_.Swap(&other->value_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ConfigField::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[5]);
 }
-
 
 // ===================================================================
 
-void RecognitionAudio::InitAsDefaultInstance() {
-  ::google::cloud::speech::v1::_RecognitionAudio_default_instance_.content_.UnsafeSetDefault(
-      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::google::cloud::speech::v1::_RecognitionAudio_default_instance_.uri_.UnsafeSetDefault(
-      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
 class RecognitionAudio::_Internal {
  public:
 };
 
-RecognitionAudio::RecognitionAudio()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.RecognitionAudio)
-}
 RecognitionAudio::RecognitionAudio(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:google.cloud.speech.v1.RecognitionAudio)
 }
 RecognitionAudio::RecognitionAudio(const RecognitionAudio& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   clear_has_audio_source();
   switch (from.audio_source_case()) {
     case kContent: {
@@ -2573,17 +2342,17 @@ RecognitionAudio::RecognitionAudio(const RecognitionAudio& from)
 }
 
 void RecognitionAudio::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_RecognitionAudio_dictation_5fasr_2eproto.base);
-  clear_has_audio_source();
+clear_has_audio_source();
 }
 
 RecognitionAudio::~RecognitionAudio() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.RecognitionAudio)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void RecognitionAudio::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
   if (has_audio_source()) {
     clear_audio_source();
   }
@@ -2598,23 +2367,16 @@ void RecognitionAudio::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void RecognitionAudio::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const RecognitionAudio& RecognitionAudio::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RecognitionAudio_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void RecognitionAudio::clear_audio_source() {
 // @@protoc_insertion_point(one_of_clear_start:google.cloud.speech.v1.RecognitionAudio)
   switch (audio_source_case()) {
     case kContent: {
-      audio_source_.content_.Destroy(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-          GetArenaNoVirtual());
+      audio_source_.content_.Destroy(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
       break;
     }
     case kUri: {
-      audio_source_.uri_.Destroy(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-          GetArenaNoVirtual());
+      audio_source_.uri_.Destroy(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
       break;
     }
     case AUDIO_SOURCE_NOT_SET: {
@@ -2632,16 +2394,14 @@ void RecognitionAudio::Clear() {
   (void) cached_has_bits;
 
   clear_audio_source();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* RecognitionAudio::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // bytes content = 1;
       case 1:
@@ -2662,11 +2422,14 @@ const char* RecognitionAudio::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -2704,7 +2467,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.RecognitionAudio)
   return target;
@@ -2764,7 +2527,7 @@ void RecognitionAudio::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 void RecognitionAudio::MergeFrom(const RecognitionAudio& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.RecognitionAudio)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -2803,32 +2566,25 @@ bool RecognitionAudio::IsInitialized() const {
 
 void RecognitionAudio::InternalSwap(RecognitionAudio* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   swap(audio_source_, other->audio_source_);
   swap(_oneof_case_[0], other->_oneof_case_[0]);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata RecognitionAudio::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[6]);
 }
-
 
 // ===================================================================
 
-void RecognizeResponse::InitAsDefaultInstance() {
-}
 class RecognizeResponse::_Internal {
  public:
 };
 
-RecognizeResponse::RecognizeResponse()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.RecognizeResponse)
-}
 RecognizeResponse::RecognizeResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena),
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   results_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
@@ -2836,23 +2592,22 @@ RecognizeResponse::RecognizeResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
 }
 RecognizeResponse::RecognizeResponse(const RecognizeResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       results_(from.results_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:google.cloud.speech.v1.RecognizeResponse)
 }
 
 void RecognizeResponse::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_RecognizeResponse_dictation_5fasr_2eproto.base);
 }
 
 RecognizeResponse::~RecognizeResponse() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.RecognizeResponse)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void RecognizeResponse::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
 }
 
 void RecognizeResponse::ArenaDtor(void* object) {
@@ -2864,11 +2619,6 @@ void RecognizeResponse::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void RecognizeResponse::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const RecognizeResponse& RecognizeResponse::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RecognizeResponse_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void RecognizeResponse::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.RecognizeResponse)
@@ -2877,16 +2627,14 @@ void RecognizeResponse::Clear() {
   (void) cached_has_bits;
 
   results_.Clear();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* RecognizeResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // repeated .google.cloud.speech.v1.SpeechRecognitionResult results = 2;
       case 2:
@@ -2902,11 +2650,14 @@ const char* RecognizeResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -2936,7 +2687,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.RecognizeResponse)
   return target;
@@ -2984,7 +2735,7 @@ void RecognizeResponse::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) 
 void RecognizeResponse::MergeFrom(const RecognizeResponse& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.RecognizeResponse)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -3011,21 +2762,18 @@ bool RecognizeResponse::IsInitialized() const {
 
 void RecognizeResponse::InternalSwap(RecognizeResponse* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   results_.InternalSwap(&other->results_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata RecognizeResponse::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[7]);
 }
-
 
 // ===================================================================
 
-void StreamingRecognizeResponse::InitAsDefaultInstance() {
-  ::google::cloud::speech::v1::_StreamingRecognizeResponse_default_instance_._instance.get_mutable()->error_ = const_cast< ::google::rpc::Status*>(
-      ::google::rpc::Status::internal_default_instance());
-}
 class StreamingRecognizeResponse::_Internal {
  public:
   static const ::google::rpc::Status& error(const StreamingRecognizeResponse* msg);
@@ -3035,33 +2783,14 @@ const ::google::rpc::Status&
 StreamingRecognizeResponse::_Internal::error(const StreamingRecognizeResponse* msg) {
   return *msg->error_;
 }
-void StreamingRecognizeResponse::unsafe_arena_set_allocated_error(
-    ::google::rpc::Status* error) {
-  if (GetArenaNoVirtual() == nullptr) {
-    delete error_;
-  }
-  error_ = error;
-  if (error) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.cloud.speech.v1.StreamingRecognizeResponse.error)
-}
 void StreamingRecognizeResponse::clear_error() {
-  if (GetArenaNoVirtual() == nullptr && error_ != nullptr) {
+  if (GetArena() == nullptr && error_ != nullptr) {
     delete error_;
   }
   error_ = nullptr;
 }
-StreamingRecognizeResponse::StreamingRecognizeResponse()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.StreamingRecognizeResponse)
-}
 StreamingRecognizeResponse::StreamingRecognizeResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena),
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   results_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
@@ -3069,9 +2798,8 @@ StreamingRecognizeResponse::StreamingRecognizeResponse(::PROTOBUF_NAMESPACE_ID::
 }
 StreamingRecognizeResponse::StreamingRecognizeResponse(const StreamingRecognizeResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       results_(from.results_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_error()) {
     error_ = new ::google::rpc::Status(*from.error_);
   } else {
@@ -3082,19 +2810,20 @@ StreamingRecognizeResponse::StreamingRecognizeResponse(const StreamingRecognizeR
 }
 
 void StreamingRecognizeResponse::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_StreamingRecognizeResponse_dictation_5fasr_2eproto.base);
-  ::memset(&error_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&speech_event_type_) -
-      reinterpret_cast<char*>(&error_)) + sizeof(speech_event_type_));
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&error_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&speech_event_type_) -
+    reinterpret_cast<char*>(&error_)) + sizeof(speech_event_type_));
 }
 
 StreamingRecognizeResponse::~StreamingRecognizeResponse() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.StreamingRecognizeResponse)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void StreamingRecognizeResponse::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
   if (this != internal_default_instance()) delete error_;
 }
 
@@ -3107,11 +2836,6 @@ void StreamingRecognizeResponse::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Aren
 void StreamingRecognizeResponse::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const StreamingRecognizeResponse& StreamingRecognizeResponse::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_StreamingRecognizeResponse_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void StreamingRecognizeResponse::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.StreamingRecognizeResponse)
@@ -3120,21 +2844,19 @@ void StreamingRecognizeResponse::Clear() {
   (void) cached_has_bits;
 
   results_.Clear();
-  if (GetArenaNoVirtual() == nullptr && error_ != nullptr) {
+  if (GetArena() == nullptr && error_ != nullptr) {
     delete error_;
   }
   error_ = nullptr;
   speech_event_type_ = 0;
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* StreamingRecognizeResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // .google.rpc.Status error = 1;
       case 1:
@@ -3158,18 +2880,21 @@ const char* StreamingRecognizeResponse::_InternalParse(const char* ptr, ::PROTOB
       // .google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType speech_event_type = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_speech_event_type(static_cast<::google::cloud::speech::v1::StreamingRecognizeResponse_SpeechEventType>(val));
         } else goto handle_unusual;
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -3214,7 +2939,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.StreamingRecognizeResponse)
   return target;
@@ -3275,7 +3000,7 @@ void StreamingRecognizeResponse::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Messag
 void StreamingRecognizeResponse::MergeFrom(const StreamingRecognizeResponse& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.StreamingRecognizeResponse)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -3308,33 +3033,30 @@ bool StreamingRecognizeResponse::IsInitialized() const {
 
 void StreamingRecognizeResponse::InternalSwap(StreamingRecognizeResponse* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   results_.InternalSwap(&other->results_);
-  swap(error_, other->error_);
-  swap(speech_event_type_, other->speech_event_type_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(StreamingRecognizeResponse, speech_event_type_)
+      + sizeof(StreamingRecognizeResponse::speech_event_type_)
+      - PROTOBUF_FIELD_OFFSET(StreamingRecognizeResponse, error_)>(
+          reinterpret_cast<char*>(&error_),
+          reinterpret_cast<char*>(&other->error_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata StreamingRecognizeResponse::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[8]);
 }
-
 
 // ===================================================================
 
-void StreamingRecognitionResult::InitAsDefaultInstance() {
-}
 class StreamingRecognitionResult::_Internal {
  public:
 };
 
-StreamingRecognitionResult::StreamingRecognitionResult()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.StreamingRecognitionResult)
-}
 StreamingRecognitionResult::StreamingRecognitionResult(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena),
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   alternatives_(arena),
   lattice_(arena) {
   SharedCtor();
@@ -3343,10 +3065,9 @@ StreamingRecognitionResult::StreamingRecognitionResult(::PROTOBUF_NAMESPACE_ID::
 }
 StreamingRecognitionResult::StreamingRecognitionResult(const StreamingRecognitionResult& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       alternatives_(from.alternatives_),
       lattice_(from.lattice_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&is_final_, &from.is_final_,
     static_cast<size_t>(reinterpret_cast<char*>(&result_finalization_cause_) -
     reinterpret_cast<char*>(&is_final_)) + sizeof(result_finalization_cause_));
@@ -3354,19 +3075,20 @@ StreamingRecognitionResult::StreamingRecognitionResult(const StreamingRecognitio
 }
 
 void StreamingRecognitionResult::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_StreamingRecognitionResult_dictation_5fasr_2eproto.base);
-  ::memset(&is_final_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&result_finalization_cause_) -
-      reinterpret_cast<char*>(&is_final_)) + sizeof(result_finalization_cause_));
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&is_final_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&result_finalization_cause_) -
+    reinterpret_cast<char*>(&is_final_)) + sizeof(result_finalization_cause_));
 }
 
 StreamingRecognitionResult::~StreamingRecognitionResult() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.StreamingRecognitionResult)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void StreamingRecognitionResult::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
 }
 
 void StreamingRecognitionResult::ArenaDtor(void* object) {
@@ -3378,11 +3100,6 @@ void StreamingRecognitionResult::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Aren
 void StreamingRecognitionResult::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const StreamingRecognitionResult& StreamingRecognitionResult::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_StreamingRecognitionResult_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void StreamingRecognitionResult::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.StreamingRecognitionResult)
@@ -3395,16 +3112,14 @@ void StreamingRecognitionResult::Clear() {
   ::memset(&is_final_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&result_finalization_cause_) -
       reinterpret_cast<char*>(&is_final_)) + sizeof(result_finalization_cause_));
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* StreamingRecognitionResult::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // repeated .google.cloud.speech.v1.SpeechRecognitionAlternative alternatives = 1;
       case 1:
@@ -3421,7 +3136,7 @@ const char* StreamingRecognitionResult::_InternalParse(const char* ptr, ::PROTOB
       // bool is_final = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          is_final_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          is_final_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -3435,7 +3150,7 @@ const char* StreamingRecognitionResult::_InternalParse(const char* ptr, ::PROTOB
       // .google.cloud.speech.v1.StreamingRecognitionResult.ResultFinalizationCause result_finalization_cause = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_result_finalization_cause(static_cast<::google::cloud::speech::v1::StreamingRecognitionResult_ResultFinalizationCause>(val));
         } else goto handle_unusual;
@@ -3454,11 +3169,14 @@ const char* StreamingRecognitionResult::_InternalParse(const char* ptr, ::PROTOB
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -3515,7 +3233,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.StreamingRecognitionResult)
   return target;
@@ -3586,7 +3304,7 @@ void StreamingRecognitionResult::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Messag
 void StreamingRecognitionResult::MergeFrom(const StreamingRecognitionResult& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.StreamingRecognitionResult)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -3623,35 +3341,31 @@ bool StreamingRecognitionResult::IsInitialized() const {
 
 void StreamingRecognitionResult::InternalSwap(StreamingRecognitionResult* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   alternatives_.InternalSwap(&other->alternatives_);
   lattice_.InternalSwap(&other->lattice_);
-  swap(is_final_, other->is_final_);
-  swap(stability_, other->stability_);
-  swap(result_finalization_cause_, other->result_finalization_cause_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(StreamingRecognitionResult, result_finalization_cause_)
+      + sizeof(StreamingRecognitionResult::result_finalization_cause_)
+      - PROTOBUF_FIELD_OFFSET(StreamingRecognitionResult, is_final_)>(
+          reinterpret_cast<char*>(&is_final_),
+          reinterpret_cast<char*>(&other->is_final_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata StreamingRecognitionResult::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[9]);
 }
-
 
 // ===================================================================
 
-void SpeechRecognitionResult::InitAsDefaultInstance() {
-}
 class SpeechRecognitionResult::_Internal {
  public:
 };
 
-SpeechRecognitionResult::SpeechRecognitionResult()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.SpeechRecognitionResult)
-}
 SpeechRecognitionResult::SpeechRecognitionResult(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena),
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   alternatives_(arena),
   lattice_(arena) {
   SharedCtor();
@@ -3660,24 +3374,23 @@ SpeechRecognitionResult::SpeechRecognitionResult(::PROTOBUF_NAMESPACE_ID::Arena*
 }
 SpeechRecognitionResult::SpeechRecognitionResult(const SpeechRecognitionResult& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       alternatives_(from.alternatives_),
       lattice_(from.lattice_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:google.cloud.speech.v1.SpeechRecognitionResult)
 }
 
 void SpeechRecognitionResult::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SpeechRecognitionResult_dictation_5fasr_2eproto.base);
 }
 
 SpeechRecognitionResult::~SpeechRecognitionResult() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.SpeechRecognitionResult)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void SpeechRecognitionResult::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
 }
 
 void SpeechRecognitionResult::ArenaDtor(void* object) {
@@ -3689,11 +3402,6 @@ void SpeechRecognitionResult::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*)
 void SpeechRecognitionResult::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const SpeechRecognitionResult& SpeechRecognitionResult::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SpeechRecognitionResult_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void SpeechRecognitionResult::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.SpeechRecognitionResult)
@@ -3703,16 +3411,14 @@ void SpeechRecognitionResult::Clear() {
 
   alternatives_.Clear();
   lattice_.Clear();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* SpeechRecognitionResult::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // repeated .google.cloud.speech.v1.SpeechRecognitionAlternative alternatives = 1;
       case 1:
@@ -3740,11 +3446,14 @@ const char* SpeechRecognitionResult::_InternalParse(const char* ptr, ::PROTOBUF_
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -3782,7 +3491,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.SpeechRecognitionResult)
   return target;
@@ -3837,7 +3546,7 @@ void SpeechRecognitionResult::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& 
 void SpeechRecognitionResult::MergeFrom(const SpeechRecognitionResult& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.SpeechRecognitionResult)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -3865,32 +3574,25 @@ bool SpeechRecognitionResult::IsInitialized() const {
 
 void SpeechRecognitionResult::InternalSwap(SpeechRecognitionResult* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   alternatives_.InternalSwap(&other->alternatives_);
   lattice_.InternalSwap(&other->lattice_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata SpeechRecognitionResult::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[10]);
 }
-
 
 // ===================================================================
 
-void SpeechRecognitionAlternative::InitAsDefaultInstance() {
-}
 class SpeechRecognitionAlternative::_Internal {
  public:
 };
 
-SpeechRecognitionAlternative::SpeechRecognitionAlternative()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.SpeechRecognitionAlternative)
-}
 SpeechRecognitionAlternative::SpeechRecognitionAlternative(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena),
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   words_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
@@ -3898,31 +3600,30 @@ SpeechRecognitionAlternative::SpeechRecognitionAlternative(::PROTOBUF_NAMESPACE_
 }
 SpeechRecognitionAlternative::SpeechRecognitionAlternative(const SpeechRecognitionAlternative& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       words_(from.words_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   transcript_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_transcript().empty()) {
-    transcript_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_transcript(),
-      GetArenaNoVirtual());
+    transcript_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_transcript(), 
+      GetArena());
   }
   confidence_ = from.confidence_;
   // @@protoc_insertion_point(copy_constructor:google.cloud.speech.v1.SpeechRecognitionAlternative)
 }
 
 void SpeechRecognitionAlternative::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SpeechRecognitionAlternative_dictation_5fasr_2eproto.base);
-  transcript_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  confidence_ = 0;
+transcript_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+confidence_ = 0;
 }
 
 SpeechRecognitionAlternative::~SpeechRecognitionAlternative() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.SpeechRecognitionAlternative)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void SpeechRecognitionAlternative::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
   transcript_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -3935,11 +3636,6 @@ void SpeechRecognitionAlternative::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Ar
 void SpeechRecognitionAlternative::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const SpeechRecognitionAlternative& SpeechRecognitionAlternative::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SpeechRecognitionAlternative_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void SpeechRecognitionAlternative::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.SpeechRecognitionAlternative)
@@ -3948,18 +3644,16 @@ void SpeechRecognitionAlternative::Clear() {
   (void) cached_has_bits;
 
   words_.Clear();
-  transcript_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  transcript_.ClearToEmpty();
   confidence_ = 0;
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* SpeechRecognitionAlternative::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // string transcript = 1;
       case 1:
@@ -3991,11 +3685,14 @@ const char* SpeechRecognitionAlternative::_InternalParse(const char* ptr, ::PROT
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -4041,7 +3738,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.SpeechRecognitionAlternative)
   return target;
@@ -4101,7 +3798,7 @@ void SpeechRecognitionAlternative::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Mess
 void SpeechRecognitionAlternative::MergeFrom(const SpeechRecognitionAlternative& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.SpeechRecognitionAlternative)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -4134,26 +3831,20 @@ bool SpeechRecognitionAlternative::IsInitialized() const {
 
 void SpeechRecognitionAlternative::InternalSwap(SpeechRecognitionAlternative* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   words_.InternalSwap(&other->words_);
-  transcript_.Swap(&other->transcript_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
+  transcript_.Swap(&other->transcript_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   swap(confidence_, other->confidence_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata SpeechRecognitionAlternative::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[11]);
 }
-
 
 // ===================================================================
 
-void WordInfo::InitAsDefaultInstance() {
-  ::google::cloud::speech::v1::_WordInfo_default_instance_._instance.get_mutable()->start_time_ = const_cast< PROTOBUF_NAMESPACE_ID::Duration*>(
-      PROTOBUF_NAMESPACE_ID::Duration::internal_default_instance());
-  ::google::cloud::speech::v1::_WordInfo_default_instance_._instance.get_mutable()->end_time_ = const_cast< PROTOBUF_NAMESPACE_ID::Duration*>(
-      PROTOBUF_NAMESPACE_ID::Duration::internal_default_instance());
-}
 class WordInfo::_Internal {
  public:
   static const PROTOBUF_NAMESPACE_ID::Duration& start_time(const WordInfo* msg);
@@ -4168,64 +3859,31 @@ const PROTOBUF_NAMESPACE_ID::Duration&
 WordInfo::_Internal::end_time(const WordInfo* msg) {
   return *msg->end_time_;
 }
-void WordInfo::unsafe_arena_set_allocated_start_time(
-    PROTOBUF_NAMESPACE_ID::Duration* start_time) {
-  if (GetArenaNoVirtual() == nullptr) {
-    delete start_time_;
-  }
-  start_time_ = start_time;
-  if (start_time) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.cloud.speech.v1.WordInfo.start_time)
-}
 void WordInfo::clear_start_time() {
-  if (GetArenaNoVirtual() == nullptr && start_time_ != nullptr) {
+  if (GetArena() == nullptr && start_time_ != nullptr) {
     delete start_time_;
   }
   start_time_ = nullptr;
 }
-void WordInfo::unsafe_arena_set_allocated_end_time(
-    PROTOBUF_NAMESPACE_ID::Duration* end_time) {
-  if (GetArenaNoVirtual() == nullptr) {
-    delete end_time_;
-  }
-  end_time_ = end_time;
-  if (end_time) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.cloud.speech.v1.WordInfo.end_time)
-}
 void WordInfo::clear_end_time() {
-  if (GetArenaNoVirtual() == nullptr && end_time_ != nullptr) {
+  if (GetArena() == nullptr && end_time_ != nullptr) {
     delete end_time_;
   }
   end_time_ = nullptr;
 }
-WordInfo::WordInfo()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.WordInfo)
-}
 WordInfo::WordInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:google.cloud.speech.v1.WordInfo)
 }
 WordInfo::WordInfo(const WordInfo& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   word_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_word().empty()) {
-    word_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_word(),
-      GetArenaNoVirtual());
+    word_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_word(), 
+      GetArena());
   }
   if (from._internal_has_start_time()) {
     start_time_ = new PROTOBUF_NAMESPACE_ID::Duration(*from.start_time_);
@@ -4241,20 +3899,21 @@ WordInfo::WordInfo(const WordInfo& from)
 }
 
 void WordInfo::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_WordInfo_dictation_5fasr_2eproto.base);
-  word_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&start_time_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&end_time_) -
-      reinterpret_cast<char*>(&start_time_)) + sizeof(end_time_));
+word_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&start_time_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&end_time_) -
+    reinterpret_cast<char*>(&start_time_)) + sizeof(end_time_));
 }
 
 WordInfo::~WordInfo() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.WordInfo)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void WordInfo::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
   word_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete start_time_;
   if (this != internal_default_instance()) delete end_time_;
@@ -4269,11 +3928,6 @@ void WordInfo::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void WordInfo::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const WordInfo& WordInfo::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_WordInfo_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void WordInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.WordInfo)
@@ -4281,25 +3935,23 @@ void WordInfo::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  word_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-  if (GetArenaNoVirtual() == nullptr && start_time_ != nullptr) {
+  word_.ClearToEmpty();
+  if (GetArena() == nullptr && start_time_ != nullptr) {
     delete start_time_;
   }
   start_time_ = nullptr;
-  if (GetArenaNoVirtual() == nullptr && end_time_ != nullptr) {
+  if (GetArena() == nullptr && end_time_ != nullptr) {
     delete end_time_;
   }
   end_time_ = nullptr;
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* WordInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // .google.protobuf.Duration start_time = 1;
       case 1:
@@ -4326,11 +3978,14 @@ const char* WordInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -4378,7 +4033,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.WordInfo)
   return target;
@@ -4440,7 +4095,7 @@ void WordInfo::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 void WordInfo::MergeFrom(const WordInfo& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.WordInfo)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -4475,34 +4130,30 @@ bool WordInfo::IsInitialized() const {
 
 void WordInfo::InternalSwap(WordInfo* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  word_.Swap(&other->word_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(start_time_, other->start_time_);
-  swap(end_time_, other->end_time_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  word_.Swap(&other->word_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(WordInfo, end_time_)
+      + sizeof(WordInfo::end_time_)
+      - PROTOBUF_FIELD_OFFSET(WordInfo, start_time_)>(
+          reinterpret_cast<char*>(&start_time_),
+          reinterpret_cast<char*>(&other->start_time_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata WordInfo::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[12]);
 }
-
 
 // ===================================================================
 
-void RecognitionLattice::InitAsDefaultInstance() {
-}
 class RecognitionLattice::_Internal {
  public:
 };
 
-RecognitionLattice::RecognitionLattice()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.RecognitionLattice)
-}
 RecognitionLattice::RecognitionLattice(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena),
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   final_nodes_(arena),
   edges_(arena) {
   SharedCtor();
@@ -4511,24 +4162,23 @@ RecognitionLattice::RecognitionLattice(::PROTOBUF_NAMESPACE_ID::Arena* arena)
 }
 RecognitionLattice::RecognitionLattice(const RecognitionLattice& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       final_nodes_(from.final_nodes_),
       edges_(from.edges_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:google.cloud.speech.v1.RecognitionLattice)
 }
 
 void RecognitionLattice::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_RecognitionLattice_dictation_5fasr_2eproto.base);
 }
 
 RecognitionLattice::~RecognitionLattice() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.RecognitionLattice)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void RecognitionLattice::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
 }
 
 void RecognitionLattice::ArenaDtor(void* object) {
@@ -4540,11 +4190,6 @@ void RecognitionLattice::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void RecognitionLattice::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const RecognitionLattice& RecognitionLattice::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RecognitionLattice_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void RecognitionLattice::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.RecognitionLattice)
@@ -4554,16 +4199,14 @@ void RecognitionLattice::Clear() {
 
   final_nodes_.Clear();
   edges_.Clear();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* RecognitionLattice::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // repeated int32 final_nodes = 1;
       case 1:
@@ -4571,7 +4214,7 @@ const char* RecognitionLattice::_InternalParse(const char* ptr, ::PROTOBUF_NAMES
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedInt32Parser(_internal_mutable_final_nodes(), ptr, ctx);
           CHK_(ptr);
         } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8) {
-          _internal_add_final_nodes(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr));
+          _internal_add_final_nodes(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -4589,11 +4232,14 @@ const char* RecognitionLattice::_InternalParse(const char* ptr, ::PROTOBUF_NAMES
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -4632,7 +4278,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.RecognitionLattice)
   return target;
@@ -4695,7 +4341,7 @@ void RecognitionLattice::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from)
 void RecognitionLattice::MergeFrom(const RecognitionLattice& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.RecognitionLattice)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -4723,44 +4369,36 @@ bool RecognitionLattice::IsInitialized() const {
 
 void RecognitionLattice::InternalSwap(RecognitionLattice* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   final_nodes_.InternalSwap(&other->final_nodes_);
   edges_.InternalSwap(&other->edges_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata RecognitionLattice::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[13]);
 }
-
 
 // ===================================================================
 
-void LatticeEdge::InitAsDefaultInstance() {
-}
 class LatticeEdge::_Internal {
  public:
 };
 
-LatticeEdge::LatticeEdge()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:google.cloud.speech.v1.LatticeEdge)
-}
 LatticeEdge::LatticeEdge(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-  _internal_metadata_(arena) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:google.cloud.speech.v1.LatticeEdge)
 }
 LatticeEdge::LatticeEdge(const LatticeEdge& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   symbol_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_symbol().empty()) {
-    symbol_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_symbol(),
-      GetArenaNoVirtual());
+    symbol_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_symbol(), 
+      GetArena());
   }
   ::memcpy(&start_node_, &from.start_node_,
     static_cast<size_t>(reinterpret_cast<char*>(&duration_) -
@@ -4769,20 +4407,21 @@ LatticeEdge::LatticeEdge(const LatticeEdge& from)
 }
 
 void LatticeEdge::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_LatticeEdge_dictation_5fasr_2eproto.base);
-  symbol_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&start_node_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&duration_) -
-      reinterpret_cast<char*>(&start_node_)) + sizeof(duration_));
+symbol_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&start_node_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&duration_) -
+    reinterpret_cast<char*>(&start_node_)) + sizeof(duration_));
 }
 
 LatticeEdge::~LatticeEdge() {
   // @@protoc_insertion_point(destructor:google.cloud.speech.v1.LatticeEdge)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void LatticeEdge::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() == nullptr);
+  GOOGLE_DCHECK(GetArena() == nullptr);
   symbol_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -4795,11 +4434,6 @@ void LatticeEdge::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 void LatticeEdge::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const LatticeEdge& LatticeEdge::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_LatticeEdge_dictation_5fasr_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void LatticeEdge::Clear() {
 // @@protoc_insertion_point(message_clear_start:google.cloud.speech.v1.LatticeEdge)
@@ -4807,32 +4441,30 @@ void LatticeEdge::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  symbol_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  symbol_.ClearToEmpty();
   ::memset(&start_node_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&duration_) -
       reinterpret_cast<char*>(&start_node_)) + sizeof(duration_));
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* LatticeEdge::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArenaNoVirtual(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
     switch (tag >> 3) {
       // int32 start_node = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          start_node_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          start_node_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // int32 end_node = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          end_node_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          end_node_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -4862,17 +4494,20 @@ const char* LatticeEdge::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
       // int32 duration = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
-          duration_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          duration_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       default: {
       handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -4934,7 +4569,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.cloud.speech.v1.LatticeEdge)
   return target;
@@ -5013,7 +4648,7 @@ void LatticeEdge::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 void LatticeEdge::MergeFrom(const LatticeEdge& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:google.cloud.speech.v1.LatticeEdge)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -5057,20 +4692,21 @@ bool LatticeEdge::IsInitialized() const {
 
 void LatticeEdge::InternalSwap(LatticeEdge* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  symbol_.Swap(&other->symbol_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(start_node_, other->start_node_);
-  swap(end_node_, other->end_node_);
-  swap(language_cost_, other->language_cost_);
-  swap(acoustic_cost_, other->acoustic_cost_);
-  swap(duration_, other->duration_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  symbol_.Swap(&other->symbol_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(LatticeEdge, duration_)
+      + sizeof(LatticeEdge::duration_)
+      - PROTOBUF_FIELD_OFFSET(LatticeEdge, start_node_)>(
+          reinterpret_cast<char*>(&start_node_),
+          reinterpret_cast<char*>(&other->start_node_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata LatticeEdge::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_dictation_5fasr_2eproto_getter, &descriptor_table_dictation_5fasr_2eproto_once,
+      file_level_metadata_dictation_5fasr_2eproto[14]);
 }
-
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace v1
