@@ -8,6 +8,10 @@ project(dictation-client VERSION 2.4.2 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 
+if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "^aarch64|arm64|ARM64|ARMv8$")
+	set(AARCH64_COMPILATION TRUE)
+endif()
+
 
 
 # ********************************************* #
@@ -54,8 +58,12 @@ set_property(TARGET boost_pkg
 # ********************************************* #
 
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -Wno-sign-compare -Wno-unused-local-typedefs -Wno-unused-variable -Wno-deprecated-declarations")
-set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
-set (CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -march=native")
+if(NOT AARCH64_COMPILATION)
+	#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
+	#set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -march=native")
+	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -msse -msse2 -msse4.2")
+	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -msse -msse2 -msse4.2")
+endif()
 
 
 message("CMAKE_CXX_FLAGS_DEBUG is ${CMAKE_CXX_FLAGS_DEBUG}")
