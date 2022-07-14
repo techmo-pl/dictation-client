@@ -14,7 +14,7 @@ To prepare a docker image with Python implementation of the Dictation Client, us
 The build process will take several minutes.
 When the build process is complete, you will receive a message:
 ```
-Successfully tagged dictation-client-python:2.4.1
+Successfully tagged dictation-client-python:2.4.2
 ```
 
 ### Run Dictation client
@@ -253,7 +253,7 @@ On the Linux operating systems using Advanced Linux Sound Architecture (ALSA) mi
 
 If you get the following output after runing request:
 ```
-Dictation ASR gRPC client 2.4.1
+Dictation ASR gRPC client 2.4.2
 ALSA lib pcm_dsnoop.c:618:(snd_pcm_dsnoop_open) unable to open slave
 ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear
 ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe
