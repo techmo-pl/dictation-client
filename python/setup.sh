@@ -4,6 +4,8 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+cd "${BASH_SOURCE%/*}"
+
 automatic_install_mode="false"
 
 if [[ $# -eq 1 ]] && [[ "$1" == "-y" ]]
@@ -74,6 +76,7 @@ fi
 # install required packages
 
 install_package "python3-dev" "${sudo_str}"
+install_package "python3-venv" "${sudo_str}"
 install_package "portaudio19-dev" "${sudo_str}"
 install_package "python3-pip" "${sudo_str}"
 

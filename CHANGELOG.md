@@ -8,6 +8,7 @@ Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp
 ### Changed
  - [CPP, python] Improve googleapis build script.
  - [CPP] Improve proto build script.
+ - [CPP, python] Unify docker image builds.
 
 ## [2.4.1] - 2022-06-29
 ### Changed
