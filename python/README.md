@@ -15,13 +15,13 @@ For details about Docker Engine installation, check out: https://docs.docker.com
 To prepare the docker image with Python implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
-docker build -f Dockerfile-python -t dictation-client-python:2.4.2 .
+docker build -f Dockerfile-python -t dictation-client-python:2.5.1 .
 ```
 
 The build process will take several minutes.
 When the build process is complete, you will receive a message:
 ```
-Successfully tagged dictation-client-python:2.4.2
+Successfully tagged dictation-client-python:2.5.1
 ```
 
 ### Run Dictation client
@@ -185,6 +185,10 @@ Available options:
                         how long the client is willing to wait for a reply
                         from the server. If not specified, the service will
                         set the deadline to a very large number.
+ --wait-for-service-start TIMEOUT
+                        Wait for the service start for a given duration
+                        in seconds. Additionally print service health status,
+                        but only for a non-zero timeout value. (defaults to 0)
   --max-alternatives MAX_ALTERNATIVES
                         Maximum number of recognition hypotheses to be
                         returned.
@@ -256,7 +260,7 @@ On the Linux operating systems using Advanced Linux Sound Architecture (ALSA) mi
 
 If you get the following output after runing request:
 ```
-Dictation ASR gRPC client 2.4.2
+Dictation ASR gRPC client 2.5.1
 ALSA lib pcm_dsnoop.c:618:(snd_pcm_dsnoop_open) unable to open slave
 ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear
 ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe

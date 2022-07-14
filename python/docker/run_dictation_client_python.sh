@@ -7,7 +7,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-IMAGE_VERSION=2.4.2
+IMAGE_VERSION=2.5.1
 
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
@@ -21,7 +21,7 @@ Dictation ASR gRPC client ${IMAGE_VERSION}
   -h, --help            show this help message and exit
   -s=ADDRESS, --service-address=ADDRESS
                         IP address and port (address:port) of a service the client will connect to.
-  -f=AUDIO, --filename=AUDIO   
+  -f=AUDIO, --filename=AUDIO
                         Name of the audio file with speech to be recognized. File should be inside 'audio' directory. It should be mono wav/ogg/mp3, 8kHz or 16kHz.
   -m, --mic             Use microphone as an audio source (instead of audio file).
   --tls                 If set, uses tls authentication, otherwise use insecure channel (default). The tls credential files (client.crt, client.key, ca.crt) should be placed inside 'tls' directory.
@@ -30,6 +30,10 @@ Dictation ASR gRPC client ${IMAGE_VERSION}
   --grpc-timeout=GRPC_TIMEOUT
                         Timeout in milliseconds used to set gRPC deadline - how long the client is willing to wait for a reply from the
                         server. If not specified, the service will set the deadline to a very large number.
+  --wait-for-service-start=TIMEOUT
+                        Wait for the service start for a given duration
+                        in seconds. Additionally print service health status,
+                        but only for a non-zero timeout value. (defaults to 0)
   --max-alternatives=MAX_ALTERNATIVES
                         Maximum number of recognition hypotheses to be returned.
   --time-offsets        If set - the recognizer will return also word time offsets.
@@ -53,19 +57,19 @@ while getopts "f:hms:-:" optchar; do
     case "${optchar}" in
         -)
             case "${OPTARG}" in
-                help)   
-                    usage; exit 0 
+                help)
+                    usage; exit 0
                     ;;
-                tls)  
+                tls)
                     opts+=( "--tls-dir" "/volume/tls" )
                     ;;
-                time-offsets)  
+                time-offsets)
                     opts+=( "--time-offsets" )
                     ;;
-                single-utterance)  
+                single-utterance)
                     opts+=( "--single-utterance" )
                     ;;
-                interim-results)  
+                interim-results)
                     opts+=( "--interim-results" )
                     ;;
                 mic)
@@ -93,15 +97,15 @@ while getopts "f:hms:-:" optchar; do
                     fi
                     ;;
             esac;;
-        f)                      
+        f)
             val=${OPTARG#*=}
             opt=${OPTARG%=$val}
             opts+=( "--audio-path" "/volume/audio/${val##*/}" )
             ;;
-        h)  
-            usage; exit 0 
+        h)
+            usage; exit 0
             ;;
-        m)  
+        m)
             opts+=("--mic")
             set +e
             if [ ! -S /tmp/pulseaudio.socket ];
@@ -110,7 +114,7 @@ while getopts "f:hms:-:" optchar; do
             fi
             set -e
             ;;
-        s)  
+        s)
             val=${OPTARG#*=}
             opt=${OPTARG%=$val}
             opts+=( "--service-address" "${val}" )

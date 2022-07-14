@@ -1,12 +1,13 @@
-#include <sstream>
 #include <atomic>
-#include <thread>
+#include <chrono>
 #include <fstream>
+#include <sstream>
+#include <thread>
 
 #include <grpc++/grpc++.h>
 
-#include "dictation_asr.grpc.pb.h"
 #include "dictation_client.h"
+#include "health.pb.h"
 
 namespace {
     std::string read_file(const std::string& path) {
@@ -48,6 +49,43 @@ bool error_response(const gsapi::StreamingRecognizeResponse& response);
 bool end_of_utterance(const gsapi::StreamingRecognizeResponse& response);
 std::string grpc_status_to_string(const grpc::Status& status);
 
+
+health::HealthCheckResponse_ServingStatus DictationClient::CheckHealth(unsigned timeout) const {
+    health::HealthCheckRequest request;
+    request.set_service("");
+    health::HealthCheckResponse response;
+    grpc::ClientContext context;
+    context.set_wait_for_ready(true);
+    std::chrono::system_clock::time_point deadline = std::chrono::system_clock::now() + std::chrono::seconds(timeout);
+    context.set_deadline(deadline);
+
+    auto stub = health::Health::NewStub(grpc::CreateChannel(service_address_, create_channel_credentials(tls_directory_)));
+    const grpc::Status status = stub->Check(&context, request, &response);
+
+    if (!status.ok()) {
+        std::cerr << "service status: UNKNOWN Received following RPC error from the service: " << grpc_status_to_string(status) << std::endl;
+        return health::HealthCheckResponse::UNKNOWN;
+    }
+
+    std::cout << "service status: ";
+    auto health_status = response.status();
+    switch (health_status)
+    {
+    case health::HealthCheckResponse::SERVING:
+        std::cout << "SERVING\n";
+        return health_status;
+    case health::HealthCheckResponse::NOT_SERVING:
+        std::cout << "NOT_SERVING";
+        return health_status;
+    case health::HealthCheckResponse::SERVICE_UNKNOWN:
+        std::cout << "SERVICE_UNKNOWN\n";
+        return health_status;
+    default:
+        std::cout << "UNKNOWN\n";
+    };
+
+    return health_status;
+}
 
 gsapi::RecognizeResponse DictationClient::Recognize(DictationSessionConfig& config, const WAV_DATA& wav_data) const {
     config.audio_sample_rate_hz = wav_data.header.samplesPerSec;
