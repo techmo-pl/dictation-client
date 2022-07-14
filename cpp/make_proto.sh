@@ -23,10 +23,11 @@ echo "Generating dictation C++ protobuf/grpc sources."
 path_i="${SCRIPTPATH}/../proto"
 path_o="${SCRIPTPATH}/libdictation-client"
 ${PROTOC}   -I${path_i} \
+            -I${grpc_root}/src/proto/grpc/health/v1 \
             -I${GAPIS} \
             -I${PROTOBUF} \
             ${PLUGIN} \
             --cpp_out=${path_o} \
             --grpc_out=${path_o} \
+            ${grpc_root}/src/proto/grpc/health/v1/health.proto \
             ${path_i}/dictation_asr.proto
-            

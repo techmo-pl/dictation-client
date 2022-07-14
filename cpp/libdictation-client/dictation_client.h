@@ -2,11 +2,14 @@
 #define __DICTATION_CLIENT_H__
 
 #include "dictation_asr.grpc.pb.h"
+#include "health.grpc.pb.h"
 
 #include "../dictation-client/audio-utils.h"
+#include "health.pb.h"
 
 
 namespace gsapi = google::cloud::speech::v1;
+namespace health = grpc::health::v1;
 
 namespace techmo { namespace dictation {
 
@@ -34,6 +37,8 @@ public:
         , tls_directory_{ tls_directory }
     {
     }
+
+    health::HealthCheckResponse_ServingStatus CheckHealth(unsigned timeout) const;
 
     gsapi::RecognizeResponse Recognize(DictationSessionConfig& config, const WAV_DATA& wav_data) const;
 

@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import sys
 from argparse import ArgumentParser
 from utils.audio_source import AudioStream
 from utils.mic_source import MicrophoneStream
@@ -52,6 +53,7 @@ if __name__ == '__main__':
     parser.add_argument("--grpc-timeout",
                         help="Timeout in milliseconds used to set gRPC deadline - how long the client is willing to wait for a reply from the server. If not specified, the service will set the deadline to a very large number.",
                         default=0, type=int)
+    parser.add_argument("--wait-for-service-start", help="Wait for the service start for a given duration in seconds. Additionally print service health status, but only for a non-zero timeout value. (defaults to 0)", default=0, type=int)
     # request configuration section
     parser.add_argument("--max-alternatives", help="Maximum number of recognition hypotheses to be returned.",
                         default=1, type=int)
@@ -73,11 +75,16 @@ if __name__ == '__main__':
     # Stream audio to the ASR engine and print all hypotheses to standard output
     args = parser.parse_args()
 
+    settings = DictationSettings(args)
+    recognizer = StreamingRecognizer(args.address, args.tls_directory, settings)
+
+    if args.wait_for_service_start > 0:
+        health_status = recognizer.check_health(args.wait_for_service_start)
+        if health_status != 0:
+            sys.exit(health_status)
+
     if args.audio is not None or args.mic:
         with create_audio_stream(args) as stream:
-            settings = DictationSettings(args)
-            recognizer = StreamingRecognizer(args.address, args.tls_directory, settings)
-
             print('Recognizing...')
             results = recognizer.recognize(stream)
             print_results(results)

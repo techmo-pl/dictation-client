@@ -26,14 +26,14 @@ In this case open project repository in web browser, go to the `submodules` dire
 To prepare the docker image with C++ implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
-docker build -f Dockerfile-cpp -t dictation-client-cpp:2.4.1 .
+docker build -f Dockerfile-cpp -t dictation-client-cpp:2.5.0 .
 ```
 
 **Note:** The build process may take a several dozen minutes (for shorter build time use the python implementation instead).
 
 When the build process is complete, following a message will be shown:
 ```
-Successfully tagged dictation-client-cpp:2.4.1
+Successfully tagged dictation-client-cpp:2.5.0
 ```
 
 ### Run Dictation client
@@ -148,6 +148,10 @@ Default value `4` should be appropriate for the average personal computer.
                               reply from the server. If not specified, the
                               service will set the deadline to a very large
                               number.
+ --wait-for-service-start arg Wait for the service start for a given duration
+                         (=0) in seconds. Additionally print service health
+                              status, but only for a non-zero timeout value.
+                              (defaults to 0)
   --streaming                 If present, will perform asynchronous RPC. This
                               is obligatory for audio content larger than 3.5
                               MB.

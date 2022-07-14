@@ -1,5 +1,7 @@
 import os
 import threading
+from grpc_health.v1 import health_pb2
+from grpc_health.v1 import health_pb2_grpc
 from . import dictation_asr_pb2 as dictation_asr_pb2
 from . import dictation_asr_pb2_grpc as dictation_asr_pb2_grpc
 import grpc
@@ -47,10 +49,29 @@ class RequestIterator:
 class StreamingRecognizer:
     def __init__(self, address, tls_directory, settings_args):
         # Use ArgumentParser to parse settings
-        self.service = dictation_asr_pb2_grpc.SpeechStub(StreamingRecognizer.create_channel(address, tls_directory))
+        self.channel = StreamingRecognizer.create_channel(address, tls_directory)
         self.settings = settings_args
 
+    def check_health(self, timeout):
+        stub = health_pb2_grpc.HealthStub(self.channel)
+        request = health_pb2.HealthCheckRequest()
+        try:
+            serving_status = stub.Check(request, timeout=timeout, wait_for_ready=True).status
+            statusline = "service status: {}".format(health_pb2.HealthCheckResponse.ServingStatus.Name(serving_status))
+        except grpc.RpcError as e:
+            serving_status = health_pb2.HealthCheckResponse.ServingStatus.UNKNOWN
+            statusline = "service status: UNKNOWN Received following RPC error from the service: [{}] {}".format(str(e.code()), str(e.details()))
+        print(statusline)
+        # NAGIOS return codes :
+        # https://nagios-plugins.org/doc/guidelines.html#AEN78
+        if serving_status == health_pb2.HealthCheckResponse.ServingStatus.SERVING:
+            return 0
+        elif serving_status == health_pb2.HealthCheckResponse.ServingStatus.NOT_SERVING:
+            return 2
+        return 3
+
     def recognize(self, audio):
+        self.service = dictation_asr_pb2_grpc.SpeechStub(self.channel)
         requests_iterator = RequestIterator(audio, self.settings)
         return self.recognize_audio_content(requests_iterator)
 
