@@ -17,7 +17,8 @@ target_dir="${SCRIPTPATH}/../googleapis_files"
 
 trap 'rm -rf "${tmp_dir}"' EXIT
 
-mkdir "${target_dir}"
+
+rm -rf "${target_dir}" && mkdir "${target_dir}"
 cp -r "${grpc_root}/third_party/googleapis/" "${tmp_dir}"
 
 # rebuild - necesseary for newer versions
