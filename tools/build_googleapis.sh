@@ -15,10 +15,9 @@ plugin="${GRPC_PLUGIN:-${grpc_root}/build/grpc_cpp_plugin}"
 tmp_dir="${SCRIPTPATH}/../tmp_googleapis"
 target_dir="${SCRIPTPATH}/../googleapis_files"
 
-trap 'rm -rf "${tmp_dir}"' EXIT
+trap 'if [[ "${tmp_dir}" == *"/tmp_googleapis" ]]; then rm -rf "${tmp_dir}"; fi' EXIT
 
-
-rm -rf "${target_dir}" && mkdir "${target_dir}"
+if [[ "${target_dir}" == *"/googleapis_files" ]]; then rm -rf "${target_dir}" && mkdir "${target_dir}"; else echo "Invalid target_dir path!"; fi
 cp -r "${grpc_root}/third_party/googleapis/" "${tmp_dir}"
 
 # rebuild - necesseary for newer versions
