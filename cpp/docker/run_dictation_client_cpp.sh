@@ -23,9 +23,9 @@ Dictation ASR gRPC client options:
   -s=ADDRESS, --service-address=ADDRESS
                         IP address and port (address:port) of a service the client will connect to.
   --tls                 If set, uses tls authentication, otherwise use insecure channel (default). The tls credential files (client.crt, client.key, ca.crt) should be placed inside 'tls' directory.
-  -f=AUDIO, --filename=AUDIO
-                        Path to wave file with audio content to be sent to service via RPC.
-  --session-id=SESSION_ID
+  -f=AUDIO, --filename=AUDIO        
+                        Name of the audio file with speech to be recognized. File should be inside 'audio' directory. It should be mono wav/ogg/mp3, 8kHz or 16kHz.
+  --session-id=SESSION_ID                
                         Session ID to be passed to the service. If not specified, the service will generate a default session ID itself.
   --grpc-timeout=GRPC_TIMEOUT
                         Timeout in milliseconds used to set gRPC deadline - how long the client is willing to wait for a reply from the server. If not specified, the service will set the deadline to a very large number.

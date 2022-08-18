@@ -18,10 +18,10 @@ target_link_libraries(${PROJECT_NAME}
         ssl_pkg
         boost_pkg
         dl_pkg
-        ogg
-        vorbis
         vorbisenc
         vorbisfile
+        vorbis
+        ogg
         )
 
 set_target_properties(${PROJECT_NAME}

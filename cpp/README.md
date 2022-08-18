@@ -10,17 +10,6 @@ To use Dictation Client on Docker, Docker Engine has to be installed (recommende
 For details about Docker Engine installation, check out: https://docs.docker.com/engine/install/
 
 
-### Submodules
-
-After cloning a git repository, download submodules:
-```
-git submodule update --init --recursive
-```
-(this command has to be invoked from the project's root directory)
-
-If project was downloaded without using git, `googleapis` submodule have to be downloaded manually. 
-In this case open project repository in web browser, go to the `submodules` directory and use the link located there to open the relevant commit in the googleapis repository. Then download it, unpack and copy all files to the `submodules/googleapis` directory.
-
 ### Build docker image
 
 To prepare the docker image with C++ implementation of the Dictation Client, open project's main directory and run following command:
@@ -95,10 +84,6 @@ This project uses cmake build.
 
 ### Required steps before build:
 
-- download googleapis submodule:
-```
-git submodule update --init --recursive
-```
 - build googleapis:
 ```
 ./tools/build_googleapis.sh

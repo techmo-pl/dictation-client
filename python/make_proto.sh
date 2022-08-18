@@ -1,7 +1,10 @@
 #!/bin/bash
 # coding=utf-8
 
-set -eo pipefail
+set -euo pipefail
+IFS=$'\n\t'
+
+cd "${BASH_SOURCE%/*}"
 
 python3 -m venv proto_env
 # shellcheck disable=SC1091

@@ -1,64 +1,38 @@
 #!/bin/bash
 
-SCRIPT=$(realpath "$0")
-SCRIPTPATH=$(dirname "${SCRIPT}")
+set -euo pipefail
 
-function cleanup()
-{
-    rm -rf "${tmp_dir}"
-}
-trap cleanup EXIT
+SCRIPT="$(realpath "$0")"
+SCRIPTPATH="$(dirname "${SCRIPT}")"
 
+parallel_jobs="${1:-8}"
+grpc_root="${GRPC_ROOT:-/opt/grpc_v1.38.1}"
+proto_src="${PROTO_SRC:-${grpc_root}/third_party/protobuf/src}"
 
-grpc_root=/opt/grpc_v1.38.1
+protoc="${PROTOC:-${grpc_root}/build/third_party/protobuf/protoc}"
+plugin="${GRPC_PLUGIN:-${grpc_root}/build/grpc_cpp_plugin}"
 
 tmp_dir="${SCRIPTPATH}/../tmp_googleapis"
 target_dir="${SCRIPTPATH}/../googleapis_files"
 
-mkdir "${target_dir}"
+trap 'if [[ "${tmp_dir}" == *"/tmp_googleapis" ]]; then rm -rf "${tmp_dir}"; fi' EXIT
 
+if [[ "${target_dir}" == *"/googleapis_files" ]]; then rm -rf "${target_dir}" && mkdir "${target_dir}"; else echo "Invalid target_dir path!"; fi
 cp -r "${grpc_root}/third_party/googleapis/" "${tmp_dir}"
-cd "${tmp_dir}"
 
-jobs=8
-[ $# -ge 1 ] && jobs=$1
+# rebuild - necesseary for newer versions
+make -C "${tmp_dir}" clean || echo "[NOTICE] cleaning ALL of the googleapis failed; this is likely expected"
 
-proto_src="${grpc_root}/third_party/protobuf/src"
-protoc="${grpc_root}/build/third_party/protobuf/protoc"
-plugin="$grpc_root/build/grpc_cpp_plugin"
+# build only the required sources
+make -C "${tmp_dir}" -j "${parallel_jobs}" \
+	GRPCPLUGIN="${plugin}" \
+	PROTOINCLUDE="${proto_src}" \
+	PROTOC="${protoc}" \
+	LANGUAGE=cpp \
+	"google/api/annotations.pb.cc" \
+	"google/api/http.pb.cc" \
+	"google/longrunning/operations.pb.cc" \
+	"google/rpc/status.pb.cc"
 
-# rebuild - necesseary fornewer versions
-make clean
-
-make -j $jobs GRPCPLUGIN=${plugin} PROTOINCLUDE=${proto_src} PROTOC=${protoc} LANGUAGE=cpp #|| exit 1
-# This build is allowed to fail in general but some of the files are required.
-# Check for required files:
-
-required_files=(    "google/api/annotations"
-                    "google/longrunning/operations"
-                    "google/rpc/status"
-)
-
-extensions=( ".pb.h" ".pb.cc" ".grpc.pb.h" ".grpc.pb.cc" )
-
-ok=true
-for file in ${required_files[@]}; do
-    for ext in ${extensions[@]}; do
-        filename="gens/${file}${ext}"
-        [[ -f $filename ]] && found=true || found=false
-        if ! $found; then
-            echo "File not found in googleapis:    ${filename}"
-        fi
-        [[ "$ok" == true && "$found" == true ]] && ok=true || ok=false
-    done
-done
-
-if ! $ok; then
-    echo "Failed to build required googleapis files."
-    exit 1
-fi
-
-cp -r gens "${target_dir}"
-cp -r google "${target_dir}"
-
-echo "All required googleapis files found."
+cp -r "${tmp_dir}/gens" "${target_dir}/"
+cp -r "${tmp_dir}/google" "${target_dir}/"

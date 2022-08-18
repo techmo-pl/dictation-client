@@ -1,15 +1,22 @@
 # Python implementation of Dictation ASR gRPC client.
 
+
 ## Docker usage
+
+### Prerequisites
+
+To use Dictation Client on Docker, Docker Engine has to be installed (recommended version 20.10.0 or higher).
+
+For details about Docker Engine installation, check out: https://docs.docker.com/engine/install/
+
 
 ### Build docker image
 
-To prepare a docker image with Python implementation of the Dictation Client, use the building script:
+To prepare the docker image with Python implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
-./build_docker_image.sh
+docker build -f Dockerfile-python -t dictation-client-python:2.5.0 .
 ```
-(To set custom image tag, use the tag name as optional argument, e.g.: `./build_docker_image.sh custom_tag`)
 
 The build process will take several minutes.
 When the build process is complete, you will receive a message:
@@ -32,7 +39,6 @@ To print the list of available options, use:
 ```
 Audio files to be transcribed should be placed inside the `dictation-client/python/docker/audio` directory.
 TLS credentials should be placed inside the `dictation-client/python/docker/tls` directory, if used.
-
 
 
 ## Local instance usage
@@ -64,18 +70,6 @@ To print the usage description, use:
 ### Manual Usage
 
 #### Before run
-
-##### Submodules
-
-After cloning a git repository, download submodules:
-```
-git submodule update --init --recursive
-```
-(this command has to be invoked from the project's root directory)
-
-If you are not using git, you have to manually download `googleapis` submodule. 
-To do this, open project repository in web browser, go to the `submodules` directory and use the link located there to open the relevant commit in the googleapis repository. Then download it, unpack and copy all files to the `submodules/googleapis` directory.
-
 
 ##### Dependencies
 
@@ -126,7 +120,16 @@ apt-get update && apt-get install ffmpeg
 
 ##### Proto sources
 
-[Optional] To regenerate the sources from `.proto`, run:
+To regenerate the sources from `.proto`, gRPC is required.
+Default location: `/opt/grpc_v1.38.1`.
+If not installed, from parent directory run `sudo ./tools/install_grpc.sh 4`
+
+When gRPC is installed to the default location, compile the required googleapis files:
+
+```
+./tools/build_googleapis.sh
+```
+Then run:
 ```
 ./make_proto.sh
 ```
