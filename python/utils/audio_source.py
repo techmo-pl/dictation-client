@@ -3,7 +3,7 @@ import os
 
 class AudioStream(object):
 
-    def __init__(self, audio_path):
+    def __init__(self, audio_path, frame_len):
         if not os.path.exists(audio_path):
             raise ValueError("Wave file does not exist at: {}".format(audio_path))
 
@@ -19,7 +19,6 @@ class AudioStream(object):
         self.data_index = 0
         self.audio = self.audio_segment.raw_data
 
-        frame_len = 200  # ms
         sample_width = 2  # 16bit
         self.frame_samples_size = (self.audio_segment.frame_rate // 1000) * frame_len * sample_width
 
