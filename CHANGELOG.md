@@ -4,8 +4,10 @@ This changelog is intended for tracking content changes in whole repository.
 We are using single version and changelog for all components.
 Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
 
-## [latest changes] - 2022-08-18
+## [2.5.1] - 2022-09-29
 
+### Added
+ - [python] `--frame-length` parameter
 ### Changed
  - [CPP, python] Improve googleapis build script.
  - [CPP] Improve proto build script.
