@@ -4,7 +4,7 @@ This changelog is intended for tracking content changes in whole repository.
 We are using single version and changelog for all components.
 Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
 
-## [2.6.0] - 2022-09-29
+## [2.6.0] - 2022-10-03
 
 ### Added
  - [python] `--frame-length` parameter
