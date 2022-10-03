@@ -64,7 +64,7 @@ if __name__ == '__main__':
     parser.add_argument("--interim-results", help="If set - messages with temporal results will be shown.",
                         action="store_true", default=False)
     parser.add_argument("--frame-length",  dest="frame_length", help="The length of single audio frame in [ms] for audio file source. Used mainly for testing purposes.",
-                        default=200, type=int)
+                        default=20, type=int)
     # timeouts
     parser.add_argument("--no-input-timeout", help="MRCP v2 no input timeout [ms].", default=5000, type=int)
     parser.add_argument("--speech-complete-timeout", help="MRCP v2 speech complete timeout [ms].", default=2000,
