@@ -24,7 +24,7 @@ def print_results(results):
 def create_audio_stream(args):
     # create audio file stream
     if args.audio is not None:
-        return AudioStream(args.audio, args.frame_len)
+        return AudioStream(args.audio, args.frame_length)
 
     # create microphone stream
     if args.mic:
@@ -63,7 +63,7 @@ if __name__ == '__main__':
                         action="store_true", default=False)
     parser.add_argument("--interim-results", help="If set - messages with temporal results will be shown.",
                         action="store_true", default=False)
-    parser.add_argument("--frame-length",  dest="frame_len", help="The length of single audio frame in [ms] for audio file source. Used mainly for testing purposes.",
+    parser.add_argument("--frame-length",  dest="frame_length", help="The length of single audio frame in [ms] for audio file source. Used mainly for testing purposes.",
                         default=200, type=int)
     # timeouts
     parser.add_argument("--no-input-timeout", help="MRCP v2 no input timeout [ms].", default=5000, type=int)
