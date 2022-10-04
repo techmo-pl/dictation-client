@@ -24,7 +24,7 @@ def print_results(results):
 def create_audio_stream(args):
     # create audio file stream
     if args.audio is not None:
-        return AudioStream(args.audio, args.frame_length)
+        return AudioStream(args.audio, args.frame_length, args.delay)
 
     # create microphone stream
     if args.mic:
@@ -73,6 +73,9 @@ if __name__ == '__main__':
                         type=int)
     parser.add_argument("--recognition-timeout", help="MRCP v2 recognition timeout [ms].", default=10000, type=int)
     parser.add_argument("--context-phrase", help="Specifies which context model to use.", default="", type=str)
+    parser.add_argument("--delay", help="Delay between sending requests [ms]. Set it equal to frame_length for real time simulation.", 
+                        default=0, type=int,)
+
 
     # Stream audio to the ASR engine and print all hypotheses to standard output
     args = parser.parse_args()
