@@ -137,8 +137,8 @@ Default value `4` should be appropriate for the average personal computer.
                          (=0) in seconds. Additionally print service health
                               status, but only for a non-zero timeout value.
                               (defaults to 0)
-  --streaming                 If present, will perform asynchronous RPC. This
-                              is obligatory for audio content larger than 3.5
+  --sync                      If present, will perform synchronous RPC. 
+                              This option should not be used with audio content larger than 3.5 MB. 
                               MB.
   --time-offsets arg (=0)     If true, returns also recognized word time
                               offsets.

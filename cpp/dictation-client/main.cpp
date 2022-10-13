@@ -87,7 +87,7 @@ po::options_description CreateOptionsDescription(void) {
             ("wait-for-service-start", po::value<int>()->default_value(0),
              "Wait for the service start for a given duration in seconds. "
              "Additionally print service health status, but only for a non-zero timeout value. (defaults to 0)")
-            ("streaming", "If present, will perform asynchronous RPC. This is obligatory for audio content larger than 3.5 MB.")
+            ("sync", "If present, will perform synchronous RPC. This option should not be used with audio content larger than 3.5 MB.")
             ("time-offsets", po::value<bool>()->default_value(false),
              "If true, returns also recognized word time offsets.")
             ("single-utterance", po::value<bool>()->default_value(true),
@@ -164,17 +164,17 @@ int main(int argc, const char *const argv[]) {
             return 1;
         }
 
-        if (userOptions.count("streaming")) {
+        if (userOptions.count("sync")) {       
+            const gsapi::RecognizeResponse response = dictation_client.Recognize(config, wav_data);
+
+            std::cout << ProtobufMessageToString(response) << std::endl;
+        }
+        else {
             const auto responses = dictation_client.StreamingRecognize(config, wav_data);
 
             for (const auto& response : responses) {
                 std::cout << ProtobufMessageToString(response) << std::endl;
             }
-        }
-        else {
-            const gsapi::RecognizeResponse response = dictation_client.Recognize(config, wav_data);
-
-            std::cout << ProtobufMessageToString(response) << std::endl;
         }
     }
     catch (const std::exception &e) {

@@ -33,7 +33,7 @@ Dictation ASR gRPC client options:
                         Wait for the service start for a given duration
                         in seconds. Additionally print service health status,
                         but only for a non-zero timeout value. (defaults to 0)
-  --streaming           If present, will perform asynchronous RPC. This is obligatory for audio content larger than 3.5 MB.
+  --sync                If present, will perform synchronous RPC. This option should not be used with audio content larger than 3.5 MB.
   --time-offsets        If true, returns also recognized word time offsets.
   --single-utterance    If set - the recognizer will detect a single spoken utterance.
   --interim-results     If set - messages with temporal results will be shown.
@@ -66,8 +66,8 @@ while getopts "f:hs:-:" optchar; do
                 interim-results)
                     opts+=( "--interim-results=true" )
                     ;;
-                streaming)
-                    opts+=( "--streaming" )
+                sync)
+                    opts+=( "--sync" )
                     ;;
                 filename=*)
                     val=${OPTARG#*=}
