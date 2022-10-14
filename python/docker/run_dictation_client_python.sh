@@ -36,6 +36,7 @@ Dictation ASR gRPC client ${IMAGE_VERSION}
                         but only for a non-zero timeout value. (defaults to 0)
   --max-alternatives=MAX_ALTERNATIVES
                         Maximum number of recognition hypotheses to be returned.
+  --sync                If present, will perform synchronous RPC. This option should not be used with audio content larger than 3.5 MB.
   --time-offsets        If set - the recognizer will return also word time offsets.
   --single-utterance    If set - the recognizer will detect a single spoken utterance.
   --interim-results     If set - messages with temporal results will be shown.
@@ -71,6 +72,9 @@ while getopts "f:hms:-:" optchar; do
                     ;;
                 interim-results)
                     opts+=( "--interim-results" )
+                    ;;
+                sync)
+                    opts+=( "--sync" )
                     ;;
                 mic)
                     opts+=("--mic")

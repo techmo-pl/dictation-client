@@ -207,6 +207,12 @@ Available options:
                         MRCP v2 recognition timeout [ms].
   --context-phrase CONTEXT_PHRASE
                         Specifies which context model to use.
+  --sync                If present, will perform synchronous RPC. 
+                        This option should not be used with audio content larger than 3.5 MB.
+  --frame-length        The length of single audio frame in [ms] for audio file source. 
+                        Used mainly for testing purposes.
+  --delay               Delay between sending requests [ms]. 
+                        Set it equal to frame_length for real time simulation.
 ```
 
 

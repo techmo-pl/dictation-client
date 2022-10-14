@@ -4,7 +4,9 @@ from grpc_health.v1 import health_pb2
 from grpc_health.v1 import health_pb2_grpc
 from . import dictation_asr_pb2 as dictation_asr_pb2
 from . import dictation_asr_pb2_grpc as dictation_asr_pb2_grpc
+from utils.audio_utils import AudioUtils
 import grpc
+
 
 
 class RequestIterator:
@@ -47,28 +49,9 @@ class RequestIterator:
 
 
 class StreamingRecognizer:
-    def __init__(self, address, tls_directory, settings_args):
-        # Use ArgumentParser to parse settings
-        self.channel = StreamingRecognizer.create_channel(address, tls_directory)
+    def __init__(self, channel, settings_args):
+        self.channel = channel
         self.settings = settings_args
-
-    def check_health(self, timeout):
-        stub = health_pb2_grpc.HealthStub(self.channel)
-        request = health_pb2.HealthCheckRequest()
-        try:
-            serving_status = stub.Check(request, timeout=timeout, wait_for_ready=True).status
-            statusline = "service status: {}".format(health_pb2.HealthCheckResponse.ServingStatus.Name(serving_status))
-        except grpc.RpcError as e:
-            serving_status = health_pb2.HealthCheckResponse.ServingStatus.UNKNOWN
-            statusline = "service status: UNKNOWN Received following RPC error from the service: [{}] {}".format(str(e.code()), str(e.details()))
-        print(statusline)
-        # NAGIOS return codes :
-        # https://nagios-plugins.org/doc/guidelines.html#AEN78
-        if serving_status == health_pb2.HealthCheckResponse.ServingStatus.SERVING:
-            return 0
-        elif serving_status == health_pb2.HealthCheckResponse.ServingStatus.NOT_SERVING:
-            return 2
-        return 3
 
     def recognize(self, audio):
         self.service = dictation_asr_pb2_grpc.SpeechStub(self.channel)
@@ -87,9 +70,7 @@ class StreamingRecognizer:
 
         recognitions = self.service.StreamingRecognize(requests_iterator, timeout=timeout, metadata=metadata)
 
-        confirmed_results = []
-        alignment = []
-        confidence = 1.0
+        results = []
 
         for recognition in recognitions:
             if recognition.error.code:
@@ -104,67 +85,48 @@ class StreamingRecognizer:
             # process response type
             elif recognition.results is not None and len(recognition.results) > 0:
                 first = recognition.results[0]
-                if first.is_final:
-                    if time_offsets:
-                        for word in first.alternatives[0].words:
-                            if word.word != '<eps>':
-                                confirmed_results.append(word.word)
-                                alignment.append([word.start_time, word.end_time])
+
+                for i in range(self.settings.max_alternatives()):
+
+                    confirmed_results = []
+                    alignment = []
+                    confidence = 1.0
+                    final_transc = ""
+
+                    if first.is_final:
+                        if time_offsets:
+                            for word in first.alternatives[i].words:
+                                if word.word != '<eps>':
+                                    confirmed_results.append(word.word)
+                                    alignment.append([word.start_time, word.end_time])
+                                    final_transc = ' '.join(confirmed_results)
+                        else:
+                            confirmed_results = first.alternatives[i].transcript
+                            final_transc = confirmed_results
+                        confidence = min(confidence, first.alternatives[i].confidence)
                     else:
-                        confirmed_results.append(first.alternatives[0].transcript)
-                    confidence = min(confidence, first.alternatives[0].confidence)
-                else:
-                    print(u"Temporal results - {}".format(first))
+                        print(u"Temporal results - {}".format(first))
+   
+                    # build final results
+                    final_alignment = [[]]  
 
-        # build final results
-        final_alignment = [[]]
-        final_transc = ' '.join(confirmed_results)
+                    if time_offsets and alignment:
+                        final_alignment = alignment
+                    
+                    single_result={
+                        'transcript': final_transc,
+                        'alignment': final_alignment,
+                        'confidence': confidence,
+                    }
+                    results.append(single_result)
 
-        if time_offsets and alignment:
-            final_alignment = alignment
-
-        return [{
-            'transcript': final_transc,
-            'alignment': final_alignment,
-            'confidence': confidence
-        }]  # array with one element
-
-    @staticmethod
-    def create_channel(address, tls_directory):
-        if not tls_directory:
-            return grpc.insecure_channel(address)
-
-        def read_file(path):
-            with open(path, 'rb') as file:
-                return file.read()
-
-        return grpc.secure_channel(address, grpc.ssl_channel_credentials(
-            read_file(os.path.join(tls_directory, 'ca.crt')),
-            read_file(os.path.join(tls_directory, 'client.key')),
-            read_file(os.path.join(tls_directory, 'client.crt')),
-        ))
-
-    @staticmethod
-    def build_recognition_config(sampling_rate, settings):
-        recognition_config = dictation_asr_pb2.RecognitionConfig(
-            encoding='LINEAR16',  # one of LINEAR16, FLAC, MULAW, AMR, AMR_WB
-            sample_rate_hertz=sampling_rate,  # the rate in hertz
-            # See https://g.co/cloud/speech/docs/languages for a list of supported languages.
-            language_code='pl-PL',  # a BCP-47 language tag
-            enable_word_time_offsets=settings.time_offsets(),  # if true, return recognized word time offsets
-            max_alternatives=1,  # maximum number of returned hypotheses
-        )
-        if (settings.context_phrase()):
-            speech_context = recognition_config.speech_contexts.add()
-            speech_context.phrases.append(settings.context_phrase())
-
-        return recognition_config
+        return results
 
     @staticmethod
     def build_configuration_request(sampling_rate, settings):
         config_req = dictation_asr_pb2.StreamingRecognizeRequest(
             streaming_config=dictation_asr_pb2.StreamingRecognitionConfig(
-                config=StreamingRecognizer.build_recognition_config(sampling_rate, settings),
+                config=AudioUtils.build_recognition_config(sampling_rate, settings),
                 single_utterance=settings.single_utterance(),
                 interim_results=settings.interim_results()
             )

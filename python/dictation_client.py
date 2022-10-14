@@ -1,15 +1,19 @@
 #!/usr/bin/python3
 import sys
 from argparse import ArgumentParser
-from utils.audio_source import AudioStream
-from utils.mic_source import MicrophoneStream
+from utils.audio_utils import AudioUtils
+from utils.audio_stream import AudioStream
+from utils.audio_loader import AudioLoader
+from utils.mic_stream import MicrophoneStream
 from service.dictation_settings import DictationSettings
 from service.streaming_recognizer import StreamingRecognizer
+from service.sync_recognizer import SyncRecognizer
 from VERSION import __version__
 
 
 def print_results(results):
     for res in results:
+        print()
         print("{}".format(res['transcript']))
         words = res['transcript'].split()
         ali = res['alignment']
@@ -19,7 +23,6 @@ def print_results(results):
                 if len(time) > 0:
                     print("{} [{}.{:02d} - {}.{:02d}]".format(words[i], time[0].seconds, int(time[0].nanos / 10000000),
                                                           time[1].seconds, int(time[1].nanos / 10000000)))
-
 
 def create_audio_stream(args):
     # create audio file stream
@@ -55,6 +58,7 @@ if __name__ == '__main__':
                         default=0, type=int)
     parser.add_argument("--wait-for-service-start", help="Wait for the service start for a given duration in seconds. Additionally print service health status, but only for a non-zero timeout value. (defaults to 0)", default=0, type=int)
     # request configuration section
+    parser.add_argument("--context-phrase", help="Specifies which context model to use.", default="", type=str)
     parser.add_argument("--max-alternatives", help="Maximum number of recognition hypotheses to be returned.",
                         default=1, type=int)
     parser.add_argument("--time-offsets", help="If set - the recognizer will return also word time offsets.",
@@ -65,6 +69,10 @@ if __name__ == '__main__':
                         action="store_true", default=False)
     parser.add_argument("--frame-length",  dest="frame_length", help="The length of single audio frame in [ms] for audio file source. Used mainly for testing purposes.",
                         default=20, type=int)
+    parser.add_argument("--sync", help="If present, will perform synchronous RPC. This option should not be used with audio content larger than 3.5 MB.",
+                        action="store_true", default=False)
+    parser.add_argument("--delay", help="Delay between sending requests [ms]. Set it equal to frame_length for real time simulation.", 
+                        default=0, type=int,)
     # timeouts
     parser.add_argument("--no-input-timeout", help="MRCP v2 no input timeout [ms].", default=5000, type=int)
     parser.add_argument("--speech-complete-timeout", help="MRCP v2 speech complete timeout [ms].", default=2000,
@@ -72,24 +80,38 @@ if __name__ == '__main__':
     parser.add_argument("--speech-incomplete-timeout", help="MRCP v2 speech incomplete timeout [ms].", default=4000,
                         type=int)
     parser.add_argument("--recognition-timeout", help="MRCP v2 recognition timeout [ms].", default=10000, type=int)
-    parser.add_argument("--context-phrase", help="Specifies which context model to use.", default="", type=str)
-    parser.add_argument("--delay", help="Delay between sending requests [ms]. Set it equal to frame_length for real time simulation.", 
-                        default=0, type=int,)
-
+    
 
     # Stream audio to the ASR engine and print all hypotheses to standard output
     args = parser.parse_args()
 
     settings = DictationSettings(args)
-    recognizer = StreamingRecognizer(args.address, args.tls_directory, settings)
+    channel = AudioUtils.create_channel(args.address, args.tls_directory)
 
     if args.wait_for_service_start > 0:
-        health_status = recognizer.check_health(args.wait_for_service_start)
+        health_status = AudioUtils.check_health(channel, args.wait_for_service_start)
         if health_status != 0:
             sys.exit(health_status)
 
-    if args.audio is not None or args.mic:
-        with create_audio_stream(args) as stream:
+    if args.sync:
+        recognizer = SyncRecognizer(channel, settings)
+
+        if args.audio is not None:
+            audio = AudioLoader(args.audio)
             print('Recognizing...')
-            results = recognizer.recognize(stream)
+            results = recognizer.recognize(audio)
             print_results(results)
+
+    else:
+        if args.max_alternatives > 1 and not args.single_utterance:
+            print("Continuous Streaming Recognition doesn't support multiple ASR alternatives.\n"
+            "Set --max-alternatives to 1 or run streaming recognition with --single-utterance parameter.")
+            sys.exit(1)
+
+        recognizer = StreamingRecognizer(channel, settings)    
+
+        if args.audio is not None or args.mic:
+            with create_audio_stream(args) as stream:
+                print('Recognizing...')
+                results = recognizer.recognize(stream)
+                print_results(results)
