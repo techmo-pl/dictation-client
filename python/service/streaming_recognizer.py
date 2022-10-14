@@ -4,7 +4,7 @@ from grpc_health.v1 import health_pb2
 from grpc_health.v1 import health_pb2_grpc
 from . import dictation_asr_pb2 as dictation_asr_pb2
 from . import dictation_asr_pb2_grpc as dictation_asr_pb2_grpc
-from utils.audio_utils import AudioUtils
+from utils.service_utils import ServiceUtils
 import grpc
 
 
@@ -126,7 +126,7 @@ class StreamingRecognizer:
     def build_configuration_request(sampling_rate, settings):
         config_req = dictation_asr_pb2.StreamingRecognizeRequest(
             streaming_config=dictation_asr_pb2.StreamingRecognitionConfig(
-                config=AudioUtils.build_recognition_config(sampling_rate, settings),
+                config=ServiceUtils.build_recognition_config(sampling_rate, settings),
                 single_utterance=settings.single_utterance(),
                 interim_results=settings.interim_results()
             )

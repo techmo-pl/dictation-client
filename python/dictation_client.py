@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import sys
 from argparse import ArgumentParser
-from utils.audio_utils import AudioUtils
+from utils.service_utils import ServiceUtils
 from utils.audio_stream import AudioStream
 from utils.audio_loader import AudioLoader
 from utils.mic_stream import MicrophoneStream
@@ -86,10 +86,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     settings = DictationSettings(args)
-    channel = AudioUtils.create_channel(args.address, args.tls_directory)
+    channel = ServiceUtils.create_channel(args.address, args.tls_directory)
 
     if args.wait_for_service_start > 0:
-        health_status = AudioUtils.check_health(channel, args.wait_for_service_start)
+        health_status = ServiceUtils.check_health(channel, args.wait_for_service_start)
         if health_status != 0:
             sys.exit(health_status)
 

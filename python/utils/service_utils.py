@@ -1,7 +1,7 @@
 import grpc
 from service import dictation_asr_pb2 as dictation_asr_pb2
 
-class AudioUtils:
+class ServiceUtils:
 
     @staticmethod
     def create_channel(address, tls_directory):
