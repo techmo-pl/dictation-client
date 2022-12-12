@@ -121,7 +121,7 @@ apt-get update && apt-get install ffmpeg
 ##### Proto sources
 
 To regenerate the sources from `.proto`, gRPC is required.
-Default location: `/opt/grpc_v1.38.1`.
+Default location: `/opt/grpc_v1.43.0`.
 If not installed, from parent directory run `sudo ./tools/install_grpc.sh 4`
 
 When gRPC is installed to the default location, compile the required googleapis files:

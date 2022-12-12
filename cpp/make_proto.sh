@@ -7,7 +7,7 @@ IFS=$'\n\t'
 SCRIPT="$(realpath "$0")"
 SCRIPTPATH="$(dirname "${SCRIPT}")"
 
-grpc_root="${GRPC_ROOT:-/opt/grpc_v1.38.1}"
+grpc_root="${GRPC_ROOT:-/opt/grpc_v1.43.0}"
 
 PROTOC="${PROTOC:-${grpc_root}/build/third_party/protobuf/protoc}"
 PROTOBUF="${grpc_root}/third_party/protobuf/src"

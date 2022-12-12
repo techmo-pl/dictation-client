@@ -72,7 +72,7 @@ This project uses cmake build.
 
 - **gRPC** provided as `grpc_pkg`
     
-    Default location: `/opt/grpc_v1.38.1`
+    Default location: `/opt/grpc_v1.43.0`
     
     If not installed, from parent directory run `sudo ./tools/install_grpc.sh 4`
     

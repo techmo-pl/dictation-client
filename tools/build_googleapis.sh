@@ -6,7 +6,7 @@ SCRIPT="$(realpath "$0")"
 SCRIPTPATH="$(dirname "${SCRIPT}")"
 
 parallel_jobs="${1:-8}"
-grpc_root="${GRPC_ROOT:-/opt/grpc_v1.38.1}"
+grpc_root="${GRPC_ROOT:-/opt/grpc_v1.43.0}"
 proto_src="${PROTO_SRC:-${grpc_root}/third_party/protobuf/src}"
 
 protoc="${PROTOC:-${grpc_root}/build/third_party/protobuf/protoc}"

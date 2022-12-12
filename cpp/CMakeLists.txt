@@ -31,7 +31,7 @@ set_property(TARGET ssl_pkg
         PROPERTY INTERFACE_LINK_LIBRARIES ${OPENSSL_LIBRARIES})
 
 # *************** GRPC **************** #
-set(Grpc_ROOT /opt/grpc_v1.38.1)
+set(Grpc_ROOT /opt/grpc_v1.43.0)
 find_package(Grpc REQUIRED)
 add_library(grpc_pkg INTERFACE IMPORTED)
 set_property(TARGET grpc_pkg

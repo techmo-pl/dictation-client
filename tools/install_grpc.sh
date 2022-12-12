@@ -5,7 +5,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 jobs=4
-version="v1.38.1"
+version="v1.43.0"
 [ $# -ge 1 ] && jobs=$1
 [ $# -ge 2 ] && version="$2"
 

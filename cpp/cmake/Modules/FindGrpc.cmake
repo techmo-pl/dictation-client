@@ -9,7 +9,7 @@ SET(Grpc_FOUND FALSE)
 
 
 if(NOT Grpc_ROOT)
-	set(Grpc_ROOT /opt/grpc_v1.38.1)
+	set(Grpc_ROOT /opt/grpc_v1.43.0)
 endif()
 
 
