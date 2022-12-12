@@ -6,8 +6,11 @@ Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp
 
 
 
-## [2.6.1] - 2022-12-12
+## [2.7.0] - 2022-12-12
 
+### Added
+ - [python] support for `sync` requests
+ - [python] handling of `--max-alternatives` parameter
 ### Changed
  - [CPP, python, tools] Switch GRPC version to 1.43.0
 

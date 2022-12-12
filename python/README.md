@@ -15,13 +15,13 @@ For details about Docker Engine installation, check out: https://docs.docker.com
 To prepare the docker image with Python implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
-docker build -f Dockerfile-python -t dictation-client-python:2.5.0 .
+docker build -f Dockerfile-python -t dictation-client-python:2.7.0 .
 ```
 
 The build process will take several minutes.
 When the build process is complete, you will receive a message:
 ```
-Successfully tagged dictation-client-python:2.5.0
+Successfully tagged dictation-client-python:2.7.0
 ```
 
 ### Run Dictation client

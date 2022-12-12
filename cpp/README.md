@@ -15,14 +15,14 @@ For details about Docker Engine installation, check out: https://docs.docker.com
 To prepare the docker image with C++ implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
-docker build -f Dockerfile-cpp -t dictation-client-cpp:2.5.0 .
+docker build -f Dockerfile-cpp -t dictation-client-cpp:2.7.0 .
 ```
 
 **Note:** The build process may take a several dozen minutes (for shorter build time use the python implementation instead).
 
 When the build process is complete, following a message will be shown:
 ```
-Successfully tagged dictation-client-cpp:2.5.0
+Successfully tagged dictation-client-cpp:2.7.0
 ```
 
 ### Run Dictation client
