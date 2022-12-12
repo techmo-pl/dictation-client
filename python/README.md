@@ -78,7 +78,7 @@ Then install the required dependencies inside the virtual environment (this step
 
 - On Linux:
 
-Use Python 3 with the virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
+Use Python 3 with the virtual environment and install required packages (supported Python versions are: 3.6, 3.7, 3.8, 3.9, 3.10):
 
 ```
 python3 -m venv .venv
@@ -95,7 +95,7 @@ Set-ExecutionPolicy RemoteSigned
 ```
 then confirm your choice.
 
-Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
+Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.6, 3.7, 3.8, 3.9, 3.10):
 
 ```
 python3 -m venv .venv

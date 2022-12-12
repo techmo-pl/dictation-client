@@ -61,8 +61,8 @@ python_version_output="$(python3 --version)"
 python_version_detailed="${python_version_output##* }"
 python_version="${python_version_detailed%.*}"
 
-if [[ ! "$python_version" =~ ^(3\.5|3\.6|3\.7|3\.8|3\.9)$ ]]; then
-    echo "Cannot find required Python version! Supported versions are: 3.5, 3.6, 3.7, 3.8, 3.9";
+if [[ ! "$python_version" =~ ^(3\.6|3\.7|3\.8|3\.9|3\.10)$ ]]; then
+    echo "Cannot find required Python version! Supported versions are: 3.6, 3.7, 3.8, 3.9, 3.10";
     exit 0
 fi
 
