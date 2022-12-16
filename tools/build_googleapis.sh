@@ -30,6 +30,7 @@ make -C "${tmp_dir}" -j "${parallel_jobs}" \
 	PROTOC="${protoc}" \
 	LANGUAGE=cpp \
 	"google/api/annotations.pb.cc" \
+	"google/api/client.pb.cc" \
 	"google/api/http.pb.cc" \
 	"google/longrunning/operations.pb.cc" \
 	"google/rpc/status.pb.cc"
