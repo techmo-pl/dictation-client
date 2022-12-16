@@ -38,7 +38,12 @@ class SyncRecognizer:
         # process response
         results = []
 
-        for i in range(max_alternatives):
+        alternatives=min(max_alternatives, len(recognition.alternatives))
+
+        if max_alternatives > 1:
+            print("Number of hypotheses:", alternatives)
+
+        for i in range(alternatives):
 
             confirmed_results = []
             alignment = []

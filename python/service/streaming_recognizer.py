@@ -60,6 +60,7 @@ class StreamingRecognizer:
 
     def recognize_audio_content(self, requests_iterator):
         time_offsets = self.settings.time_offsets()
+        max_alternatives = self.settings.max_alternatives()
 
         timeout=None
         if self.settings.grpc_timeout() > 0:
@@ -86,7 +87,12 @@ class StreamingRecognizer:
             elif recognition.results is not None and len(recognition.results) > 0:
                 first = recognition.results[0]
 
-                for i in range(self.settings.max_alternatives()):
+                alternatives = min(max_alternatives, len(first.alternatives))
+
+                if max_alternatives > 1:
+                    print("Number of hypotheses:", alternatives)
+
+                for i in range(alternatives):
 
                     confirmed_results = []
                     alignment = []
