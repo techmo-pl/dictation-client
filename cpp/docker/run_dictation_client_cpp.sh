@@ -33,7 +33,7 @@ Dictation ASR gRPC client options:
                         Wait for the service start for a given duration
                         in seconds. Additionally print service health status,
                         but only for a non-zero timeout value. (defaults to 0)
-  --sync                 --sync                If present, will perform synchronous RPC instead of asynchronous (streaming) call. 
+  --sync                If present, will perform synchronous RPC instead of asynchronous (streaming) call. 
                         It is not recommended to use this option for large files. For audio larger than 3.5MB, 
                         recognition quality is degraded - for the best possible recognition, 
                         send shorter audio fragments or use the streaming mode.
