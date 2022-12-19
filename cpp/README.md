@@ -15,14 +15,14 @@ For details about Docker Engine installation, check out: https://docs.docker.com
 To prepare the docker image with C++ implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
-docker build -f Dockerfile-cpp -t dictation-client-cpp:2.5.0 .
+docker build -f Dockerfile-cpp -t dictation-client-cpp:2.7.0 .
 ```
 
 **Note:** The build process may take a several dozen minutes (for shorter build time use the python implementation instead).
 
 When the build process is complete, following a message will be shown:
 ```
-Successfully tagged dictation-client-cpp:2.5.0
+Successfully tagged dictation-client-cpp:2.7.0
 ```
 
 ### Run Dictation client
@@ -72,7 +72,7 @@ This project uses cmake build.
 
 - **gRPC** provided as `grpc_pkg`
     
-    Default location: `/opt/grpc_v1.38.1`
+    Default location: `/opt/grpc_v1.43.0`
     
     If not installed, from parent directory run `sudo ./tools/install_grpc.sh 4`
     
@@ -137,9 +137,12 @@ Default value `4` should be appropriate for the average personal computer.
                          (=0) in seconds. Additionally print service health
                               status, but only for a non-zero timeout value.
                               (defaults to 0)
-  --streaming                 If present, will perform asynchronous RPC. This
-                              is obligatory for audio content larger than 3.5
-                              MB.
+  --sync                      If present, will perform synchronous RPC 
+                              instead of asynchronous (streaming) call.
+                              It is not recommended to use this option for 
+                              large files. For audio larger than 3.5MB, recognition 
+                              quality is degraded - for the best possible recognition, 
+                              send shorter audio fragments or use the streaming mode.
   --time-offsets arg (=0)     If true, returns also recognized word time
                               offsets.
   --single-utterance arg (=1) Whether to perform continuous recognition (false)

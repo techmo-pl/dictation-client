@@ -5,16 +5,10 @@
 #  Grpc_INCLUDE_DIRS - the Grpc include directories
 #  Grpc_LIBRARIES - link these to use Grpc
 
-SET(Grpc_FOUND FALSE)
+set (Grpc_FOUND TRUE)
 
-
-if(NOT Grpc_ROOT)
-	set(Grpc_ROOT /opt/grpc_v1.38.1)
-endif()
-
-
-if(NOT (EXISTS ${Grpc_ROOT}))
-	return()
+if (NOT Grpc_ROOT)
+	set(Grpc_ROOT /opt/grpc_v1.43.0)
 endif()
 
 find_file (DEBIAN_FOUND debian_version debconf.conf PATHS /etc)
@@ -45,9 +39,13 @@ set (Grpc_LIBRARIES
 	${Absl_LIBRARIES_ROOT}/libabsl_bad_any_cast_impl.a
 	${Absl_LIBRARIES_ROOT}/libabsl_bad_optional_access.a
 	${Absl_LIBRARIES_ROOT}/libabsl_bad_variant_access.a
-	${Absl_LIBRARIES_ROOT}/libabsl_city.a
 	${Absl_LIBRARIES_ROOT}/libabsl_civil_time.a
 	${Absl_LIBRARIES_ROOT}/libabsl_cord.a
+	${Absl_LIBRARIES_ROOT}/libabsl_cord_internal.a
+	${Absl_LIBRARIES_ROOT}/libabsl_cordz_functions.a
+	${Absl_LIBRARIES_ROOT}/libabsl_cordz_info.a
+	${Absl_LIBRARIES_ROOT}/libabsl_cordz_handle.a
+	${Absl_LIBRARIES_ROOT}/libabsl_cordz_sample_token.a
 	${Absl_LIBRARIES_ROOT}/libabsl_examine_stack.a
 	${Absl_LIBRARIES_ROOT}/libabsl_exponential_biased.a
 	${Absl_LIBRARIES_ROOT}/libabsl_failure_signal_handler.a
@@ -64,7 +62,9 @@ set (Grpc_LIBRARIES
 	${Absl_LIBRARIES_ROOT}/libabsl_flags_usage.a
 	${Absl_LIBRARIES_ROOT}/libabsl_flags_usage_internal.a
 	${Absl_LIBRARIES_ROOT}/libabsl_hash.a
+	${Absl_LIBRARIES_ROOT}/libabsl_low_level_hash.a
 	${Absl_LIBRARIES_ROOT}/libabsl_hashtablez_sampler.a
+	${Absl_LIBRARIES_ROOT}/libabsl_city.a
 	${Absl_LIBRARIES_ROOT}/libabsl_leak_check.a
 	${Absl_LIBRARIES_ROOT}/libabsl_leak_check_disable.a
 	${Absl_LIBRARIES_ROOT}/libabsl_log_severity.a
@@ -99,11 +99,32 @@ set (Grpc_LIBRARIES
 	${Absl_LIBRARIES_ROOT}/libabsl_throw_delegate.a
 	${Absl_LIBRARIES_ROOT}/libabsl_time.a
 	${Absl_LIBRARIES_ROOT}/libabsl_time_zone.a
-	${Absl_LIBRARIES_ROOT}/libabsl_wyhash.a
 	${Absl_LIBRARIES_ROOT}/libabsl_malloc_internal.a
 	${Absl_LIBRARIES_ROOT}/libabsl_base.a
 	${Absl_LIBRARIES_ROOT}/libabsl_int128.a
 	)
 
-message("Found Grpc (include ${Grpc_INCLUDE_DIRS}; library: ${Grpc_LIBRARIES})")
-set(Grpc_FOUND TRUE)
+foreach (dir ${Grpc_INCLUDE_DIRS})
+	if (NOT (EXISTS ${dir}))
+		message("Include directory ${dir} not found!")
+		set (Grpc_FOUND FALSE)
+	endif()
+endforeach(dir)
+
+foreach (lib ${Grpc_LIBRARIES})
+	if (NOT (EXISTS ${lib}))
+		message("Library ${lib} not found!")
+		set (Grpc_FOUND FALSE)
+	endif()
+endforeach(lib)
+
+if (NOT Grpc_FOUND)
+	if (Grpc_FIND_REQUIRED)
+		message(FATAL_ERROR "GRPC not found!")
+	endif()
+	return()
+endif()
+
+message(STATUS "Found Grpc: (include ${Grpc_INCLUDE_DIRS}; library ${Grpc_LIBRARIES})")
+
+

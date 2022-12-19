@@ -37,7 +37,7 @@ venv/
 .idea/
 
 #python virtual environment
-.env/
+.venv/
 
 #googleapis sources
 googleapis_files/*
@@ -45,14 +45,14 @@ googleapis_files/*
 #protobuf sources
 cpp/libdictation-client/dictation_asr.*
 
-# ignore files in directory `wav`
-cpp/docker/wav/*
+# ignore files in directory `audio`
+cpp/docker/audio/*
 
 # ignore files in directory `tls`
 cpp/docker/tls/*
 
-# ignore files in directory `wav`
-python/docker/wav/*
+# ignore files in directory `audio`
+python/docker/audio/*
 
 # ignore files in directory `tls`
 python/docker/tls/*

@@ -4,6 +4,17 @@ This changelog is intended for tracking content changes in whole repository.
 We are using single version and changelog for all components.
 Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
 
+
+
+## [2.7.0] - 2022-12-19
+
+### Added
+ - [python] support for `sync` requests
+ - [python] handling of `--max-alternatives` parameter
+### Changed
+ - [CPP, python, tools] Switch GRPC version to 1.43.0
+
+
 ## [2.6.0] - 2022-10-03
 
 ### Added

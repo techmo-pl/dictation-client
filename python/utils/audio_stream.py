@@ -1,14 +1,16 @@
 from pydub import AudioSegment
 import os
+import time
 
 class AudioStream(object):
 
-    def __init__(self, audio_path, frame_length):
+    def __init__(self, audio_path, frame_length, delay):
         if not os.path.exists(audio_path):
             raise ValueError("Wave file does not exist at: {}".format(audio_path))
 
         self.audio_segment = AudioSegment.from_file(audio_path)
         self.audio_path = audio_path
+        self.delay = float(delay) / 1000  # ms to sec
 
         if self.audio_segment.channels != 1:
             raise ValueError("Only mono waves are allowed. {} contains: {} channels".format(audio_path, self.audio_segment.channels))
@@ -62,4 +64,5 @@ class AudioStream(object):
 
             data = self.audio[self.data_index: end_sample]
             self.data_index = end_sample
+            time.sleep(self.delay)
             yield data

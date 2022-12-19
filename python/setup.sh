@@ -61,8 +61,8 @@ python_version_output="$(python3 --version)"
 python_version_detailed="${python_version_output##* }"
 python_version="${python_version_detailed%.*}"
 
-if [[ ! "$python_version" =~ ^(3\.5|3\.6|3\.7|3\.8|3\.9)$ ]]; then
-    echo "Cannot find required Python version! Supported versions are: 3.5, 3.6, 3.7, 3.8, 3.9";
+if [[ ! "$python_version" =~ ^(3\.6|3\.7|3\.8|3\.9|3\.10)$ ]]; then
+    echo "Cannot find required Python version! Supported versions are: 3.6, 3.7, 3.8, 3.9, 3.10";
     exit 0
 fi
 
@@ -80,8 +80,8 @@ install_package "python3-venv" "${sudo_str}"
 install_package "portaudio19-dev" "${sudo_str}"
 install_package "python3-pip" "${sudo_str}"
 
-python3 -m venv .env
-source .env/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 pip3 install --upgrade pip
 pip3 install wheel
 pip3 install -r requirements.txt

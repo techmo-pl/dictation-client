@@ -7,7 +7,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-IMAGE_VERSION=2.5.0
+IMAGE_VERSION=2.7.0
 
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
@@ -36,9 +36,13 @@ Dictation ASR gRPC client ${IMAGE_VERSION}
                         but only for a non-zero timeout value. (defaults to 0)
   --max-alternatives=MAX_ALTERNATIVES
                         Maximum number of recognition hypotheses to be returned.
+  --sync                If present, will perform synchronous RPC instead of asynchronous (streaming) call. 
+                        It is not recommended to use this option for large files. For audio larger than 3.5MB, 
+                        recognition quality is degraded - for the best possible recognition, 
+                        send shorter audio fragments or use the streaming mode.
   --time-offsets        If set - the recognizer will return also word time offsets.
   --single-utterance    If set - the recognizer will detect a single spoken utterance.
-  --interim-results     If set - messages with temporal results will be shown.
+  --interim-results     If set - messages with interim results will be shown.
   --no-input-timeout=NO_INPUT_TIMEOUT
                         MRCP v2 no input timeout [ms].
   --speech-complete-timeout=SPEECH_COMPLETE_TIMEOUT
@@ -71,6 +75,9 @@ while getopts "f:hms:-:" optchar; do
                     ;;
                 interim-results)
                     opts+=( "--interim-results" )
+                    ;;
+                sync)
+                    opts+=( "--sync" )
                     ;;
                 mic)
                     opts+=("--mic")

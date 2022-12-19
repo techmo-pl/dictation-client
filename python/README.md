@@ -15,13 +15,13 @@ For details about Docker Engine installation, check out: https://docs.docker.com
 To prepare the docker image with Python implementation of the Dictation Client, open project's main directory and run following command:
 
 ```
-docker build -f Dockerfile-python -t dictation-client-python:2.5.0 .
+docker build -f Dockerfile-python -t dictation-client-python:2.7.0 .
 ```
 
 The build process will take several minutes.
 When the build process is complete, you will receive a message:
 ```
-Successfully tagged dictation-client-python:2.5.0
+Successfully tagged dictation-client-python:2.7.0
 ```
 
 ### Run Dictation client
@@ -78,11 +78,11 @@ Then install the required dependencies inside the virtual environment (this step
 
 - On Linux:
 
-Use Python 3 with the virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
+Use Python 3 with the virtual environment and install required packages (supported Python versions are: 3.6, 3.7, 3.8, 3.9, 3.10):
 
 ```
-python3 -m venv .env
-source .env/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -95,11 +95,11 @@ Set-ExecutionPolicy RemoteSigned
 ```
 then confirm your choice.
 
-Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.5, 3.6, 3.7, 3.8, 3.9):
+Use Python 3 with virtual environment and install required packages (supported Python versions are: 3.6, 3.7, 3.8, 3.9, 3.10):
 
 ```
-python3 -m venv .env
-.\.env\Scripts\activate
+python3 -m venv .venv
+.\.venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -121,7 +121,7 @@ apt-get update && apt-get install ffmpeg
 ##### Proto sources
 
 To regenerate the sources from `.proto`, gRPC is required.
-Default location: `/opt/grpc_v1.38.1`.
+Default location: `/opt/grpc_v1.43.0`.
 If not installed, from parent directory run `sudo ./tools/install_grpc.sh 4`
 
 When gRPC is installed to the default location, compile the required googleapis files:
@@ -142,11 +142,11 @@ This might be required when using other gRPC or Protocol Buffers version.
 To run the Dictation Client, activate the virtual environment first:
 - On Linux:
 ```
-source .env/bin/activate
+source .venv/bin/activate
 ```
 - On Windows:
 ```
-.\.env\Scripts\activate
+.\.venv\Scripts\activate
 ```
 Then run Dictation Client. Sample use:
 
@@ -196,7 +196,7 @@ Available options:
                         offsets.
   --single-utterance    If set - the recognizer will detect a single spoken
                         utterance.
-  --interim-results     If set - messages with temporal results will be shown.
+  --interim-results     If set - messages with interim results will be shown.
   --no-input-timeout NO_INPUT_TIMEOUT
                         MRCP v2 no input timeout [ms].
   --speech-complete-timeout SPEECH_COMPLETE_TIMEOUT
@@ -207,6 +207,16 @@ Available options:
                         MRCP v2 recognition timeout [ms].
   --context-phrase CONTEXT_PHRASE
                         Specifies which context model to use.
+  --sync                If present, will perform synchronous RPC 
+                        instead of asynchronous (streaming) call.
+                        It is not recommended to use this option for 
+                        large files. For audio larger than 3.5MB, recognition 
+                        quality is degraded - for the best possible recognition, 
+                        send shorter audio fragments or use the streaming mode.
+  --frame-length        The length of single audio frame in [ms] for audio file source. 
+                        Used mainly for testing purposes.
+  --delay               Delay between sending requests [ms]. 
+                        Set it equal to frame_length for real time simulation.
 ```
 
 
