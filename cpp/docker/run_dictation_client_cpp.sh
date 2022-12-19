@@ -39,7 +39,7 @@ Dictation ASR gRPC client options:
                         send shorter audio fragments or use the streaming mode.
   --time-offsets        If true, returns also recognized word time offsets.
   --single-utterance    If set - the recognizer will detect a single spoken utterance.
-  --interim-results     If set - messages with temporal results will be shown.
+  --interim-results     If set - messages with interim results will be shown.
   --service-settings=SETTINGS
                         Semicolon-separated list of key=value pairs defining settings to be sent to service via gRPC request.
   --max-alternatives=MAX_ALTERNATIVES

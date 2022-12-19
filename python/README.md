@@ -196,7 +196,7 @@ Available options:
                         offsets.
   --single-utterance    If set - the recognizer will detect a single spoken
                         utterance.
-  --interim-results     If set - messages with temporal results will be shown.
+  --interim-results     If set - messages with interim results will be shown.
   --no-input-timeout NO_INPUT_TIMEOUT
                         MRCP v2 no input timeout [ms].
   --speech-complete-timeout SPEECH_COMPLETE_TIMEOUT

@@ -65,7 +65,7 @@ if __name__ == '__main__':
                         action="store_true", default=False)
     parser.add_argument("--single-utterance", help="If set - the recognizer will detect a single spoken utterance.",
                         action="store_true", default=False)
-    parser.add_argument("--interim-results", help="If set - messages with temporal results will be shown.",
+    parser.add_argument("--interim-results", help="If set - messages with interim results will be shown.",
                         action="store_true", default=False)
     parser.add_argument("--frame-length",  dest="frame_length", help="The length of single audio frame in [ms] for audio file source. Used mainly for testing purposes.",
                         default=20, type=int)
