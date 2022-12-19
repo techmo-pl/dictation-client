@@ -33,7 +33,10 @@ Dictation ASR gRPC client options:
                         Wait for the service start for a given duration
                         in seconds. Additionally print service health status,
                         but only for a non-zero timeout value. (defaults to 0)
-  --sync                If present, will perform synchronous RPC. This option should not be used with audio content larger than 3.5 MB.
+  --sync                 --sync                If present, will perform synchronous RPC instead of asynchronous (streaming) call. 
+                        It is not recommended to use this option for large files. For audio larger than 3.5MB, 
+                        recognition quality is degraded - for the best possible recognition, 
+                        send shorter audio fragments or use the streaming mode.
   --time-offsets        If true, returns also recognized word time offsets.
   --single-utterance    If set - the recognizer will detect a single spoken utterance.
   --interim-results     If set - messages with temporal results will be shown.
