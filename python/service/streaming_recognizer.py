@@ -90,7 +90,7 @@ class StreamingRecognizer:
                 alternatives = min(max_alternatives, len(first.alternatives))
 
                 if max_alternatives > 1:
-                    print("Number of hypotheses:", alternatives)
+                    print("Number of alternative recognitions:", alternatives)
 
                 for i in range(alternatives):
 
@@ -111,7 +111,7 @@ class StreamingRecognizer:
                             final_transc = confirmed_results
                         confidence = min(confidence, first.alternatives[i].confidence)
                     else:
-                        print(u"Temporal results - {}".format(first))
+                        print(u"Interim results - {}".format(first))
    
                     # build final results
                     final_alignment = [[]]  

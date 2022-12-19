@@ -69,7 +69,7 @@ if __name__ == '__main__':
                         action="store_true", default=False)
     parser.add_argument("--frame-length",  dest="frame_length", help="The length of single audio frame in [ms] for audio file source. Used mainly for testing purposes.",
                         default=20, type=int)
-    parser.add_argument("--sync", help="If present, will perform synchronous RPC. This option should not be used with audio content larger than 3.5 MB.",
+    parser.add_argument("--sync", help="If present, will perform synchronous RPC instead of asynchronous (streaming) call. It is not recommended to use this option for large files. For audio larger than 3.5MB, recognition quality is degraded - for the best possible recognition, send shorter audio fragments or use the streaming mode.",
                         action="store_true", default=False)
     parser.add_argument("--delay", help="Delay between sending requests [ms]. Set it equal to frame_length for real time simulation.", 
                         default=0, type=int,)
