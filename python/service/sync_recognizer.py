@@ -41,7 +41,7 @@ class SyncRecognizer:
         alternatives=min(max_alternatives, len(recognition.alternatives))
 
         if max_alternatives > 1:
-            print("Number of hypotheses:", alternatives)
+            print("Number of alternative recognitions:", alternatives)
 
         for i in range(alternatives):
 
