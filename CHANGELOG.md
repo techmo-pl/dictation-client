@@ -6,7 +6,7 @@ Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp
 
 
 
-## [2.7.0] - 2022-12-12
+## [2.7.0] - 2022-12-19
 
 ### Added
  - [python] support for `sync` requests
