@@ -5,12 +5,19 @@ We are using single version and changelog for all components.
 Dev note: Remember to synchronize version in files: `python/VERSION.py` and `cpp/libdictation-client/VERSION.h`
 
 
+## [2.8.0] - 2023-01-03
+
+### Changed
+ - [python] Drop support for Python 3.6
+ - [python] Upgrade PyAudio to 0.2.13
+ - [python] Upgrade setuptools to 65.5.1
+
 
 ## [2.7.0] - 2022-12-19
 
 ### Added
- - [python] support for `sync` requests
- - [python] handling of `--max-alternatives` parameter
+ - [python] Support for `sync` requests
+ - [python] Handling of `--max-alternatives` parameter
 ### Changed
  - [CPP, python, tools] Switch GRPC version to 1.43.0
 

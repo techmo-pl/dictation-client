@@ -7,7 +7,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-IMAGE_VERSION=2.7.0
+IMAGE_VERSION=2.8.0
 
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "${SCRIPT}")
@@ -36,9 +36,9 @@ Dictation ASR gRPC client ${IMAGE_VERSION}
                         but only for a non-zero timeout value. (defaults to 0)
   --max-alternatives=MAX_ALTERNATIVES
                         Maximum number of recognition hypotheses to be returned.
-  --sync                If present, will perform synchronous RPC instead of asynchronous (streaming) call. 
-                        It is not recommended to use this option for large files. For audio larger than 3.5MB, 
-                        recognition quality is degraded - for the best possible recognition, 
+  --sync                If present, will perform synchronous RPC instead of asynchronous (streaming) call.
+                        It is not recommended to use this option for large files. For audio larger than 3.5MB,
+                        recognition quality is degraded - for the best possible recognition,
                         send shorter audio fragments or use the streaming mode.
   --time-offsets        If set - the recognizer will return also word time offsets.
   --single-utterance    If set - the recognizer will detect a single spoken utterance.
