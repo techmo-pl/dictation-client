@@ -25,7 +25,7 @@ install_package () {
                 sudo apt-get update && sudo apt-get install -y "$1";
             else
                 apt-get update && apt-get install -y "$1";
-            fi 
+            fi
         else
             while true; do
                 read -p "The required package $1 is not installed. Do you want to install it now? [y/n]" yn
@@ -38,7 +38,7 @@ install_package () {
                             apt-get update && apt-get install -y "$1";
                         fi;
                         break ;;
-                    [Nn]*) 
+                    [Nn]*)
                         echo "Permission to install the required package has not been granted. Exiting...";
                         exit 0 ;;
                 esac
@@ -61,8 +61,8 @@ python_version_output="$(python3 --version)"
 python_version_detailed="${python_version_output##* }"
 python_version="${python_version_detailed%.*}"
 
-if [[ ! "$python_version" =~ ^(3\.6|3\.7|3\.8|3\.9|3\.10)$ ]]; then
-    echo "Cannot find required Python version! Supported versions are: 3.6, 3.7, 3.8, 3.9, 3.10";
+if [[ ! "$python_version" =~ ^(3\.7|3\.8|3\.9|3\.10)$ ]]; then
+    echo "Cannot find required Python version! Supported versions are: 3.7, 3.8, 3.9, 3.10";
     exit 0
 fi
 
@@ -86,4 +86,4 @@ pip3 install --upgrade pip
 pip3 install wheel
 pip3 install -r requirements.txt
 
-echo "Setup finished!" 
+echo "Setup finished!"
